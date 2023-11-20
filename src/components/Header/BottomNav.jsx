@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ExpandLessIcon from '@mui/icons-material/ExpandLess';
-import AllCategory from './CategoryBanner/AllCategory';
-import '../..//css/header/bottomNav.css';
+import React, { useEffect, useState } from "react";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import AllCategory from "./CategoryBanner/AllCategory";
+import "../../css/header/bottomNav.css";
 
 export default function BottomNav() {
   const [isClick, setIsClick] = useState(false);

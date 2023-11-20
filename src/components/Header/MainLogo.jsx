@@ -1,12 +1,12 @@
-import React from 'react';
-import SearchIcon from '@mui/icons-material/Search';
-import { makeStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
-import '../../css/header/mainLogo.css';
+import React from "react";
+import SearchIcon from "@mui/icons-material/Search";
+import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
+import "../../css/header/mainLogo.css";
 
 const useStyles = makeStyles({
   searchIcon: {
-    color: '#ff9c46',
+    color: "#ff9c46",
   },
 });
 export default function MainLogo() {
@@ -16,7 +16,7 @@ export default function MainLogo() {
       <div className="logoBox">
         <div className="logoContent">
           <h1 className="logoContainer">
-            <img className="logoImg" src="/interparkBook_logo.png" alt="" />
+            <img className="logoImg" src="/img/logo.png" alt="" />
           </h1>
           <div className="search">
             <form className="searchForm">
@@ -45,7 +45,14 @@ export default function MainLogo() {
               </ul>
             </div>
           </div>
-          <div className="adImg">광고부문</div>
+          <div className="adImg">
+            <figure>
+              <img
+                src="https://image.kyobobook.co.kr/newimages/adcenter/IMAC/creatives/2023/11/09/71047/GN_110923_2.jpg"
+                alt=""
+              />
+            </figure>
+          </div>
         </div>
       </div>
     </div>
