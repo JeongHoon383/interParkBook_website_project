@@ -4,9 +4,9 @@ import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { BsClipboardCheck } from "react-icons/bs";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import BookInfo from "../Components/BookInfo";
 import { motion, useTransform, useViewportScroll } from "framer-motion";
 import { CiSearch } from "react-icons/ci";
+import Detail_BookInfo from "../components/Detail/Detail_BookInfo";
 
 const MotionNav = styled(motion.div)`
   position: fixed;
@@ -131,7 +131,7 @@ const Detail = () => {
               </span>
             </Star>
           </TitleBox>
-          <BookInfo data={data} />
+          <Detail_BookInfo data={data} />
         </div>
       </Container>
       <br />
