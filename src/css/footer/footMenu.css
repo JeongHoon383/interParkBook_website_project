@@ -1,0 +1,36 @@
+.footMenu {
+  margin: 0 auto;
+  width: 60%;
+  border-bottom: 1px solid #b8b8b8;
+}
+
+.footMenu_link {
+  margin: 15px 20px;
+  display: flex;
+  align-items: center;
+  font-size: 0.7em;
+  color: var(--default);
+}
+
+.footMenu_link .firstLink {
+  font-weight: 700;
+  color: var(--hover);
+}
+
+.footMenu_link .firstLink::after {
+  font-weight: normal;
+  color: var(--default);
+}
+
+.footMenu_link li {
+  letter-spacing: -1px;
+}
+
+.footMenu_link a:hover {
+  text-decoration: underline;
+}
+
+.footMenu_link li:not(:last-child)::after {
+  content: '|';
+  margin: 0 5px;
+}
