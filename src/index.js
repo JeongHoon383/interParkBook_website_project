@@ -1,21 +1,13 @@
-<<<<<<< HEAD
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import App from './App';
-import Main from './pages/Main';
-=======
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import Main from "./Pages/Main";
->>>>>>> Detail_jiwon
-
 import reportWebVitals from './reportWebVitals';
-import Detail from './pages/Detail';
+import Detail from './Pages/Detail';
 import { createGlobalStyle } from 'styled-components';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import CategoryList from './Pages/CategoryList';
 const GlobalStyle = createGlobalStyle`
 @font-face {
   font-family: 'fontName';
@@ -155,11 +147,7 @@ const router = createBrowserRouter([
     errorElement: <h1>not found</h1>,
     children: [
       {
-<<<<<<< HEAD
-        index: '/',
-=======
         index: "/",
->>>>>>> Detail_jiwon
         element: <Main />,
       },
       {
@@ -176,7 +164,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/category/list',
-        element: <div>category list</div>,
+        element: <CategoryList />,
       },
       {
         path: '/search',
