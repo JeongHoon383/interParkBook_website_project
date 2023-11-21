@@ -1,7 +1,7 @@
 @font-face {
   font-family: "YES24GothicR";
   font-weight: normal;
-  src: url(./font/YES24GothicR.otf) format("truetype");
+  src: url('/public/font/YES24GothicR.ttf') format("truetype");
 }
 
 body {
