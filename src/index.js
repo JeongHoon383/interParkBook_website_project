@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import App from './App';
 import Main from './pages/Main';
+=======
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import App from "./App";
+import Main from "./Pages/Main";
+>>>>>>> Detail_jiwon
 
 import reportWebVitals from './reportWebVitals';
 import Detail from './pages/Detail';
@@ -147,7 +155,11 @@ const router = createBrowserRouter([
     errorElement: <h1>not found</h1>,
     children: [
       {
+<<<<<<< HEAD
         index: '/',
+=======
+        index: "/",
+>>>>>>> Detail_jiwon
         element: <Main />,
       },
       {
