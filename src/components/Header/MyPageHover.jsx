@@ -1,5 +1,5 @@
 import React from 'react';
-import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import { IoMdArrowDropup } from 'react-icons/io';
 
 export default function MyPageHover() {
   return (
@@ -7,7 +7,7 @@ export default function MyPageHover() {
       <ul>
         <li className="myPageHover_li mp">
           마이페이지
-          <ArrowDropUpIcon fontSize="small" />
+          <IoMdArrowDropup fontSize="small" />
         </li>
         <li className="myPageHover_li">마이도서</li>
         <li className="myPageHover_li">주문배송조회</li>
