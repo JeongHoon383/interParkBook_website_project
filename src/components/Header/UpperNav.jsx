@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { IoMdArrowDropdown } from 'react-icons/io';
 import MyPageHover from './MyPageHover';
 import '../../css/header/upperNav.css';
 
@@ -30,7 +30,7 @@ export default function UpperNav() {
             <li className="rightTab_li">북카트</li>
             <li className="rightTab_li myPage" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
               마이페이지
-              <ArrowDropDownIcon fontSize="small" />
+              <IoMdArrowDropdown fontSize="small" />
               {isHover == true ? <MyPageHover /> : null}
             </li>
             <li className="rightTab_li">고객센터</li>
