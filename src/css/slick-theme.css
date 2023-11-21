@@ -70,11 +70,11 @@
 }
 
 .slick-prev:before {
-    content: '←';
+    content: '<';
 }
 
 [dir='rtl'] .slick-prev:before {
-    content: '→';
+    content: '>';
 }
 
 .slick-next {
@@ -87,11 +87,11 @@
 }
 
 .slick-next:before {
-    content: '→';
+    content: '>';
 }
 
 [dir='rtl'] .slick-next:before {
-    content: '←';
+    content: '<';
 }
 
 /* Dots */
@@ -101,7 +101,7 @@
 
 .slick-dots {
     position: absolute;
-    bottom: -25px;
+    bottom: 20px;
 
     display: block;
 
@@ -156,8 +156,7 @@
 }
 
 .slick-dots li button:before {
-    font-family: 'slick';
-    font-size: 6px;
+    font-size: 30px;
     line-height: 20px;
 
     position: absolute;
