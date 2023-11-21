@@ -69,16 +69,25 @@ const Container = styled.div`
   }
 `;
 const Star = styled.div`
+  display: flex;
+  width: 200px;
+  align-items: center;
+  justify-content: flex-end;
   .star {
     margin-right: 10px;
     font-size: 16px;
+    display: flex;
+    .star_icon {
+      display: flex;
+    }
   }
   .review {
     font-size: 12px;
     color: #666;
+    display: flex;
   }
   .star_icon {
-    color: red;
+    color: #ff0000;
   }
 `;
 
@@ -128,7 +137,8 @@ const Detail = () => {
                 10
               </span>
               <span className="review">
-                | <BsClipboardCheck /> 리뷰
+                <span> | </span>
+                <BsClipboardCheck /> 리뷰
               </span>
             </Star>
           </TitleBox>

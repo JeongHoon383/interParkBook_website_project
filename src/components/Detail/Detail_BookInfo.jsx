@@ -5,6 +5,7 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 import { BiSolidCoupon } from "react-icons/bi";
 import { CiCircleQuestion } from "react-icons/ci";
 import Detail_count from "./Detail_count";
+import { CiHeart } from "react-icons/ci";
 const InfoContainer = styled.div`
   display: flex;
   margin: 0 auto;
@@ -12,12 +13,15 @@ const InfoContainer = styled.div`
     flex: 0.25;
     figure {
       width: 200px;
-      height: 230px;
-      padding: 20px 0;
+      height: 280px;
       margin: 0 auto;
       display: flex;
       justify-content: center;
       align-items: center;
+      box-shadow: -9px 8px 13px 0px rgba(0, 0, 0, 0.75);
+      -webkit-box-shadow: -9px 8px 13px 0px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: -9px 8px 13px 0px rgba(0, 0, 0, 0.75);
+
       img {
         width: 100%;
         height: 100%;
@@ -27,7 +31,7 @@ const InfoContainer = styled.div`
   .info_section {
     flex: 0.75;
     border: 1px solid black;
-    padding: 20px 10px;
+    padding: 10px;
     .info_publisher {
       border-bottom: 1px solid lightgray;
       padding-bottom: 20px;
@@ -45,7 +49,10 @@ const InfoContainer = styled.div`
   }
 `;
 const InfoCaption = styled.div`
-  width: 80%;
+  width: 100%;
+  &:first-of-type {
+    margin-bottom: 50px;
+  }
   background: #f9f9f9;
   padding: 10px;
   margin: 5px auto;
@@ -72,12 +79,17 @@ const PriceSection = styled.div`
   height: 90%;
   padding: 10px;
   .delivery {
+    margin-top: 10px;
     span {
       margin-left: 5px;
     }
     span::after {
       margin-left: 5px;
       content: "|";
+    }
+    span.last {
+      display: flex;
+      align-items: center;
     }
     span.last::after {
       content: "";
@@ -116,6 +128,8 @@ const PriceSection = styled.div`
   em {
     display: block;
     margin-bottom: 10px;
+    display: flex;
+    align-items: center;
     span {
       font-size: 13px;
     }
@@ -158,6 +172,40 @@ const AdBox = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+`;
+
+const CartArea = styled.div`
+  display: flex;
+  border: 1px solid black;
+  padding-left: 10px;
+  position: absolute;
+  .cart,
+  .buy {
+    width: 130px;
+    height: 40px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: white;
+  }
+  .cart {
+    background-color: #ff9c46;
+  }
+  .buy {
+    background-color: #707070;
+  }
+  .like {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #717171;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #717171;
+  }
 `;
 
 const Detail_BookInfo = ({ data }) => {
@@ -213,9 +261,13 @@ const Detail_BookInfo = ({ data }) => {
             <em>
               <strong>할인혜택</strong>
               <span>카드할인 / 무이자 할부</span>
-              <MdKeyboardArrowRight style={{ color: "red" }} />
+              <MdKeyboardArrowRight
+                style={{ color: "red", display: "inline-block" }}
+              />
               <span>이달의 혜택 도서상품권</span>
-              <MdKeyboardArrowRight style={{ color: "red" }} />
+              <MdKeyboardArrowRight
+                style={{ color: "red", display: "inline-block" }}
+              />
             </em>
             <em className="point">
               <strong>적립혜택</strong>
@@ -223,7 +275,9 @@ const Detail_BookInfo = ({ data }) => {
               <span className="last">
                 5만원이상 주문시 2천P+등급별 최대 1.5%적립{" "}
               </span>
-              <MdKeyboardArrowRight style={{ color: "red" }} />
+              <MdKeyboardArrowRight
+                style={{ color: "red", display: "inline-block" }}
+              />
             </em>
             {/*	1,100P (5%적립)5만원이상 주문시 2천P+등급별 최대 1.5%적립  */}
             <em className="coupon">
@@ -235,21 +289,29 @@ const Detail_BookInfo = ({ data }) => {
               <BiSolidCoupon />
               <span>3천원 중복할인 쿠폰</span>
             </em>
-            <em>
-              <AdBox>인터파크 도서 X 더조은컴퓨터 최대 9천원</AdBox>
-            </em>
+
+            <AdBox>인터파크 도서 X 더조은컴퓨터 최대 9천원</AdBox>
+
             <em className="delivery">
               <strong>배송정보</strong>
               <span>예약판매</span>
               <span>11/24(금) 이후 발송 예정</span>
               <span className="last">
-                무료배송 <CiCircleQuestion />
+                무료배송{" "}
+                <CiCircleQuestion style={{ display: "inline-block" }} />
               </span>
             </em>
             <em className="count_area">
               <strong>주문수량</strong>
               <Detail_count />
             </em>
+            <CartArea>
+              <div className="cart">북카트담기</div>
+              <div className="buy">바로구매</div>
+              <div className="like">
+                <CiHeart />
+              </div>
+            </CartArea>
           </PriceSection>
         </div>
       </InfoContainer>
