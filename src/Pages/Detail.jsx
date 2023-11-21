@@ -1,12 +1,12 @@
-import React, { useEffect, useRef } from "react";
-import styled from "styled-components";
-import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-import { BsClipboardCheck } from "react-icons/bs";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { motion, useTransform, useViewportScroll } from "framer-motion";
-import { CiSearch } from "react-icons/ci";
-import Detail_BookInfo from "../components/Detail/Detail_BookInfo";
+import React, { useEffect, useRef } from 'react';
+import styled from 'styled-components';
+import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
+import { BsClipboardCheck } from 'react-icons/bs';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import { motion, useTransform, useViewportScroll } from 'framer-motion';
+import { CiSearch } from 'react-icons/ci';
+import Detail_BookInfo from '../components/Detail/Detail_BookInfo';
 
 const MotionNav = styled(motion.div)`
   position: fixed;
@@ -84,7 +84,7 @@ const Star = styled.div`
 
 const Detail = () => {
   const { isPending, error, data } = useQuery({
-    queryKey: ["repoData"],
+    queryKey: ['repoData'],
     queryFn: () => axios.get(`/detail.json`).then((res) => res.data.item[0]),
   });
   const containerRef = useRef(null);
@@ -98,7 +98,8 @@ const Detail = () => {
         style={{
           opacity: opacity,
           scale: opacity,
-        }}></MotionNav>
+        }}
+      ></MotionNav>
       <Container ref={containerRef}>
         <div className="center">
           <LocationBox>
@@ -107,8 +108,8 @@ const Detail = () => {
           <TitleBox>
             <Title>
               <div>
-                <h1>{data?.title && data.title.split("-")[0]}</h1>
-                <span>: {data?.title && data.title.split("-")[1]}</span>
+                <h1>{data?.title && data.title.split('-')[0]}</h1>
+                <span>: {data?.title && data.title.split('-')[1]}</span>
               </div>
               <div className="event">
                 <span>베스트셀러</span>
@@ -123,7 +124,7 @@ const Detail = () => {
                   <AiFillStar />
                   <AiFillStar />
                   <AiFillStar />
-                </span>{" "}
+                </span>{' '}
                 10
               </span>
               <span className="review">
