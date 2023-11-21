@@ -3,11 +3,13 @@ import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import Main from "./Pages/Main";
-import reportWebVitals from './reportWebVitals';
-import Detail from './Pages/Detail';
-import { createGlobalStyle } from 'styled-components';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import CategoryList from './Pages/CategoryList';
+import Detail from "./Pages/Detail";
+import NotFound from "./Pages/NotFound";
+
+import reportWebVitals from "./reportWebVitals";
+import { createGlobalStyle } from "styled-components";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import CategoryList from "./Pages/CategoryList";
 const GlobalStyle = createGlobalStyle`
 @font-face {
   font-family: 'fontName';
@@ -142,39 +144,39 @@ iframe {
 `;
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <App />,
-    errorElement: <h1>not found</h1>,
+    errorElement: <NotFound />,
     children: [
       {
         index: "/",
         element: <Main />,
       },
       {
-        path: '/book/:id',
+        path: "/book/:id",
         element: <Detail />,
       },
       {
-        path: '/bestseller',
+        path: "/bestseller",
         element: <div>bestseller</div>,
       },
       {
-        path: '/category/main',
+        path: "/category/main",
         element: <div>category list</div>,
       },
       {
-        path: '/category/list',
+        path: "/category/list",
         element: <CategoryList />,
       },
       {
-        path: '/search',
+        path: "/search",
         element: <div>search</div>,
       },
     ],
   },
 ]);
 const client = new QueryClient();
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={client}>
