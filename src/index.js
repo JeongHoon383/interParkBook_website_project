@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import App from "./App";
+import Main from "./Pages/Main";
 
 import reportWebVitals from "./reportWebVitals";
 import Detail from "./Pages/Detail";
@@ -147,7 +148,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: "/",
-        element: <h1>main</h1>,
+        element: <Main />,
       },
       {
         path: "/book/:id",

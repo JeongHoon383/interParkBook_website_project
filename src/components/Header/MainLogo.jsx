@@ -1,16 +1,9 @@
-import React from "react";
-import SearchIcon from "@mui/icons-material/Search";
-import { makeStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
-import "../../css/header/mainLogo.css";
+import React from 'react';
+import { IoSearch } from 'react-icons/io5';
+import { Link } from 'react-router-dom';
+import '../../css/header/mainLogo.css';
 
-const useStyles = makeStyles({
-  searchIcon: {
-    color: "#ff9c46",
-  },
-});
 export default function MainLogo() {
-  const classes = useStyles();
   return (
     <div className="mainLogo">
       <div className="logoBox">
@@ -22,7 +15,7 @@ export default function MainLogo() {
             <form className="searchForm">
               <input className="searchInput" type="text" />
               <button className="searchBtn">
-                <SearchIcon className={classes.searchIcon} />
+                <IoSearch style={{ color: 'var(--main)' }} />
               </button>
             </form>
             <div className="hit_searcher">

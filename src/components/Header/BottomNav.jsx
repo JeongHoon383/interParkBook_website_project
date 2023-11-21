@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import AllCategory from "./CategoryBanner/AllCategory";
-import "../../css/header/bottomNav.css";
+import React, { useState } from 'react';
+import { IoIosArrowDown } from 'react-icons/io';
+import { IoIosArrowUp } from 'react-icons/io';
+import AllCategory from './CategoryBanner/AllCategory';
+import '../../css/header/bottomNav.css';
 
 export default function BottomNav() {
   const [isClick, setIsClick] = useState(false);
@@ -16,7 +16,7 @@ export default function BottomNav() {
         <div className={`categoryTab`} onClick={handleClick}>
           <a href="#" className="allTab">
             전체 카테고리
-            {isClick == true ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+            {isClick == true ? <IoIosArrowUp /> : <IoIosArrowDown />}
           </a>
           {isClick == true ? <AllCategory /> : null}
         </div>
