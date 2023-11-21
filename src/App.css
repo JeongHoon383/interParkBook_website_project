@@ -1,38 +1,53 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.container{
+  background-color: #ff7c46;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between; /*좌우 간격 최대로 하여 좌우정렬*/
+  padding: 70px;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+.navbar{
+  border: 1px solid red;
+  background-color :#f3f3f3;
+  display:flex;
+  flex-direction: row; /* 수평방향으로 배치 <--> column */ 
+  align-items: flex-end;
+  width: 95%;
+  height: 95%;
 }
 
-.App-link {
-  color: #61dafb;
+.navbar_left {
+display:flex;
+flex-direction: row; /* 수평방향으로 배치 */
+
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.navbar_right {
+display : flex;
+/* margin-left : auto; 좌측 마진을 auto로 설정하여 우측에 정렬 */
+flex-direction: row; /* 우측아이템을 수평으로 정렬*/ 
+margin-top: 10px; /* 우측 아이템들과 상단 간격 설정*/
+
+}
+
+.navbar a{
+  padding : 10px;
+  text-decoration: none;
+  color : black;
+  margin-bottom: 10px; /* 링크들 간의 간격 설정 */
+}
+
+.navbar a:hover{
+color:black;
+}
+/* 
+@font-face {
+  font-family: "YES24.ttf";
+  src: url("../src/font/YES24.ttf");
+} */
+
+/* footer */
+.footer{
+  background-color: #f3f3f3;
+  padding: 50px;
+  text-align: center;
 }
