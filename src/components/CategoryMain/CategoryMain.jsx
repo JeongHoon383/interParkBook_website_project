@@ -3,7 +3,7 @@ import React from 'react'
 const CategoryMain = () => {
   return (
     <div>
-      asdasd
+      깃 테스트르르르
     </div>
   )
 }
