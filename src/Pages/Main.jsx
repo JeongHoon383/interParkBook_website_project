@@ -3,7 +3,7 @@ import MainBanner from '../components/Main/Main_MainBanner';
 
 export default function Main() {
   return (
-    <div className="mainContent" style={{ margin: '20px 0', height: '1500px' }}>
+    <div className="mainContent" style={{ width: '60%', margin: '30px auto', height: '1500px' }}>
       <MainBanner />
     </div>
   );
