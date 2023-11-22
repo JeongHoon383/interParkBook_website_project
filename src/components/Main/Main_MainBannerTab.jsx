@@ -18,34 +18,24 @@ const StyledSlider = styled(Slider)`
 
 export default function Main_MainBannerTab() {
   const [tab, setTab] = useState(0);
-  const [active, setActive] = useState('');
+  const [active, setActive] = useState(0);
 
-  const handleMouseOver1 = (e) => {
-    setActive('');
-    setTab(0);
-    setActive('active');
+  const handleMouseOver = (a) => {
+    setTab(a);
+    setActive(a);
   };
-  const handleMouseOver2 = (e) => {
-    setActive('');
-    setTab(1);
-    setActive('active');
-  };
-  const handleMouseOver3 = (e) => {
-    setActive('');
-    setTab(2);
-    setActive('active');
-  };
+
   return (
     <>
       <Slide tab={tab} />
       <div className="mainBanner_tab">
-        <div onMouseOver={handleMouseOver1} className={`${active}`}>
+        <div onMouseOver={() => handleMouseOver(0)} className={active === 0 ? `active` : null}>
           핫클릭 이벤트
         </div>
-        <div onMouseOver={handleMouseOver2} className={`${active}`}>
+        <div onMouseOver={() => handleMouseOver(1)} className={active === 1 ? `active` : null}>
           추천 이벤트
         </div>
-        <div onMouseOver={handleMouseOver3} className={`${active}`}>
+        <div onMouseOver={() => handleMouseOver(2)} className={active === 2 ? `active` : null}>
           화제의 책
         </div>
       </div>
