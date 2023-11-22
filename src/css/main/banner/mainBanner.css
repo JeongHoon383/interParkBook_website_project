@@ -1,7 +1,16 @@
+.mainBanner {
+  height: 360px;
+}
+
 .mainBanner_content {
   width: 60%;
   margin: 0 auto;
-  border: 1px solid tomato;
+  border-radius: 5px;
 }
 
-.mainBanner_tab {}
+.mainBanner_tab {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffc28d;
+}

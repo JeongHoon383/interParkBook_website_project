@@ -30,8 +30,9 @@ const InfoContainer = styled.div`
   }
   .info_section {
     flex: 0.75;
-    border: 1px solid black;
+
     padding: 10px;
+    position: relative;
     .info_publisher {
       border-bottom: 1px solid lightgray;
       padding-bottom: 20px;
@@ -75,7 +76,6 @@ const InfoCaption = styled.div`
   }
 `;
 const PriceSection = styled.div`
-  border: 1px solid black;
   height: 90%;
   padding: 10px;
   .delivery {
@@ -176,9 +176,10 @@ const AdBox = styled.div`
 
 const CartArea = styled.div`
   display: flex;
-  border: 1px solid black;
   padding-left: 10px;
   position: absolute;
+  bottom: 0;
+  left: 0;
   .cart,
   .buy {
     width: 130px;
