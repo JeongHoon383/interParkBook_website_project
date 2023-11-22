@@ -5,6 +5,7 @@ import App from "./App";
 import Main from "./Pages/Main";
 import Detail from "./Pages/Detail";
 import NotFound from "./Pages/NotFound";
+import CategoryMain from "./Pages/CategoryMain";
 
 import reportWebVitals from "./reportWebVitals";
 import { createGlobalStyle } from "styled-components";
@@ -162,7 +163,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/category/main",
-        element: <div>category list</div>,
+        element: <CategoryMain />,
       },
       {
         path: "/category/list",
