@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import Slider from 'react-slick';
-import '../../css/slick.css';
-import '../../css/slick-theme.css';
 import '../../css/main/banner/mainSlide.css';
 import styled from 'styled-components';
 import Main_MainBannerIssue from './Main_MainBannerIssue';
@@ -20,9 +18,9 @@ export default function Main_MainBannerTab() {
   const [tab, setTab] = useState(0);
   const [active, setActive] = useState(0);
 
-  const handleMouseOver = (a) => {
-    setTab(a);
-    setActive(a);
+  const handleMouseOver = (e) => {
+    setTab(e);
+    setActive(e);
   };
 
   return (
