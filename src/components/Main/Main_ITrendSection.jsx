@@ -1,7 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import axios from 'axios';
+import styled from 'styled-components';
 import '../../css/main/trendSection.css';
+
+const Pre = styled.div`
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  left: 3%;
+  z-index: 3;
+`;
+
+const NextTo = styled.div`
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: 3%;
+  z-index: 3;
+`;
+
+const Img = styled.img`
+  width: 100%;
+`;
 
 export default function Main_ITrendSection() {
   const [itemNewAll, setItemNewAll] = useState([]);
@@ -31,9 +52,19 @@ export default function Main_ITrendSection() {
     autoplaySpeed: 4000,
     cssEase: 'linear',
     draggable: false,
+    nextArrow: (
+      <NextTo>
+        <Img src="img/Slide/right-arrow.svg" />
+      </NextTo>
+    ),
+    prevArrow: (
+      <Pre>
+        <Img src="/img/Slide/left-arrow.svg" />
+      </Pre>
+    ),
   };
   return (
-    <div className="trendSection" style={{ marginTop: '30px' }}>
+    <div className="trendSection" style={{ margin: '60px 0' }}>
       <div className="interparkNew">
         <div className="newHeader">
           <h3>
