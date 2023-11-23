@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { GoHeart } from "react-icons/go";
 
 const ProdBuy = styled.div`
   width: 16%;
@@ -41,6 +42,9 @@ export default function CategoryList_ProdBuy() {
           <button>+</button>
         </span>
       </div>
+      <button className="insertCart">카트에 넣기</button>
+      <button className="buy">바로 구매</button>
+      <button className="dibs"><GoHeart /></button>
     </ProdBuy>
   );
 }
