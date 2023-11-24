@@ -87,10 +87,10 @@ const Sortarea = styled.div`
 `;
 
 export default function CategoryList_Sort({data}){
-  const [page, setPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
   const [selected, setSelected] = useState("20");
 
-  const handlePageChange = (page) => setPage(page)
+  const handlePageChange = (page) => setCurrentPage(page)
   const handleChangeCount = (e) => setSelected(e.target.value)
   
   return(
@@ -119,7 +119,7 @@ export default function CategoryList_Sort({data}){
       <div className="bottomArea">
         <Pagination 
           totalItemsCount={data.totalResults}
-          activePage={page}
+          activePage={currentPage}
           pageRangeDisplayed={10}
           itemsCountPerPage={parseInt(selected)}
           onChange={handlePageChange}

@@ -3,7 +3,6 @@ import CategoryList_TopNav  from '../components/CategoryList/CategoryList_TopNav
 import CategoryList_Main from '../components/CategoryList/main/CategoryList_Main';
 import styled from 'styled-components';
 import axios from 'axios';
-import CategoryList_Products from '../components/CategoryList/main/product/CategoryList_Products';
 
 const CategoryListContainer = styled.div`
   font-size: 12px;
@@ -22,9 +21,6 @@ export default function CategoryList(){
     <CategoryListContainer>
       <CategoryList_TopNav />
       <CategoryList_Main 
-      data = {data}
-      />
-      <CategoryList_Products 
       data = {data}
       />
     </CategoryListContainer>
