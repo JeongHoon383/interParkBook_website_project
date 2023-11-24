@@ -1,0 +1,68 @@
+{
+  "version": "20131101",
+  "logo": "http://image.aladin.co.kr/img/header/2011/aladin_logo_new.gif",
+  "title": "알라딘 상품정보 - 전지적 푸바오 시점",
+  "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=328065875&amp;partner=openAPI",
+  "pubDate": "Mon, 13 Nov 2023 09:11:02 GMT",
+  "totalResults": 1,
+  "startIndex": 1,
+  "itemsPerPage": 1,
+  "query": "isbn=K832936705",
+  "searchCategoryId": 0,
+  "searchCategoryName": "",
+  "item": [
+    {
+      "title": "전지적 푸바오 시점 - 작은할부지 송바오가 전하는 푸바오의 뚠빵한 하루",
+      "link": "http://www.aladin.co.kr/shop/wproduct.aspx?ItemId=328065875&amp;partner=openAPI&amp;start=api",
+      "author": "송영관(에버랜드 동물원) (지은이), 송영관(에버랜드 동물원), 류정훈(에버랜드 커뮤니케이션 그룹) (사진)",
+      "pubDate": "2023-11-15",
+      "description": "푸바오의 작은할부지 송바오가 전하는 판다월드 바오패밀리의 귀엽고 사랑스러운 일상 포토에세이. 20년차 사육사이자 푸바오의 영원한 작은할부지 ‘송바오’ 송영관 작가는 푸바오를 향한 애정에 보답하고, 푸바오와 판다월드의 이야기를 전하고자 《전지적 푸바오 시점》을 출간한다.",
+      "isbn": "K832936705",
+      "isbn13": "9791171710102",
+      "itemId": 328065875,
+      "priceSales": 19800,
+      "priceStandard": 22000,
+      "mallType": "BOOK",
+      "stockStatus": "예약판매",
+      "mileage": 1100,
+      "cover": "https://image.aladin.co.kr/product/32806/58/cover/k832936705_1.jpg",
+      "categoryId": 51376,
+      "categoryName": "국내도서>에세이>사진/그림 에세이",
+      "publisher": "위즈덤하우스",
+      "salesPoint": 121190,
+      "adult": false,
+      "fixedPrice": true,
+      "bestRank": 1,
+      "customerReviewRank": 10,
+      "subInfo": {
+        "ebookList": [],
+        "usedList": {
+          "aladinUsed": {
+            "itemCount": 0,
+            "minPrice": 0,
+            "link": "https://www.aladin.co.kr/shop/UsedShop/wuseditemall.aspx?ItemId=328065875&amp;TabType=2&amp;partner=openAPI"
+          },
+          "userUsed": {
+            "itemCount": 0,
+            "minPrice": 0,
+            "link": "https://www.aladin.co.kr/shop/UsedShop/wuseditemall.aspx?ItemId=328065875&amp;TabType=1&amp;partner=openAPI"
+          },
+          "spaceUsed": {
+            "itemCount": 0,
+            "minPrice": 0,
+            "link": "https://www.aladin.co.kr/shop/UsedShop/wuseditemall.aspx?ItemId=328065875&amp;TabType=3&amp;partner=openAPI"
+          }
+        },
+        "subTitle": "작은할부지 송바오가 전하는 푸바오의 뚠빵한 하루",
+        "originalTitle": "",
+        "itemPage": 248,
+        "ratingInfo": {
+          "ratingScore": 10,
+          "ratingCount": 10,
+          "commentReviewCount": 10,
+          "myReviewCount": 0
+        }
+      }
+    }
+  ]
+}
