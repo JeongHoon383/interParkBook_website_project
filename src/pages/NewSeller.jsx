@@ -1,13 +1,13 @@
 import React from "react";
 import Book from "../components/Book";
 
-export default function Home() {
 
+export default function NewSeller() {
   return (
     <div className="content">
-      <Book />
+      <Book filename="NewSeller" />
     </div>
 
-  )
 
+  )
 }

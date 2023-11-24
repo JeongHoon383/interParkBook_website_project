@@ -2,10 +2,15 @@ import React from "react";
 import Book from "../components/Book";
 
 export default function BestSeller() {
-	return (
-		<div><Book /></div>
-	)
+  return (
+    <div className="content">
 
+      <Book filename="BestSeller" />
+      <Book filename="BestSeller" />
+      <Book filename="BestSeller" />
+    </div>
+
+  )
 
 
 }
