@@ -74,7 +74,7 @@ export default function CategoryList_ProdContent({data}){
         <span>{data.priceStandard.toLocaleString()}원</span>
         <HiArrowLongRight />
         <span className="priceSales">{data.priceSales.toLocaleString()}원</span>
-        <div className="mileageIcon">M</div>
+        <span className="mileageIcon">M</span>
         <span className="mileage">{data.mileage.toLocaleString()}원</span>
       </p>
       <p className="salesPoint">

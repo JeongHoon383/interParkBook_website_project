@@ -86,12 +86,11 @@ const Sortarea = styled.div`
   }
 `;
 
-export default function CategoryList_Sort({data}){
-  const [currentPage, setCurrentPage] = useState(1);
-  const [selected, setSelected] = useState("20");
+export default function CategoryList_Sort({data, listQty, setListQty, currentPage, setCurrentPage, isSoldout, setIsSoldout}){
 
   const handlePageChange = (page) => setCurrentPage(page)
-  const handleChangeCount = (e) => setSelected(e.target.value)
+  const handleChangeListQty = (e) => setListQty(e.target.value)
+  const handleChangeSoldout = (e) => setIsSoldout(e.target.value)
   
   return(
     <Sortarea>
@@ -106,13 +105,14 @@ export default function CategoryList_Sort({data}){
           <button>상품명순</button>
         </span>
         <span className="listOption">
-          <select name="count" id="count" onChange={handleChangeCount} value={selected}>
+          <select name="listQty" id="listQty" onChange={handleChangeListQty} value={listQty}>
             <option value="20">20개씩 보기</option>
+            <option value="30">30개씩 보기</option>
             <option value="40">40개씩 보기</option>
           </select>
-          <select name="soldout" id="soldout">
-            <option value="include">품절포함</option>
-            <option value="exclude">품절제외</option>
+          <select name="soldout" id="soldout" onChange={handleChangeSoldout} value={isSoldout}>
+            <option value="0">품절포함</option>
+            <option value="1">품절제외</option>
           </select>
         </span>
       </div>
@@ -121,7 +121,7 @@ export default function CategoryList_Sort({data}){
           totalItemsCount={data.totalResults}
           activePage={currentPage}
           pageRangeDisplayed={10}
-          itemsCountPerPage={parseInt(selected)}
+          itemsCountPerPage={listQty}
           onChange={handlePageChange}
           linkClassFirst={"paginationBtn"}
           linkClassPrev={"paginationBtn"}
