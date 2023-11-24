@@ -86,6 +86,7 @@
 }
 
 .mainNav {
+  z-index: 99;
   position: absolute;
   display: flex;
   justify-content: space-between;
