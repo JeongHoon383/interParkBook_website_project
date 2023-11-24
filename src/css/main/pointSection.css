@@ -1,0 +1,13 @@
+.BlogBestHeader h3 {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.BlogBestHeader span:first-child {
+  color: #e66a57;
+}
+
+.BlogBestHeader span:last-child {
+  color: var(--default);
+}

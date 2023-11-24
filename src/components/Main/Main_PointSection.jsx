@@ -4,10 +4,10 @@ import '../../css/main/pointSection.css';
 export default function Main_PointSection() {
   return (
     <div className="pointSection">
-      <div className="pointSectionHeader">
+      <div className="BlogBestHeader">
         <h3>
-          <span>분야별</span>
-          <span>추천</span>
+          <span>주목!</span>
+          <span>이달의 책</span>
         </h3>
       </div>
     </div>

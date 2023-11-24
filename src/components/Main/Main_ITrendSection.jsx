@@ -80,7 +80,7 @@ export default function Main_ITrendSection() {
                   <img src={v.cover} alt="" />
                 </div>
                 <div className="textBox">
-                  <p className="newTitle">{v.title}</p>
+                  <p className="newTitle">{v.title.split('-')[0]}</p>
                   <p className="newAuthor">{v.author}</p>
                 </div>
               </div>
@@ -123,7 +123,7 @@ function BestSeller({ rank, bestSeller }) {
                   <span className="rankImg">
                     <img src={v.cover} alt="" />
                   </span>
-                  <span className="rankTitle">{v.title}</span>
+                  <span className="rankTitle">{v.title.split('-')[0]}</span>
                 </li>
               ))}
           </ol>,
@@ -136,7 +136,7 @@ function BestSeller({ rank, bestSeller }) {
                   <span className="rankImg">
                     <img src={v.cover} alt="" />
                   </span>
-                  <span className="rankTitle">{v.title}</span>
+                  <span className="rankTitle">{v.title.split('-')[0]}</span>
                 </li>
               ))}
           </ol>,

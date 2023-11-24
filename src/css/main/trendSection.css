@@ -1,10 +1,40 @@
 .newHeader {
   display: flex;
-  justify-content: space-between;
   margin-bottom: 20px;
+  align-items: center;
+  position: relative;
 }
 
-.newHeader h3,
+.newHeader h3 {
+  display: flex;
+  flex-basis: 100%;
+  align-items: center;
+  color: var(--default);
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 8px 0;
+}
+
+.newHeader h3::before {
+  content: '';
+  flex-grow: 1;
+  margin: 0 16px;
+  background: var(--default);
+  height: 1px;
+  font-size: 0;
+  line-height: 0;
+}
+
+.newHeader h3::after {
+  content: '';
+  flex-grow: 1;
+  margin: 0 16px;
+  background: var(--default);
+  height: 1px;
+  font-size: 0;
+  line-height: 0;
+}
+
 .bestsellerHeader h3 {
   font-size: 1.2em;
   font-weight: bold;
@@ -14,16 +44,18 @@
   font-size: 0.6em;
   font-weight: bold;
   color: var(--default);
-}
-
-.newHeader a:hover {
-  text-decoration: underline;
+  position: absolute;
+  top: 0;
+  right: 14px;
 }
 
 .newHeader a::after {
   content: '▶';
-  margin-left: 5px;
-  font-size: 0.5em;
+  margin-left: 3px;
+}
+
+.newHeader a:hover {
+  text-decoration: underline;
 }
 
 .newHeader h3 span:first-child,

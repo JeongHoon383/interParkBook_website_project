@@ -43,13 +43,13 @@ export default function Main_MainBannerTab() {
     <>
       <Slide tab={tab} />
       <div className="mainBanner_tab">
-        <div onMouseOver={() => handleMouseOver(0)} className={active === 0 ? `active` : null}>
+        <div onMouseOver={() => handleMouseOver(0)} className={active === 0 ? `activeHover` : null}>
           핫클릭 이벤트
         </div>
-        <div onMouseOver={() => handleMouseOver(1)} className={active === 1 ? `active` : null}>
+        <div onMouseOver={() => handleMouseOver(1)} className={active === 1 ? `activeHover` : null}>
           추천 이벤트
         </div>
-        <div onMouseOver={() => handleMouseOver(2)} className={active === 2 ? `active` : null}>
+        <div onMouseOver={() => handleMouseOver(2)} className={active === 2 ? `activeHover` : null}>
           화제의 책
         </div>
       </div>
