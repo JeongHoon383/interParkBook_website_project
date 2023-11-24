@@ -20,7 +20,7 @@ export default function CategoryList_Products({data}){
     <ProductsList>
       {
         data.item && data.item.map(data => (
-          <li>
+          <li key={data.itemId}>
             <CategoryList_ProdAvatar 
               image={data.cover}
             />
