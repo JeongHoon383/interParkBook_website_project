@@ -1,4 +1,41 @@
-.imgBox img {
+.slideWrapper {
   margin: 0 auto;
-  width: 90%;
+}
+
+.issueBook {
+  padding-bottom: 58px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: rgb(248, 248, 248);
+}
+
+.issueBookItem {
+  margin-top: 50px;
+}
+
+.issueBookItem p {
+  font-size: 0.8em;
+  font-weight: 800;
+  color: var(--hover);
+  text-align: center;
+}
+
+.issueBookItem p:last-child {
+  margin-top: 7px;
+  font-size: 0.7em;
+  color: var(--default);
+}
+
+.imgBox {
+  width: 200px;
+  height: 270px;
+  margin-bottom: 12px;
+}
+
+.imgBox img {
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 10px 4px -4px #d9d9d9;
 }

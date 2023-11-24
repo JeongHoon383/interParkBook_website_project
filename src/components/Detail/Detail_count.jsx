@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const CountBox = styled.span`
   border: 1px solid lightgray;
+  width: 80px;
   height: 20px;
   display: flex;
   align-items: flex-start;
@@ -11,6 +12,7 @@ const CountBox = styled.span`
     width: 30px;
     text-align: center;
     display: inline-block;
+    width: 40px;
     height: 100%;
     border: 1px solid black;
     font-size: 12px;
@@ -22,6 +24,7 @@ const CountBox = styled.span`
     height: 100%;
     border: 1px solid black;
     background: white;
+    width: 20px;
   }
 `;
 

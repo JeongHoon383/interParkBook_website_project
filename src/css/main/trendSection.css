@@ -1,0 +1,163 @@
+.newHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.newHeader h3,
+.bestsellerHeader h3 {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.newHeader a {
+  font-size: 0.6em;
+  font-weight: bold;
+  color: var(--default);
+}
+
+.newHeader a:hover {
+  text-decoration: underline;
+}
+
+.newHeader a::after {
+  content: '▶';
+  margin-left: 5px;
+  font-size: 0.5em;
+}
+
+.newHeader h3 span:first-child,
+.bestsellerHeader h3 span:last-child {
+  color: #e66a57;
+}
+
+.newHeader h3 span:last-child,
+.bestsellerHeader h3 span:first-child {
+  color: var(--default);
+}
+
+.trendSection {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* slide */
+
+.newSlider {
+  margin: 20px auto;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #e4e4e4;
+}
+
+.slideDiv .imgBox {
+  box-sizing: border-box;
+  width: 98px;
+  height: 140px;
+  margin: 0 auto;
+  margin-bottom: 30px;
+}
+
+.slideDiv .imgBox img {
+  width: 100%;
+  height: 100%;
+}
+
+.textBox {
+  width: 180px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.textBox .newTitle,
+.textBox .newAuthor,
+.bestsellerList .rankTitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: bold;
+}
+
+.textBox .newTitle {
+  font-size: 0.9em;
+  color: var(--hover);
+  margin-bottom: 10px;
+}
+
+.textBox .newAuthor {
+  font-size: 0.7em;
+  color: var(--default);
+}
+
+.interparkNew {
+  width: 77%;
+}
+
+/* bestseller */
+
+.bestSeller {
+  width: 20%;
+}
+
+.bestsellerHeader {
+  margin-bottom: 8px;
+}
+
+.bestsellerList li {
+  display: flex;
+  align-items: center;
+}
+
+.bestsellerList span {
+  margin: 4px;
+}
+
+.bestsellerList .rankImg {
+  display: block;
+  overflow: hidden;
+  width: 38px;
+  height: 38px;
+}
+
+.bestsellerList .rankImg img {
+  width: 100%;
+}
+
+.bestsellerList .rankTab {
+  font-size: 0.7em;
+  color: var(--default);
+  cursor: pointer;
+}
+
+.bestsellerList .rankTab:hover {
+  color: var(--hover);
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.bestsellerList .division {
+  margin: 0 5px;
+  color: var(--default);
+  font-size: 0.7em
+}
+
+.bestsellerList ol {
+  margin-top: 8px;
+}
+
+.bestsellerList .rankNum {
+  display: block;
+  width: 15px;
+  height: 15px;
+  text-align: center;
+  line-height: 15px;
+  font-size: 0.7em;
+  font-weight: bold;
+  color: #fff;
+  background-color: cornflowerblue;
+}
+
+.bestsellerList .rankTitle {
+  font-size: 0.7em;
+  display: block;
+  width: 156px;
+}
