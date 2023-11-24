@@ -1,13 +1,47 @@
-.BlogBestHeader h3 {
+.pointSection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.blogBestHeader h3 {
   font-size: 1.2em;
   font-weight: bold;
   margin-bottom: 8px;
 }
 
-.BlogBestHeader span:first-child {
+.blogBestHeader span:first-child {
   color: #e66a57;
 }
 
-.BlogBestHeader span:last-child {
+.blogBestHeader span:last-child {
   color: var(--default);
+}
+
+.blogBest {}
+
+.saleItem {}
+
+.categoryTabs {
+  padding-bottom: 22px;
+  border-bottom: 1px solid #c9c9c9;
+}
+
+.saleTabs .saleTabWrap {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-weight: bold;
+  color: var(--hover);
+  font-size: 0.9em;
+  letter-spacing: -1px;
+}
+
+.saleTabs .saleTabWrap .catTabLi {
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.clicked {
+  color: #e66a57;
 }

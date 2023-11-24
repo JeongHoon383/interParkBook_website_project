@@ -83,7 +83,6 @@ export default function Main_CategoryRecommend() {
                 {v.name}
               </li>
             ))}
-            <i></i>
           </ul>
         </div>
         <div className="categoryContents">{slideArr[isHover].content}</div>
