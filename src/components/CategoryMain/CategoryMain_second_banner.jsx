@@ -5,9 +5,8 @@ const CategoryMain_second_banner = () => {
   return (
     <Second_banner>
       <div className="banner_left">
-        left
         <div>
-          <img className="banner_img" src="https://image.yes24.com/Goods/123253432/L" alt="" />
+          <img className="banner_img" src="/img/CategoryMain/secondbanner_img/secondbanner1.jpeg" alt="" />
         </div>
         <div className="banner_text">
           <div>인터파크의 선택(링크 - 카테고리 리스트로)</div>
@@ -22,9 +21,11 @@ const CategoryMain_second_banner = () => {
         </div>
       </div>
       <div className="banner_right">
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
+        <ul>
+          <li><img className="banner_right_img" src="/img/CategoryMain/secondbanner_img/secondbanner1-1.jpeg" alt="" /></li>
+          <li><img className="banner_right_img" src="/img/CategoryMain/secondbanner_img/secondbanner2-2.jpeg" alt="" /></li>
+          <li><img className="banner_right_img" src="/img/CategoryMain/secondbanner_img/secondbanner3-3.jpeg" alt="" /></li>
+        </ul>
       </div>
     </Second_banner>
   );
@@ -32,15 +33,16 @@ const CategoryMain_second_banner = () => {
 
 const Second_banner = styled.div`
   display: flex;
-  margin: 0 auto;
   margin-top: 20px;
   width: 770px;
   height: 323px;
   border : 1px solid red;
+  /* background-color : rgb(38, 38, 38); */
 
   .banner_left{
     display : flex;
-    width : 580px
+    width : 580px;
+    border-right : 1px solid grey;
   }
 
   .banner_img{
@@ -54,15 +56,23 @@ const Second_banner = styled.div`
     margin-top : 30px;
   }
 
-  .banner_right{
-    display : flex;
-    flex-direction : column;
-    border : 1px solid blue;
+  .banner_right ul{
+    width : 190px;
+    flex-basis : 33.33%;
   }
 
-  .banner_right *{
-    width : 190px;
-    flex : 1;
+  .banner_right ul li{
+    height : 105px;
+    border-bottom : 1px solid grey;
+  }
+
+  .banner_right ul li:last-child{
+    border-bottom : none;
+  }
+
+  .banner_right_img{
+    width : 55px;
+    height : 80px;
   }
 `;
 
