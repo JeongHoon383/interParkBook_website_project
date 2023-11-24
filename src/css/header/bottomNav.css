@@ -1,0 +1,96 @@
+.bottomNav {
+  letter-spacing: -1px;
+  color: #fff;
+  background-color: var(--main);
+}
+
+.bottomNav_tab {
+  width: 60%;
+  margin: 0 auto;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+
+.allTab {
+  display: flex;
+  align-items: center;
+}
+
+.categoryTab {
+  margin-right: 20px;
+}
+
+.otherTab {
+  font-size: 0.9em;
+}
+
+.otherTab li {
+  display: inline-block;
+  margin-right: 30px;
+}
+
+/* 전체 카테고리 배너 */
+.allCategory {
+  position: relative;
+  color: #000;
+  z-index: 99;
+}
+
+.category {
+  color: var(--default);
+  padding: 20px;
+}
+
+.category:not(:first-child) {
+  border-left: 1px solid #e5e5e5;
+}
+
+.category h3 {
+  font-weight: 800;
+  font-size: 0.9em;
+  margin-bottom: 10px;
+}
+
+.categoryNav {
+  display: flex;
+}
+
+.categoryNav ul {
+  width: 110px;
+  font-size: 0.75em;
+}
+
+.categoryNav li {
+  font-weight: 500;
+  line-height: 150%;
+}
+
+.categoryNav li:hover {
+  color: var(--hover);
+  text-decoration: underline;
+}
+
+.categoryNav li.reservationSell,
+.categoryNav li.translateBook {
+  font-weight: 800;
+  color: var(--main);
+}
+
+.goodsTitle:after {
+  content: '>';
+  margin-left: 5px;
+  font-size: 0.7em;
+  font-weight: 800;
+}
+
+.mainNav {
+  z-index: 99;
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  top: 15px;
+  border: 1px solid var(--main);
+  background-color: #fff;
+}

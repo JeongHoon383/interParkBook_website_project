@@ -1,0 +1,74 @@
+.serviceBenefit {
+  margin-bottom: 70px;
+}
+
+.serviceBenefitHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--hover);
+  padding-bottom: 10px;
+}
+
+.serviceBenefitHeader h2 {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: var(--hover);
+}
+
+.serviceBenefitHeader .notice {
+  margin-left: auto;
+}
+
+.serviceBenefitHeader .notice h5 {
+  margin-right: 8px;
+  display: inline-block;
+  font-size: 0.8em;
+  font-weight: bold;
+  color: var(--hover);
+}
+
+.serviceBenefitHeader .notice h5:after {
+  content: '>';
+  font-size: 0.5em;
+  margin-left: 4px;
+}
+
+.serviceBenefitHeader .notice span {
+  font-size: 0.6em;
+  font-weight: bold;
+  color: var(--default);
+}
+
+.serviceBenefitHeader .notice span:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.serviceBenefitBox {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.serviceBenefitBox h3 {
+  font-size: 0.9em;
+  font-weight: bold;
+  word-spacing: -0.8px;
+  margin-bottom: 10px;
+}
+
+.serviceBenefitBox ul li {
+  margin-bottom: 10px;
+  font-size: 0.7em;
+  font-weight: bold;
+  color: var(--default);
+}
+
+.serviceBenefitBox .col1 li:hover,
+.serviceBenefitBox .col2 li:hover,
+.serviceBenefitBox .col3 li:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
