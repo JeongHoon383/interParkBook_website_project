@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from "styled-components"
+import NewbookContent from './NewbookContent';
+import { IoIosArrowForward } from "react-icons/io";
 
 const NewbookContainer = styled.div`
     float: left;
@@ -8,13 +10,18 @@ const NewbookContainer = styled.div`
     text-align: left;
     .newBookText{
       padding: 20px 0 19px 20px;
+      display : flex;
+      cursor: pointer;
     }
 `;
 
 const Newbook = () => {
   return (
     <NewbookContainer>
-      <div className='newBookText'>새로 나온 책</div>
+      <div className='newBookText'>
+        새로 나온 책<span><IoIosArrowForward/></span>
+      </div>
+      <NewbookContent/>
     </NewbookContainer>
   )
 }
