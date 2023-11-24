@@ -9,7 +9,9 @@ export default function MainLogo() {
       <div className="logoBox">
         <div className="logoContent">
           <h1 className="logoContainer">
-            <img className="logoImg" src="/img/logo.png" alt="" />
+            <Link to="/">
+              <img className="logoImg" src="/img/logo.png" alt="" />
+            </Link>
           </h1>
           <div className="search">
             <form className="searchForm">

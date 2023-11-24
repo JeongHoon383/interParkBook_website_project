@@ -1,38 +1,62 @@
 import React from 'react';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import styled from 'styled-components';
 
+const Pre = styled.div`
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  left: 3%;
+  z-index: 3;
+`;
+
+const NextTo = styled.div`
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 3%;
+  z-index: 3;
+`;
+
+const Img = styled.img`
+  width: 100%;
+`;
 export default function Slide() {
   const settings = {
+    className: '',
+    arrows: true,
     dots: true,
     infinite: true,
-    speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoplay: true,
+    speed: 1000,
+    autoplaySpeed: 4000,
+    draggable: false,
+    appendDots: (dots) => (
+      <div
+        style={{
+          width: '100%',
+          position: 'absolute',
+          top: '20px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <ul> {dots} </ul>
+      </div>
+    ),
+    dotsClass: 'dots_custom',
+    nextArrow: (
+      <NextTo>
+        <Img src="/img/Slide/right-arrow.svg" />
+      </NextTo>
+    ),
+    prevArrow: (
+      <Pre>
+        <Img src="/img/Slide/left-arrow.svg" />
+      </Pre>
+    ),
   };
-  return (
-    <div>
-      <Slider {...settings}>
-        <div>
-          <h3>1</h3>
-        </div>
-        <div>
-          <h3>2</h3>
-        </div>
-        <div>
-          <h3>3</h3>
-        </div>
-        <div>
-          <h3>4</h3>
-        </div>
-        <div>
-          <h3>5</h3>
-        </div>
-        <div>
-          <h3>6</h3>
-        </div>
-      </Slider>
-    </div>
-  );
+  return <div>Slide</div>;
 }

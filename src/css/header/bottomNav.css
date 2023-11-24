@@ -19,7 +19,7 @@
 }
 
 .categoryTab {
-  margin: 0 20px;
+  margin-right: 20px;
 }
 
 .otherTab {
@@ -35,6 +35,7 @@
 .allCategory {
   position: relative;
   color: #000;
+  z-index: 99;
 }
 
 .category {
