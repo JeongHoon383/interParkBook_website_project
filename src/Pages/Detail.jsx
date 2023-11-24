@@ -99,6 +99,7 @@ const Detail = () => {
     queryKey: ["repoData"],
     queryFn: () => axios.get(`/detail.json`).then((res) => res.data.item[0]),
   });
+
   const containerRef = useRef(null);
 
   const { scrollY, scrollYProgress } = useViewportScroll();
@@ -149,57 +150,6 @@ const Detail = () => {
         </div>
       </Container>
       <Detail_tabs></Detail_tabs>
-
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
     </>
   );
 };

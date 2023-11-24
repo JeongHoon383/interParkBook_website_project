@@ -3,10 +3,11 @@ import { Link, Route, Routes, useMatch } from "react-router-dom";
 import styled from "styled-components";
 import Detail_info from "./Detail_info";
 import Detail_event from "./Detail_event";
-import Detail_reco from "./Detail_reco";
 import Detail_review from "./Detail_review";
 import Detail_change from "./Detail_change";
 import { motion } from "framer-motion";
+import Detail_slider from "./Detail_slider";
+import Detail_reco from "./Detail_reco";
 
 const TabsContainer = styled.div`
   width: 60%;
@@ -16,6 +17,7 @@ const Tabs = styled.div`
   display: flex;
   position: sticky;
   top: 55px;
+  z-index: 10;
 `;
 const Tab = styled.div`
   flex: 1;
@@ -87,6 +89,9 @@ const Detail_tabs = () => {
           </Link>
         </Tab>
       </Tabs>
+      {!eventMatch && !recMatch && !reviewMatch && !changeMatch ? (
+        <Detail_info />
+      ) : null}
       {infoMatch && <Detail_info />}
       {eventMatch && <Detail_event />}
       {recMatch && <Detail_reco />}
