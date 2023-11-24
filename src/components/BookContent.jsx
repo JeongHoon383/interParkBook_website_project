@@ -1,5 +1,5 @@
 import React from "react";
-import '../App.css';
+import '../Search.css';
 import styled from 'styled-components';
 
 export default function BookContent(book) {
