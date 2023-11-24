@@ -1,6 +1,7 @@
 import React from 'react'
 import CategoryMain_banner from '../components/CategoryMain/CategoryMain_banner'
 import CategoryMain_second_banner from '../components/CategoryMain/CategoryMain_second_banner'
+import CategoryMainNewBook from '../components/CategoryMain/CategoryMainNewBook'
 import styled from "styled-components"
 
 
@@ -9,6 +10,7 @@ const CategoryMain = () => {
     <CategoryMainContainer>
       <CategoryMain_banner/>
       <CategoryMain_second_banner/>
+      <CategoryMainNewBook/>
       <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
     </CategoryMainContainer>
   )
