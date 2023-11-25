@@ -5,18 +5,18 @@ import styled from 'styled-components';
 import '../../css/main/trendSection.css';
 
 const Pre = styled.div`
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   position: absolute;
-  left: 3%;
+  left: 2%;
   z-index: 3;
 `;
 
 const NextTo = styled.div`
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   position: absolute;
-  right: 3%;
+  right: 2%;
   z-index: 3;
 `;
 
@@ -29,9 +29,6 @@ export default function Main_ITrendSection() {
   const [bestSeller, setBestSeller] = useState([]);
   const [rank, setRank] = useState(0);
 
-  const handleClick = (e) => {
-    setRank(e);
-  };
   useEffect(() => {
     axios
       .get('/data/itemNewAll.json')
@@ -41,6 +38,13 @@ export default function Main_ITrendSection() {
       .catch();
     axios.get('/data/bestSeller.json').then((result) => setBestSeller(result.data.item));
   }, []);
+
+  const rankSpan = [{ name: '1~5위' }, { name: '6~10위' }];
+
+  const handleClick = (e) => {
+    setRank(e);
+  };
+
   const settings = {
     className: 'slideDiv',
     dots: false,
@@ -63,6 +67,7 @@ export default function Main_ITrendSection() {
       </Pre>
     ),
   };
+
   return (
     <div className="trendSection" style={{ margin: '60px 0' }}>
       <div className="interparkNew">
@@ -95,13 +100,16 @@ export default function Main_ITrendSection() {
           </h3>
         </div>
         <div className="bestsellerList">
-          <span className="rankTab first" onClick={() => handleClick(0)}>
-            1~5위
-          </span>
           <em className="division">|</em>
-          <span className="rankTab second" onClick={() => handleClick(1)}>
-            6~10위
-          </span>
+          {rankSpan.map((el, index) => (
+            <>
+              <span className={index === rank ? `rankTab current` : `rankTab`} onClick={() => handleClick(index)}>
+                {el.name}
+              </span>
+              <em className="division">|</em>
+            </>
+          ))}
+
           <BestSeller rank={rank} bestSeller={bestSeller} />
         </div>
       </div>

@@ -1,7 +1,21 @@
 @font-face {
-  font-family: "YES24GothicR";
-  font-weight: normal;
-  src: url('/public/font/YES24GothicR.ttf') format("truetype");
+  font-family: 'Yes24GothicR';
+  src: url('../public/font/YES24GothicR.ttf');
+}
+
+@font-face {
+  font-family: 'Yes24GothicM';
+  src: url('../public//font/YES24GothicM.ttf');
+}
+
+@font-face {
+  font-family: 'Yes24GothicEB';
+  src: url('../public//font/YES24GothicEB.ttf');
+}
+
+@font-face {
+  font-family: 'Yes24GothicB';
+  src: url('../public//font/YES24GothicB.ttf');
 }
 
 body {

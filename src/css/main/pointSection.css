@@ -2,25 +2,48 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 66px 0;
 }
 
 .blogBestHeader h3 {
+  font-family: 'YES24GothicB';
   font-size: 1.2em;
-  font-weight: bold;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #c9c9c9;
 }
 
 .blogBestHeader span:first-child {
   color: #e66a57;
 }
 
-.blogBestHeader span:last-child {
+.blogBestHeader span:last-of-type {
   color: var(--default);
 }
 
-.blogBest {}
+.blogBestHeader a {
+  margin-left: 12px;
+  font-size: 0.5em;
+  color: var(--default);
+}
 
-.saleItem {}
+.blogBestHeader a:hover {
+  text-decoration: underline;
+}
+
+.blogBestHeader a::after {
+  content: '▶';
+  margin-left: 3px;
+  font-size: 0.3rem;
+}
+
+.blogBest {
+  width: 40%;
+}
+
+.saleItem {
+  width: 60%;
+}
 
 .categoryTabs {
   padding-bottom: 22px;
@@ -44,4 +67,72 @@
 
 .clicked {
   color: #e66a57;
+}
+
+.slick-slide img {
+  width: 100%;
+}
+
+.slick-slide .blogBestImgBox {
+  width: 85px;
+  height: 120px;
+  display: inline-block;
+  overflow: hidden;
+  margin-bottom: 22px;
+  border: 1px solid #c9c9c9;
+}
+
+.blogBestText {
+  margin-left: 8px;
+  margin-top: 10px;
+  word-spacing: -1px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.starRateWrap {
+  width: 85px;
+  height: 15px;
+  position: relative;
+  display: inline-block;
+  background: url('../../../public/img/img_star.png') repeat-x;
+}
+
+.starRateWrap .starRate {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 15px;
+  background: url('../../../public/img/img_star.png') repeat-x 0 -15px;
+}
+
+.starRateWrap .customerReviewRank {
+  position: absolute;
+  margin-left: 5px;
+  left: 100%;
+  font-family: 'YES24GothicB';
+  color: #e66a57
+}
+
+.blogBestTitle,
+.priceStandard,
+.priceSales {
+  font-family: 'YES24GothicB';
+}
+
+.blogBestTitle {
+  margin: 8px 0;
+  font-size: 0.8em;
+  color: var(--default);
+}
+
+.priceStandard {
+  font-size: 0.7em;
+  text-decoration: line-through;
+  color: #c9c9c9;
+}
+
+.priceSales {
+  font-size: 0.7em;
+  color: var(--default);
 }

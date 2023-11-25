@@ -52,6 +52,7 @@
 .newHeader a::after {
   content: '▶';
   margin-left: 3px;
+  font-size: 0.4rem;
 }
 
 .newHeader a:hover {
@@ -161,8 +162,6 @@
 }
 
 .bestsellerList .rankTab:hover {
-  color: var(--hover);
-  font-weight: bold;
   text-decoration: underline;
 }
 
@@ -192,4 +191,9 @@
   font-size: 0.7em;
   display: block;
   width: 156px;
+}
+
+.rankTab.current {
+  color: #e66a57;
+  font-weight: bold;
 }
