@@ -1,6 +1,5 @@
 .pointSection {
   display: flex;
-  align-items: center;
   justify-content: space-between;
   margin: 66px 0;
 }
@@ -41,8 +40,8 @@
   width: 40%;
 }
 
-.saleItem {
-  width: 60%;
+.musicItem {
+  width: 55%;
 }
 
 .categoryTabs {
@@ -50,23 +49,37 @@
   border-bottom: 1px solid #c9c9c9;
 }
 
-.saleTabs .saleTabWrap {
+.musicTabs .musicTabWrap {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  font-weight: bold;
+  font-family: 'YES24GothicB';
   color: var(--hover);
   font-size: 0.9em;
   letter-spacing: -1px;
+  background-color: #f8f8f8;
 }
 
-.saleTabs .saleTabWrap .catTabLi {
-  margin: 0 auto;
+.musicTabs .musicTabWrap .catTabLi {
+  width: 120px;
+  padding-top: 4px;
+  padding-bottom: 9px;
+  border-right: 1px solid #d8d8d8;
   cursor: pointer;
+  text-align: center;
 }
 
 .clicked {
+  background-color: #fff;
+  border-bottom: none;
   color: #e66a57;
+}
+
+.tabIcon {
+  font-size: 1.4em;
+}
+
+.tabIcon svg {
+  margin: 0 auto;
 }
 
 .slick-slide img {
@@ -134,5 +147,38 @@
 
 .priceSales {
   font-size: 0.7em;
+  color: var(--default);
+}
+
+.musicImgBox,
+.dvdImgBox {
+  box-sizing: border-box;
+  width: 85px;
+  height: 85px;
+  margin: 30px auto 15px auto;
+}
+
+.musicImgBox img,
+.dvdImgBox img {
+  width: 100%;
+  height: 100%;
+}
+
+.musicTitle,
+.dvdTitle {
+  font-family: 'YES24GothicB';
+  font-size: 0.7em;
+  width: 100px;
+  height: 80px;
+  text-align: center;
+  margin: 0 auto;
+  color: var(--default);
+}
+
+.musicPrice,
+.dvdPrice {
+  font-size: 0.7em;
+  font-weight: bold;
+  text-align: center;
   color: var(--default);
 }

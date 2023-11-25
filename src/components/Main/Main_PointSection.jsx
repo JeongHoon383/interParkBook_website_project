@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Slider from 'react-slick';
 import axios from 'axios';
+import { MdQueueMusic } from 'react-icons/md';
+import { RiDvdFill } from 'react-icons/ri';
 import '../../css/main/pointSection.css';
 
-const Pre = styled.div`
+const BPre = styled.div`
   width: 30px;
   height: 30px;
   position: absolute;
@@ -13,11 +15,27 @@ const Pre = styled.div`
   z-index: 3;
 `;
 
-const NextTo = styled.div`
+const BNextTo = styled.div`
   width: 30px;
   height: 30px;
   position: absolute;
   top: -9%;
+  right: 1%;
+  z-index: 3;
+`;
+
+const MPre = styled.div`
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  left: 1%;
+  z-index: 3;
+`;
+
+const MNextTo = styled.div`
+  width: 30px;
+  height: 30px;
+  position: absolute;
   right: 1%;
   z-index: 3;
 `;
@@ -57,10 +75,12 @@ const StyledSlider = styled(Slider)`
 export default function Main_PointSection() {
   const [isTab, setIsTab] = useState(0);
   const [blogBest, setBlogBest] = useState([]);
+  const [music, setMusic] = useState([]);
+  const [dvd, setDvd] = useState([]);
 
   const slideArr = [
-    { name: '특가할인', content: <SaleSlide01 /> },
-    { name: '정가인하', content: <SaleSlide02 /> },
+    { icon: <MdQueueMusic />, name: '화제의 음반', content: <MusicSlide music={music} /> },
+    { icon: <RiDvdFill />, name: '화제의 DVD', content: <DVDSlide dvd={dvd} /> },
   ];
 
   useEffect(() => {
@@ -69,6 +89,20 @@ export default function Main_PointSection() {
       url: '/data/blogBest.json',
     })
       .then((result) => setBlogBest([result.data]))
+      .catch((err) => console.error(err));
+
+    axios({
+      method: 'get',
+      url: '/data/musicBestseller.json',
+    })
+      .then((result) => setMusic([result.data]))
+      .catch((err) => console.error(err));
+
+    axios({
+      method: 'get',
+      url: '/data/dvdBestseller.json',
+    })
+      .then((result) => setDvd([result.data]))
       .catch((err) => console.error(err));
   }, []);
 
@@ -91,10 +125,10 @@ export default function Main_PointSection() {
           <BlogBestSlide blogBest={blogBest} />
         </div>
       </div>
-      <div className="saleItem" style={{ border: '1px solid tomato' }}>
-        <div className="saleItemHeader">
-          <div className="saleTabs">
-            <ul className="saleTabWrap">
+      <div className="musicItem" style={{ border: '1px solid #c9c9c9' }}>
+        <div className="musicItemHeader">
+          <div className="musicTabs">
+            <ul className="musicTabWrap">
               {slideArr.map((v, i) => (
                 <li
                   key={i}
@@ -103,13 +137,14 @@ export default function Main_PointSection() {
                     handleClick(i);
                   }}
                 >
+                  <span className="tabIcon">{v.icon}</span>
                   {v.name}
                 </li>
               ))}
             </ul>
           </div>
-          <div className="saleContents">{slideArr[isTab].content}</div>
         </div>
+        <div className="musicContents">{slideArr[isTab].content}</div>
       </div>
     </div>
   );
@@ -137,14 +172,14 @@ function BlogBestSlide({ blogBest }) {
       );
     },
     nextArrow: (
-      <NextTo>
+      <BNextTo>
         <Img src="/img/Slide/right-arrow.svg" />
-      </NextTo>
+      </BNextTo>
     ),
     prevArrow: (
-      <Pre>
+      <BPre>
         <Img src="/img/Slide/left-arrow.svg" />
-      </Pre>
+      </BPre>
     ),
   };
   return (
@@ -180,67 +215,87 @@ function BlogBestSlide({ blogBest }) {
   );
 }
 
-function SaleSlide01() {
+function DVDSlide({ dvd }) {
   const settings = {
     dots: false,
     arrows: true,
     infinite: true,
-    slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToShow: 3,
+    slidesToScroll: 3,
     autoplay: false,
     speed: 1000,
     draggable: false,
     nextArrow: (
-      <NextTo>
+      <MNextTo>
         <Img src="/img/Slide/right-arrow.svg" />
-      </NextTo>
+      </MNextTo>
     ),
     prevArrow: (
-      <Pre>
+      <MPre>
         <Img src="/img/Slide/left-arrow.svg" />
-      </Pre>
+      </MPre>
     ),
   };
   return (
     <>
-      <StyledSlider {...settings}>
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
-      </StyledSlider>
+      {dvd.map((v, i) => (
+        <Slider {...settings}>
+          {v.item.map((ic, i) => (
+            <>
+              <div className="dvdImgBox" key={i}>
+                <img src={ic.cover} alt="" />
+              </div>
+              <p className="dvdTitle">{ic.title.split('-')[0]}</p>
+              <p className="dvdPrice" style={{ color: '#e66a57' }}>
+                <span style={{ color: '#e66a57' }}>{ic.priceSales.toLocaleString()}원</span>
+                <span style={{ color: '#666', fontSize: '0.9em', marginLeft: '4px' }}>+{ic.mileage}P</span>
+              </p>
+            </>
+          ))}
+        </Slider>
+      ))}
     </>
   );
 }
-function SaleSlide02() {
+function MusicSlide({ music }) {
   const settings = {
     dots: false,
     arrows: true,
     infinite: true,
-    slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToShow: 3,
+    slidesToScroll: 3,
     autoplay: false,
     speed: 1000,
     draggable: false,
     nextArrow: (
-      <NextTo>
+      <MNextTo>
         <Img src="/img/Slide/right-arrow.svg" />
-      </NextTo>
+      </MNextTo>
     ),
     prevArrow: (
-      <Pre>
+      <MPre>
         <Img src="/img/Slide/left-arrow.svg" />
-      </Pre>
+      </MPre>
     ),
   };
   return (
     <>
-      <Slider {...settings}>
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
-      </Slider>
+      {music.map((v, i) => (
+        <Slider {...settings}>
+          {v.item.map((ic, i) => (
+            <>
+              <div className="musicImgBox" key={i}>
+                <img src={ic.cover} alt="" />
+              </div>
+              <p className="musicTitle">{ic.title.split('-')[0]}</p>
+              <p className="dvdPrice" style={{ color: '#e66a57' }}>
+                <span style={{ color: '#e66a57' }}>{ic.priceSales.toLocaleString()}원</span>
+                <span style={{ color: '#666', fontSize: '0.9em', marginLeft: '4px' }}>+{ic.mileage}P</span>
+              </p>
+            </>
+          ))}
+        </Slider>
+      ))}
     </>
   );
 }

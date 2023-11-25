@@ -5,16 +5,20 @@ import '../../css/main/categoryRecommend.css';
 import axios from 'axios';
 
 const Pre = styled.div`
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   position: absolute;
+  top: 50%;
+  left: 0;
   z-index: 3;
 `;
 
 const NextTo = styled.div`
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   position: absolute;
+  top: 50%;
+  right: 0;
   z-index: 3;
 `;
 
