@@ -24,10 +24,10 @@ const Title = styled.div`
   }
 `;
 
-export default function CategoryList_Title(){
+export default function CategoryList_Title({title}){
   return(
     <Title>
-      <h3>여행</h3>
+      <h3>{title}</h3>
       <span>
         <Link>주간베스트</Link>
         <Link>새로 나온 책</Link>

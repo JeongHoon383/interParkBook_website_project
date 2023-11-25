@@ -1,6 +1,6 @@
-import React from 'react';
-import '../../css/main/banner/mainBanner.css';
-import Main_MainBannerTab from './Main_MainBannerTab';
+import React from "react";
+import "../../css/main/banner/mainBanner.css";
+import Main_MainBannerTab from "./Main_MainBannerTab";
 
 export default function MainBanner() {
   return (
