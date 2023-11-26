@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { IoIosArrowForward } from "react-icons/io";
 
 const Steady = styled.div`
+  margin-top : 20px;
   width: 479px;
   height: 354px;
   border: 1px solid red;
@@ -66,12 +67,12 @@ const Steady = styled.div`
 const SteadySeller = () => {
   return (
     <Steady>
-      <div className="steady_title">
+      <h3 className="steady_title">
         스테디셀러
         <span>
           <IoIosArrowForward />
         </span>
-      </div>
+      </h3>
       <div className="steady_main">
         <div className="steady_circle">에세이</div>
         <div><img className="steady_img" src="/img/CategoryMain/steadySeller_img/img_1.jpeg" alt="" /></div>

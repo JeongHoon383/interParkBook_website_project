@@ -9,7 +9,9 @@ const BestSellerContainer = styled.div`
 const Bestseller = () => {
   return (
     <BestSellerContainer>
-      베스트셀러
+      <h3>
+        베스트셀러
+      </h3>
     </BestSellerContainer>
   )
 }

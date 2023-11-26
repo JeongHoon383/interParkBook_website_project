@@ -62,11 +62,12 @@ const Second_banner = styled.div`
     cursor: pointer;
     margin-bottom : 15px;
     color : #fff;
+    font-size : 15px;
+    font-weight : bold;
   }
 
   .banner_semiTitle{
     margin-bottom : 10px;
-    font-size : 13px;
     color : var(--main);
   }
 

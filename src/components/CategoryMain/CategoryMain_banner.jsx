@@ -63,6 +63,7 @@ const TopBanner = styled.div`
   .banner_category li{
     width : 86px;
     margin-right : 1px;
+    font-size : 12px;
     color : white;
     background-color : rgb(149, 149, 149);
     border : none;
