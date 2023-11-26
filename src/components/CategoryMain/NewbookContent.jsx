@@ -5,6 +5,7 @@ const NewbookContents = styled.div`
   margin-left : 35px;
   .newbook_ul li:not(:first-child){
     margin-bottom : 10px;
+    font-size : 13px;
   }
 
   .newBook_img{
@@ -24,6 +25,10 @@ const NewbookContents = styled.div`
   .newBook_autor,
   .newBook_editor{
     color : var(--default);
+  }
+
+  .newbook_price{
+    font-weight : bold;
   }
 `;
 

@@ -11,6 +11,7 @@ const NewbookContainer = styled.div`
     .newBookText{
       padding: 20px 0 19px 20px;
       display : flex;
+      font-weight : bold;
       cursor: pointer;
     }
 `;
