@@ -1,72 +1,88 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { HiArrowLongRight } from "react-icons/hi2";
+import { AiFillStar } from "react-icons/ai";
 
 const ProdContent = styled.div`
   width: 66%;
   padding: 0 20px;
-  > *{
+  > * {
     margin-bottom: 8px;
   }
-  .title{
+  .title {
     font-size: 15px;
     font-weight: bold;
     color: #000;
   }
-  .bookInfo{
-    > *{
+  .bookInfo {
+    > * {
       padding-right: 5px;
-      &:not(:first-child){
+      &:not(:first-child) {
         padding-left: 5px;
       }
-      &:not(:last-child){
+      &:not(:last-child) {
         border-right: 1px solid #666;
       }
     }
   }
-  .price{
+  .price {
     display: flex;
     align-items: center;
-    > *{
+    > * {
       margin-right: 5px;
     }
-    .priceSales{
-      font-size: 14px;
+    .priceSales {
+      font-size: 15px;
       font-weight: bold;
       color: var(--main);
     }
-    .mileageIcon{
+    .mileageIcon {
       width: 13px;
       height: 13px;
       font-size: 10px;
       line-height: 13px;
-      color: #FFF;
+      color: #fff;
       text-align: center;
       border-radius: 50%;
       background: var(--main);
     }
-    .mileage{
+    .mileage {
       font-size: 11px;
       font-weight: bold;
     }
   }
-  .salesPoint{
-    span{
+  .salesPoint {
+    .salesPointNumber {
       font-weight: bold;
     }
   }
-  .description{
-    color: #AAA;
+  .customerReviewRank {
+    display: flex;
+    align-items: center;
+    svg {
+      color: var(--main);
+    }
+    .reviewPoint {
+      font-size: 15px;
+      font-weight: bold;
+      margin-left: 5px;
+    }
+  }
+  .description {
+    color: #aaa;
     line-height: 16px;
   }
 `;
 
-export default function CategoryList_ProdContent({data}){
-
-  return(
+export default function CategoryList_ProdContent({ data }) {
+  return (
     <ProdContent>
-      <p className="title">{data.title}</p>
+      <p className="title">
+        <Link to={`/book/${data.itemId}`}>{data.title}</Link>
+      </p>
       <p className="bookInfo">
         <span>{data.author}</span>
+        {/* 클릭 시 지은이 이름으로 검색하는 기능 추가 필요 */}
         <span>{data.publisher}</span>
         <span>{data.pubDate}</span>
       </p>
@@ -78,9 +94,20 @@ export default function CategoryList_ProdContent({data}){
         <span className="mileage">{data.mileage.toLocaleString()}원</span>
       </p>
       <p className="salesPoint">
-        세일즈포인트 :
-        <span>{data.salesPoint.toLocaleString()}</span>
-        </p>
+        <span>세일즈포인트 : </span>
+        <span className="salesPointNumber">
+          {data.salesPoint.toLocaleString()}
+        </span>
+      </p>
+      <p className="customerReviewRank">
+        <span>회원리뷰 : </span>
+        <AiFillStar />
+        <AiFillStar />
+        <AiFillStar />
+        <AiFillStar />
+        <AiFillStar />
+        <span className="reviewPoint">10</span> {/* 별점 기능 추가 필요 */}
+      </p>
       <p className="description">{data.description}</p>
     </ProdContent>
   );

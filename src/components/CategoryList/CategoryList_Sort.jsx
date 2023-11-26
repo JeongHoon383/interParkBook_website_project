@@ -1,84 +1,91 @@
 import styled from "styled-components";
-import Pagination from 'react-js-pagination'
+import Pagination from "react-js-pagination";
 import { useState } from "react";
-import { AiOutlineDoubleLeft, AiOutlineLeft, AiOutlineRight, AiOutlineDoubleRight } from "react-icons/ai";
-
+import {
+  AiOutlineDoubleLeft,
+  AiOutlineLeft,
+  AiOutlineRight,
+  AiOutlineDoubleRight,
+} from "react-icons/ai";
 
 const Sortarea = styled.div`
   width: 770px;
   margin-top: 30px;
   border: 1px solid #d8d8d8;
-  .topArea{
+  .topArea {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px 20px;
     border-bottom: 1px solid #d8d8d8;
-    .sortOption{
-      button{
+    .sortOption {
+      button {
         line-height: 25px;
-        margin-right: 10px;
-        &:hover{
+        margin-right: 15px;
+        &:hover {
           font-weight: bold;
         }
-        &.currentSort{
+        &.currentSort {
           font-weight: bold;
           color: var(--main);
         }
       }
     }
-    .listOption{
-      select{
+    .listOption {
+      select {
         height: 30px;
         border: 1px solid #d8d8d8;
         border-radius: 4px;
-        &:first-child{
+        &:first-child {
           margin-right: 5px;
         }
       }
     }
   }
-  .bottomArea{
+  .bottomArea {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px 12px;
     background: #f8f8f8;
-    .pagination{
+    .pagination {
       display: inline-flex;
       align-items: center;
-      li{
-        a{
+      li {
+        &.disabled {
+          color: #ccc;
+        }
+        a {
           display: inline-block;
           width: 26px;
           line-height: 24px;
           margin: 0 1px;
           text-align: center;
-          &.active{
+          &.active {
             font-weight: bold;
             border-radius: 4px;
             border: 1px solid #d8d8d8;
-            background: #FFF;
+            background: #fff;
           }
-          &:not(.paginationBtn):hover{
+          &:not(.paginationBtn):hover {
             border-radius: 4px;
             border: 1px solid #d8d8d8;
-            background: #FFF;
+            background: #fff;
           }
-          &.paginationBtn{
+          &.paginationBtn {
             font-size: 16px;
           }
         }
       }
     }
-    .selectOption{
-      button{
+    .selectOption {
+      button {
         line-height: 27px;
         padding: 0 7px;
         border: 1px solid #d8d8d8;
         border-radius: 4px;
-        background: #FFF;
-        &:not(:last-child){
+        background: #fff;
+        &:not(:last-child) {
           margin-right: 5px;
         }
       }
@@ -86,13 +93,20 @@ const Sortarea = styled.div`
   }
 `;
 
-export default function CategoryList_Sort({data, listQty, setListQty, currentPage, setCurrentPage, isSoldout, setIsSoldout}){
+export default function CategoryList_Sort({
+  data,
+  listQty,
+  setListQty,
+  currentPage,
+  setCurrentPage,
+  isSoldout,
+  setIsSoldout,
+}) {
+  const handlePageChange = (page) => setCurrentPage(page);
+  const handleChangeListQty = (e) => setListQty(Number(e.target.value));
+  const handleChangeSoldout = (e) => setIsSoldout(e.target.value);
 
-  const handlePageChange = (page) => setCurrentPage(page)
-  const handleChangeListQty = (e) => setListQty(e.target.value)
-  const handleChangeSoldout = (e) => setIsSoldout(e.target.value)
-  
-  return(
+  return (
     <Sortarea>
       <div className="topArea">
         <span className="sortOption">
@@ -105,19 +119,31 @@ export default function CategoryList_Sort({data, listQty, setListQty, currentPag
           <button>상품명순</button>
         </span>
         <span className="listOption">
-          <select name="listQty" id="listQty" onChange={handleChangeListQty} value={listQty}>
+          <label htmlFor="listQty"></label>
+          <select
+            name="listQty"
+            id="listQty"
+            onChange={handleChangeListQty}
+            value={listQty}
+          >
             <option value="20">20개씩 보기</option>
             <option value="30">30개씩 보기</option>
             <option value="40">40개씩 보기</option>
           </select>
-          <select name="soldout" id="soldout" onChange={handleChangeSoldout} value={isSoldout}>
+          <label htmlFor="soldout"></label>
+          <select
+            name="soldout"
+            id="soldout"
+            onChange={handleChangeSoldout}
+            value={isSoldout}
+          >
             <option value="0">품절포함</option>
             <option value="1">품절제외</option>
           </select>
         </span>
       </div>
       <div className="bottomArea">
-        <Pagination 
+        <Pagination
           totalItemsCount={data.totalResults}
           activePage={currentPage}
           pageRangeDisplayed={10}

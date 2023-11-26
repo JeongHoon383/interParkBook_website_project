@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { GoHeart } from "react-icons/go";
+import { Link } from "react-router-dom";
 
 const ProdBuy = styled.div`
   width: 16%;
@@ -15,10 +16,11 @@ const ProdBuy = styled.div`
       height: 18px;
       margin-right: 5px;
     }
-    span {
+    .quantitywrapper {
+      border-radius: 3px;
+      border: 1px solid #d8d8d8;
       > * {
         height: 30px;
-        border: 1px solid #d8d8d8;
       }
       button {
         width: 30px;
@@ -27,26 +29,34 @@ const ProdBuy = styled.div`
       input {
         width: 35px;
         text-align: right;
+        border: none;
+        border-left: 1px solid #d8d8d8;
+        border-right: 1px solid #d8d8d8;
+        &:focus {
+          outline: none;
+        }
       }
     }
   }
   .insertCart,
   .buy {
+    display: inline-block;
     width: 100%;
     line-height: 30px;
-    color: #fff;
     font-weight: bold;
+    color: #fff;
+    text-align: center;
     border-radius: 3px;
     background: var(--main);
   }
-  .dibs{
+  .dibs {
     position: relative;
     width: 30px;
     height: 30px;
-    font-size: 24px;
+    font-size: 18px;
     border: 1px solid #d8d8d8;
     background: #f8f8f8;
-    svg{
+    svg {
       position: absolute;
       top: 50%;
       right: 50%;
@@ -55,22 +65,25 @@ const ProdBuy = styled.div`
   }
 `;
 
+//장바구니에 담기, 바로구매, 수량, 체크박스 기능 추가
 export default function CategoryList_ProdBuy() {
   const [quantity, setQuantity] = useState(1);
 
   return (
     <ProdBuy>
       <div className="quantity">
-        <input type="checkbox" />
-        <span>
+        <label htmlFor="ProdQuantity"></label>
+        <input name="ProdQuantity" id="ProdQuantity" type="checkbox" />
+        <span className="quantitywrapper">
           <button>-</button>
           <input type="number" value={quantity} readOnly />
           <button>+</button>
         </span>
       </div>
       <button className="insertCart">카트에 넣기</button>
-      <button className="buy">바로 구매</button>
+      <Link className="buy">바로 구매</Link>
       <button className="dibs">
+        {/* 찜 기능 추가 */}
         <GoHeart />
       </button>
     </ProdBuy>
