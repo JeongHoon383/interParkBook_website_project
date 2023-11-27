@@ -62,7 +62,7 @@ const BestSellerNav = styled.nav`
 export default function CategortList_WeekBestSeller() {
   return (
     <BestSellerNav>
-      <h4 className="weekBestSellerTitle">여행 주간 베스트셀러 &lt;</h4>
+      <h4 className="weekBestSellerTitle">여행 주간 베스트셀러 &gt;</h4>
       <ul className="weekBestSellerList">
         <li className="weekBestSellerItem">
           <figure>

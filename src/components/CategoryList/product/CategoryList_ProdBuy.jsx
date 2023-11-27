@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { GoHeart } from "react-icons/go";
 import { Link } from "react-router-dom";
@@ -11,10 +11,11 @@ const ProdBuy = styled.div`
   .quantity {
     display: flex;
     align-items: center;
-    > input {
+    >input {
       width: 18px;
       height: 18px;
       margin-right: 5px;
+      accent-color: var(--main);
     }
     .quantitywrapper {
       border-radius: 3px;
@@ -66,14 +67,17 @@ const ProdBuy = styled.div`
 `;
 
 //장바구니에 담기, 바로구매, 수량, 체크박스 기능 추가
-export default function CategoryList_ProdBuy() {
+export default function CategoryList_ProdBuy({data}) {
   const [quantity, setQuantity] = useState(1);
+  //전체 선택 및 취소
+  //개별 항목 취소 시 전체 선택 해제
+  //모든 항목 선택 시 전체 선택 활성화
 
   return (
     <ProdBuy>
       <div className="quantity">
         <label htmlFor="ProdQuantity"></label>
-        <input name="ProdQuantity" id="ProdQuantity" type="checkbox" />
+        <input name="ProdQuantity" id="ProdQuantity" type="checkbox" isbn13={data.isbn13}/>
         <span className="quantitywrapper">
           <button>-</button>
           <input type="number" value={quantity} readOnly />

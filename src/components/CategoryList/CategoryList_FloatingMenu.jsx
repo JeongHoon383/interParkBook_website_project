@@ -175,7 +175,10 @@ export default function CategoryList_FloatingMenu() {
             <span>찜한상품</span>
           </Link>
         </div>
-        <h4 className="recentView">최근 본 상품</h4>
+        <h4 className="recentView">
+          최근 본 상품
+          <span className="recentViewCount">3</span>
+        </h4>
         <ul className="recentViewList">
           {/* 추후 sql 이용 시 axios 데이터로 수정/ 데이터 없을 때 화면 추가 /삭제 기능 추가*/}
           <li>

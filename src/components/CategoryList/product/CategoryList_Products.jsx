@@ -22,7 +22,7 @@ export default function CategoryList_Products({ data }) {
           <li key={data.itemId}>
             <CategoryList_ProdAvatar data={data} />
             <CategoryList_ProdContent data={data} />
-            <CategoryList_ProdBuy />
+            <CategoryList_ProdBuy data={data}/>
           </li>
         ))}
     </ProductsList>

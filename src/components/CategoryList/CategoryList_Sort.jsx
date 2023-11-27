@@ -36,7 +36,7 @@ const Sortarea = styled.div`
         height: 30px;
         border: 1px solid #d8d8d8;
         border-radius: 4px;
-        &:first-child {
+        &:first-of-type {
           margin-right: 5px;
         }
       }
@@ -101,10 +101,13 @@ export default function CategoryList_Sort({
   setCurrentPage,
   isSoldout,
   setIsSoldout,
+  handleSelectAll
 }) {
   const handlePageChange = (page) => setCurrentPage(page);
   const handleChangeListQty = (e) => setListQty(Number(e.target.value));
   const handleChangeSoldout = (e) => setIsSoldout(e.target.value);
+  
+  
 
   return (
     <Sortarea>
@@ -160,7 +163,7 @@ export default function CategoryList_Sort({
           lastPageText={<AiOutlineDoubleRight />}
         />
         <span className="selectOption">
-          <button>전체선택</button>
+          <button onClick={handleSelectAll()}>전체선택</button>
           <button>카트에 넣기</button>
           <button>찜하기</button>
         </span>

@@ -16,7 +16,10 @@ export default function CategoryList_MainSection() {
   const [listQty, setListQty] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
   const [isSoldout, setIsSoldout] = useState("0");
+  const [checkList, setCheckList] = useState([]);
 
+  const handleSelectAll = () => data.item.map(item => setCheckList([...checkList, item.isbn13]))
+  
   useEffect(() => {
     axios(`http://www.aladin.co.kr/ttb/api/ItemList.aspx
 ?ttbkey=ttbgur65142158001
@@ -29,7 +32,10 @@ export default function CategoryList_MainSection() {
 &Version=20131101
 &Cover=MidBig
 &CategoryId=1196
-`).then((result) => setData(result.data));
+`).then((result) => {
+  setData(result.data)
+  console.log(result.data);
+});
   }, [listQty, currentPage, isSoldout]);
   //data.item에 isbn, isbn13, itemId 있음
   return (
@@ -44,6 +50,7 @@ export default function CategoryList_MainSection() {
         setCurrentPage={setCurrentPage}
         isSoldout={isSoldout}
         setIsSoldout={setIsSoldout}
+        handleSelectAll={handleSelectAll}
       />
       <CategoryList_Products data={data} />
       <CategoryList_Sort
