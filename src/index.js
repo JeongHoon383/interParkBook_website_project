@@ -7,8 +7,9 @@ import Detail from "./Pages/Detail";
 import NotFound from "./Pages/NotFound";
 import CategoryMain from "./Pages/CategoryMain";
 import Root from './Pages/Root';
-import BestSeller from './Pages/BestSeller'
+import BestSeller from './components/BestSeller'
 import NewSeller from './Pages/NewSeller';
+import Search from "./components/Search";
 
 
 import reportWebVitals from "./reportWebVitals";
@@ -175,7 +176,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/search",
-        element: <div>search</div>,
+        element: <Search/>,
       },
 
       { path: "/newseller", 

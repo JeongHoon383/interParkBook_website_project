@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import BookAvatar from "./BookAvatar";
 import BookContent from "./BookContent";
 import BookList from "./BookList";
+import Bookcheckbox from "./Bookcheckbox";
+
 
 
 export default function Book({ filename }) {
@@ -22,17 +24,23 @@ export default function Book({ filename }) {
     
     
     
-    <div className="mombook">
+  <div className="mombook">
+
 
 
 
       <BookList>
         {bookList.map((book) =>
 
-          <div classname="book">
-            <BookAvatar image={book.image} />
-            <br></br>
+          
+          <div className="book" key={book.id}>
 
+
+            <BookAvatar image={book.image} 
+            
+            />
+          
+            
             <div>
               <BookContent
                 title={book.title}

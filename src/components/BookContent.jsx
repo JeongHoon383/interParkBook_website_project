@@ -1,15 +1,22 @@
 import React from "react";
-import '../Search.css';
+import '../css/Search.css';
 import styled from 'styled-components';
+import Bookstar from "./BookStar";
 
 export default function BookContent(book) {
   return (
     <div className="bookcontent">
       <div className="booktitle"><b>{book.title} {book.comment}</b></div>
-      <div classname="bookauthor">{book.author} / {book.company} </div>
+      <div className="bookauthor">{book.author} / {book.company} </div>
+      <br></br>
       <div className="bookprice">{book.price}원 {book.point}원</div>
-      <div className="booksaleindex">판매지수 {book.sale_index} </div>
-      <div className="review">회원리뷰({book.review}건) 리뷰 총점10.0 </div>
+      
+      <div><img src="" alt="" /></div>
+
+
+        <Bookstar/>
+        <div className="booksaleindex">판매지수 {book.sale_index} </div>
+
     </div>
   );
 }
