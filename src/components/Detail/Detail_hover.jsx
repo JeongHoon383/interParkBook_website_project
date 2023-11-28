@@ -6,7 +6,6 @@ const Wrapper = styled.div`
   width: 100%;
   margin: 40px auto;
   height: 130px;
-
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   div:nth-child(2) {
@@ -39,9 +38,18 @@ const FigureBox = styled.div`
   height: 100%;
   overflow: hidden;
   border: 1px solid lightgray;
+
+  div.container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    div:first-child {
+      width: 66%;
+    }
+  }
 `;
 
-const Figure = styled.div`
+const Figure = styled.figure`
   width: 100%;
   height: 100%;
   img {
@@ -61,43 +69,84 @@ const Detail_hover = () => {
       <HoverBox>
         <motion.div
           style={{
-            color: active == "s1" ? "#ff9c46" : "#c8c8d0",
-            fontWeight: active == "s1" ? "bold" : null,
-            background: active == "s1" && "#FFFFFF",
+            color: active === "s1" ? "#ff9c46" : "#c8c8d0",
+            fontWeight: active === "s1" ? "bold" : null,
+            background: active === "s1" && "#FFFFFF",
           }}
           onMouseOver={() => handleEnter("s1")}>
-          이벤트1
+          이벤트/기획전
         </motion.div>
         <motion.div
           style={{
-            color: active == "s2" ? "#ff9c46" : "#c8c8d0",
-            fontWeight: active == "s2" ? "bold" : null,
-            background: active == "s2" && "#FFFFFF",
+            color: active === "s2" ? "#ff9c46" : "#c8c8d0",
+            fontWeight: active === "s2" ? "bold" : null,
+            background: active === "s2" && "#FFFFFF",
           }}
           onMouseOver={() => handleEnter("s2")}>
-          이벤트2
+          연관도서
         </motion.div>
         <motion.div
           style={{
-            color: active == "s3" ? "#ff9c46" : "#c8c8d0",
-            fontWeight: active == "s3" ? "bold" : null,
-            background: active == "s3" && "#FFFFFF",
+            color: active === "s3" ? "#ff9c46" : "#c8c8d0",
+            fontWeight: active === "s3" ? "bold" : null,
+            background: active === "s3" && "#FFFFFF",
           }}
           onMouseOver={() => handleEnter("s3")}>
-          이벤트3
+          상품권
         </motion.div>
       </HoverBox>
       <FigureBox>
-        {active == "s1" && (
-          <Figure>
-            <img
-              src="https://qi-b.qoo10cdn.com/renewPark/reBookpark/test_img/last_inc/book_benefit.jpg"
-              alt=""
-            />
-          </Figure>
+        {active === "s1" && (
+          <div className="container">
+            <div>
+              <Figure style={{ borderRight: "1px solid lightgray" }}>
+                <img src="https://qi-b.qoo10cdn.com/renewPark/reBookpark/test_img/last_inc/book_benefit.jpg" />
+              </Figure>
+            </div>
+            <div>
+              <Figure>
+                <img
+                  src="https://image.kyobobook.co.kr/newimages/adcenter/IMAC/creatives/2023/11/23/71047/sang_1123_2.jpg"
+                  alt=""
+                />
+              </Figure>
+            </div>
+          </div>
         )}
-        {active == "s2" && <span>1</span>}
-        {active == "s3" && <span>2</span>}
+        {active === "s2" && (
+          <div className="container">
+            <div>
+              <Figure style={{ borderRight: "1px solid lightgray" }}>
+                <img src="https://qi-b.qoo10cdn.com/renewPark/reBookpark/test_img/last_inc/book_benefit.jpg" />
+              </Figure>
+            </div>
+            <div>
+              <Figure>
+                <img
+                  src="https://image.kyobobook.co.kr/newimages/adcenter/IMAC/creatives/2023/11/23/71047/sang_1123_2.jpg"
+                  alt=""
+                />
+              </Figure>
+            </div>
+          </div>
+        )}
+        {active === "s3" && (
+          <div className="container">
+            <div>
+              <Figure style={{ borderRight: "1px solid lightgray" }}>
+                <img src="https://qi-b.qoo10cdn.com/renewPark/reBookpark/test_img/last_inc/book_benefit.jpg" />
+              </Figure>
+            </div>
+            <div>
+              <Figure>
+                <img
+                  src="https://image.kyobobook.co.kr/newimages/adcenter/IMAC/creatives/2023/11/23/71047/sang_1123_2.jpg"
+                  alt=""
+                />
+              </Figure>
+            </div>
+          </div>
+        )}
       </FigureBox>
     </Wrapper>
   );

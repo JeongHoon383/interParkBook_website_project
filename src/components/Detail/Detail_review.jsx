@@ -4,6 +4,12 @@ import { RiKakaoTalkFill } from "react-icons/ri";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { AnimatePresence, motion } from "framer-motion";
 import { IoIosArrowDown } from "react-icons/io";
+import {
+  MdArrowBackIos,
+  MdArrowForwardIos,
+  MdKeyboardDoubleArrowLeft,
+  MdKeyboardDoubleArrowRight,
+} from "react-icons/md";
 
 const Wrapper = styled.div`
   position: relative;
@@ -174,10 +180,8 @@ const UserOutput = styled.div`
   height: 145px;
   .content {
     margin-top: 20px;
-    overflow: hidden;
-    text-overflow: ellipsis;
     white-space: nowrap;
-    height: 70px;
+
     line-height: 120%;
     word-spacing: 5px;
     font-size: 13px;
@@ -207,6 +211,7 @@ const UserOutput = styled.div`
       display: flex;
       align-items: center;
       margin-top: 20px;
+
       li {
         margin: 0 10px;
       }
@@ -219,9 +224,54 @@ const Extend = styled.div`
   align-items: center;
   justify-content: flex-end;
   font-size: 12px;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
   span:nth-child(2) {
     color: #ff9c46;
     font-weight: bold;
+  }
+`;
+
+const Content = styled(motion.div)`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 70px;
+`;
+
+const PageContainer = styled.div`
+  height: 37px;
+  background: #fafafa;
+  border-top: 1px solid black;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  margin-bottom: 10px;
+  .number {
+    background-color: #555555;
+    color: #ffffe4;
+  }
+  div {
+    width: 100%;
+    height: 100%;
+    ul {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 12px;
+      li {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 45px;
+        height: 37px;
+        cursor: pointer;
+      }
+    }
   }
 `;
 
@@ -232,6 +282,7 @@ const Detail_review = () => {
   const handleClick = () => {
     setClick((click) => !click);
   };
+
   return (
     <Wrapper>
       {toggle === false && (
@@ -366,7 +417,13 @@ const Detail_review = () => {
                 <li>2023/09/21</li>
               </ul>
             </div>
-            <div className="content">
+            <Content
+              style={{
+                overflow: click && "visible",
+                whiteSpace: click && "normal",
+                textOverflow: click && "clip",
+                height: click && "auto",
+              }}>
               역사책을 좋아하는 나로썬 이런 부류의 책은 관심을 갖지 못했다.
               우연히 유튜브 알고리즘으로 마흔의 읽는 쇼펜 하우어 책을
               알게됐는데, 그야 말로 충격이었다. 잠언 형식처럼 사회생활에 꼭
@@ -380,16 +437,42 @@ const Detail_review = () => {
               알게됐는데, 그야 말로 충격이었다. 잠언 형식처럼 사회생활에 꼭
               필요한 책이란 걸 알게되 당장 구입했다. 책가격은 생각보다
               비싼편이지만
-            </div>
+            </Content>
             <Extend onClick={handleClick}>
-              <span>펼쳐보기</span>
-              <span>
-                <IoIosArrowDown />
-              </span>
+              <motion.div style={{ position: "relative" }}>
+                <motion.span>펼쳐보기</motion.span>
+                <motion.span>
+                  <IoIosArrowDown
+                    style={{ transform: click && "rotate(180deg)" }}
+                  />
+                </motion.span>
+              </motion.div>
             </Extend>
           </UserOutput>
         </div>
-        <div>4</div>
+        <PageContainer>
+          <div>
+            <ul>
+              <li>
+                <MdKeyboardDoubleArrowLeft />
+                맨앞
+              </li>
+              <li>
+                <MdArrowBackIos />
+                이전
+              </li>
+              <li className="number">1</li>
+              <li>
+                다음
+                <MdArrowForwardIos />
+              </li>
+              <li>
+                맨뒤
+                <MdKeyboardDoubleArrowRight />
+              </li>
+            </ul>
+          </div>
+        </PageContainer>
       </Review>
     </Wrapper>
   );

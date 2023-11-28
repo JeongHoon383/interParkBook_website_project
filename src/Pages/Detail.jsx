@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { BsClipboardCheck } from "react-icons/bs";
@@ -9,7 +9,9 @@ import { CiSearch } from "react-icons/ci";
 import Detail_BookInfo from "../components/Detail/Detail_BookInfo";
 import Detail_tabs from "../components/Detail/Detail_tabs";
 import Detail_hover from "../components/Detail/Detail_hover";
+import { useParams } from "react-router-dom";
 
+import { detailState } from "../components/Detail/atom";
 const MotionNav = styled(motion.div)`
   position: fixed;
   top: 0;
@@ -17,6 +19,46 @@ const MotionNav = styled(motion.div)`
   width: 100vw;
   height: 55px;
   z-index: 1;
+  .center {
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+    div:first-child {
+      font-weight: 900;
+      font-size: 20px;
+    }
+    div:last-child {
+      font-size: 22px;
+      color: #ff9c46;
+      display: flex;
+      align-items: center;
+      * {
+        margin-left: 8px;
+      }
+      span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      em {
+        font-size: 14px;
+      }
+
+      input {
+        width: 115px;
+        height: 32px;
+        color: white;
+        background: #ff9c46;
+        font-size: 14px;
+        font-weight: bold;
+        border: none;
+      }
+    }
+  }
 `;
 
 const LocationBox = styled.div`
@@ -105,13 +147,64 @@ const Detail = () => {
   const { scrollY, scrollYProgress } = useViewportScroll();
   /*   console.log(scrollY > containerRef.current.offsetTop); */
   const opacity = useTransform(scrollY, [0, 186], [0, 1]);
+
+  const { id } = useParams();
+  console.log(id);
+
+  /*   useEffect(() => {
+    axios
+      .get(
+        `https://dapi.kakao.com/v3/search/book?target=isbn&query='9791171710102'`,
+        {
+          headers: "Authorization: KakaoAK 21cabe3d0ca37c4bab8dea7ce9d95589",
+        }
+      )
+      .then((result) => console.log(result.data.documents))
+      .catch((error) => console.log(error));
+  }, []); */
+
+  const {
+    isPending: detailPending,
+    error: detailError,
+    data: detailData,
+  } = useQuery({
+    queryKey: ["detailData"],
+    queryFn: () =>
+      axios
+        .get(
+          `https://dapi.kakao.com/v3/search/book?target=isbn&query='9791171710102'`,
+          {
+            headers: "Authorization: KakaoAK 21cabe3d0ca37c4bab8dea7ce9d95589",
+          }
+        )
+        .then((result) => result.data.documents[0]),
+  });
+
+  console.log(detailData, "테스트");
+
   return (
     <>
       <MotionNav
         style={{
           opacity: opacity,
           scale: opacity,
-        }}></MotionNav>
+        }}>
+        <div className="center">
+          <div>{detailData?.title}</div>
+          <div>
+            <span>
+              {detailData?.sale_price.toLocaleString()}
+              <em>원</em>
+            </span>
+            <input
+              style={{ background: "#707070" }}
+              type="button"
+              value="북카트담기"
+            />
+            <input type="button" value="바로구매" />
+          </div>
+        </div>
+      </MotionNav>
       <Container ref={containerRef}>
         <div className="center">
           <LocationBox>
@@ -120,7 +213,7 @@ const Detail = () => {
           <TitleBox>
             <Title>
               <div>
-                <h1>{data?.title && data.title.split("-")[0]}</h1>
+                <h1>{detailData?.title}</h1>
                 <span>: {data?.title && data.title.split("-")[1]}</span>
               </div>
               <div className="event">
@@ -145,11 +238,11 @@ const Detail = () => {
               </span>
             </Star>
           </TitleBox>
-          <Detail_BookInfo data={data} />
+          <Detail_BookInfo detailData={detailData} data={data} />
           <Detail_hover />
         </div>
       </Container>
-      <Detail_tabs></Detail_tabs>
+      <Detail_tabs id={id} detailData={detailData}></Detail_tabs>
     </>
   );
 };
