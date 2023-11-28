@@ -11,8 +11,9 @@ const BackgroundLayout = styled.nav`
   border-bottom: 1px solid #d8d8d8;
   background: #f8f8f8;
   .centerLayout {
-    width: 980px;
+    width: 60%;
     margin: 0 auto;
+    padding: 0 15px;
     .categoryNavigation {
       line-height: 41px;
       > span {

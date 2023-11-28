@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { GoHeart } from "react-icons/go";
 import { Link } from "react-router-dom";
@@ -72,6 +72,7 @@ export default function CategoryList_ProdBuy({data}) {
   //전체 선택 및 취소
   //개별 항목 취소 시 전체 선택 해제
   //모든 항목 선택 시 전체 선택 활성화
+  //진열 수량 select, 품절 여부 버튼 클릭시 전체선택 해제
 
   return (
     <ProdBuy>

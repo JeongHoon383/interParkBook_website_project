@@ -78,7 +78,7 @@ export default function CategoryList_ProdContent({ data }) {
   return (
     <ProdContent>
       <p className="title">
-        <Link to={`/book/${data.itemId}`}>{data.title}</Link>
+        <Link to={`/book/${data.isbn13}`}>{data.title}</Link>
       </p>
       <p className="bookInfo">
         <span>{data.author}</span>

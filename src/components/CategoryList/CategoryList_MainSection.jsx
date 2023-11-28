@@ -17,11 +17,10 @@ export default function CategoryList_MainSection() {
   const [currentPage, setCurrentPage] = useState(1);
   const [isSoldout, setIsSoldout] = useState("0");
   const [checkList, setCheckList] = useState([]);
+  const [isCheckedAll, setIsCheckedAll] = useState(false);
 
-  const handleSelectAll = () => data.item.map(item => setCheckList([...checkList, item.isbn13]))
-  
   useEffect(() => {
-    axios(`http://www.aladin.co.kr/ttb/api/ItemList.aspx
+    axios(`/ttb/api/ItemList.aspx
 ?ttbkey=ttbgur65142158001
 &QueryType=itemNewAll
 &MaxResults=${listQty}
@@ -34,12 +33,25 @@ export default function CategoryList_MainSection() {
 &CategoryId=1196
 `).then((result) => {
   setData(result.data)
-  console.log(result.data);
 });
   }, [listQty, currentPage, isSoldout]);
-  //data.item에 isbn, isbn13, itemId 있음
+
+  //하위 컴포넌트(CategoryList_Sort) 전체선택/선택해제 핸들링이벤트
+  const handleSelectAll = () => {
+    Array.isArray(data.item) && data.item.map(item => checkList.indexOf(item.isbn13) < 0 ? setCheckList(checkList => [...checkList, item.isbn13]) : null)
+    setIsCheckedAll(!isCheckedAll);
+  };
+
+  const handleDeselectAll = () => {
+    setCheckList([]);
+    setIsCheckedAll(!isCheckedAll);
+  }
+
   return (
     <MainSection>
+      {
+        checkList.map(list => <div>{list}</div>)
+      }
       <CategoryList_Title title={data.searchCategoryName} />
       <CategoryList_SubCaNav />
       <CategoryList_Sort
@@ -51,6 +63,8 @@ export default function CategoryList_MainSection() {
         isSoldout={isSoldout}
         setIsSoldout={setIsSoldout}
         handleSelectAll={handleSelectAll}
+        isCheckedAll={isCheckedAll}
+        handleDeselectAll={handleDeselectAll}
       />
       <CategoryList_Products data={data} />
       <CategoryList_Sort

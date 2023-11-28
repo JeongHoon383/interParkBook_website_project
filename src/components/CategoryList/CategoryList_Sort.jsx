@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Pagination from "react-js-pagination";
-import { useState } from "react";
 import {
   AiOutlineDoubleLeft,
   AiOutlineLeft,
@@ -101,13 +100,14 @@ export default function CategoryList_Sort({
   setCurrentPage,
   isSoldout,
   setIsSoldout,
-  handleSelectAll
+  handleSelectAll,
+  handleDeselectAll,
+  isCheckedAll
 }) {
+
   const handlePageChange = (page) => setCurrentPage(page);
-  const handleChangeListQty = (e) => setListQty(Number(e.target.value));
+  const handleListQty = (e) => setListQty(Number(e.target.value));
   const handleChangeSoldout = (e) => setIsSoldout(e.target.value);
-  
-  
 
   return (
     <Sortarea>
@@ -126,7 +126,7 @@ export default function CategoryList_Sort({
           <select
             name="listQty"
             id="listQty"
-            onChange={handleChangeListQty}
+            onChange={handleListQty}
             value={listQty}
           >
             <option value="20">20개씩 보기</option>
@@ -163,7 +163,9 @@ export default function CategoryList_Sort({
           lastPageText={<AiOutlineDoubleRight />}
         />
         <span className="selectOption">
-          <button onClick={handleSelectAll()}>전체선택</button>
+          {
+            isCheckedAll ? <button onClick={handleDeselectAll}>선택해제</button> : <button onClick={handleSelectAll}>전체선택</button>
+          }
           <button>카트에 넣기</button>
           <button>찜하기</button>
         </span>

@@ -9,9 +9,10 @@ const CategoryListMain = styled.main`
   position: relative;
   display: flex;
   align-items: flex-start;
-  width: 980px;
+  width: 60%;
   margin: 0 auto;
   margin-top: 20px;
+  padding: 0 15px;
   font-size: 12px;
   color: #666;
 `;
