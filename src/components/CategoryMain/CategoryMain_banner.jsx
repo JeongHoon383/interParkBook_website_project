@@ -51,7 +51,7 @@ const TopBanner = styled.div`
 
   .banner_category{
     position : absolute;
-    top : 22%;
+    top : 13%;
     margin-bottom : 20px;
     display : flex;
     font-size : 11px;

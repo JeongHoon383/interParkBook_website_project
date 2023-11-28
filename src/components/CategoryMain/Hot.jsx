@@ -40,6 +40,7 @@ const CategoryHot = styled.div`
   }
 
   .hot_content{
+    margin-left : 20px;
     width : 172px;
   }
 
@@ -52,6 +53,20 @@ const CategoryHot = styled.div`
 
   .hot_content_text{
     margin: 16px 0 0 20px;
+  }
+
+  .hot_text_title{
+    font-weight : bold;
+    margin-bottom : 10px;
+  }
+
+  .hot_text_author{
+    margin-bottom : 10px;
+  }
+
+  .hot_text_price{
+    margin-bottom : 10px;
+    font-weight : bold;
   }
 `;
 
@@ -85,10 +100,10 @@ const Hot = () => {
                 alt=""
               />
               <ul className="hot_content_text">
-                <li>너의 얼굴이 궁금해</li>
-                <li>오휘명 저 | 히읏</li>
-                <li>13,950원(10% 할인)</li>
-                <li>사랑과 위로가 필요한 사람들에게</li>
+                <li className="hot_text_title">너의 얼굴이 궁금해</li>
+                <li className="hot_text_author grey">오휘명 저 | 히읏</li>
+                <li className="hot_text_price">13,950원(10% 할인)</li>
+                <li className="grey">사랑과 위로가 필요한 사람들에게</li>
               </ul>
             </div>
           </div>

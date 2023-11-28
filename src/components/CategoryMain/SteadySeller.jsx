@@ -56,7 +56,6 @@ const Steady = styled.div`
   .steady_author,
   .steady_publisher{
     margin-bottom : 5px;
-    color : #999;
   }
 
   .steady_price{
@@ -79,8 +78,8 @@ const SteadySeller = () => {
         <div>
           <ul className="steady_img_content">
             <li className="steady_img_title">타샤의 정원</li>
-            <li className="steady_author">타샤 튜터 저</li>
-            <li className="steady_publisher">윌북(willbook)</li>
+            <li className="steady_author grey">타샤 튜터 저</li>
+            <li className="steady_publisher grey">윌북(willbook)</li>
             <li className="steady_price">16,020원</li>
           </ul>
         </div>

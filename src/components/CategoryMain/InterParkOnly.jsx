@@ -35,7 +35,7 @@ const Only = styled.div`
 
   .onlyReview_article_author{
     display: block;
-    margin-top: 6px;
+    margin-top: 10px;
     width: 278px;
     height: 16px;
     overflow: hidden;
@@ -67,11 +67,6 @@ const Only = styled.div`
     font-weight : bold;
   }
 
-  .onlyReview_author,
-  .onlyReview_publisher{
-    color : #999;
-  }
-
   .onlyReview_author{
     margin-bottom : 5px;
   }
@@ -94,8 +89,8 @@ const InterParkOnly = () => {
             <div><img className="onlyReview_img" src="/img/CategoryMain/interParkOnly/only_1-1.jpeg" alt="" /></div>
             <div className="onlyReview_img_text">
               <div className="onlyReview_title">이 편지가 도착하면은</div>
-              <div className="onlyReview_author">골드키위새 저</div>
-              <div className="onlyReview_publisher">문학동네</div>
+              <div className="onlyReview_author grey">골드키위새 저</div>
+              <div className="grey">문학동네</div>
             </div>
           </div>
         </div>

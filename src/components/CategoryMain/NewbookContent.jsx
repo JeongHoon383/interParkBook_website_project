@@ -22,11 +22,6 @@ const NewbookContents = styled.div`
     font-weight : bold;
   }
 
-  .newBook_autor,
-  .newBook_editor{
-    color : var(--default);
-  }
-
   .newbook_price{
     font-weight : bold;
   }
@@ -39,8 +34,8 @@ const NewbookContent = () => {
         <li><img className='newBook_img' src="/img/CategoryMain/newbook_img/newbook_img1.jpeg" alt="" /></li>
         <li className='newBook_category'>[경제 경영]</li>
         <li className='newBook_title'>잘 잃어야 잘 번다</li>
-        <li className='newBook_autor'>톰 호가드 저정진근 역</li>
-        <li className='newBook_editor'>에디터</li>
+        <li className='newBook_autor grey'>톰 호가드 저정진근 역</li>
+        <li className='newBook_editor grey'>에디터</li>
         <li className='newbook_price'>17,820원(10% 할인)</li>
         <li className='newbook_point'>990P</li>
         <li className='newbook_annotation'>투자는 왜 실패하는가?</li>

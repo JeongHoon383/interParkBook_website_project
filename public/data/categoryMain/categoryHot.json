@@ -1,0 +1,341 @@
+[
+  {
+    "category" : "literature",
+    "item" : [
+  {
+    "img" : "/img/CategoryMain/categoryHot_img/literature/img_1.jpeg",
+    "title" : "너의 얼굴이 궁금해",
+    "author" : "오휘명 저 | 히읏",
+    "price" : "13,950원(10% 할인)",
+    "annotation" : "사랑과 위로가 필요한 사람들에게"
+  },
+  {
+    "img" : "/img/CategoryMain/categoryHot_img/literature/img_2.jpeg",
+    "title" : "레몬과 살인귀",
+    "author" : "구와가키 아유 저",
+    "price" : "15,120원(10% 할인)",
+    "annotation" : "제21회 이 미스터리가 대단해 대상"
+  },
+  {
+    "img" : "/img/CategoryMain/categoryHot_img/literature/img_3.jpeg",
+    "title" : "붕괴하는 악마의 영토 세트",
+    "author" : "랜섬 릭스 저",
+    "price" : "30,600원(10% 할인)",
+    "annotation" : "페러그린과 이상한 아이들의 집 완결"
+  },
+  {
+    "img" : "/img/CategoryMain/categoryHot_img/literature/img_4.jpeg",
+    "title" : "겨울을 지나가다",
+    "author" : "조해진 저 | 작가정신",
+    "price" : "12,600원(10% 할인)",
+    "annotation" : "세상의 모든 엄마와 딸들에게 바치는 헌사"
+  },
+  {
+    "img" : "/img/CategoryMain/categoryHot_img/literature/img_5.jpeg",
+    "title" : "나와 타인을 번역한다는 것",
+    "author" : "줌파 라히리 저",
+    "price" : "15,300원(10% 할인)",
+    "annotation" : "줌파 라히리의 오직 번역에 관한 산문집"
+  },
+  {
+    "img" : "/img/CategoryMain/categoryHot_img/literature/img_6.jpeg",
+    "title" : "시골에 살길 잘했다",
+    "author" : "김주형 저",
+    "price" : "15,120원(10% 할인)",
+    "annotation" : "헐랭이 농부의 시골 정착기"
+  },
+  {
+    "img" : "/img/CategoryMain/categoryHot_img/literature/img_7.jpeg",
+    "title" : "내향적이지만 집순이는 아닙니다",
+    "author" : "라비니야 저 | 부크럼",
+    "price" : "15,300원(10% 할인)",
+    "annotation" : "내향인의 여행이란 이런 것!"
+  },
+  {
+    "img" : "/img/CategoryMain/categoryHot_img/literature/img_8.jpeg",
+    "title" : "일주일에 세 번, 동네문화 센터에 놀러 갑니다",
+    "author" : "정경아 저 | 세미콜론",
+    "price" : "15,120원(10% 할인)",
+    "annotation" : "68세 K-그랜마의 명량 노년 탐사기"
+  }
+]
+},
+{
+  "category" : "economic",
+  "item" : [
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/economic/img_1.jpeg",
+      "title" : "핵의 변곡점",
+      "author" : "시그프리드 헤커 저",
+      "price" : "27,000원(10% 할인)",
+      "annotation" : "북미 핵협상의 결정적 순간들"
+    },
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/economic/img_2.jpeg",
+      "title" : "서울 밖에도 사람이 산다",
+      "author" : "히니 저 | 이르비치",
+      "price" : "15,120원(10% 할인)",
+      "annotation" : "그럼에도 왜 지방에 남아 있느냐는 물음"
+    },
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/economic/img_3.jpeg",
+      "title" : "로마사를 움직이는 12가지 힘",
+      "author" : "모토무라 료지 저",
+      "price" : "18,000원(10% 할인)",
+      "annotation" : "로마 역사의 심장부를 관통하다!"
+    },
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/economic/img_4.jpeg",
+      "title" : "브레인 키핑",
+      "author" : "마크 밀스테인 저",
+      "price" : "16,650원(10% 할인)",
+      "annotation" : "뇌를 제대로 알아야만 오래 쓸 수 있다."
+    },
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/economic/img_5.jpeg",
+      "title" : "손실 없는 투자원칙",
+      "author" : "남석관 저 | 모루",
+      "price" : "18,000원(10% 할인)",
+      "annotation" : "절대 고수의 주식 투자법"
+    },
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/economic/img_6.jpeg",
+      "title" : "윤제성의 월가의 투자",
+      "author" : "윤제성, 김현석 공저",
+      "price" : "20,700원(10% 할인)",
+      "annotation" : "월가 최상위 투자자의 투자법"
+    },
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/economic/img_7.jpeg",
+      "title" : "더 마인드",
+      "author" : "하와이 대저택 저",
+      "price" : "17,820원(10% 할인)",
+      "annotation" : "인생을 바꾸는 마인드셋"
+    },
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/economic/img_8.jpeg",
+      "title" : "무한능력",
+      "author" : "토니 로빈스 저",
+      "price" : "27,000원(10% 할인)",
+      "annotation" : "성공 멘토 토니 로빈스의 첫 책!"
+    },
+  ]
+},
+{
+  "category" : "hobby",
+  "item" : [
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/hobby/img_1.jpeg",
+      "title" : "미아의 마음이 머문 꽃잎 컬러링북",
+      "author" : "미아(이혜란) 저",
+      "price" : "15,300원(10% 할인)",
+      "annotation" : "12만 팔로워, 미아 작가의 컬러링북"
+    },
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/hobby/img_2.jpeg",
+      "title" : "이토 준지 걸작집 세트",
+      "author" : "이토 준지 글그림",
+      "price" : "77,000원(0% 할인)",
+      "annotation" : "일상에서 느껴지는 공포의 극대감을 맛보다"
+    },
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/hobby/img_3.jpeg",
+      "title" : "0~5세 골든 브레인 육아법",
+      "author" : "김보경 저",
+      "price" : "16,650원(10% 할인)",
+      "annotation" : "스탠퍼드 박사 엄마가 알려주는 영유아 두뇌 발달 컨설"
+    },
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/hobby/img_4.jpeg",
+      "title" : "한국 교회 트렌드 2024",
+      "author" : "지용근 외 10인",
+      "price" : "18,000원(10% 할인)",
+      "annotation" : "2024 한국 교회 전망과 전략"
+    },
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/hobby/img_5.jpeg",
+      "title" : "마음 디톡스",
+      "author" : "노희송 저 | 두란노",
+      "price" : "12,600원(10% 할인)",
+      "annotation" : "마음의 독소 없애기"
+    },
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/hobby/img_6.jpeg",
+      "title" : "아이비 웨이",
+      "author" : "폴 J.김 저",
+      "price" : "17,820원(10% 할인)",
+      "annotation" : "아이비리그 핵심성공전략"
+    },
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/hobby/img_7.jpeg",
+      "title" : "오늘, 가족 독서를 시작합니다",
+      "author" : "김정은, 유형선 저",
+      "price" : "13,500원(10% 할인)",
+      "annotation" : "지치지 않는 독서 습관 만들기"
+    },
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/hobby/img_8.jpeg",
+      "title" : "국어 1등급 고득점의 비밀",
+      "author" : "김지영 저",
+      "price" : "16,020원(10% 할인)",
+      "annotation" : "흔들림 없이 국어 1등급 받는 법"
+    }
+  ]
+},
+{
+  "category" : "kid",
+  "item" : [
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/kid/img_1.jpeg",
+      "title" : "그네탈래",
+      "author" : "장혜련 글그림 | 월천상회",
+      "price" : "14,400원(10% 할인)",
+      "annotation" : "신나고 짜릿한 생애 첫 번째 모험"
+    },
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/kid/img_2.jpeg",
+      "title" : "와, 눈이다!",
+      "author" : "김리라 글그림 | 올리",
+      "price" : "13,500원(10% 할인)",
+      "annotation" : "놀이와 요리의 재미있는 결합"
+    },
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/kid/img_3.jpeg",
+      "title" : "맨날맨날 착하기 싫어",
+      "author" : "장아영 글그림",
+      "price" : "14,400원(10% 할인)",
+      "annotation" : "착한 아이 날개를 벗고 훨훨 날아오르자!"
+    },
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/kid/img_4.jpeg",
+      "title" : "방귀 말놀이",
+      "author" : "키즈콘텐츠클럽 글",
+      "price" : "12,600원(10% 할인)",
+      "annotation" : "뿌붕뿌붕 뿡뿡 '방귀'로 재미있게 말놀이하자!"
+    },
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/kid/img_5.jpeg",
+      "title" : "오늘부터 나는 말 잘하는 어린이",
+      "author" : "신유아 글/이길수 그림 | 창비",
+      "price" : "12,600원(10% 할인)",
+      "annotation" : "어린이 초특급 말하기 솔루션"
+    },
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/kid/img_6.jpeg",
+      "title" : "AI 판타시티",
+      "author" : "박다솜, 김상수 저",
+      "price" : "12,600원(10% 할인)",
+      "annotation" : "나의 첫 인공지능 입문서"
+    },
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/kid/img_7.jpeg",
+      "title" : "룰루의 생각나라 여행",
+      "author" : "루이스 헤이 글",
+      "price" : "15,300원(10% 할인)",
+      "annotation" : "무엇이든 될 수 있는 생각모험 나라로!"
+    },
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/kid/img_8.jpeg",
+      "title" : "510원의 깜짝 세계 여행",
+      "author" : "김진형 글/박재현 그림",
+      "price" : "11,520원(10% 할인)",
+      "annotation" : "동전들의 찰떡궁합 쨍그랑 대모험"
+    },
+  ]
+},
+{
+  "category" : "foreign",
+  "item" : [
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/foreign/img_1.jpeg",
+      "title" : "키위엔 영어표현 하루 5분의 기적",
+      "author" : "박강준 저 | 키위엔",
+      "price" : "18,900원(10% 할인)",
+      "annotation" : "한국인 맞춤형 영어 학습법"
+    },
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/foreign/img_2.jpeg",
+      "title" : "NEW 국민영어법 STARTER + NEW 국민영어법 B",
+      "author" : "이민호 저 | 시원스쿨닷컴",
+      "price" : "30,600원(10% 할인)",
+      "annotation" : "세상 명쾌한 영어 소통법"
+    },
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/foreign/img_3.jpeg",
+      "title" : "업의 그릇",
+      "author" : "김동석 저 | 한빛미디어",
+      "price" : "18,900원(10% 할인)",
+      "annotation" : "회사 밖에서 돈을 담는 법"
+    },
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/foreign/img_4.jpeg",
+      "title" : "2024 사이다 면접",
+      "author" : "이지수, 구영모 공저 | 박문각",
+      "price" : "41,800원(5% 할인)",
+      "annotation" : "경기도 임용 2차 면접 대비"
+    },
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/foreign/img_5.jpeg",
+      "title" : "챗GPT로 만드는 주식 & 암호화폐 자동매매 시스템",
+      "author" : "설근민 저 | 제이펍",
+      "price" : "18,000원(10% 할인)",
+      "annotation" : "챗GPT가 알아서 만드는 금융 프로그램"
+    },
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/foreign/img_6.jpeg",
+      "title" : "완자 공부력 초등 한국사독해시대편 1",
+      "author" : "편집부 저 | 비상교육",
+      "price" : "9,000원(10% 할인)",
+      "annotation" : "완자 공부력 전과목 준비 완료"
+    },
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/foreign/img_7.jpeg",
+      "title" : "미국인 사용빈도 다반사 영어회화 구동사 2",
+      "author" : "김아영 저",
+      "price" : "16,200원(10% 할인)",
+      "annotation" : "영어회화 구동사 그 두 번째 책!"
+    },
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/foreign/img_8.jpeg",
+      "title" : "의대에 가고 싶어졌습니다",
+      "author" : "서울대학교 의과대학",
+      "price" : "16,200원(10% 할인)",
+      "annotation" : "서울대 의대생들이 말한다!"
+    },
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/foreign/img_9.jpeg",
+      "title" : "만능 핵심 일본어 패턴 88",
+      "author" : "와키메센세 저 | 동양북스",
+      "price" : "15,120원(10% 할인)",
+      "annotation" : "초보를 위한 일본어 회화 처방전"
+    },
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/foreign/img_10.jpeg",
+      "title" : "스티븐 울프럼의 챗GPT 강의",
+      "author" : "스티븐 울프럼 저",
+      "price" : "18,000원(10% 할인)",
+      "annotation" : "무궁무진한 챗GPT의 모든 것"
+    },
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/foreign/img_11.jpeg",
+      "title" : "코딩 테스트 합격자 되기 - 파이썬 편",
+      "author" : "박경록 저 | 골든래빗",
+      "price" : "36,000원(10% 할인)",
+      "annotation" : "빈출 100 문제로 완벽 대비"
+    },
+    {
+      "img" : "/img/CategoryMain/categoryHot_img/foreign/img_12.jpeg",
+      "title" : "2024 간호사 국가고시 초단기완성 파이널 핵심요약",
+      "author" : "주선희 저",
+      "price" : "24,300원(10% 할인)",
+      "annotation" : "국시대비 핵심요약집"
+    }
+  ]
+}
+
+
+
+
+
+
+]
