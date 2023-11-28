@@ -17,10 +17,7 @@ import Detail_reco from "./components/Detail/Detail_reco";
 import Detail_review from "./components/Detail/Detail_review";
 import Detail_change from "./components/Detail/Detail_change";
 const GlobalStyle = createGlobalStyle`
-@font-face {
-  font-family: 'fontName';
-  src: url('/font/YES24GothicR.ttf');
-}
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -140,12 +137,6 @@ iframe {
 .hidden {
   position: fixed;
   left: -10000px;
-}
-
-:root {
-  --main: #ff9c46;
-  --default: #666666;
-  --hover: #333;
 }
 `;
 const router = createBrowserRouter([

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Slider from 'react-slick';
 
 const Pre = styled.div`
   width: 20px;
@@ -58,5 +59,16 @@ export default function Slide() {
       </Pre>
     ),
   };
-  return <div>Slide</div>;
+  return (
+    <div>
+      <Slider {...settings}>
+        <div className="mediaImgBox">
+          <img className="mediaImg" src="/img/Choice/mediaChoice1.jpg" alt="" />
+        </div>
+        <div className="mediaImgBox">
+          <img className="mediaImg" src="/img/Choice/mediaChoice2.jpg" alt="" />
+        </div>
+      </Slider>
+    </div>
+  );
 }

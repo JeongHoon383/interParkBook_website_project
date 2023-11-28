@@ -4,18 +4,18 @@ import Slider from 'react-slick';
 import styled from 'styled-components';
 
 const Pre = styled.div`
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
   position: absolute;
-  left: 3%;
+  left: 0.5%;
   z-index: 3;
 `;
 
 const NextTo = styled.div`
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
   position: absolute;
-  right: 3%;
+  right: 0.5%;
   z-index: 3;
 `;
 

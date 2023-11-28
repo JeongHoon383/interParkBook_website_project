@@ -6,7 +6,7 @@ import { useState } from "react";
 
 const BackgroundLayout = styled.div`
   background: #f8f8f8;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #d8d8d8;
   height: 41px;
   .centerLayout {
     width: 980px;
@@ -86,7 +86,7 @@ const BackgroundLayout = styled.div`
   }
 `;
 
-export default function CategoryList_Nav() {
+export default function CategoryList_TopNav() {
   const [isDropMenuOpen, setIsDropMenuOpen] = useState([false, false]);
 
   const handleClick = (idx) => {
