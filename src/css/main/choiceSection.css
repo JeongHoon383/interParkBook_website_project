@@ -74,7 +74,3 @@
 .dots_custom li.slick-active button {
   background-color: #08c1ce;
 }
-
-.slick-slide div {
-  cursor: pointer;
-}

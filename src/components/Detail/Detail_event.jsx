@@ -51,11 +51,11 @@ const Detail_event = () => {
           alt=""
         />
       </Figure>
-      <SortSection>
+      {/*  <SortSection>
         <h1>이 상품의 시리즈</h1>
         <hr />
         <em>홈 &gt; 국내도서 &gt; 인문 &gt; 인문교양 &gt; 교양일반</em>
-      </SortSection>
+      </SortSection> */}
     </div>
   );
 };

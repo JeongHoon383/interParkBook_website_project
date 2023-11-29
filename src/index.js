@@ -11,11 +11,13 @@ import reportWebVitals from "./reportWebVitals";
 import { createGlobalStyle } from "styled-components";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import CategoryList from "./Pages/CategoryList";
+import Detail_info from "./components/Detail/Detail_info";
+import Detail_event from "./components/Detail/Detail_event";
+import Detail_reco from "./components/Detail/Detail_reco";
+import Detail_review from "./components/Detail/Detail_review";
+import Detail_change from "./components/Detail/Detail_change";
 const GlobalStyle = createGlobalStyle`
-@font-face {
-  font-family: 'fontName';
-  src: url('/font/YES24GothicR.ttf');
-}
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -136,12 +138,6 @@ iframe {
   position: fixed;
   left: -10000px;
 }
-
-:root {
-  --main: #ff9c46;
-  --default: #666666;
-  --hover: #333;
-}
 `;
 const router = createBrowserRouter([
   {
@@ -156,6 +152,28 @@ const router = createBrowserRouter([
       {
         path: "/book/:id",
         element: <Detail />,
+        children: [
+          {
+            path: "/book/:id/info",
+            element: <Detail_info />,
+          },
+          {
+            path: "/book/:id/event",
+            element: <Detail_event />,
+          },
+          {
+            path: "/book/:id/rec",
+            element: <Detail_reco />,
+          },
+          {
+            path: "/book/:id/review",
+            element: <Detail_review />,
+          },
+          {
+            path: "/book/:id/change",
+            element: <Detail_change />,
+          },
+        ],
       },
       {
         path: "/bestseller",
