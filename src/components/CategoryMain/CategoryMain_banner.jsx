@@ -1,21 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Category_slide from "../Category_slide.jsx"
+import Category_slide from "../Category_slide"
+import axios from "axios";
 
 const CategoryMain_banner = () => {
+  const mouseOver = () => {
+    
+  }
+
+
   return (
     <TopBanner>
       <div className="banner">
         <div className="banner_main">
-        <Category_slide/>          
+        <Category_slide/>
         </div>
         <ul className="banner_category">
-          <li>쇼펜하우어</li>
-          <li>목표달성</li>
-          <li>머핀북</li>
-          <li>파견자들</li>
-          <li>김영사</li>
-          <li>주목 이 책!</li>
+          <li onMouseOver={() => mouseOver(0)}>쇼펜하우어</li>
+          <li onMouseOver={() => mouseOver(1)}>목표달성</li>
+          <li onMouseOver={() => mouseOver(2)}>머핀북</li>
+          <li onMouseOver={() => mouseOver(3)}>파견자들</li>
+          <li onMouseOver={() => mouseOver(4)}>김영사</li>
+          <li onMouseOver={() => mouseOver(5)}>주목 이 책!</li>
         </ul>
       </div>
       <div className="banner_ad">
@@ -29,7 +35,7 @@ const TopBanner = styled.div`
   display : flex;
   justify-content : center;
   margin-top : 20px;
-  height:323px;
+  height:326px;
 
   .banner{
     display : flex;

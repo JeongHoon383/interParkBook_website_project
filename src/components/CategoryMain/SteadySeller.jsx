@@ -6,7 +6,7 @@ const Steady = styled.div`
   margin-top : 20px;
   width: 479px;
   height: 354px;
-  border: 1px solid red;
+  border : 0.3px solid grey;
 
   .steady_title{
     padding: 20px 0 9px 20px;
