@@ -3,7 +3,8 @@ import styled from 'styled-components'
 
 const Recent_container = styled.div`
     display : flex;
-    margin: 20px auto 0;
+    margin: 20px auto 20px;
+    
     width: 958px;
     height : 364px;
     border: solid 1px #d8d8d8;
@@ -72,6 +73,43 @@ const Recent_container = styled.div`
     padding-left: 20px;
     padding-bottom: 25px;
     }
+
+    .recent_content_img_box{
+      padding-left : 29px;
+    }
+
+    .recent_content_img{
+      width : 125px;
+      height : 185px;
+    }
+
+    .recent_img_text{
+      margin-top : 17px;
+      padding-left : 29px;
+    }
+
+    .recent_img_name{
+      font-weight : bold;
+    }
+
+    .recent_img_author{
+      margin-top: 6px;
+      width: 140px;
+      height: 15px;
+      line-height: 15px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .recent_img_grade{
+      margin-top : 8px;
+    }
+
+    .recent_img_price{
+      margin-top : 8px;
+      font-weight : bold;
+    }
 `;
 
 const RecentBook = () => {
@@ -96,14 +134,14 @@ const RecentBook = () => {
       <div className="recent_content">
         <h3 className="recent_content_title">이 책을 구입하신 분들이 <em>함께 산 책</em></h3>
         <div className="recent_content_main">
-          <div className="recent_content_img_box">
-            <div><img className="recent_content_img" src="/img/CategoryMain/recent_img/img_1.jpeg" alt="" /></div>
+          <div className="recent_content_img_container">
+            <div className="recent_content_img_box"><img className="recent_content_img" src="/img/CategoryMain/recent_img/img_1.jpeg" alt="" /></div>
             <div>
-              <ul>
-                <li>붉은 궁</li>
-                <li>허주은 저/허주은 역 | 시공사</li>
-                <li>별점</li>
-                <li>15,300(10% 할인)</li>
+              <ul className="recent_img_text">
+                <li className="recent_img_name">붉은 궁</li>
+                <li className="recent_img_author grey">허주은 저/허주은 역 | 시공사</li>
+                <li className="recent_img_grade">별점</li>
+                <li className="recent_img_price">15,300(10% 할인)</li>
               </ul>
             </div>
           </div>

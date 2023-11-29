@@ -21,7 +21,6 @@ const CategoryMain = () => {
       <Hot/>
       <Culture/>
       <RecentBook/>
-      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
     </CategoryMainContainer>
   )
 }
