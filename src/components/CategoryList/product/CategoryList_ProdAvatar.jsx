@@ -24,7 +24,7 @@ const ProdAvatar = styled.div`
 export default function CategoryList_ProdAvatar({ data }) {
   return (
     <ProdAvatar>
-      <Link to={`/book/${data.isbn13}`}>
+      <Link to={`/book/${data.isbn}`}>
         <img src={data.cover} alt="bookCover" />
       </Link>
       <Link className="preview" target="_blank">

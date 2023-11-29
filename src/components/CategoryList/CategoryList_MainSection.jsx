@@ -38,7 +38,7 @@ export default function CategoryList_MainSection() {
 
   //하위 컴포넌트(CategoryList_Sort) 전체선택/선택해제 핸들링이벤트
   const handleSelectAll = () => {
-    Array.isArray(data.item) && data.item.map(item => checkList.indexOf(item.isbn13) < 0 ? setCheckList(checkList => [...checkList, item.isbn13]) : null)
+    Array.isArray(data.item) && data.item.map(item => checkList.indexOf(item.isbn) < 0 ? setCheckList(checkList => [...checkList, item.isbn]) : null)
     setIsCheckedAll(!isCheckedAll);
   };
 

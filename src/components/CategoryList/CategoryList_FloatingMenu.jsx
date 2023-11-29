@@ -43,6 +43,17 @@ const FloatingMenu = styled.aside`
       svg {
         font-size: 18px;
       }
+      .pointIcon {
+      width: 16px;
+      height: 16px;
+      font-size: 11px;
+      font-weight: bold;
+      line-height: 16px;
+      color: #f8f8f8;
+      text-align: center;
+      border-radius: 50%;
+      background: #666;
+    }
     }
   }
   .recentViewList {
@@ -149,8 +160,8 @@ export default function CategoryList_FloatingMenu() {
       <h4 className="myInterpark">마이 인터파크</h4>
       <div className="myMenu">
         <Link>
-          <AiFillMediumCircle />
-          <span>0원</span>
+          <span className="pointIcon">P</span>
+          <span>0P</span>
         </Link>
         <Link>
           <RiCoupon3Line />

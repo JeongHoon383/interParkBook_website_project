@@ -78,7 +78,7 @@ export default function CategoryList_ProdBuy({data}) {
     <ProdBuy>
       <div className="quantity">
         <label htmlFor="ProdQuantity"></label>
-        <input name="ProdQuantity" id="ProdQuantity" type="checkbox" isbn13={data.isbn13}/>
+        <input name="ProdQuantity" id="ProdQuantity" type="checkbox" isbn={data.isbn}/>
         <span className="quantitywrapper">
           <button>-</button>
           <input type="number" value={quantity} readOnly />

@@ -36,7 +36,7 @@ const ProdContent = styled.div`
       font-weight: bold;
       color: var(--main);
     }
-    .mileageIcon {
+    .pointIcon {
       width: 13px;
       height: 13px;
       font-size: 10px;
@@ -46,7 +46,7 @@ const ProdContent = styled.div`
       border-radius: 50%;
       background: var(--main);
     }
-    .mileage {
+    .point {
       font-size: 11px;
       font-weight: bold;
     }
@@ -78,7 +78,7 @@ export default function CategoryList_ProdContent({ data }) {
   return (
     <ProdContent>
       <p className="title">
-        <Link to={`/book/${data.isbn13}`}>{data.title}</Link>
+        <Link to={`/book/${data.isbn}`}>{data.title}</Link>
       </p>
       <p className="bookInfo">
         <span>{data.author}</span>
@@ -90,8 +90,8 @@ export default function CategoryList_ProdContent({ data }) {
         <span>{data.priceStandard.toLocaleString()}원</span>
         <HiArrowLongRight />
         <span className="priceSales">{data.priceSales.toLocaleString()}원</span>
-        <span className="mileageIcon">M</span>
-        <span className="mileage">{data.mileage.toLocaleString()}원</span>
+        <span className="pointIcon">P</span>
+        <span className="point">{data.mileage.toLocaleString()}P</span>
       </p>
       <p className="salesPoint">
         <span>세일즈포인트 : </span>
