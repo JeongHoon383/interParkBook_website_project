@@ -37,15 +37,20 @@ export default function CategoryList_MainSection() {
   }, [listQty, currentPage, isSoldout]);
 
   //하위 컴포넌트(CategoryList_Sort) 전체선택/선택해제 핸들링이벤트
-  const handleSelectAll = () => {
-    Array.isArray(data.item) && data.item.map(item => checkList.indexOf(item.isbn) < 0 ? setCheckList(checkList => [...checkList, item.isbn]) : null)
-    setIsCheckedAll(!isCheckedAll);
+  const handleSelectAll = (flag) => {
+    if(flag){
+      Array.isArray(data.item) && data.item.map(item => checkList.indexOf(item.isbn) < 0 ? setCheckList(checkList => [...checkList, item.isbn]) : null)
+      setIsCheckedAll(true);
+    }else{
+      setCheckList([]);
+      setIsCheckedAll(false);
+    }
   };
 
-  const handleDeselectAll = () => {
-    setCheckList([]);
-    setIsCheckedAll(!isCheckedAll);
-  }
+  //체크박스가 전부 체크됐을 때 IsCheckedAll true/false 변환
+  useEffect(() => {
+    Array.isArray(checkList) && checkList.length === listQty ? setIsCheckedAll(true) : setIsCheckedAll(false)
+  }, [checkList]);
 
   return (
     <MainSection>
@@ -55,7 +60,7 @@ export default function CategoryList_MainSection() {
       <CategoryList_Title title={data.searchCategoryName} />
       <CategoryList_SubCaNav />
       <CategoryList_Sort
-        data={data}
+        totalResults={data.totalResults}
         listQty={listQty}
         setListQty={setListQty}
         currentPage={currentPage}
@@ -64,17 +69,26 @@ export default function CategoryList_MainSection() {
         setIsSoldout={setIsSoldout}
         handleSelectAll={handleSelectAll}
         isCheckedAll={isCheckedAll}
-        handleDeselectAll={handleDeselectAll}
+        setIsCheckedAll={setIsCheckedAll}
+        checkList={checkList}
       />
-      <CategoryList_Products data={data} />
-      <CategoryList_Sort
+      <CategoryList_Products
         data={data}
+        checkList={checkList}
+        setCheckList={setCheckList}
+      />
+      <CategoryList_Sort
+        totalResults={data.totalResults}
         listQty={listQty}
         setListQty={setListQty}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
         isSoldout={isSoldout}
         setIsSoldout={setIsSoldout}
+        handleSelectAll={handleSelectAll}
+        isCheckedAll={isCheckedAll}
+        setIsCheckedAll={setIsCheckedAll}
+        checkList={checkList}
       />
     </MainSection>
   );

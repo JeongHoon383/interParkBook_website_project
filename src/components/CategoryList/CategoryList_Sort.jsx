@@ -93,7 +93,7 @@ const Sortarea = styled.div`
 `;
 
 export default function CategoryList_Sort({
-  data,
+  totalResults,
   listQty,
   setListQty,
   currentPage,
@@ -101,13 +101,26 @@ export default function CategoryList_Sort({
   isSoldout,
   setIsSoldout,
   handleSelectAll,
-  handleDeselectAll,
-  isCheckedAll
+  isCheckedAll,
+  setIsCheckedAll
 }) {
 
+  //페이지네이션 현재 페이지 변경
   const handlePageChange = (page) => setCurrentPage(page);
-  const handleListQty = (e) => setListQty(Number(e.target.value));
-  const handleChangeSoldout = (e) => setIsSoldout(e.target.value);
+
+  //한 페이지에 볼 상품 수량 변경
+  const handleListQty = (e) => {
+    setListQty(Number(e.target.value))
+    handleSelectAll(false)
+    setIsCheckedAll(false)
+  };
+
+  //품절 상품 포함/제외 변경
+  const handleChangeSoldout = (e) => {
+    setIsSoldout(e.target.value)
+    handleSelectAll(false)
+    setIsCheckedAll(false)
+  };
 
   return (
     <Sortarea>
@@ -147,7 +160,7 @@ export default function CategoryList_Sort({
       </div>
       <div className="bottomArea">
         <Pagination
-          totalItemsCount={data.totalResults}
+          totalItemsCount={totalResults}
           activePage={currentPage}
           pageRangeDisplayed={10}
           itemsCountPerPage={listQty}
@@ -164,7 +177,7 @@ export default function CategoryList_Sort({
         />
         <span className="selectOption">
           {
-            isCheckedAll ? <button onClick={handleDeselectAll}>선택해제</button> : <button onClick={handleSelectAll}>전체선택</button>
+            isCheckedAll ? <button onClick={() => handleSelectAll(false)}>선택해제</button> : <button onClick={() => handleSelectAll(true)}>전체선택</button>
           }
           <button>카트에 넣기</button>
           <button>찜하기</button>

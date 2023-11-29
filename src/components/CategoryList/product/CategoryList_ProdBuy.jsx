@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { GoHeart } from "react-icons/go";
 import { Link } from "react-router-dom";
@@ -67,18 +67,47 @@ const ProdBuy = styled.div`
 `;
 
 //장바구니에 담기, 바로구매, 수량, 체크박스 기능 추가
-export default function CategoryList_ProdBuy({data}) {
+export default function CategoryList_ProdBuy({data, checkList, setCheckList }) {
   const [quantity, setQuantity] = useState(1);
-  //전체 선택 및 취소
-  //개별 항목 취소 시 전체 선택 해제
-  //모든 항목 선택 시 전체 선택 활성화
-  //진열 수량 select, 품절 여부 버튼 클릭시 전체선택 해제
+  const [isChecked, setisChecked] = useState(false);
+
+  //개별 상품 체크박스 클릭시 checkList에 상품 넣고 빼기
+  const handleSelect = (e) => {
+    if(isChecked) {
+      let copy = [...checkList];
+      for(let i=0; i<copy.length; i++){
+        if(copy[i] === e.target.value){
+          copy.splice(i,1);
+        }
+      }
+      setCheckList(copy);
+      setisChecked(false);
+    }else{
+      setCheckList([...checkList, e.target.value]);
+      setisChecked(true);
+    }
+  }
+
+
+  /////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////
+  //check 함수에 문제가 있다....첫번째 상품은 체크를 해도 체크박스가 안 변하고 데이터는 추가된다. 또 클릭하면 또 데이터가 추가된다. 수정 요망
+  //checkList에 해당 상품이 있는지 없는지에 따라 해당 상품의 checkbox checked를 true/false 변환
+  const check = () => {
+    checkList.indexOf(data.isbn) > 0 ? setisChecked(true) : setisChecked(false)
+  }
+
+  //checkList가 update될 때마다 개별 상품 체크 여부 확인
+  useEffect(() => {
+    check();
+  }, [checkList]);
 
   return (
     <ProdBuy>
       <div className="quantity">
         <label htmlFor="ProdQuantity"></label>
-        <input name="ProdQuantity" id="ProdQuantity" type="checkbox" isbn={data.isbn}/>
+        <input name="ProdQuantity" id="ProdQuantity" type="checkbox" checked={isChecked} value={data.isbn} onChange={handleSelect}/>
         <span className="quantitywrapper">
           <button>-</button>
           <input type="number" value={quantity} readOnly />

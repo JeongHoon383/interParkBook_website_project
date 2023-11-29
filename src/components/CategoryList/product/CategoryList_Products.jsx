@@ -14,7 +14,7 @@ const ProductsList = styled.ul`
   }
 `;
 
-export default function CategoryList_Products({ data }) {
+export default function CategoryList_Products({ data, checkList, setCheckList }) {
   return (
     <ProductsList>
       {data.item &&
@@ -22,7 +22,11 @@ export default function CategoryList_Products({ data }) {
           <li key={data.itemId}>
             <CategoryList_ProdAvatar data={data} />
             <CategoryList_ProdContent data={data} />
-            <CategoryList_ProdBuy data={data}/>
+            <CategoryList_ProdBuy
+              data={data}
+              checkList={checkList}
+              setCheckList={setCheckList}
+            />
           </li>
         ))}
     </ProductsList>
