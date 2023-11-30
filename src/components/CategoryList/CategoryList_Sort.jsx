@@ -103,9 +103,11 @@ export default function CategoryList_Sort({
   handleSelectAll,
   isCheckedAll,
   setIsCheckedAll,
-  setCheckList
+  setCheckList,
 }) {
+  //졍렬 버튼 클릭시 resetCheckLIst 실행/ 수정 필요
 
+  //상품 체크 목록 리셋
   const resetCheckList = () => {
     setIsCheckedAll(false);
     setCheckList([]);
@@ -120,14 +122,14 @@ export default function CategoryList_Sort({
   //한 페이지에 볼 상품 수량 변경
   const handleListQty = (e) => {
     resetCheckList();
-    setListQty(Number(e.target.value))
+    setListQty(Number(e.target.value));
     handleSelectAll(false);
   };
 
   //품절 상품 포함/제외 변경
   const handleChangeSoldout = (e) => {
     resetCheckList();
-    setIsSoldout(e.target.value)
+    setIsSoldout(e.target.value);
     handleSelectAll(false);
   };
 
@@ -185,9 +187,11 @@ export default function CategoryList_Sort({
           lastPageText={<AiOutlineDoubleRight />}
         />
         <span className="selectOption">
-          {
-            isCheckedAll ? <button onClick={() => handleSelectAll(false)}>선택해제</button> : <button onClick={() => handleSelectAll(true)}>전체선택</button>
-          }
+          {isCheckedAll ? (
+            <button onClick={() => handleSelectAll(false)}>선택해제</button>
+          ) : (
+            <button onClick={() => handleSelectAll(true)}>전체선택</button>
+          )}
           <button>카트에 넣기</button>
           <button>찜하기</button>
         </span>

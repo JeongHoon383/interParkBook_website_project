@@ -32,16 +32,21 @@ export default function CategoryList_MainSection() {
 &Cover=MidBig
 &CategoryId=1196
 `).then((result) => {
-  setData(result.data)
-});
+      setData(result.data);
+    });
   }, [listQty, currentPage, isSoldout]);
 
   //하위 컴포넌트(CategoryList_Sort) 전체선택/선택해제 핸들링이벤트
   const handleSelectAll = (flag) => {
-    if(flag){
-      Array.isArray(data.item) && data.item.map(item => !checkList.includes(item.isbn) ? setCheckList(checkList => [...checkList, item.isbn]) : null)
+    if (flag) {
+      Array.isArray(data.item) &&
+        data.item.map((item) =>
+          !checkList.includes(item.isbn)
+            ? setCheckList((checkList) => [...checkList, item.isbn])
+            : null
+        );
       setIsCheckedAll(true);
-    }else{
+    } else {
       setCheckList([]);
       setIsCheckedAll(false);
     }
@@ -49,7 +54,9 @@ export default function CategoryList_MainSection() {
 
   //체크박스가 전부 체크됐을 때 IsCheckedAll true/false 변환
   useEffect(() => {
-    Array.isArray(checkList) && checkList.length === listQty ? setIsCheckedAll(true) : setIsCheckedAll(false)
+    Array.isArray(checkList) && checkList.length === listQty
+      ? setIsCheckedAll(true)
+      : setIsCheckedAll(false);
   }, [checkList]);
 
   return (

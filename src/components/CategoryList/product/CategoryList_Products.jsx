@@ -14,7 +14,11 @@ const ProductsList = styled.ul`
   }
 `;
 
-export default function CategoryList_Products({ data, checkList, setCheckList }) {
+export default function CategoryList_Products({
+  data,
+  checkList,
+  setCheckList,
+}) {
   return (
     <ProductsList>
       {data.item &&

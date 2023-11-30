@@ -11,7 +11,7 @@ const ProdBuy = styled.div`
   .quantity {
     display: flex;
     align-items: center;
-    >input {
+    > input {
       width: 18px;
       height: 18px;
       margin-right: 5px;
@@ -66,36 +66,45 @@ const ProdBuy = styled.div`
   }
 `;
 
-//장바구니에 담기, 바로구매, 수량, 체크박스 기능 추가
-export default function CategoryList_ProdBuy({data, checkList, setCheckList }) {
+//장바구니에 담기, 바로구매, 수량
+export default function CategoryList_ProdBuy({
+  data,
+  checkList,
+  setCheckList,
+}) {
   const [quantity, setQuantity] = useState(1);
   const [isChecked, setisChecked] = useState(false);
 
   //개별 상품 체크박스 클릭시 checkList에 상품 넣고 빼기
   const handleSelect = (e) => {
-    if(isChecked) {
+    if (isChecked) {
       let copy = [...checkList];
-      for(let i=0; i<copy.length; i++){
-        if(copy[i] === e.target.value){
-          copy.splice(i,1);
+      for (let i = 0; i < copy.length; i++) {
+        if (copy[i] === e.target.value) {
+          copy.splice(i, 1);
         }
       }
       setCheckList(copy);
       setisChecked(false);
-    }else{
+    } else {
       setCheckList([...checkList, e.target.value]);
       setisChecked(true);
     }
-  }
+  };
 
-  
+  const handleQuantity = (flag) => {
+    if (flag === "plus") {
+      setQuantity(quantity + 1);
+    } else if (flag === "minus" && quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
 
-  //checkList에 해당 상품이 있는지 없는지에 따라 해당 상품의 checkbox checked를 true/false 변환
+  //checkList에 해당 상품이 있는지 없는지에 따라 해당 상품의 checkbox 체크 변환
   useEffect(() => {
     const check = () => {
-      checkList.includes(data.isbn) ? setisChecked(true) : setisChecked(false)
-    }
-  
+      checkList.includes(data.isbn) ? setisChecked(true) : setisChecked(false);
+    };
     check();
   }, [checkList, data.isbn]);
 
@@ -103,11 +112,30 @@ export default function CategoryList_ProdBuy({data, checkList, setCheckList }) {
     <ProdBuy>
       <div className="quantity">
         <label htmlFor="ProdQuantity"></label>
-        <input name="ProdQuantity" id="ProdQuantity" type="checkbox" checked={isChecked} value={data.isbn} onChange={handleSelect}/>
+        <input
+          name="ProdQuantity"
+          id="ProdQuantity"
+          type="checkbox"
+          checked={isChecked}
+          value={data.isbn}
+          onChange={handleSelect}
+        />
         <span className="quantitywrapper">
-          <button>-</button>
+          <button
+            onClick={() => {
+              handleQuantity("minus");
+            }}
+          >
+            -
+          </button>
           <input type="number" value={quantity} readOnly />
-          <button>+</button>
+          <button
+            onClick={() => {
+              handleQuantity("plus");
+            }}
+          >
+            +
+          </button>
         </span>
       </div>
       <button className="insertCart">카트에 넣기</button>

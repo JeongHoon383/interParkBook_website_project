@@ -44,16 +44,16 @@ const FloatingMenu = styled.aside`
         font-size: 18px;
       }
       .pointIcon {
-      width: 16px;
-      height: 16px;
-      font-size: 11px;
-      font-weight: bold;
-      line-height: 16px;
-      color: #f8f8f8;
-      text-align: center;
-      border-radius: 50%;
-      background: #666;
-    }
+        width: 16px;
+        height: 16px;
+        font-size: 11px;
+        font-weight: bold;
+        line-height: 16px;
+        color: #f8f8f8;
+        text-align: center;
+        border-radius: 50%;
+        background: #666;
+      }
     }
   }
   .recentViewList {
