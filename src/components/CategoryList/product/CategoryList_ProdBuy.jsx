@@ -88,20 +88,16 @@ export default function CategoryList_ProdBuy({data, checkList, setCheckList }) {
     }
   }
 
+  
 
-  /////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////
-  //check 함수에 문제가 있다....첫번째 상품은 체크를 해도 체크박스가 안 변하고 데이터는 추가된다. 또 클릭하면 또 데이터가 추가된다. 수정 요망
   //checkList에 해당 상품이 있는지 없는지에 따라 해당 상품의 checkbox checked를 true/false 변환
-  const check = () => {
-    checkList.indexOf(data.isbn) > 0 ? setisChecked(true) : setisChecked(false)
-  }
-
-  //checkList가 update될 때마다 개별 상품 체크 여부 확인
   useEffect(() => {
+    const check = () => {
+      checkList.includes(data.isbn) ? setisChecked(true) : setisChecked(false)
+    }
+  
     check();
-  }, [checkList]);
+  }, [checkList, data.isbn]);
 
   return (
     <ProdBuy>

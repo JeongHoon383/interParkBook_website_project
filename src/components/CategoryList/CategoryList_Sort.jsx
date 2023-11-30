@@ -102,24 +102,33 @@ export default function CategoryList_Sort({
   setIsSoldout,
   handleSelectAll,
   isCheckedAll,
-  setIsCheckedAll
+  setIsCheckedAll,
+  setCheckList
 }) {
 
+  const resetCheckList = () => {
+    setIsCheckedAll(false);
+    setCheckList([]);
+  };
+
   //페이지네이션 현재 페이지 변경
-  const handlePageChange = (page) => setCurrentPage(page);
+  const handlePageChange = (page) => {
+    resetCheckList();
+    setCurrentPage(page);
+  };
 
   //한 페이지에 볼 상품 수량 변경
   const handleListQty = (e) => {
+    resetCheckList();
     setListQty(Number(e.target.value))
-    handleSelectAll(false)
-    setIsCheckedAll(false)
+    handleSelectAll(false);
   };
 
   //품절 상품 포함/제외 변경
   const handleChangeSoldout = (e) => {
+    resetCheckList();
     setIsSoldout(e.target.value)
-    handleSelectAll(false)
-    setIsCheckedAll(false)
+    handleSelectAll(false);
   };
 
   return (

@@ -19,7 +19,7 @@ export default function CategoryList_Products({ data, checkList, setCheckList })
     <ProductsList>
       {data.item &&
         data.item.map((data) => (
-          <li key={data.itemId}>
+          <li key={data.isbn}>
             <CategoryList_ProdAvatar data={data} />
             <CategoryList_ProdContent data={data} />
             <CategoryList_ProdBuy
