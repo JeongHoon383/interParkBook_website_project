@@ -1,0 +1,386 @@
+{
+  "version": "20131101",
+  "logo": "http://image.aladin.co.kr/img/header/2011/aladin_logo_new.gif",
+  "title": "알라딘 블로거 베스트셀러 리스트 - 국내도서",
+  "link": "https://www.aladin.co.kr/shop/common/wbest.aspx?BestType=BlogBest&amp;BranchType=1&amp;partner=openAPI",
+  "pubDate": "Sat, 25 Nov 2023 09:05:20 GMT",
+  "totalResults": 100,
+  "startIndex": 1,
+  "itemsPerPage": 8,
+  "query": "QueryType=BLOGBEST;SearchTarget=Book",
+  "searchCategoryId": 0,
+  "searchCategoryName": "국내도서",
+  "item": [
+    {
+      "title": "나와 타인을 번역한다는 것",
+      "link": "http://www.aladin.co.kr/shop/wproduct.aspx?ItemId=329023445&amp;partner=openAPI&amp;start=api",
+      "author": "줌파 라히리 (지은이), 이승민 (옮긴이)",
+      "pubDate": "2023-11-20",
+      "description": "데뷔작 『축복받은 집』으로 퓰리처상을 수상하고, 오바마 대통령에게 국가인문학메달을 받은 줌파 라히리. 자신만의 문학적 영토를 넓혀나가던 작가는, 장편소설 『저지대』를 출간한 뒤 이탈리아어로만 글을 쓸 것이라 선언한다. 『나와 타인을 번역한다는 것』은 줌파 라히리가 이탈리아어에 몰두해 있던 시기, 미국에서 처음 출간한 산문집이다.",
+      "isbn": "8960908517",
+      "isbn13": "9788960908512",
+      "itemId": 329023445,
+      "priceSales": 15300,
+      "priceStandard": 17000,
+      "mallType": "BOOK",
+      "stockStatus": "",
+      "mileage": 850,
+      "cover": "https://image.aladin.co.kr/product/32902/34/coversum/8960908517_1.jpg",
+      "categoryId": 51373,
+      "categoryName": "국내도서>에세이>외국에세이",
+      "publisher": "마음산책",
+      "salesPoint": 5510,
+      "adult": false,
+      "fixedPrice": true,
+      "customerReviewRank": 10,
+      "bestRank": 1,
+      "subInfo": {},
+      "reviewList": [
+        {
+          "reviewRank": 10,
+          "title": "[100자평]문은 한번에 하나씩만 열 수 있다. 작가는 모국어 안에...",
+          "writer": "zandi",
+          "link": "https://blog.aladin.co.kr/744688143/15079439?partner=openAPI"
+        }
+      ]
+    },
+    {
+      "title": "다시 페미니즘의 도전 - 한국 사회 성정치학의 쟁점들",
+      "link": "http://www.aladin.co.kr/shop/wproduct.aspx?ItemId=329403908&amp;partner=openAPI&amp;start=api",
+      "author": "정희진 (지은이)",
+      "pubDate": "2023-11-24",
+      "description": "독창적인 여성학자, 다학제적 연구자, 도발적인 서평가 정희진이 한국 사회 일상을 뒤덮은 성정치학의 문제들을 새롭게 재구성해 페미니즘이 나아가야 할 길을 묻는다. 2005년 ‘페미니즘 교과서’ 《페미니즘의 도전》을 통해 남성 언어로 길들여진 한국 사회에 균열을 내며 여성주의적 패러다임의 전환을 이끌어낸 저자가 18년 만에 다시 여성주의 담론의 전복적인 사유를 펼친다.",
+      "isbn": "K412936045",
+      "isbn13": "9791193154168",
+      "itemId": 329403908,
+      "priceSales": 16200,
+      "priceStandard": 18000,
+      "mallType": "BOOK",
+      "stockStatus": "",
+      "mileage": 900,
+      "cover": "https://image.aladin.co.kr/product/32940/39/coversum/k412936045_1.jpg",
+      "categoryId": 51304,
+      "categoryName": "국내도서>사회과학>사회학>사회학 일반",
+      "publisher": "교양인",
+      "salesPoint": 4610,
+      "adult": false,
+      "fixedPrice": true,
+      "customerReviewRank": 10,
+      "bestRank": 2,
+      "subInfo": {},
+      "reviewList": [
+        {
+          "reviewRank": 10,
+          "title": "[100자평]다시 나온 페미니즘의 도전. 넘나 반가운 연말 소식.....",
+          "writer": "에어셀",
+          "link": "https://blog.aladin.co.kr/781311134/15081065?partner=openAPI"
+        },
+        {
+          "reviewRank": 10,
+          "title": "[100자평]지난 18년 동안 변화(없음)가 한마디로 진단 끝. “...",
+          "writer": "공쟝쟝",
+          "link": "https://blog.aladin.co.kr/jyang0202/15080496?partner=openAPI"
+        },
+        {
+          "reviewRank": 10,
+          "title": "[100자평]또 한번 정희진의 눈으로 세상을 보게되다니..  이런 ...",
+          "writer": "김선희",
+          "link": "https://blog.aladin.co.kr/753336121/15080339?partner=openAPI"
+        },
+        {
+          "reviewRank": 10,
+          "title": "[100자평]ㅠㅠ아니 무슨 이런 연말선물 같은 책이",
+          "writer": "버섯",
+          "link": "https://blog.aladin.co.kr/exile/15080165?partner=openAPI"
+        }
+      ]
+    },
+    {
+      "title": "감정의 문화정치 - 감정은 세계를 바꿀 수 있을까",
+      "link": "http://www.aladin.co.kr/shop/wproduct.aspx?ItemId=327824569&amp;partner=openAPI&amp;start=api",
+      "author": "사라 아메드 (지은이), 시우 (옮긴이)",
+      "pubDate": "2023-11-06",
+      "description": "페미니스트 독립연구자 사라 아메드의 주저 중 한 권인 《감정의 문화정치》가 출간됐다. 이 책은 그간 감정 연구와 정동 이론의 필독서로 꼽혀왔다. 이 책이 제기하고 답하는 질문은 두 가지다. ‘세상의 변화는 왜 이다지도 어려운가?’ ‘그럼에도 변화는 왜 가능한가?’",
+      "isbn": "K382936489",
+      "isbn13": "9791168730830",
+      "itemId": 327824569,
+      "priceSales": 26820,
+      "priceStandard": 29800,
+      "mallType": "BOOK",
+      "stockStatus": "",
+      "mileage": 1490,
+      "cover": "https://image.aladin.co.kr/product/32782/45/coversum/k382936489_1.jpg",
+      "categoryId": 51338,
+      "categoryName": "국내도서>사회과학>여성학/젠더>여성학이론",
+      "publisher": "오월의봄",
+      "salesPoint": 13410,
+      "adult": false,
+      "fixedPrice": true,
+      "customerReviewRank": 7,
+      "bestRank": 3,
+      "subInfo": {},
+      "reviewList": [
+        {
+          "reviewRank": 10,
+          "title": "[100자평]강추 편집장이란 분이 이런 책이나 추천하고",
+          "writer": "rendevous",
+          "link": "https://blog.aladin.co.kr/740029108/15067594?partner=openAPI"
+        },
+        {
+          "reviewRank": 2,
+          "title": "[100자평]비추 편집장이란 사람이 이런책이나 추천하고",
+          "writer": "epikhigh00v",
+          "link": "https://blog.aladin.co.kr/789776140/15065351?partner=openAPI"
+        },
+        {
+          "reviewRank": 10,
+          "title": "[100자평]관심도서",
+          "writer": "버섯",
+          "link": "https://blog.aladin.co.kr/exile/15023220?partner=openAPI"
+        }
+      ]
+    },
+    {
+      "title": "화성과 나 - 배명훈 연작소설집",
+      "link": "http://www.aladin.co.kr/shop/wproduct.aspx?ItemId=328778710&amp;partner=openAPI&amp;start=api",
+      "author": "배명훈 (지은이)",
+      "pubDate": "2023-11-14",
+      "description": "“‘배명훈 SF’라는 말로밖에 설명할 수 없는”(정소연 소설가), “자신이 무엇을 쓰는지 정확히 아는 사람”(SF평론가 심완선), 2020년대 한국 SF의 황금기를 이끈 주역 중 한 명인 작가 배명훈이 국내 최초로 화성 이주를 주제로 삼은 연작소설집 《화성과 나》(래빗홀, 2023)를 선보인다.",
+      "isbn": "K572936116",
+      "isbn13": "9791168341432",
+      "itemId": 328778710,
+      "priceSales": 14220,
+      "priceStandard": 15800,
+      "mallType": "BOOK",
+      "stockStatus": "",
+      "mileage": 790,
+      "cover": "https://image.aladin.co.kr/product/32877/87/coversum/k572936116_1.jpg",
+      "categoryId": 89482,
+      "categoryName": "국내도서>소설/시/희곡>과학소설(SF)>한국 과학소설",
+      "publisher": "래빗홀",
+      "salesPoint": 7760,
+      "adult": false,
+      "fixedPrice": true,
+      "customerReviewRank": 10,
+      "bestRank": 4,
+      "subInfo": {},
+      "reviewList": [
+        {
+          "reviewRank": 10,
+          "title": "[마이리뷰]결국 사람이다.",
+          "writer": "쭘마",
+          "link": "https://blog.aladin.co.kr/714092176/15082878?partner=openAPI"
+        },
+        {
+          "reviewRank": 10,
+          "title": "[마이리뷰]화성과 나",
+          "writer": "쿠쥬니",
+          "link": "https://blog.aladin.co.kr/780142101/15082294?partner=openAPI"
+        },
+        {
+          "reviewRank": 10,
+          "title": "[마이리뷰]지구와 화성에 사는 사람들의 이..",
+          "writer": "댕구르르",
+          "link": "https://blog.aladin.co.kr/booknchat/15081766?partner=openAPI"
+        },
+        {
+          "reviewRank": 10,
+          "title": "[마이리뷰][마이리뷰] 화성과 나",
+          "writer": "jjinyyeop_n",
+          "link": "https://blog.aladin.co.kr/midal56/15081722?partner=openAPI"
+        },
+        {
+          "reviewRank": 10,
+          "title": "[마이리뷰]화성이주의 현실",
+          "writer": "우아한하루",
+          "link": "https://blog.aladin.co.kr/784047243/15081700?partner=openAPI"
+        }
+      ]
+    },
+    {
+      "title": "타인의 고통에 응답하는 공부",
+      "link": "http://www.aladin.co.kr/shop/wproduct.aspx?ItemId=328754598&amp;partner=openAPI&amp;start=api",
+      "author": "김승섭 (지은이)",
+      "pubDate": "2023-11-22",
+      "description": "소수자의 건강에 대한 사회적 책임을 질문해 온 김승섭이 그간의 연구를 소개하는 공부의 기록이자, 그 과정에서 겪은 시행착오를 고백하는 분투의 기록이다.",
+      "isbn": "8962625814",
+      "isbn13": "9788962625813",
+      "itemId": 328754598,
+      "priceSales": 19800,
+      "priceStandard": 22000,
+      "mallType": "BOOK",
+      "stockStatus": "",
+      "mileage": 1100,
+      "cover": "https://image.aladin.co.kr/product/32875/45/coversum/8962625814_1.jpg",
+      "categoryId": 51378,
+      "categoryName": "국내도서>인문학>교양 인문학",
+      "publisher": "동아시아",
+      "salesPoint": 21280,
+      "adult": false,
+      "fixedPrice": true,
+      "customerReviewRank": 10,
+      "bestRank": 5,
+      "subInfo": {},
+      "reviewList": [
+        {
+          "reviewRank": 10,
+          "title": "[100자평]인간으로 태어나 공부를 한다면 이런 방향으로 해야 하지...",
+          "writer": "잠자냥",
+          "link": "https://blog.aladin.co.kr/socker/15078563?partner=openAPI"
+        },
+        {
+          "reviewRank": 10,
+          "title": "[100자평]내가 어찌 해 볼 도리 없이 너무 거대한 세상의 차별과...",
+          "writer": "아르크",
+          "link": "https://blog.aladin.co.kr/777644161/15075699?partner=openAPI"
+        },
+        {
+          "reviewRank": 10,
+          "title": "[마이리뷰]한국 사회의 ‘주삿바늘‘은 무엇..",
+          "writer": "버섯",
+          "link": "https://blog.aladin.co.kr/exile/15074070?partner=openAPI"
+        },
+        {
+          "reviewRank": 10,
+          "title": "[100자평]사람보다 시스템이 주인이 되어가는 세상에서 김승섭의 시...",
+          "writer": "Ajna",
+          "link": "https://blog.aladin.co.kr/711038163/15053442?partner=openAPI"
+        }
+      ]
+    },
+    {
+      "title": "깊은 시간으로부터 - 발아래에 새겨진 수백만 년에 대하여",
+      "link": "http://www.aladin.co.kr/shop/wproduct.aspx?ItemId=329035289&amp;partner=openAPI&amp;start=api",
+      "author": "헬렌 고든 (지은이), 김정은 (옮긴이)",
+      "pubDate": "2023-11-22",
+      "description": "작가이자 기자, 편집자로서 수많은 매체에 과학과 관련된 글을 기고해온 저자 헬렌 고든은 이 책에서 지구의 시간을 엿볼 수 있는 곳들을 직접 탐험하고 그곳의 전문가들과 대화하면서 독자들을 깊은 시간의 현장으로 이끈다.",
+      "isbn": "8972918164",
+      "isbn13": "9788972918165",
+      "itemId": 329035289,
+      "priceSales": 19800,
+      "priceStandard": 22000,
+      "mallType": "BOOK",
+      "stockStatus": "",
+      "mileage": 1100,
+      "cover": "https://image.aladin.co.kr/product/32903/52/coversum/8972918164_1.jpg",
+      "categoryId": 51315,
+      "categoryName": "국내도서>과학>지구과학>지구",
+      "publisher": "까치",
+      "salesPoint": 850,
+      "adult": false,
+      "fixedPrice": true,
+      "customerReviewRank": 0,
+      "bestRank": 6,
+      "subInfo": {},
+      "reviewList": []
+    },
+    {
+      "title": "뇌 2",
+      "link": "http://www.aladin.co.kr/shop/wproduct.aspx?ItemId=326113920&amp;partner=openAPI&amp;start=api",
+      "author": "베르나르 베르베르 (지은이), 이세욱 (옮긴이)",
+      "pubDate": "2023-10-20",
+      "description": "약혼자와 사랑을 나누다 사망한 체스 챔피언의 사인을 기자인 뤼크레스와 이지도르가 추적하면서, 인간에게 최상의 기쁨을 선사한다는 뇌 속 &lt;최후 비밀&gt;에 서서히 다가가는 이야기다. 그 과정에서 두 사람은 &lt;우리는 누구인가&gt;에 대한 답을 찾으려 한다.",
+      "isbn": "8932923655",
+      "isbn13": "9788932923659",
+      "itemId": 326113920,
+      "priceSales": 13320,
+      "priceStandard": 14800,
+      "mallType": "BOOK",
+      "stockStatus": "",
+      "mileage": 740,
+      "cover": "https://image.aladin.co.kr/product/32611/39/coversum/8932923655_1.jpg",
+      "categoryId": 50921,
+      "categoryName": "국내도서>소설/시/희곡>프랑스소설",
+      "publisher": "열린책들",
+      "salesPoint": 815,
+      "adult": false,
+      "fixedPrice": true,
+      "customerReviewRank": 10,
+      "bestRank": 7,
+      "subInfo": {},
+      "reviewList": [
+        {
+          "reviewRank": 10,
+          "title": "[마이리뷰][뇌 2] 우리 머릿속의 보물 ‘최..",
+          "writer": "늘술",
+          "link": "https://blog.aladin.co.kr/728420176/15081582?partner=openAPI"
+        },
+        {
+          "reviewRank": 10,
+          "title": "[100자평]과학적인 측면과 철학적인 요소를 조화롭게 녹여내어 다소...",
+          "writer": "minhuigwak",
+          "link": "https://blog.aladin.co.kr/766334130/15081509?partner=openAPI"
+        },
+        {
+          "reviewRank": 10,
+          "title": "[마이리뷰][마이리뷰] 뇌 2",
+          "writer": "minhuigwak",
+          "link": "https://blog.aladin.co.kr/766334130/15081491?partner=openAPI"
+        },
+        {
+          "reviewRank": 10,
+          "title": "[마이리뷰]뇌 2",
+          "writer": "gazahbs",
+          "link": "https://blog.aladin.co.kr/721747156/15080303?partner=openAPI"
+        },
+        {
+          "reviewRank": 10,
+          "title": "[마이리뷰]뇌 2",
+          "writer": "향기로운이끼",
+          "link": "https://blog.aladin.co.kr/783035146/15080259?partner=openAPI"
+        }
+      ]
+    },
+    {
+      "title": "나는 메트로폴리탄 미술관의 경비원입니다 - 경이로운 세계 속으로 숨어버린 한 남자의 이야기",
+      "link": "http://www.aladin.co.kr/shop/wproduct.aspx?ItemId=328923887&amp;partner=openAPI&amp;start=api",
+      "author": "패트릭 브링리 (지은이), 김희정, 조현주 (옮긴이)",
+      "pubDate": "2023-11-24",
+      "description": "뉴욕 메트로폴리탄 미술관에서 경비원으로 근무했던 패트릭 브링리의 독특하면서도 지적인 회고를 담은 에세이다. 가족의 죽음으로 고통 속에 웅크리고 있던 한 남자가 미술관에서 10년이라는 시간을 보내며 상실감을 극복하고 마침내 세상으로 나아갈 힘을 얻는 여정을 섬세하게 그려냈다.",
+      "isbn": "8901276534",
+      "isbn13": "9788901276533",
+      "itemId": 328923887,
+      "priceSales": 15750,
+      "priceStandard": 17500,
+      "mallType": "BOOK",
+      "stockStatus": "",
+      "mileage": 870,
+      "cover": "https://image.aladin.co.kr/product/32892/38/coversum/8901276534_2.jpg",
+      "categoryId": 51373,
+      "categoryName": "국내도서>에세이>외국에세이",
+      "publisher": "웅진지식하우스",
+      "salesPoint": 5540,
+      "adult": false,
+      "fixedPrice": true,
+      "customerReviewRank": 10,
+      "bestRank": 8,
+      "subInfo": {},
+      "reviewList": [
+        {
+          "reviewRank": 10,
+          "title": "[마이리뷰]가장 경이로운 세계 속으로...",
+          "writer": "spicahyun",
+          "link": "https://blog.aladin.co.kr/718441117/15080789?partner=openAPI"
+        },
+        {
+          "reviewRank": 10,
+          "title": "[마이리뷰]올해 가장 인상깊은 책!!",
+          "writer": "suya",
+          "link": "https://blog.aladin.co.kr/752482145/15080383?partner=openAPI"
+        },
+        {
+          "reviewRank": 10,
+          "title": "[마이리뷰]소소한 일상",
+          "writer": "하얀사과",
+          "link": "https://blog.aladin.co.kr/741313112/15071443?partner=openAPI"
+        },
+        {
+          "reviewRank": 10,
+          "title": "[100자평]뉴욕 메트로폴리탄 미술관의 경비원으로 두 번째 삶을 살...",
+          "writer": "쎄인트saint",
+          "link": "https://blog.aladin.co.kr/nurimaru/15069748?partner=openAPI"
+        }
+      ]
+    }
+  ]
+}

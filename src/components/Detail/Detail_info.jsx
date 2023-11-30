@@ -1,5 +1,8 @@
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import { motion, useTransform, useViewportScroll } from "framer-motion";
 import React, { useEffect, useRef } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
 const SortSection = styled(motion.section)`
@@ -69,6 +72,24 @@ const Detail_info = () => {
     scrollY.onChange(() => console.log(scrollY.get(), scrollYProgress.get()));
     console.log(sectionRef.current.offsetTop);
   }, []); */
+  const { id } = useParams();
+  const {
+    isPending: detailPending,
+    error: detailError,
+    data: detailData,
+  } = useQuery({
+    queryKey: ["detailData"],
+    queryFn: () =>
+      axios
+        .get(
+          `https://dapi.kakao.com/v3/search/book?target=isbn&query='${id}'`,
+          {
+            headers: "Authorization: KakaoAK 21cabe3d0ca37c4bab8dea7ce9d95589",
+          }
+        )
+        .then((result) => result.data.documents[0]),
+  });
+
   return (
     <>
       <SortSection>
@@ -80,11 +101,7 @@ const Detail_info = () => {
         <h1>책소개</h1>
         <hr />
         <span>
-          “내가 임신하고 중절하는 걸 도와주면 1억엔을 줄게요” 2023년 일본을
-          강타한, 중증 장애 당사자의 파격적 자전소설 아쿠타카와상이 만장일치로
-          선정한 최초의 중증 장애인 수상자 출간과 동시에 판매부수 30만 부를
-          돌파하며 일본을 뒤흔든 화제작 지난 7월 19일에 열린 제169회
-          아쿠타가와상 시상식.
+          {detailData?.contents}
           <br /> <br />
           일본 최고 권위 문학상답게 현지 언론들은 앞다퉈 시상식장으로
           몰려들었고, 수상자가 무대에 오르자 평소와 다른 풍경에 기자들은 홀린 듯

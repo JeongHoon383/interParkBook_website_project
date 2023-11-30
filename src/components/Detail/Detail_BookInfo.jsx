@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { GoSearch } from "react-icons/go";
 import { MdKeyboardArrowRight } from "react-icons/md";
@@ -6,10 +6,16 @@ import { BiSolidCoupon } from "react-icons/bi";
 import { CiCircleQuestion } from "react-icons/ci";
 import Detail_count from "./Detail_count";
 import { CiHeart } from "react-icons/ci";
+import { IoBookOutline } from "react-icons/io5";
+import { FaHeart } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { FaTwitterSquare } from "react-icons/fa";
+import { FaFacebookSquare } from "react-icons/fa";
 const InfoContainer = styled.div`
   display: flex;
   margin: 0 auto;
   .cover_section {
+    margin-top: 30px;
     flex: 0.25;
     figure {
       width: 200px;
@@ -51,6 +57,29 @@ const InfoContainer = styled.div`
 `;
 const InfoCaption = styled.div`
   width: 100%;
+
+  .share {
+    em {
+      color: rgba(0, 0, 0, 0.4);
+    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+
+    svg {
+      width: 20px;
+      height: 20px;
+      color: #65ccec;
+      cursor: pointer;
+    }
+    .facebook_icon {
+      svg {
+        color: #6680b8;
+      }
+    }
+  }
+
   &:first-of-type {
     margin-bottom: 50px;
   }
@@ -58,7 +87,7 @@ const InfoCaption = styled.div`
   padding: 10px;
   margin: 5px auto;
   text-align: center;
-  font-size: 10px;
+  font-size: 13px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -68,8 +97,34 @@ const InfoCaption = styled.div`
   }
   &.preview {
     margin: 10px auto;
-    border: 1px solid #c6c9cd;
-    background: #fafafa;
+    width: 208px;
+    height: 36px;
+    margin-top: 28px;
+    margin-bottom: 20px;
+    padding: 0;
+    color: #666;
+    .first {
+      border-right: none;
+    }
+    div {
+      border: 1px solid #666;
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        font-size: 0.8rem;
+        font-weight: bold;
+        * {
+          margin: 0 2px;
+        }
+      }
+    }
   }
   & .line {
     color: #c6c9cd;
@@ -79,7 +134,7 @@ const PriceSection = styled.div`
   height: 90%;
   padding: 10px;
   .delivery {
-    margin-top: 10px;
+    margin-top: 20px;
     span {
       margin-left: 5px;
     }
@@ -127,7 +182,7 @@ const PriceSection = styled.div`
   }
   em {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
     span {
@@ -140,7 +195,8 @@ const PriceSection = styled.div`
     padding: 7px 10px;
     width: 180px;
     height: 80px;
-    margin-bottom: 20px;
+    margin-top: 13px;
+
     .red_sale {
       margin: 7px 0;
       display: flex;
@@ -198,6 +254,7 @@ const CartArea = styled.div`
     background-color: #707070;
   }
   .like {
+    cursor: pointer;
     width: 40px;
     height: 40px;
     border: 1px solid #717171;
@@ -209,53 +266,83 @@ const CartArea = styled.div`
   }
 `;
 
-const Detail_BookInfo = ({ data }) => {
+const Detail_BookInfo = ({ data, detailData }) => {
+  let days = ["일", "월", "화", "수", "목", "금", "토"];
+  const [click, setClick] = useState(false);
   return (
     <>
       <InfoContainer>
         <div className="cover_section">
           <figure>
-            <img src={data?.cover && data.cover} alt="" />
+            <img src={detailData?.thumbnail} alt="" />
           </figure>
           <InfoCaption className="preview">
-            <GoSearch /> 미리보기
+            <div className="first">
+              <Link to={detailData?.url}>
+                <span>
+                  <GoSearch /> 크게보기
+                </span>
+              </Link>
+            </div>
+
+            <div>
+              <Link to={detailData?.url}>
+                <span>
+                  <IoBookOutline /> 미리보기
+                </span>
+              </Link>
+            </div>
           </InfoCaption>
           <InfoCaption>
-            <span>베스트셀러 {data?.bestRank && data.bestRank}위</span>
+            <span style={{ color: "rgba(0,0,0,0.4)" }}>베스트셀러 1위</span>
             <div className="line">l</div>
-            <span>
-              독자리뷰 {data?.customerReviewRank && data.customerReviewRank}위
+            <span style={{ color: "rgba(0,0,0,0.4)" }}>독자리뷰 10위</span>
+          </InfoCaption>
+          <InfoCaption>
+            <span style={{ color: "rgba(0,0,0,0.4)" }}>판매지수</span>
+          </InfoCaption>
+          <InfoCaption>
+            <span className="share">
+              <em>공유하기</em>
+              <em>
+                <FaTwitterSquare />
+              </em>
+              <em className="facebook_icon">
+                <FaFacebookSquare />
+              </em>
             </span>
-          </InfoCaption>
-          <InfoCaption>
-            <span>판매지수</span>
-          </InfoCaption>
-          <InfoCaption>
-            <span>공유</span>
           </InfoCaption>
         </div>
         <div className="info_section">
           <div className="info_publisher">
-            <span>저 : 송영관&nbsp;</span>
+            <span>저 : {detailData?.authors[0]}&nbsp;</span>
             <span>사진 : 류정훈&nbsp;</span>
-            <span>출판사 : 위즈덤하우스&nbsp;</span>
-            <span>발행 : 2023년 11월 15일&nbsp;</span>
-            <span className="last_span">ISBN : 9791171710102&nbsp;</span>
+            <span>출판사 : {detailData?.publisher}&nbsp;</span>
+            <span>
+              발행 : {detailData?.datetime.split("-")[0]}년{" "}
+              {detailData?.datetime.split("-")[1]}월{" "}
+              {detailData?.datetime.split("-")[2].slice(0, 2)}일&nbsp;
+            </span>
+            <span className="last_span">
+              ISBN : {detailData?.isbn.split(" ")[1]}&nbsp;
+            </span>
           </div>
           <PriceSection>
             <em>
               <strong>정가</strong>
-              <span> 22,000원</span>
+              <span> {detailData?.price.toLocaleString()}원</span>
             </em>
             <em>
               <div className="red_box">
                 <strong>새책</strong>
                 <em className="red_sale">
-                  <h1>19,800원</h1>
+                  <h1>{detailData?.sale_price.toLocaleString()}원</h1>
                   <span>(10%할인)</span>
                 </em>
                 <em>
-                  <span>1,100P (5%적립)</span>
+                  <span>
+                    {(detailData?.sale_price * 0.05).toLocaleString()}P (5%적립)
+                  </span>
                 </em>
               </div>
             </em>
@@ -272,7 +359,11 @@ const Detail_BookInfo = ({ data }) => {
             </em>
             <em className="point">
               <strong>적립혜택</strong>
-              <span>1,100P &nbsp;(5%적립)</span>
+              <span>
+                {" "}
+                {(detailData?.sale_price * 0.05).toLocaleString()}P
+                &nbsp;(5%적립)
+              </span>
               <span className="last">
                 5만원이상 주문시 2천P+등급별 최대 1.5%적립{" "}
               </span>
@@ -291,12 +382,17 @@ const Detail_BookInfo = ({ data }) => {
               <span>3천원 중복할인 쿠폰</span>
             </em>
 
-            <AdBox>인터파크 도서 X 더조은컴퓨터 최대 9천원</AdBox>
+            <AdBox style={{ marginTop: 20 }}>
+              인터파크 도서 X 더조은컴퓨터 최대 9천원
+            </AdBox>
 
             <em className="delivery">
               <strong>배송정보</strong>
               <span>예약판매</span>
-              <span>11/24(금) 이후 발송 예정</span>
+              <span>
+                {new Date().getMonth() + 1}/{new Date().getDate()}(
+                {days[new Date().getDay()]}) 이후 발송 예정
+              </span>
               <span className="last">
                 무료배송{" "}
                 <CiCircleQuestion style={{ display: "inline-block" }} />
@@ -309,8 +405,13 @@ const Detail_BookInfo = ({ data }) => {
             <CartArea>
               <div className="cart">북카트담기</div>
               <div className="buy">바로구매</div>
-              <div className="like">
-                <CiHeart />
+              <div className="like" onClick={() => setClick((prev) => !prev)}>
+                <FaHeart
+                  strokeWidth="8"
+                  pathLength="1"
+                  stroke="rgba(0,0,0,1)"
+                  fill={click ? "#ff9c46" : "rgba(255,255,255,0)"}
+                />
               </div>
             </CartArea>
           </PriceSection>

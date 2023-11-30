@@ -14,17 +14,19 @@ const CountBox = styled.span`
     display: inline-block;
     width: 40px;
     height: 100%;
-    border: 1px solid black;
+    border: 1px solid lightgray;
     font-size: 12px;
     font-weight: 800;
     border-left: none;
     border-right: none;
+    color: lightgray;
   }
   button {
     height: 100%;
-    border: 1px solid black;
+    border: 1px solid lightgray;
     background: white;
     width: 20px;
+    color: lightgray;
   }
 `;
 

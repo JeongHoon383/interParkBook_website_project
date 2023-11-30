@@ -2,11 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Div = styled.div`
-  margin: 30px 0;
+  margin: 24px 0;
 `;
 
 const Img = styled.img`
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
 `;
 
 export default function Main_Advertise2() {
