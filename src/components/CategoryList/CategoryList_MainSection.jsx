@@ -54,9 +54,6 @@ export default function CategoryList_MainSection() {
 
   return (
     <MainSection>
-      {
-        checkList.map(list => <div>{list}</div>)
-      }
       <CategoryList_Title title={data.searchCategoryName} />
       <CategoryList_SubCaNav />
       <CategoryList_Sort
