@@ -9,13 +9,15 @@ export default function BookContent(book) {
       <div className="booktitle"><b>{book.title} {book.comment}</b></div>
       <div className="bookauthor">{book.author} / {book.company} </div>
       <br></br>
-      <div className="bookprice">{book.price}원 {book.point}원</div>
+      <div className="bookprice">{book.price}원 {book.point}</div>
       
       <div><img src="" alt="" /></div>
 
 
-        <Bookstar/>
-        <div className="booksaleindex">판매지수 {book.sale_index} </div>
+       <div className="bookline">
+          <Bookstar className="bookstar"/>
+          <div className="booksaleindex">판매지수 {book.sale_index} </div>
+       </div>
 
     </div>
   );
