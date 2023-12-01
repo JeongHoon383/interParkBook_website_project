@@ -76,23 +76,24 @@ const Second_banner_content = (props) => {
     }).then((result) => {
       setBanner(result.data)
     })
-  })
+  },[])
+
 
   return (
     <SecondBanner>
       <div className="banner_left">
         <div>
-          <img className="banner_img" src={banner && banner[0].img} alt="" />
+          <img className="banner_img" src={banner[0] && banner[0].img} alt="" />
         </div>
         <div className="banner_text">
           <div className="banner_text_icon">인터파크의 선택<span><IoIosArrowForward/></span></div>
-          <div className="banner_semiTitle">{props.active === "1" ? banner[0].semiTitle : ''}</div>
-          <div className="banner_content">{props.active === "1" ? banner[0].content : ''}</div>
-          <div className="banner_title">{props.active === "1" ? banner[0].title : ''}</div>
-          <div className="banner_author">{props.active === "1" ? banner[0].author : ''}</div>
+          <div className="banner_semiTitle">{banner[0] && props.active === "1" ? banner[0].semiTitle : ''}</div>
+          <div className="banner_content">{banner[0] && props.active === "1" ? banner[0].content : ''}</div>
+          <div className="banner_title">{banner[0] && props.active === "1" ? banner[0].title : ''}</div>
+          <div className="banner_author">{banner[0] && props.active === "1" ? banner[0].author : ''}</div>
           <div className="banner_price">
-            <span>{props.active === "1" ? banner[0].price : ''}</span>
-            <span>{props.active === "1" ? banner[0].point : ''}</span>
+            <span>{banner[0] && props.active === "1" ? banner[0].price : ''}</span>
+            <span>{banner[0] && props.active === "1" ? banner[0].point : ''}</span>
           </div>
         </div>
       </div>
