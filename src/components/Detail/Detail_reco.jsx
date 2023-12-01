@@ -8,6 +8,7 @@ const Title = styled.div`
   margin-top: 40px;
   height: 40px;
   font-weight: bold;
+
   div {
     border-top: 1px solid lightgray;
     margin-top: 15px;
@@ -64,7 +65,7 @@ const Detail_reco = () => {
         )
         .then((result) => result.data.documents),
   });
-  console.log(enData);
+
   return (
     <>
       {novelPending ? (

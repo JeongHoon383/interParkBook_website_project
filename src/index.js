@@ -16,6 +16,7 @@ import Detail_event from "./components/Detail/Detail_event";
 import Detail_reco from "./components/Detail/Detail_reco";
 import Detail_review from "./components/Detail/Detail_review";
 import Detail_change from "./components/Detail/Detail_change";
+import Cart from "./Pages/Cart";
 const GlobalStyle = createGlobalStyle`
 
 html, body, div, span, applet, object, iframe,
@@ -190,6 +191,10 @@ const router = createBrowserRouter([
       {
         path: "/search",
         element: <div>search</div>,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
   },

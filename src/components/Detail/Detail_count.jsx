@@ -7,7 +7,6 @@ const CountBox = styled.span`
   height: 20px;
   display: flex;
   align-items: flex-start;
-
   input {
     width: 30px;
     text-align: center;
