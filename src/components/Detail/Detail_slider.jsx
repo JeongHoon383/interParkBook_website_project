@@ -7,10 +7,12 @@ import { MdArrowForwardIos } from "react-icons/md";
 const Wrapper = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  padding: 20px 0;
+
   gap: 5px;
   position: absolute;
-  width: 100%;
+  right: 0;
+  margin: 0 auto;
+  width: 90%;
   left: 0;
 `;
 
@@ -28,9 +30,6 @@ const Slide = styled(motion.div)`
 const Img = styled.img`
   width: 100%;
   height: 100%;
-  /*   background-image: url("https://image.aladin.co.kr/product/32806/58/cover/k832936705_1.jpg");
-  background-position: center center;
-  background-size: cover; */
 `;
 const Title = styled.h3`
   margin-top: 5px;
@@ -39,25 +38,25 @@ const Title = styled.h3`
 `;
 const wrapperVars = {
   start: {
-    x: "100%",
+    x: window.innerWidth,
   },
   end: {
     x: 0,
   },
   exit: {
-    x: "-100%",
+    x: -window.innerWidth,
   },
 };
 
 const wrapperVars2 = {
   start: {
-    x: "-100%",
+    x: -window.innerWidth,
   },
   end: {
     x: 0,
   },
   exit: {
-    x: "100%",
+    x: window.innerWidth,
   },
 };
 
@@ -73,7 +72,7 @@ const LeftButton = styled.button`
   top: 50%;
   transform: translateY(-50%);
 `;
-const Detail_slider = () => {
+const Detail_slider = ({ data }) => {
   const [index, setIndex] = useState(0);
   const [leave, setLeave] = useState(false);
   const [Right, setRight] = useState();
@@ -100,7 +99,8 @@ const Detail_slider = () => {
   return (
     <div
       style={{
-        overflow: "hidden",
+        overflowX: "hidden",
+        overflowY: "clip",
         height: "220px",
         position: "relative",
       }}>
@@ -110,20 +110,19 @@ const Detail_slider = () => {
           initial="start"
           animate="end"
           exit="exit"
-          transition={{ duration: 1, type: "tween" }}
+          transition={{ duration: 2, type: "spring" }}
           key={index}>
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-            .slice(index * offset, index * offset + offset)
-            .map((v, i) => (
-              <Slide key={i}>
-                <figure>
-                  <Img
-                    src="https://image.aladin.co.kr/product/32806/58/cover/k832936705_1.jpg"
-                    key={i}></Img>
-                </figure>
-                <Title>타이틀</Title>
-              </Slide>
-            ))}
+          {data &&
+            data
+              .slice(index * offset, index * offset + offset)
+              .map((books, i) => (
+                <Slide key={i}>
+                  <figure>
+                    <Img src={books?.thumbnail}></Img>
+                  </figure>
+                  <Title>{books?.title}</Title>
+                </Slide>
+              ))}
         </Wrapper>{" "}
         <RightButton type="button" onClick={() => handleNext()}>
           <MdArrowForwardIos
@@ -132,7 +131,9 @@ const Detail_slider = () => {
               width: "34px",
               height: "50px",
               position: "relative",
-              right: "-10px",
+              right: "-7px",
+              top: "50%",
+              transform: "translateY(-50%)",
               zIndex: 1,
             }}
           />
@@ -144,7 +145,9 @@ const Detail_slider = () => {
               width: "34px",
               height: "50px",
               position: "relative",
-              left: "-10px",
+              left: "-7px",
+              top: "50%",
+              transform: "translateY(-50%)",
               zIndex: 1,
             }}
           />

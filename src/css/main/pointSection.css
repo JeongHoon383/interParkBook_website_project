@@ -1,0 +1,184 @@
+.pointSection {
+  display: flex;
+  justify-content: space-between;
+  margin: 66px 0;
+}
+
+.blogBestHeader h3 {
+  font-family: 'YES24GothicB';
+  font-size: 1.2em;
+  margin-bottom: 6px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #c9c9c9;
+}
+
+.blogBestHeader span:first-child {
+  color: #e66a57;
+}
+
+.blogBestHeader span:last-of-type {
+  color: var(--default);
+}
+
+.blogBestHeader a {
+  margin-left: 12px;
+  font-size: 0.5em;
+  color: var(--default);
+}
+
+.blogBestHeader a:hover {
+  text-decoration: underline;
+}
+
+.blogBestHeader a::after {
+  content: '▶';
+  margin-left: 3px;
+  font-size: 0.3rem;
+}
+
+.blogBest {
+  width: 40%;
+}
+
+.musicItem {
+  width: 55%;
+}
+
+.categoryTabs {
+  padding-bottom: 22px;
+  border-bottom: 1px solid #c9c9c9;
+}
+
+.musicTabs .musicTabWrap {
+  display: flex;
+  align-items: center;
+  font-family: 'YES24GothicB';
+  color: var(--hover);
+  font-size: 0.9em;
+  letter-spacing: -1px;
+  background-color: #f8f8f8;
+}
+
+.musicTabs .musicTabWrap .catTabLi {
+  width: 120px;
+  padding-top: 4px;
+  padding-bottom: 9px;
+  border-right: 1px solid #d8d8d8;
+  cursor: pointer;
+  text-align: center;
+}
+
+.clicked {
+  background-color: #fff;
+  border-bottom: none;
+  color: #e66a57;
+}
+
+.tabIcon {
+  font-size: 1.4em;
+}
+
+.tabIcon svg {
+  margin: 0 auto;
+}
+
+.slick-slide img {
+  width: 100%;
+}
+
+.slick-slide .blogBestImgBox {
+  width: 85px;
+  height: 120px;
+  display: inline-block;
+  overflow: hidden;
+  margin-bottom: 22px;
+  border: 1px solid #c9c9c9;
+}
+
+.blogBestText {
+  margin-left: 8px;
+  margin-top: 10px;
+  word-spacing: -1px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.starRateWrap {
+  width: 85px;
+  height: 15px;
+  position: relative;
+  display: inline-block;
+  background: url('../../../public/img/img_star.png') repeat-x;
+}
+
+.starRateWrap .starRate {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 15px;
+  background: url('../../../public/img/img_star.png') repeat-x 0 -15px;
+}
+
+.starRateWrap .customerReviewRank {
+  position: absolute;
+  margin-left: 5px;
+  left: 100%;
+  font-family: 'YES24GothicB';
+  color: #e66a57
+}
+
+.blogBestTitle,
+.priceStandard,
+.priceSales {
+  font-family: 'YES24GothicB';
+}
+
+.blogBestTitle {
+  margin: 8px 0;
+  font-size: 0.8em;
+  color: var(--default);
+}
+
+.priceStandard {
+  font-size: 0.7em;
+  text-decoration: line-through;
+  color: #c9c9c9;
+}
+
+.priceSales {
+  font-size: 0.7em;
+  color: var(--default);
+}
+
+.musicImgBox,
+.dvdImgBox {
+  box-sizing: border-box;
+  width: 85px;
+  height: 85px;
+  margin: 30px auto 15px auto;
+}
+
+.musicImgBox img,
+.dvdImgBox img {
+  width: 100%;
+  height: 100%;
+}
+
+.musicTitle,
+.dvdTitle {
+  font-family: 'YES24GothicB';
+  font-size: 0.7em;
+  width: 100px;
+  height: 80px;
+  text-align: center;
+  margin: 0 auto;
+  color: var(--default);
+}
+
+.musicPrice,
+.dvdPrice {
+  font-size: 0.7em;
+  font-weight: bold;
+  text-align: center;
+  color: var(--default);
+}

@@ -5,18 +5,18 @@ import Main_MainBannerIssue from './Main_MainBannerIssue';
 import styled from 'styled-components';
 
 const Pre = styled.div`
-  width: 30px;
-  height: 30px;
+  width: 60px;
+  height: 60px;
   position: absolute;
-  left: 3%;
+  left: 0.2%;
   z-index: 3;
 `;
 
 const NextTo = styled.div`
-  width: 30px;
-  height: 30px;
+  width: 60px;
+  height: 60px;
   position: absolute;
-  right: 3%;
+  right: 0.2%;
   z-index: 3;
 `;
 
@@ -28,6 +28,8 @@ const StyledSlider = styled(Slider)`
   width: 100%;
   margin: 0 auto;
   background-color: rgb(248, 248, 248);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 `;
 
 export default function Main_MainBannerTab() {

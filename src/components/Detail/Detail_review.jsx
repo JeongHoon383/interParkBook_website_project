@@ -4,6 +4,14 @@ import { RiKakaoTalkFill } from "react-icons/ri";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { AnimatePresence, motion } from "framer-motion";
 import { IoIosArrowDown } from "react-icons/io";
+import { AiTwotoneLike } from "react-icons/ai";
+import {
+  MdArrowBackIos,
+  MdArrowForwardIos,
+  MdKeyboardDoubleArrowLeft,
+  MdKeyboardDoubleArrowRight,
+} from "react-icons/md";
+import { useForm } from "react-hook-form";
 
 const Wrapper = styled.div`
   position: relative;
@@ -150,6 +158,7 @@ const SortBox = styled.div`
 `;
 
 const Re_title = styled.div`
+  padding: 10px 0;
   font-size: 20px;
   font-weight: bold;
   padding-left: 20px;
@@ -174,10 +183,7 @@ const UserOutput = styled.div`
   height: 145px;
   .content {
     margin-top: 20px;
-    overflow: hidden;
-    text-overflow: ellipsis;
     white-space: nowrap;
-    height: 70px;
     line-height: 120%;
     word-spacing: 5px;
     font-size: 13px;
@@ -207,6 +213,7 @@ const UserOutput = styled.div`
       display: flex;
       align-items: center;
       margin-top: 20px;
+
       li {
         margin: 0 10px;
       }
@@ -219,12 +226,135 @@ const Extend = styled.div`
   align-items: center;
   justify-content: flex-end;
   font-size: 12px;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
   span:nth-child(2) {
     color: #ff9c46;
     font-weight: bold;
   }
 `;
 
+const PageContainer = styled.div`
+  height: 37px;
+  background: #fafafa;
+  border-top: 1px solid black;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  margin-bottom: 10px;
+  .number {
+    background-color: #555555;
+    color: #ffffe4;
+  }
+  div {
+    width: 100%;
+    height: 100%;
+    ul {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 12px;
+      li {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 45px;
+        height: 37px;
+        cursor: pointer;
+      }
+    }
+  }
+`;
+const ReviewContent = styled.div`
+  padding: 0 15px;
+  .title {
+    margin: 20px 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    div:first-child {
+      font-size: 15px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      em {
+        color: var(--main);
+        display: flex;
+        align-items: center;
+      }
+    }
+    div:last-child {
+      ul {
+        display: flex;
+        align-items: center;
+        li:first-child::after {
+          content: "|";
+          margin: 0 5px;
+        }
+      }
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.4);
+    }
+  } //title
+  .content {
+    font-size: 13px;
+    word-spacing: 4px;
+    line-height: 110%;
+  }
+  .comment {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    ul {
+      display: flex;
+      align-items: center;
+      font-size: 12px;
+
+      li::after {
+        content: "|";
+        margin: 0 10px;
+        color: rgba(0, 0, 0, 0.4);
+      }
+      li:last-child {
+        background-color: #949494;
+        font-size: 11px;
+        padding: 3px 5px;
+        box-sizing: content-box;
+        width: 55px;
+        display: flex;
+        align-items: center;
+        color: rgba(255, 255, 255, 1);
+        span {
+          margin-left: 2px;
+        }
+      }
+      li:last-child::after {
+        content: "";
+        margin: 0;
+        color: transparent;
+      }
+    }
+  }
+  .extend {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    span {
+      margin-left: 5px;
+    }
+    span:last-child {
+      color: var(--main);
+    }
+  }
+`;
 const Detail_review = () => {
   const [star, setStar] = useState(1);
   const [toggle, setToggle] = useState(false);
@@ -232,6 +362,21 @@ const Detail_review = () => {
   const handleClick = () => {
     setClick((click) => !click);
   };
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm();
+
+  const onValid = (data) => {
+    setValue("title", "");
+    setValue("content", "");
+    setValue("point", "1");
+
+    console.log(data);
+  };
+
   return (
     <Wrapper>
       {toggle === false && (
@@ -245,11 +390,16 @@ const Detail_review = () => {
       )}
       <AnimatePresence>
         {toggle === true ? (
-          <Form variants={formVars} initial="start" animate="end" exit="exit">
+          <Form
+            onSubmit={handleSubmit(onValid)}
+            variants={formVars}
+            initial="start"
+            animate="end"
+            exit="exit">
             <fieldset>
               <legend>
                 <h1>리뷰 작성</h1>{" "}
-                <RiKakaoTalkFill style={{ fontSize: "20px" }} />{" "}
+                <RiKakaoTalkFill style={{ fontSize: "20px" }} />
                 <CloseButton
                   layoutId="tog"
                   onClick={() => setToggle(false)}
@@ -260,12 +410,18 @@ const Detail_review = () => {
 
               <div className="title">
                 <label htmlFor=""></label>
-                <input placeholder="제목을 입력해주세요.." type="text" />{" "}
+                <input
+                  {...register("title", { required: true })}
+                  placeholder="제목을 입력해주세요.."
+                  type="text"
+                />
+
                 <Evaluation>
                   <select
-                    onChange={(e) => setStar(e.currentTarget.value)}
+                    {...register("point", { required: true })}
+                    onChange={(e) => setStar(Number(e.currentTarget.value))}
                     name="star"
-                    id="">
+                    id="star">
                     <option value="1">1점</option>
                     <option value="2">2점</option>
                     <option value="3">3점</option>
@@ -321,9 +477,14 @@ const Detail_review = () => {
                   </Star>
                 </Evaluation>
               </div>
+
               <div className="content">
                 <label htmlFor=""></label>
-                <TextArea type="text" placeholder="내용을 입력해주세요" />
+                <TextArea
+                  {...register("content", { required: true })}
+                  type="text"
+                  placeholder="내용을 입력해주세요"
+                />
               </div>
               <SubmitButton type="submit">글작성</SubmitButton>
             </fieldset>
@@ -332,7 +493,7 @@ const Detail_review = () => {
       </AnimatePresence>
       <Review>
         <Re_title>
-          리뷰{" "}
+          리뷰
           <div className="star">
             <AiFillStar />
             <AiFillStar />
@@ -348,48 +509,73 @@ const Detail_review = () => {
             <li>제목순</li>
           </ul>
         </SortBox>
-        <div>
-          <UserOutput>
+        <ReviewContent>
+          <div className="title">
+            <div>
+              <em>
+                <AiFillStar />
+                <AiFillStar />
+                <AiFillStar />
+                <AiFillStar />
+                <AiFillStar />
+              </em>
+              마흔에 읽은 쇼펜하우어
+            </div>
             <div>
               <ul>
-                <li>
-                  <AiFillStar />
-                  <AiFillStar />
-                  <AiFillStar />
-                  <AiFillStar />
-                  <AiFillStar />
-                </li>
-                <li>마흔에 읽는 쇼펜하우어</li>
-              </ul>
-              <ul>
-                <li>아이디</li>
-                <li>2023/09/21</li>
+                <li>qwer12**</li>
+                <li>2023/11/23</li>
               </ul>
             </div>
-            <div className="content">
-              역사책을 좋아하는 나로썬 이런 부류의 책은 관심을 갖지 못했다.
-              우연히 유튜브 알고리즘으로 마흔의 읽는 쇼펜 하우어 책을
-              알게됐는데, 그야 말로 충격이었다. 잠언 형식처럼 사회생활에 꼭
-              필요한 책이란 걸 알게되 당장 구입했다. 책가격은 생각보다
-              비싼편이지만 역사책을 좋아하는 나로썬 이런 부류의 책은 관심을 갖지
-              못했다. 우연히 유튜브 알고리즘으로 마흔의 읽는 쇼펜 하우어 책을
-              알게됐는데, 그야 말로 충격이었다. 잠언 형식처럼 사회생활에 꼭
-              필요한 책이란 걸 알게되 당장 구입했다. 책가격은 생각보다
-              비싼편이지만 역사책을 좋아하는 나로썬 이런 부류의 책은 관심을 갖지
-              못했다. 우연히 유튜브 알고리즘으로 마흔의 읽는 쇼펜 하우어 책을
-              알게됐는데, 그야 말로 충격이었다. 잠언 형식처럼 사회생활에 꼭
-              필요한 책이란 걸 알게되 당장 구입했다. 책가격은 생각보다
-              비싼편이지만
-            </div>
-            <Extend onClick={handleClick}>
+          </div>
+          <div className="content">
+            최근 관심 있는 독서 분야인 철학 관련 도서를 읽을 기회가 생겼다.
+            쇼펜하우어 정말 유명한 철학가지만, 제대로 읽어보고 알아본 적은
+            없었다. 쇼펜하우어 철학에 대해 자세히 알아볼 수
+          </div>
+          <div className="comment">
+            <ul>
+              <li>댓글(0)</li>
+              <li>추천(0)</li>
+              <li>
+                <AiTwotoneLike />
+                <span>추천하기</span>
+              </li>
+            </ul>
+            <div onClick={handleClick} className="extend">
               <span>펼쳐보기</span>
-              <span>
+              <span
+                style={{
+                  transform: click ? "rotate(180deg)" : "rotate(0deg)",
+                }}>
                 <IoIosArrowDown />
               </span>
-            </Extend>
-          </UserOutput>
-        </div>
-        <div>4</div>
+            </div>
+          </div>
+        </ReviewContent>
+        <PageContainer>
+          <div>
+            <ul>
+              <li>
+                <MdKeyboardDoubleArrowLeft />
+                맨앞
+              </li>
+              <li>
+                <MdArrowBackIos />
+                이전
+              </li>
+              <li className="number">1</li>
+              <li>
+                다음
+                <MdArrowForwardIos />
+              </li>
+              <li>
+                맨뒤
+                <MdKeyboardDoubleArrowRight />
+              </li>
+            </ul>
+          </div>
+        </PageContainer>
       </Review>
     </Wrapper>
   );

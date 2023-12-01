@@ -7,24 +7,25 @@ const CountBox = styled.span`
   height: 20px;
   display: flex;
   align-items: flex-start;
-
   input {
     width: 30px;
     text-align: center;
     display: inline-block;
     width: 40px;
     height: 100%;
-    border: 1px solid black;
+    border: 1px solid lightgray;
     font-size: 12px;
     font-weight: 800;
     border-left: none;
     border-right: none;
+    color: rgba(0,0,0,0.6);
   }
   button {
     height: 100%;
-    border: 1px solid black;
+    border: 1px solid lightgray;
     background: white;
     width: 20px;
+    color: lightgray;
   }
 `;
 
