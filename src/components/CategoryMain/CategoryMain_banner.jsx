@@ -4,10 +4,12 @@ import Category_slide from "../Category_slide"
 import axios from "axios";
 
 const CategoryMain_banner = () => {
-  const mouseOver = () => {
-    
-  }
 
+  const [isHover, setIsHover] = useState();
+
+  const mouseHover = (userClick) => {
+    setIsHover()
+  }
 
   return (
     <TopBanner>
@@ -16,12 +18,12 @@ const CategoryMain_banner = () => {
         <Category_slide/>
         </div>
         <ul className="banner_category">
-          <li onMouseOver={() => mouseOver(0)}>쇼펜하우어</li>
-          <li onMouseOver={() => mouseOver(1)}>목표달성</li>
-          <li onMouseOver={() => mouseOver(2)}>머핀북</li>
-          <li onMouseOver={() => mouseOver(3)}>파견자들</li>
-          <li onMouseOver={() => mouseOver(4)}>김영사</li>
-          <li onMouseOver={() => mouseOver(5)}>주목 이 책!</li>
+          <li onMouseOver={mouseHover}>쇼펜하우어</li>
+          <li onMouseOver={mouseHover}>목표달성</li>
+          <li onMouseOver={mouseHover}>머핀북</li>
+          <li onMouseOver={mouseHover}>파견자들</li>
+          <li onMouseOver={mouseHover}>김영사</li>
+          <li onMouseOver={mouseHover}>주목 이 책!</li>
         </ul>
       </div>
       <div className="banner_ad">
