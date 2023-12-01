@@ -7,7 +7,7 @@ import Cart_Cal from "../components/Cart/Cart_Cal";
 const Wrapper = styled.div`
   width: 60%;
   margin: 0 auto;
-  border: 1px solid red;
+ 
 `;
 
 const Cart = () => {

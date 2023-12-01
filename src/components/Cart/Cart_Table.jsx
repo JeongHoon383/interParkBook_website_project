@@ -12,6 +12,7 @@ const TaxSection = styled.div`
   display: flex;
   align-items: center;
   font-weight: bold;
+  margin-bottom:10px;
   input {
     margin-right: 8px;
   }
@@ -108,14 +109,52 @@ const TextWrapper = styled.div`
 
 const BookInfo = styled.div`
   height: 190px;
-
   ul {
     display: flex;
 
     height: 100%;
     align-items: center;
+    .count_list{
+      text-align:center;
+      display:flex; 
+      flex-direction:column;
+      align-items:center;
+  
+
+span{
+  width:30px;
+  height:15px;
+  font-size:10px;
+  background:#8F8F8F;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  border-radius:5px;
+  color:#FFFFFF;
+}
+      input{
+        outline:none;
+        border:1px solid rgba(0,0,0,0.4);
+        font-size:12px;
+        background:#F2F2F2;
+        width:30px;
+        height:16px;
+        margin-bottom:10px;
+ 
+      }
+    }
+    li:first-child{
+     display:flex;
+     align-items: center;
+     justify-content: center;
+     .book_check{
+      margin-right:10px;
+     }
+     
+    }
+ 
     .tax {
-      padding: 0 10px;
+      padding: 0 30px;
       p {
         color: #15b2e7;
         font-size: 13px;
@@ -172,6 +211,20 @@ const ButtonList = styled.li`
     height: 20px;
   }
 `;
+
+
+const SumList = styled.li`
+display:flex;
+align-items:center;
+justify-content:flex-end;
+
+em{
+  color:red;
+  font-weight:bold;
+  font-size:16px;
+ 
+}
+`
 
 const Cart_Table = () => {
   return (
@@ -233,7 +286,7 @@ const Cart_Table = () => {
           <ul>
             <li style={{ width: "13%" }}>
               <figure>
-                <input type="checkbox" checked name="" id="" />
+                <input type="checkbox" checked className="book_check" id="" />
                 <img
                   src="https://image.aladin.co.kr/product/32806/58/cover/k832936705_1.jpg"
                   alt=""
@@ -251,8 +304,8 @@ const Cart_Table = () => {
                 <li>&nbsp;적립 360P</li>
               </PriceList>
             </li>
-            <li style={{ width: "13%" }}>수량</li>
-            <li style={{ width: "15%" }}>소계/금액</li>
+            <li className="count_list" style={{ width: "13%" }}><input type="text" value='1' /><span>변경</span></li>
+            <SumList style={{ width: "15%" }}><em>6,480원</em> </SumList>
             <ButtonList style={{ width: "14%" }}>
               <input type="button" value="주문하기" />
               <input type="button" value="삭제하기" />

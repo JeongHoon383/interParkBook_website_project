@@ -18,7 +18,7 @@ const CountBox = styled.span`
     font-weight: 800;
     border-left: none;
     border-right: none;
-    color: lightgray;
+    color: rgba(0,0,0,0.6);
   }
   button {
     height: 100%;

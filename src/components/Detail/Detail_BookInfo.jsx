@@ -314,7 +314,7 @@ const Detail_BookInfo = ({ data, detailData }) => {
             </span>
           </InfoCaption>
           <InfoCaption>
-            <span style={{ color: "rgba(0,0,0,0.4)" }}>판매지수</span>
+            <span style={{ color: "rgba(0,0,0,0.4)" }}>판매지수&nbsp;<em style={{ color: "red" }}>9,418</em></span>
           </InfoCaption>
           <InfoCaption>
             <span className="share">
