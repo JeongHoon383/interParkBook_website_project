@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from "styled-components"
 import NewbookContent from './NewbookContent';
 import { IoIosArrowForward } from "react-icons/io";
+import axios from 'axios';
 
 const NewbookContainer = styled.div`
     float: left;
@@ -15,15 +16,32 @@ const NewbookContainer = styled.div`
       font-weight : bold;
       cursor: pointer;
     }
+
+    .content_container{
+      display : flex;
+    }
 `;
 
 const Newbook = () => {
+  const [newList, setNewList] = useState([])
+
+  useEffect(() => {
+    axios({
+      method : 'get',
+      url : '/data/categoryMain/newBook.json'
+    }).then((result) => {
+      setNewList(result.data)
+    })
+  }, [])
+
   return (
     <NewbookContainer>
       <div className='newBookText'>
         새로 나온 책<span><IoIosArrowForward/></span>
       </div>
-      <NewbookContent/>
+      <div className="content_container">
+      { newList.map((item, key) => <NewbookContent key={key} content={item} /> )} 
+      </div>
     </NewbookContainer>
   )
 }

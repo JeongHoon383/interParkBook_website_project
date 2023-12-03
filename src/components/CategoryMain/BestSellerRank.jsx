@@ -34,6 +34,7 @@ const BestRank = styled.div`
 `;
 
 const BestSellerRank = ({rank}) => {
+  if(!rank) return <></> 
   const {title} = rank;
   return (
     <BestRank>

@@ -76,6 +76,7 @@ const Bestseller = () => {
         <span className="more grey">더보기<IoIosArrowForward/></span>
       </div>
       <BestSellerBox rank={rankList[0]}/>
+      {/* { rankList.map(item => )} */}
       <BestSellerRank rank={rankList[0]}/>
     </BestSellerContainer>
   )

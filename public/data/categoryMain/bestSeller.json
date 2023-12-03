@@ -3,60 +3,70 @@
     "img" : "/img/CategoryMain/bestSeller/1.jpeg",
     "title" : "마흔에 읽은 쇼펜하우어",
     "author" : "강용수 저 | 유노북스",
-    "price" : "15,300원(10% 할인)"
+    "price" : "15,300원(10% 할인)",
+    "rank" : "1"
   },
   {
     "img" : "/img/CategoryMain/bestSeller/2.jpeg",
     "title" : "트렌드 코리아 2024",
     "author" : "김난도, 전미영, 최지혜, 이수진",
-    "price" : "17,100원(10% 할인)"
+    "price" : "17,100원(10% 할인)",
+    "rank" : "2"
   },
   {
     "img" : "/img/CategoryMain/bestSeller/3.jpeg",
     "title" : "세이노의 가르침",
     "author" : "세이노(SayNo) 저 | 데이원",
-    "price" : "6,480원(10% 할인)"
+    "price" : "6,480원(10% 할인)",
+    "rank" : "3"
   },
   {
     "img" : "/img/CategoryMain/bestSeller/4.jpeg",
     "title" : "남에게 보여주려고 인생을 낭비하지 마라",
     "author" : "아르투어 쇼펜하우어 저",
-    "price" : "15,750원(10% 할인)"
+    "price" : "15,750원(10% 할인)",
+    "rank" : "4"
   },
   {
     "img" : "/img/CategoryMain/bestSeller/5.jpeg",
     "title" : "퓨처 셀프",
     "author" : "벤저민 하디 저 | 최은아 역",
-    "price" : "17,820원(10% 할인)"
+    "price" : "17,820원(10% 할인)",
+    "rank" : "5"
   },
   {
     "img" : "/img/CategoryMain/bestSeller/6.jpeg",
     "title" : "작별하지 않는다",
     "author" : "한강 저 | 문학동네",
-    "price" : "12,600원(10% 할인)"
+    "price" : "12,600원(10% 할인)",
+    "rank" : "6"
   },
   {
     "img" : "/img/CategoryMain/bestSeller/7.jpeg",
     "title" : "당신의 인생이 왜 힘들지 않아야 한다고 생각하십니까",
     "author" : "쇼펜하우어 저/김욱 편역",
-    "price" : "15,750원(10% 할인)"
+    "price" : "15,750원(10% 할인)",
+    "rank" : "7"
   },
   {
     "img" : "/img/CategoryMain/bestSeller/8.jpeg",
     "title" : "설민석의 한국사 대모험 27",
     "author" : "설민석, 스토리박스 글",
-    "price" : "11,700원(10% 할인)"
+    "price" : "11,700원(10% 할인)",
+    "rank" : "8"
   },
   {
     "img" : "/img/CategoryMain/bestSeller/9.jpeg",
     "title" : "에그박사 11",
     "author" : "에그박사 원저/박송이 글",
-    "price" : "13,050원(10% 할인)"
+    "price" : "13,050원(10% 할인)",
+    "rank" : "9"
   },
   {
     "img" : "/img/CategoryMain/bestSeller/10.jpeg",
     "title" : "손실 없는 투자원칙",
     "author" : "남석관 저 | 모루",
-    "price" : "18,000원(10% 할인)"
+    "price" : "18,000원(10% 할인)",
+    "rank" : "10"
   }
 ]

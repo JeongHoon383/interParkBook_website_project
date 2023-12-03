@@ -25,20 +25,27 @@ const NewbookContents = styled.div`
   .newbook_price{
     font-weight : bold;
   }
+
+  .newbook_annotation{
+    width : 147px;
+  }
 `;
 
-const NewbookContent = () => {
+const NewbookContent = ({ content }) => {
+  if(!content) return <></> 
+    const {img, category, title, author, editor, price, point, annotation} = content;
+
   return (
     <NewbookContents>
       <ul className='newbook_ul'>
-        <li><img className='newBook_img' src="/img/CategoryMain/newbook_img/newbook_img1.jpeg" alt="" /></li>
-        <li className='newBook_category'>[경제 경영]</li>
-        <li className='newBook_title'>잘 잃어야 잘 번다</li>
-        <li className='newBook_autor grey'>톰 호가드 저정진근 역</li>
-        <li className='newBook_editor grey'>에디터</li>
-        <li className='newbook_price'>17,820원(10% 할인)</li>
-        <li className='newbook_point'>990P</li>
-        <li className='newbook_annotation'>투자는 왜 실패하는가?</li>
+        <li><img className='newBook_img' src={img} alt="" /></li>
+        <li className='newBook_category'>{category}</li>
+        <li className='newBook_title'>{title}</li>
+        <li className='newBook_autor grey'>{author}</li>
+        <li className='newBook_editor grey'>{editor}</li>
+        <li className='newbook_price'>{price}</li>
+        <li className='newbook_point'>{point}</li>
+        <li className='newbook_annotation'>{annotation}</li>
       </ul>
     </NewbookContents>
   )
