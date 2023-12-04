@@ -20,7 +20,7 @@ const MotionNav = styled(motion.div)`
   height: 55px;
   z-index: 1;
   .center {
-    width: 80%;
+    width: 60%;
     height: 100%;
     margin: 0 auto;
     display: flex;
@@ -119,17 +119,22 @@ const Star = styled.div`
   align-items: center;
   justify-content: flex-end;
   .star {
-    margin-right: 10px;
     font-size: 16px;
     display: flex;
     .star_icon {
       display: flex;
     }
   }
+
   .review {
     font-size: 12px;
     color: #666;
     display: flex;
+    align-items: center;
+    .line {
+      margin: 0 5px;
+      color: #666;
+    }
   }
   .star_icon {
     color: #ff9c46;
@@ -233,8 +238,9 @@ const Detail = () => {
                 10
               </span>
               <span className="review">
-                <span> | </span>
-                <BsClipboardCheck /> 리뷰
+                <span className="line">|</span>
+                <BsClipboardCheck />
+                리뷰
               </span>
             </Star>
           </TitleBox>
