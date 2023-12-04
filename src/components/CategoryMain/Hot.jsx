@@ -28,7 +28,13 @@ const CategoryHot = styled.div`
   }
 
   .hot_category_list {
+    margin-right : 330px;
     display: flex;
+  }
+
+  .hot_category_list li{
+    margin-left : 20px;
+    cursor: pointer;
   }
 
   .hot_banner {
@@ -218,15 +224,15 @@ const Hot = () => {
       <div className='hotContainer'>
         <div className='hot_banner_content'>
           <Slider {...thumbnailsSetting} afterChange={thumbnailsAfterChange}>
-            {thumbnails.map((source) => (
+            {/* {thumbnails.map((source) => ( */}
               <div>
                 <img
                   className='hot_banner'
-                  src={`/img/CategoryMain/categoryHot_img/${source}`}
+                  src="/img/CategoryMain/categoryHot_img/banner_1.jpeg"
                   alt=''
                 />
               </div>
-            ))}
+            {/* ))} */}
           </Slider>
         
           <div className='hot_content_container'>
