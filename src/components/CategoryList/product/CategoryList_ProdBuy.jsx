@@ -25,6 +25,7 @@ const ProdBuy = styled.div`
       }
       button {
         width: 30px;
+        font-size: 16px;
         background: #f8f8f8;
       }
       input {

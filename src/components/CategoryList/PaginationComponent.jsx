@@ -23,6 +23,7 @@ const PaginationWrapper = styled.div`
         text-align: center;
         &.active {
           font-weight: bold;
+          pointer-events: none;
           border-radius: 4px;
           border: 1px solid #d8d8d8;
           background: #fff;
