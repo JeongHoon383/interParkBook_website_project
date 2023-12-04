@@ -11,6 +11,9 @@ import reportWebVitals from './reportWebVitals';
 import { createGlobalStyle } from 'styled-components';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import CategoryList from './Pages/CategoryList';
+import Login from './Pages/Login';
+import SignUp from './Pages/SignUp';
+import Agreement from './Pages/Agreement';
 const GlobalStyle = createGlobalStyle`
 
 html, body, div, span, applet, object, iframe,
@@ -163,6 +166,20 @@ const router = createBrowserRouter([
       {
         path: '/search',
         element: <div>search</div>,
+      },
+      {
+        path: '/login',
+        element: <Login />,
+      },
+    ],
+  },
+  {
+    path: '/member',
+    element: <SignUp />,
+    children: [
+      {
+        index: '/agreement',
+        element: <Agreement />,
       },
     ],
   },

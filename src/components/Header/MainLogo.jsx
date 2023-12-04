@@ -8,11 +8,11 @@ export default function MainLogo() {
     <div className="mainLogo">
       <div className="logoBox">
         <div className="logoContent">
-          <h1 className="logoContainer">
+          <div className="logoContainer">
             <Link to="/">
               <img className="logoImg" src="/img/logo.png" alt="" />
             </Link>
-          </h1>
+          </div>
           <div className="search">
             <form className="searchForm">
               <input className="searchInput" type="text" />

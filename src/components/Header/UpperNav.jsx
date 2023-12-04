@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import MyPageHover from './MyPageHover';
 import '../../css/header/upperNav.css';
+import { Link } from 'react-router-dom';
 
 export default function UpperNav() {
   const [isHover, setIsHover] = useState(false);
@@ -25,8 +26,12 @@ export default function UpperNav() {
         </div>
         <div className="rightTab">
           <ul className="rightTab_ul">
-            <li className="rightTab_li">로그인</li>
-            <li className="rightTab_li">회원가입</li>
+            <li className="rightTab_li">
+              <Link to="/login">로그인</Link>
+            </li>
+            <li className="rightTab_li">
+              <Link to="/member">회원가입</Link>
+            </li>
             <li className="rightTab_li">북카트</li>
             <li className="rightTab_li myPage" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
               마이페이지
