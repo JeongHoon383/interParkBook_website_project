@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from "styled-components"
+import CultureContent from './CultureContent';
+import CultureSlide from '../CultureSlide'
 import { IoIosArrowForward } from "react-icons/io";
+
+import axios from 'axios';
 
 const CultureContainer = styled.div`
   display : flex;
@@ -19,39 +23,18 @@ const CultureContainer = styled.div`
     height : 329px;
   }
 
+  .reviewer_container{
+    margin-top : 113px;
+    margin-left : 30px;
+    width : 210px;
+  }
+
   .day_review_title{
     display : flex;
   }
 
-  .day_review_container{
-    display : flex;
-    margin-top : 14px;
-  }
-
-  .day_review_img{
-    width : 92px;
-    height : 135px;
-  }
-
-  .day_review_text{
-    margin-left : 14px;
-  }
-
-  .day_review_cmt{
-    margin-bottom : 10px;
-  }
-
-  .day_review_name{
-    margin-bottom : 5px;
-    font-weight : bold;
-  }
-
-  .day_review_author{
-    margin-bottom : 5px;
-  }
-
   .interPark_meet{
-    margin-left : 270px;
+    margin-left : 30px;
     margin-top : 113px;
   }
 
@@ -122,19 +105,31 @@ const CultureContainer = styled.div`
 `;
 
 const Culture = () => {
+  const [cultureList, setCultureList] = useState([]);
+  const [review, setReview] = useState([])
+
+  useEffect(() => {
+    axios({
+      method : 'get',
+      url : '/data/categoryMain/culture.json'
+    }).then((result) => {
+      const data = result.data
+
+      setCultureList(data.slice(0, 2));
+      setReview(data.slice(2, 3))
+    })
+  }, [])
+
   return (
     <CultureContainer>
       <div className="day_review">
         <div className="day_review_title"><h3>이주의 리뷰</h3><IoIosArrowForward/></div>
-        <div className="day_review_container">
-          <div><img className="day_review_img" src="/img/CategoryMain/culture_img/review_img1.jpeg" alt="" /></div>
-          <ul className="day_review_text">
-            <li className="day_review_cmt">주간 우수 리뷰 : 별밤이현</li>
-            <li className="day_review_name">춤추는 바람개비</li>
-            <li className="day_review_author grey">황연주 글</li>
-            <li className="day_review_publisher grey">좋은땅</li>
-          </ul>
-        </div>
+        {cultureList.map((item) => ( <CultureContent item={item}/> ))}
+      </div>
+      <div className="reviewer_container">
+        <div className="day_review_title"><h3>리뷰어 모집</h3><IoIosArrowForward/></div>
+        {review.map((item) => ( <CultureContent item={item}/> ))}
+        <CultureSlide/>
       </div>
       <div className="interPark_meet">
         <div className="interPark_meet_title"><h3>채널인터파크가 만났어요</h3><IoIosArrowForward/></div>

@@ -23,6 +23,8 @@ const BestSellerImg = styled.div`
 
   .bestSeller_img_text{
     margin-top : 10px;
+    width : 178px;
+    text-align : center;
   }
 
   .best_title{
@@ -32,12 +34,12 @@ const BestSellerImg = styled.div`
 
   .best_author{
     margin-top : 5px;
-    margin-left : 7px;
+    
   }
 
   .best_price{
     margin-top : 5px;
-    margin-left : 7px;
+    
     font-size : 12px;
   }
 `;
