@@ -6,7 +6,7 @@ import Slider from 'react-slick';
 const CategoryHot = styled.div`
   margin-top: 20px;
 
-  .hotContainer {
+  .hot_Container {
     margin: 0 auto;
     margin-top: 20px;
     padding: 20px;
@@ -221,7 +221,7 @@ const Hot = () => {
           ))}
         </ul>
       </div>
-      <div className='hotContainer'>
+      <div className='hot_Container'>
         <div className='hot_banner_content'>
           <Slider {...thumbnailsSetting} afterChange={thumbnailsAfterChange}>
             {/* {thumbnails.map((source) => ( */}
