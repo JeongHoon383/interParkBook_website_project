@@ -1,0 +1,42 @@
+[
+  {
+    "img" : "/img/CategoryMain/newbook_img/newbook_img1.jpeg",
+    "category" : "[경제 경영]",
+    "title" : "잘 잃어야 잘 번다",
+    "author" : "톰 호가드 저정진근 역",
+    "editor" : "에디터",
+    "price" : "17,820원(10% 할인)",
+    "point" : "990P",
+    "annotation" : "투자는 왜 실패하는가?"
+  },
+  {
+    "img" : "/img/CategoryMain/newbook_img/newbook_img2.jpeg",
+    "category" : "[어린이]",
+    "title" : "까칠 수염 보건 선생님",
+    "author" : "안수민 글/신은경 그림",
+    "editor" : "봄개울",
+    "price" : "11,700원(10% 할인)",
+    "point" : "650P",
+    "annotation" : "겉모습보다 중요한 것들"
+  },
+  {
+    "img" : "/img/CategoryMain/newbook_img/newbook_img3.jpeg",
+    "category" : "[유아]",
+    "title" : "춤추는 가나다라",
+    "author" : "이달 글/강혜숙 그림",
+    "editor" : "달달북스",
+    "price" : "13,500원(10% 할인)",
+    "point" : "750P",
+    "annotation" : "유쾌한 기역과 함께 배우는 한글 그림책"
+  },
+  {
+    "img" : "/img/CategoryMain/newbook_img/newbook_img4.jpeg",
+    "category" : "[경제 경영]",
+    "title" : "끝없는 월요일",
+    "author" : "진율 저",
+    "editor" : "여니북스",
+    "price" : "15,120원(10% 할인)",
+    "point" : "840P",
+    "annotation" : "부자의 기준을 제시하다!"
+  }
+]

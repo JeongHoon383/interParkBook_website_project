@@ -33,10 +33,10 @@ const HoverBox = styled.div`
   }
 `;
 
-const FigureBox = styled.div`
+const FigureBox = styled(motion.div)`
   width: 100%;
   height: 100%;
-  overflow: hidden;
+
   border: 1px solid lightgray;
 
   div.container {
@@ -95,10 +95,23 @@ const Detail_hover = () => {
           상품권
         </motion.div>
       </HoverBox>
-      <FigureBox>
+      <FigureBox initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
         {active === "s1" && (
           <div className="container">
-            <div>
+            <div style={{ position: "relative" }}>
+              <span
+                style={{
+                  position: "absolute",
+                  width: "10px",
+                  height: "10px",
+                  borderLeft: "1px solid rgba(0,0,0,0.4)",
+                  borderBottom: "1px solid rgba(0,0,0,0.4)",
+                  background: "#FFFFFF",
+                  top: "21.5px",
+                  transform: "translateY(-50%) rotate(45deg)",
+                  left: "-6px",
+                  zIndex: "99",
+                }}></span>
               <Figure style={{ borderRight: "1px solid lightgray" }}>
                 <img src="https://qi-b.qoo10cdn.com/renewPark/reBookpark/test_img/last_inc/book_benefit.jpg" />
               </Figure>
@@ -115,9 +128,22 @@ const Detail_hover = () => {
         )}
         {active === "s2" && (
           <div className="container">
-            <div>
+            <div style={{ position: "relative" }}>
+              <span
+                style={{
+                  position: "absolute",
+                  width: "10px",
+                  height: "10px",
+                  borderLeft: "1px solid #5A4B86",
+                  borderBottom: "1px solid #5A4B86",
+                  background: "#5A4B86",
+                  top: "64.5px",
+                  transform: "translateY(-50%) rotate(45deg)",
+                  left: "-6px",
+                  zIndex: "99",
+                }}></span>
               <Figure style={{ borderRight: "1px solid lightgray" }}>
-                <img src="https://qi-b.qoo10cdn.com/renewPark/reBookpark/test_img/last_inc/book_benefit.jpg" />
+                <img src="https://qi-b.qoo10cdn.com/milti/renewPark/main/95405_202311290936264851.jpg" />
               </Figure>
             </div>
             <div>
@@ -132,9 +158,22 @@ const Detail_hover = () => {
         )}
         {active === "s3" && (
           <div className="container">
-            <div>
+            <div style={{ position: "relative" }}>
+              <span
+                style={{
+                  position: "absolute",
+                  width: "10px",
+                  height: "10px",
+                  borderLeft: "1px solid #099B65",
+                  borderBottom: "1px solid #099B65",
+                  background: "#099B65",
+                  top: "107.5px",
+                  transform: "translateY(-50%) rotate(45deg)",
+                  left: "-6px",
+                  zIndex: "99",
+                }}></span>
               <Figure style={{ borderRight: "1px solid lightgray" }}>
-                <img src="https://qi-b.qoo10cdn.com/renewPark/reBookpark/test_img/last_inc/book_benefit.jpg" />
+                <img src="https://qi-b.qoo10cdn.com/milti/renewPark/main/95405_202311291635431301.png" />
               </Figure>
             </div>
             <div>

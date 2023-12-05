@@ -6,6 +6,10 @@ import Main from "./Pages/Main";
 import Detail from "./Pages/Detail";
 import NotFound from "./Pages/NotFound";
 import CategoryMain from "./Pages/CategoryMain";
+import Root from './Pages/Root';
+import BestSeller from './components/BestSeller'
+import NewSeller from './Pages/NewSeller';
+import Search from "./components/Search";
 import Mypage from "./Pages/Mypage";
 
 import reportWebVitals from "./reportWebVitals";
@@ -17,6 +21,7 @@ import Detail_event from "./components/Detail/Detail_event";
 import Detail_reco from "./components/Detail/Detail_reco";
 import Detail_review from "./components/Detail/Detail_review";
 import Detail_change from "./components/Detail/Detail_change";
+import Cart from "./Pages/Cart";
 const GlobalStyle = createGlobalStyle`
 
 html, body, div, span, applet, object, iframe,
@@ -178,7 +183,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/bestseller",
-        element: <div>bestseller</div>,
+        element:<BestSeller />,
       },
       {
         path: "/category/main",
@@ -190,7 +195,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/search",
-        element: <div>search</div>,
+        element: <Search/>,
       },
       {
         path: "/mypage",

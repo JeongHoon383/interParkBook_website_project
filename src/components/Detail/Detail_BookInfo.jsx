@@ -11,6 +11,9 @@ import { FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { FaTwitterSquare } from "react-icons/fa";
 import { FaFacebookSquare } from "react-icons/fa";
+import { GoTriangleDown } from "react-icons/go";
+import { GoTriangleRight } from "react-icons/go";
+
 const InfoContainer = styled.div`
   display: flex;
   margin: 0 auto;
@@ -19,7 +22,7 @@ const InfoContainer = styled.div`
     flex: 0.25;
     figure {
       width: 200px;
-      height: 280px;
+      height: 260px;
       margin: 0 auto;
       display: flex;
       justify-content: center;
@@ -57,7 +60,12 @@ const InfoContainer = styled.div`
 `;
 const InfoCaption = styled.div`
   width: 100%;
-
+  span {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    justify-content: center;
+  }
   .share {
     em {
       color: rgba(0, 0, 0, 0.4);
@@ -190,8 +198,9 @@ const PriceSection = styled.div`
     }
   }
   .red_box {
-    border: 1px solid #ef544d;
-    border-top: 5px solid #ef544d;
+    position: relative;
+    border: 1px solid var(--main);
+    border-top: 5px solid var(--main);
     padding: 7px 10px;
     width: 180px;
     height: 80px;
@@ -294,12 +303,18 @@ const Detail_BookInfo = ({ data, detailData }) => {
             </div>
           </InfoCaption>
           <InfoCaption>
-            <span style={{ color: "rgba(0,0,0,0.4)" }}>베스트셀러 1위</span>
+            <span style={{ color: "rgba(0,0,0,0.4)" }}>
+              <GoTriangleRight />
+              주간&nbsp;<em style={{ color: "red" }}>8</em>위
+            </span>
             <div className="line">l</div>
-            <span style={{ color: "rgba(0,0,0,0.4)" }}>독자리뷰 10위</span>
+            <span style={{ color: "rgba(0,0,0,0.4)" }}>
+              <GoTriangleRight />
+              분야&nbsp;<em style={{ color: "red" }}>10</em>위
+            </span>
           </InfoCaption>
           <InfoCaption>
-            <span style={{ color: "rgba(0,0,0,0.4)" }}>판매지수</span>
+            <span style={{ color: "rgba(0,0,0,0.4)" }}>판매지수&nbsp;<em style={{ color: "red" }}>9,418</em></span>
           </InfoCaption>
           <InfoCaption>
             <span className="share">
@@ -334,6 +349,15 @@ const Detail_BookInfo = ({ data, detailData }) => {
             </em>
             <em>
               <div className="red_box">
+                <GoTriangleDown
+                  style={{
+                    position: "absolute",
+                    bottom: "-10px",
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                  }}
+                  color="var(--main)"
+                />
                 <strong>새책</strong>
                 <em className="red_sale">
                   <h1>{detailData?.sale_price.toLocaleString()}원</h1>
@@ -350,17 +374,16 @@ const Detail_BookInfo = ({ data, detailData }) => {
               <strong>할인혜택</strong>
               <span>카드할인 / 무이자 할부</span>
               <MdKeyboardArrowRight
-                style={{ color: "red", display: "inline-block" }}
+                style={{ color: "var(--main)", display: "inline-block" }}
               />
               <span>이달의 혜택 도서상품권</span>
               <MdKeyboardArrowRight
-                style={{ color: "red", display: "inline-block" }}
+                style={{ color: "var(--main)", display: "inline-block" }}
               />
             </em>
             <em className="point">
               <strong>적립혜택</strong>
               <span>
-                {" "}
                 {(detailData?.sale_price * 0.05).toLocaleString()}P
                 &nbsp;(5%적립)
               </span>
@@ -368,10 +391,10 @@ const Detail_BookInfo = ({ data, detailData }) => {
                 5만원이상 주문시 2천P+등급별 최대 1.5%적립{" "}
               </span>
               <MdKeyboardArrowRight
-                style={{ color: "red", display: "inline-block" }}
+                style={{ color: "var(--main)", display: "inline-block" }}
               />
             </em>
-            {/*	1,100P (5%적립)5만원이상 주문시 2천P+등급별 최대 1.5%적립  */}
+
             <em className="coupon">
               <strong>추가혜택</strong>
               <BiSolidCoupon />

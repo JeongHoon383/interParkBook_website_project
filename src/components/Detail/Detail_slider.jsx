@@ -7,7 +7,7 @@ import { MdArrowForwardIos } from "react-icons/md";
 const Wrapper = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  padding: 20px 0;
+
   gap: 5px;
   position: absolute;
   right: 0;
@@ -38,25 +38,25 @@ const Title = styled.h3`
 `;
 const wrapperVars = {
   start: {
-    x: "100%",
+    x: window.innerWidth,
   },
   end: {
     x: 0,
   },
   exit: {
-    x: "-100%",
+    x: -window.innerWidth,
   },
 };
 
 const wrapperVars2 = {
   start: {
-    x: "-100%",
+    x: -window.innerWidth,
   },
   end: {
     x: 0,
   },
   exit: {
-    x: "100%",
+    x: window.innerWidth,
   },
 };
 
@@ -99,7 +99,8 @@ const Detail_slider = ({ data }) => {
   return (
     <div
       style={{
-        overflow: "hidden",
+        overflowX: "hidden",
+        overflowY: "clip",
         height: "220px",
         position: "relative",
       }}>
@@ -109,7 +110,7 @@ const Detail_slider = ({ data }) => {
           initial="start"
           animate="end"
           exit="exit"
-          transition={{ duration: 1, type: "tween" }}
+          transition={{ duration: 2, type: "spring" }}
           key={index}>
           {data &&
             data
@@ -130,7 +131,9 @@ const Detail_slider = ({ data }) => {
               width: "34px",
               height: "50px",
               position: "relative",
-              right: "-10px",
+              right: "-7px",
+              top: "50%",
+              transform: "translateY(-50%)",
               zIndex: 1,
             }}
           />
@@ -142,7 +145,9 @@ const Detail_slider = ({ data }) => {
               width: "34px",
               height: "50px",
               position: "relative",
-              left: "-10px",
+              left: "-7px",
+              top: "50%",
+              transform: "translateY(-50%)",
               zIndex: 1,
             }}
           />
