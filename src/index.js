@@ -6,6 +6,7 @@ import Main from "./Pages/Main";
 import Detail from "./Pages/Detail";
 import NotFound from "./Pages/NotFound";
 import CategoryMain from "./Pages/CategoryMain";
+import Mypage from "./Pages/Mypage";
 
 import reportWebVitals from "./reportWebVitals";
 import { createGlobalStyle } from "styled-components";
@@ -191,6 +192,11 @@ const router = createBrowserRouter([
         path: "/search",
         element: <div>search</div>,
       },
+      {
+        path: "/mypage",
+        element: <Mypage />,
+      },
+
     ],
   },
 ]);

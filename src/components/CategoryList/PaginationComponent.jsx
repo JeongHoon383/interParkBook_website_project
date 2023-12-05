@@ -18,7 +18,8 @@ const PaginationWrapper = styled.div`
       a {
         display: inline-block;
         width: 26px;
-        line-height: 24px;
+        height: 24px;
+        line-height: 22px;
         margin: 0 1px;
         text-align: center;
         &.active {
@@ -34,6 +35,10 @@ const PaginationWrapper = styled.div`
           background: #fff;
         }
         &.paginationBtn {
+          display: flex;
+          align-items: center;
+          width: auto;
+          margin: 0 1px;
           font-size: 16px;
         }
       }
