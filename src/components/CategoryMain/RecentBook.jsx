@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import RecentContent from './RecentContent';
+import axios from 'axios';
 
 const Recent_container = styled.div`
     display : flex;
@@ -57,6 +59,11 @@ const Recent_container = styled.div`
       width : 739px;
     }
 
+    .recent_content p{
+      display : flex;
+      margin-left : 30px;
+    }
+
     .recent_content_title{
     padding-left: 20px;
     height: 52px;
@@ -69,50 +76,21 @@ const Recent_container = styled.div`
       color : var(--main);
     }
 
-    .recent_content_main{
-    padding-left: 20px;
-    padding-bottom: 25px;
-    }
-
-    .recent_content_img_box{
-      padding-left : 29px;
-    }
-
-    .recent_content_img{
-      width : 125px;
-      height : 185px;
-    }
-
-    .recent_img_text{
-      margin-top : 17px;
-      padding-left : 29px;
-    }
-
-    .recent_img_name{
-      font-weight : bold;
-    }
-
-    .recent_img_author{
-      margin-top: 6px;
-      width: 140px;
-      height: 15px;
-      line-height: 15px;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-
-    .recent_img_grade{
-      margin-top : 8px;
-    }
-
-    .recent_img_price{
-      margin-top : 8px;
-      font-weight : bold;
-    }
+    
 `;
 
 const RecentBook = () => {
+  const [recentList, setRecentList] = useState([]);
+
+  useEffect(() => {
+    axios({
+      method : 'get',
+      url : '/data/categoryMain/recent.json'
+    }).then((result) => {
+      setRecentList(result.data)
+    })
+  }, [])
+
   return (
     <Recent_container>
       <div className="recent_book">
@@ -133,19 +111,7 @@ const RecentBook = () => {
       </div>
       <div className="recent_content">
         <h3 className="recent_content_title">이 책을 구입하신 분들이 <em>함께 산 책</em></h3>
-        <div className="recent_content_main">
-          <div className="recent_content_img_container">
-            <div className="recent_content_img_box"><img className="recent_content_img" src="/img/CategoryMain/recent_img/img_1.jpeg" alt="" /></div>
-            <div>
-              <ul className="recent_img_text">
-                <li className="recent_img_name">붉은 궁</li>
-                <li className="recent_img_author grey">허주은 저/허주은 역 | 시공사</li>
-                <li className="recent_img_grade">별점</li>
-                <li className="recent_img_price">15,300(10% 할인)</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+        <p>{recentList.map((item) => ( <RecentContent recentList = {item}/> ))}          </p>
       </div>
     </Recent_container>
   )
