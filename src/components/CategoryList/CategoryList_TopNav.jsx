@@ -47,7 +47,7 @@ const BackgroundLayout = styled.nav`
             color: #000;
           }
         }
-        .firstDepthList {
+        .firstDList {
           position: absolute;
           li {
             width: 80px;
@@ -89,10 +89,10 @@ const BackgroundLayout = styled.nav`
   }
 `;
 
-export default function CategoryList_TopNav() {
+export default function CategoryList_TopNav({ categoryData }) {
   const [isDropMenuOpen, setIsDropMenuOpen] = useState([false, false]);
 
-  const handleClick = (idx) => {
+  const handleDropMenu = (idx) => {
     let copy = [...isDropMenuOpen];
     if (copy[idx]) {
       copy[idx] = false;
@@ -111,28 +111,30 @@ export default function CategoryList_TopNav() {
           <Link to={"/"}>메인페이지</Link>
           <span>
             <LiaAngleRightSolid className="angleRight" />
-            <button onClick={() => handleClick(0)}>
-              <span>국내도서</span>
+            <button onClick={() => handleDropMenu(0)}>
+              <span>{categoryData.mall}</span>
               {isDropMenuOpen[0] ? <CiSquareChevUp /> : <CiSquareChevDown />}
             </button>
             {isDropMenuOpen[0] ? (
-              <ul className="clickMenu firstDepthList">
-                <li className="currentCategory">
+              <ul className="clickMenu firstDList">
+                <li>
                   <Link>국내도서</Link>
                 </li>
                 <li>
-                  <Link>외국도서</Link>
+                  <Link>
+                    외국도서
+                  </Link>
                 </li>
                 <li>
-                  <Link>eBook</Link>
+                  <Link>전자책</Link>
                 </li>
               </ul>
             ) : null}
           </span>
           <span>
             <LiaAngleRightSolid className="angleRight" />
-            <button onClick={() => handleClick(1)}>
-              <span>여행</span>
+            <button onClick={() => handleDropMenu(1)}>
+              <span>{categoryData.firstD}</span>
               {isDropMenuOpen[1] ? <CiSquareChevUp /> : <CiSquareChevDown />}
             </button>
             {isDropMenuOpen[1] ? (
