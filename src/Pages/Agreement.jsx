@@ -1,112 +1,56 @@
 import React from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import '../css/login/signUp.css';
+import axios from 'axios';
+import SignForm from '../components/SignUp/SignForm';
+
+const schema = yup
+  .object({
+    id: yup
+      .string()
+      .matches(
+        /^[a-z]+[a-z0-9]{6,20}$/g, // 영문으로 시작하는 영문자 또는 숫자 6~20자
+        '영문으로 시작하는 6~20자 영문(소문자), 숫자만 사용 가능합니다.'
+      )
+      .required('필수 정보입니다. 아이디를 입력해주세요.'),
+
+    password: yup
+      .string()
+      .matches(
+        /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,12}$/, // 8 ~ 16자 영문, 숫자, 특수문자를 최소 한가지씩
+        '8~12자의 영문, 숫자, 특수문자 중 2가지 이상으로만 가능합니다.'
+      )
+      .required('필수 정보입니다. 비밀번호를 입력해주세요.'),
+
+    passwordCheck: yup.string().oneOf([yup.ref('password'), null], '비밀번호가 일치하지 않습니다. 다시 입력해주세요.'),
+
+    name: yup
+      .string()
+      .matches(/^[가-힣a-zA-Z]{2,15}$/, '한글과 영문 대,소문자를 사용해주세요.')
+      .required('필수 정보입니다. 이름을 입력해주세요.'),
+
+    email: yup
+      .string()
+      .required('비밀번호 찾기 시 사용되니, 정확한 이메일 주소를 작성해주세요.')
+      .email('이메일 주소 양식에 맞게 작성해주세요.'),
+
+    phone: yup
+      .string()
+      .required('점유인증을 하여 휴대폰 번호를 등록해주세요. 등록한 번호는 로그인 이후 변경 가능합니다.'),
+  })
+  .required();
 
 export default function Agreement() {
+  const methods = useForm({
+    mode: 'onChange',
+    resolver: yupResolver(schema),
+  });
+
   return (
-    <div className="signUpContent">
-      <div className="signUpInner">
-        <form>
-          <fieldset>
-            <div>
-              <label htmlFor="id">
-                <span>아이디</span>
-              </label>
-              <input type="text" placeholder="6~20자 영문, 숫자" name="id" />
-            </div>
-            <div>
-              <label htmlFor="password">
-                <span>비밀번호</span>
-              </label>
-              <input type="password" name="password" id="password" placeholder="8~12자 영문, 숫자, 특수문자" />
-            </div>
-            <div>
-              <label htmlFor="passwordCheck">
-                <span>비밀번호 확인</span>
-              </label>
-              <input
-                type="password"
-                name="passwordCheck"
-                id="passwordCheck"
-                placeholder="8~12자 영문, 숫자, 특수문자"
-              />
-            </div>
-            <div>
-              <label htmlFor="name">
-                <span>이름</span>
-              </label>
-              <input type="text" name="name" id="name" />
-            </div>
-            <div>
-              <label htmlFor="email">
-                <span>이메일</span>
-              </label>
-              <input type="email" name="email" id="email" />
-              <select name="selectEmail" id="selectEmail">
-                <option value="self">직접입력</option>
-                <option value="@naver.com">@naver.com</option>
-                <option value="@gmail.com">@gmail.com</option>
-                <option value="@nate.com">@nate.com</option>
-              </select>
-            </div>
-            <div>
-              <label htmlFor="phone">
-                <span>휴대폰</span>
-              </label>
-              <input type="text" name="phone" id="phone" placeholder="010 1234 5678" />
-              <button>인증번호 받기</button>
-            </div>
-            <div className="agree">
-              <div className="agreeAll">
-                <div className="checkBox">
-                  <input type="checkbox" name="agreeAll" id="agreeAll" />
-                  <label htmlFor="agreeAll">
-                    <span>약관 전체 동의</span>
-                  </label>
-                </div>
-              </div>
-              <div className="required">
-                <div>인터파크커머스 필수 동의 항목</div>
-                <div className="checkBox">
-                  <input type="checkbox" name="required" id="required" />
-                  <label htmlFor="required">
-                    <span>[필수] 이용약관</span>
-                  </label>
-                </div>
-                <div className="checkBox">
-                  <input type="checkbox" name="required" id="required" />
-                  <label htmlFor="required">
-                    <span>[필수] 개인정보 수집동의서</span>
-                  </label>
-                </div>
-              </div>
-              <div className="option">
-                <div>선택 동의 항목</div>
-                <div className="checkBox">
-                  <input type="checkbox" name="option" id="option" />
-                  <label htmlFor="option">
-                    <span>[선택] 개인정보 수집동의서</span>
-                  </label>
-                </div>
-                <div className="checkBox">
-                  <input type="checkbox" name="option" id="option" />
-                  <label htmlFor="option">
-                    <span>[선택] 위치기반서비스 이용약관</span>
-                  </label>
-                </div>
-                <div className="checkBox">
-                  <input type="checkbox" name="option" id="option" />
-                  <label htmlFor="option">
-                    <span>[선택] 제 3자 마케팅 활용동의서 전체동의</span>
-                  </label>
-                  <div>쇼핑 2,000원 할인쿠폰 증정</div>
-                  <div>맞춤서비스 제공을 위해 마케팅활용에 동의하여 주신 고객님께 쇼핑 2천원 할인쿠폰을 드립니다.</div>
-                </div>
-              </div>
-            </div>
-            <button type="submit"></button>
-          </fieldset>
-        </form>
-      </div>
-    </div>
+    <FormProvider {...methods}>
+      <SignForm />
+    </FormProvider>
   );
 }

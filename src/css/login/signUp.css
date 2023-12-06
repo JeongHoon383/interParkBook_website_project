@@ -2,3 +2,97 @@
   width: 40%;
   margin: 70px auto;
 }
+
+
+fieldset input[type=text],
+fieldset input[type=password],
+fieldset input[type=email] {
+  width: 70%;
+}
+
+fieldset input[type=text]::placeholder,
+fieldset input[type=password]::placeholder,
+fieldset input[type=email]::placeholder {
+  padding-left: 6px;
+  font-size: 0.8em;
+  color: #c9c9c9;
+}
+
+.textLabel {
+  width: 190px;
+  display: inline-block;
+  text-align: left;
+  font-family: 'YES24GothicB';
+  font-size: 0.8em;
+}
+
+#selectEmail {
+  position: absolute;
+  top: 8px;
+  right: 15px;
+  padding-top: 4px;
+  border: none;
+  font-size: 0.8em;
+  color: var(--default);
+}
+
+.requireIcon {
+  color: #32aceb
+}
+
+.tokenBtn {
+  position: absolute;
+  top: 8px;
+  right: 15px;
+  margin: 0;
+  width: 80px;
+  height: 24px;
+  font-size: 0.8em;
+  border: 1px solid #666;
+  color: #666;
+  background-color: #fff;
+}
+
+.agree {
+  margin-top: 22px;
+}
+
+.agreeAll {
+  margin-top: 22px;
+  font-size: 1.2em;
+  font-family: 'YES24GothicB';
+}
+
+.required {
+  margin-bottom: 33px;
+}
+
+.selectText {
+  font-size: 0.9em;
+  font-family: 'YES24GothicB';
+}
+
+.checkBox label {
+  color: #666;
+}
+
+.submitBtn {
+  color: #fff;
+  background-color: var(--main);
+}
+
+.messageDiv {
+  margin-left: 190px;
+  margin-bottom: 12px;
+  font-size: 0.7em;
+  color: var(--main);
+}
+
+.required div {
+  margin-bottom: 12px;
+}
+
+button:disabled {
+  background-color: #ccc;
+  pointer-events: none;
+}
