@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+import styled from 'styled-components';
+
+const Input = styled.input`
+  display: inline-block;
+  width: 70%;
+  height: 40px;
+  padding-left: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #ddd;
+`;
 
 export default function SignForm() {
   const [checkItem, setCheckItem] = useState([]);
@@ -42,7 +52,7 @@ export default function SignForm() {
                 <span>아이디</span>
                 <span className="requireIcon"> *</span>
               </label>
-              <input
+              <Input
                 type="text"
                 name="id"
                 id="id"
@@ -58,7 +68,7 @@ export default function SignForm() {
                 <span>비밀번호</span>
                 <span className="requireIcon"> *</span>
               </label>
-              <input
+              <Input
                 type="password"
                 name="password"
                 id="password"
@@ -74,7 +84,7 @@ export default function SignForm() {
                 <span>비밀번호 확인</span>
                 <span className="requireIcon"> *</span>
               </label>
-              <input
+              <Input
                 type="password"
                 name="passwordCheck"
                 id="passwordCheck"
@@ -90,7 +100,7 @@ export default function SignForm() {
                 <span>이름</span>
                 <span className="requireIcon"> *</span>
               </label>
-              <input type="text" name="name" id="name" {...register('name')} />
+              <Input type="text" name="name" id="name" {...register('name')} />
             </div>
             <div className="messageDiv">{errors.name?.message}</div>
             <div style={{ position: 'relative' }}>
@@ -98,7 +108,7 @@ export default function SignForm() {
                 <span>이메일</span>
                 <span className="requireIcon"> *</span>
               </label>
-              <input
+              <Input
                 type="email"
                 name="email"
                 id="email"
@@ -114,7 +124,7 @@ export default function SignForm() {
                 <span>휴대폰</span>
                 <span className="requireIcon"> *</span>
               </label>
-              <input
+              <Input
                 type="text"
                 name="phone"
                 id="phone"

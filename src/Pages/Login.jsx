@@ -1,6 +1,16 @@
 import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import '../css/login/login.css';
+
+const Input = styled.input`
+  display: inline-block;
+  width: 100%;
+  height: 40px;
+  padding-left: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #ddd;
+`;
 
 export default function Login() {
   const [isTab, setIsTab] = useState(0);
@@ -63,8 +73,8 @@ function Member(props) {
   return (
     <form action="" name="MemberForm" onSubmit={memberHandleSubmit}>
       <fieldset>
-        <input type="text" placeholder="아이디" name="id" value={props.login.id} onChange={props.memberHandleChange} />
-        <input
+        <Input type="text" placeholder="아이디" name="id" value={props.login.id} onChange={props.memberHandleChange} />
+        <Input
           type="password"
           placeholder="비밀번호"
           name="password"
@@ -153,21 +163,21 @@ function NotMember(props) {
         비회원으로 <span style={{ color: '#ef3e42' }}>구매 시 입력하신 정보</span>로 로그인해 주세요.
       </div>
       <form action="" name="NotMemberForm" onSubmit={notMemberHandleChange}>
-        <input
+        <Input
           type="text"
           placeholder="주문자명"
           name="orderName"
           value={props.orderInfo.orderName}
           onChange={props.notMemberHandleChange}
         />
-        <input
+        <Input
           type="text"
           placeholder="휴대폰번호 (-없이 입력)"
           name="orderPhone"
           value={props.orderInfo.orderPhone}
           onChange={props.notMemberHandleChange}
         />
-        <input
+        <Input
           type="password"
           placeholder="비밀번호"
           name="orderPW"

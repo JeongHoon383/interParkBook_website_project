@@ -3,13 +3,6 @@
   margin: 70px auto;
 }
 
-
-fieldset input[type=text],
-fieldset input[type=password],
-fieldset input[type=email] {
-  width: 70%;
-}
-
 fieldset input[type=text]::placeholder,
 fieldset input[type=password]::placeholder,
 fieldset input[type=email]::placeholder {

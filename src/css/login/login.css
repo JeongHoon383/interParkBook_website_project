@@ -32,17 +32,6 @@
   border-bottom: #fff;
 }
 
-fieldset input[type=text],
-fieldset input[type=password],
-fieldset input[type=email] {
-  display: inline-block;
-  width: 100%;
-  height: 40px;
-  padding-left: 8px;
-  margin-bottom: 12px;
-  border: 1px solid #ddd;
-}
-
 fieldset button {
   margin: 6px 0 12px 0;
   width: 100%;
