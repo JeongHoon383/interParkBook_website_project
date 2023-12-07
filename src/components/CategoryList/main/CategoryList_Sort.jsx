@@ -1,90 +1,84 @@
 import styled from "styled-components";
-import Pagination from "react-js-pagination";
-import {
-  AiOutlineDoubleLeft,
-  AiOutlineLeft,
-  AiOutlineRight,
-  AiOutlineDoubleRight,
-} from "react-icons/ai";
+import Pagination from 'react-js-pagination'
+import { useState } from "react";
+import { AiOutlineDoubleLeft, AiOutlineLeft, AiOutlineRight, AiOutlineDoubleRight } from "react-icons/ai";
+
 
 const Sortarea = styled.div`
   width: 770px;
   margin-top: 30px;
   border: 1px solid #d8d8d8;
-  .topArea {
+  .topArea{
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px 20px;
     border-bottom: 1px solid #d8d8d8;
-    .sortOption {
-      button {
+    .sortOption{
+      button{
         line-height: 25px;
-        margin-right: 15px;
-        &:hover {
+        margin-right: 10px;
+        &:hover{
           font-weight: bold;
         }
-        &.currentSort {
+        &.currentSort{
           font-weight: bold;
           color: var(--main);
         }
       }
     }
-    .listOption {
-      select {
+    .listOption{
+      select{
         height: 30px;
         border: 1px solid #d8d8d8;
         border-radius: 4px;
-        &:first-of-type {
+        &:first-child{
           margin-right: 5px;
         }
       }
     }
   }
-  .bottomArea {
+  .bottomArea{
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px 12px;
     background: #f8f8f8;
-    .pagination {
+    .pagination{
       display: inline-flex;
       align-items: center;
-      li {
-        &.disabled {
-          color: #ccc;
-        }
-        a {
+      li{
+        a{
           display: inline-block;
           width: 26px;
           line-height: 24px;
           margin: 0 1px;
           text-align: center;
-          &.active {
+          &.active{
             font-weight: bold;
             border-radius: 4px;
             border: 1px solid #d8d8d8;
-            background: #fff;
+            background: #FFF;
           }
-          &:not(.paginationBtn):hover {
+          &:not(.paginationBtn):hover{
             border-radius: 4px;
             border: 1px solid #d8d8d8;
-            background: #fff;
+            background: #FFF;
           }
-          &.paginationBtn {
+          &.paginationBtn{
             font-size: 16px;
           }
         }
       }
     }
-    .selectOption {
-      button {
+    .selectOption{
+      button{
         line-height: 27px;
         padding: 0 7px;
         border: 1px solid #d8d8d8;
         border-radius: 4px;
-        background: #fff;
-        &:not(:last-child) {
+        background: #FFF;
+        &:not(:last-child){
           margin-right: 5px;
         }
       }
@@ -92,48 +86,14 @@ const Sortarea = styled.div`
   }
 `;
 
-export default function CategoryList_Sort({
-  totalResults,
-  listQty,
-  setListQty,
-  currentPage,
-  setCurrentPage,
-  isSoldout,
-  setIsSoldout,
-  handleSelectAll,
-  isCheckedAll,
-  setIsCheckedAll,
-  setCheckList,
-}) {
-  //졍렬 버튼 클릭시 resetCheckLIst 실행/ 수정 필요
+export default function CategoryList_Sort({data}){
+  const [currentPage, setCurrentPage] = useState(1);
+  const [selected, setSelected] = useState("20");
 
-  //상품 체크 목록 리셋
-  const resetCheckList = () => {
-    setIsCheckedAll(false);
-    setCheckList([]);
-  };
-
-  //페이지네이션 현재 페이지 변경
-  const handlePageChange = (page) => {
-    resetCheckList();
-    setCurrentPage(page);
-  };
-
-  //한 페이지에 볼 상품 수량 변경
-  const handleListQty = (e) => {
-    resetCheckList();
-    setListQty(Number(e.target.value));
-    handleSelectAll(false);
-  };
-
-  //품절 상품 포함/제외 변경
-  const handleChangeSoldout = (e) => {
-    resetCheckList();
-    setIsSoldout(e.target.value);
-    handleSelectAll(false);
-  };
-
-  return (
+  const handlePageChange = (page) => setCurrentPage(page)
+  const handleChangeCount = (e) => setSelected(e.target.value)
+  
+  return(
     <Sortarea>
       <div className="topArea">
         <span className="sortOption">
@@ -146,35 +106,22 @@ export default function CategoryList_Sort({
           <button>상품명순</button>
         </span>
         <span className="listOption">
-          <label htmlFor="listQty"></label>
-          <select
-            name="listQty"
-            id="listQty"
-            onChange={handleListQty}
-            value={listQty}
-          >
+          <select name="count" id="count" onChange={handleChangeCount} value={selected}>
             <option value="20">20개씩 보기</option>
-            <option value="30">30개씩 보기</option>
             <option value="40">40개씩 보기</option>
           </select>
-          <label htmlFor="soldout"></label>
-          <select
-            name="soldout"
-            id="soldout"
-            onChange={handleChangeSoldout}
-            value={isSoldout}
-          >
-            <option value="0">품절포함</option>
-            <option value="1">품절제외</option>
+          <select name="soldout" id="soldout">
+            <option value="include">품절포함</option>
+            <option value="exclude">품절제외</option>
           </select>
         </span>
       </div>
       <div className="bottomArea">
-        <Pagination
-          totalItemsCount={totalResults}
+        <Pagination 
+          totalItemsCount={data.totalResults}
           activePage={currentPage}
           pageRangeDisplayed={10}
-          itemsCountPerPage={listQty}
+          itemsCountPerPage={parseInt(selected)}
           onChange={handlePageChange}
           linkClassFirst={"paginationBtn"}
           linkClassPrev={"paginationBtn"}
@@ -187,11 +134,7 @@ export default function CategoryList_Sort({
           lastPageText={<AiOutlineDoubleRight />}
         />
         <span className="selectOption">
-          {isCheckedAll ? (
-            <button onClick={() => handleSelectAll(false)}>선택해제</button>
-          ) : (
-            <button onClick={() => handleSelectAll(true)}>전체선택</button>
-          )}
+          <button>전체선택</button>
           <button>카트에 넣기</button>
           <button>찜하기</button>
         </span>

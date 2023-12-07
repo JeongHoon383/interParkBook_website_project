@@ -18,7 +18,7 @@ const CountBox = styled.span`
     font-weight: 800;
     border-left: none;
     border-right: none;
-    color: rgba(0,0,0,0.6);
+    color: lightgray;
   }
   button {
     height: 100%;
@@ -29,7 +29,7 @@ const CountBox = styled.span`
   }
 `;
 
-const Detail_count = () => {
+const Detail_count = ({ setQty }) => {
   const [count, setCount] = useState(1);
   let calc = (a) => {
     if (a == "plus") {
@@ -40,6 +40,7 @@ const Detail_count = () => {
       count <= 1 && alert("최소 구매수량은 1개입니다");
     }
   };
+  setQty(count);
   return (
     <>
       <CountBox>

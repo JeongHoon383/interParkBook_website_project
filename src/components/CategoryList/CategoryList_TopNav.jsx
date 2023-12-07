@@ -4,16 +4,13 @@ import { CiSquareChevDown, CiSquareChevUp } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-const BackgroundLayout = styled.nav`
-  height: 41px;
-  font-size: 12px;
-  color: #666;
-  border-bottom: 1px solid #d8d8d8;
+const BackgroundLayout = styled.div`
   background: #f8f8f8;
+  border-bottom: 1px solid #d8d8d8;
+  height: 41px;
   .centerLayout {
-    width: 60%;
+    width: 980px;
     margin: 0 auto;
-    padding: 0 15px;
     .categoryNavigation {
       line-height: 41px;
       > span {
@@ -108,7 +105,7 @@ export default function CategoryList_TopNav() {
     <BackgroundLayout>
       <div className="centerLayout">
         <nav className="categoryNavigation">
-          <Link to={"/"}>메인페이지</Link>
+          <Link>메인페이지</Link>
           <span>
             <LiaAngleRightSolid className="angleRight" />
             <button onClick={() => handleClick(0)}>
@@ -126,6 +123,9 @@ export default function CategoryList_TopNav() {
                 <li>
                   <Link>eBook</Link>
                 </li>
+                <li>
+                  <Link>중고샵</Link>
+                </li>
               </ul>
             ) : null}
           </span>
@@ -139,13 +139,13 @@ export default function CategoryList_TopNav() {
               <div className="clickMenu secondDepthList">
                 <ul>
                   <li>
-                    <Link>가정/요리/뷰티</Link>
-                  </li>
-                  <li>
-                    <Link>건강/취미/레저</Link>
+                    <Link>건강/취미</Link>
                   </li>
                   <li>
                     <Link>경제경영</Link>
+                  </li>
+                  <li>
+                    <Link>공무원 수험서</Link>
                   </li>
                   <li>
                     <Link>과학</Link>
@@ -154,7 +154,7 @@ export default function CategoryList_TopNav() {
                     <Link>달력/기타</Link>
                   </li>
                   <li>
-                    <Link>대학교재/전문서적</Link>
+                    <Link>대학교재</Link>
                   </li>
                   <li>
                     <Link>만화</Link>
@@ -189,13 +189,16 @@ export default function CategoryList_TopNav() {
                     <Link>외국어</Link>
                   </li>
                   <li>
-                    <Link>유아</Link>
+                    <Link>요리/살림</Link>
                   </li>
                   <li>
-                    <Link>인문학</Link>
+                    <Link>유아</Link>
                   </li>
                 </ul>
                 <ul>
+                  <li>
+                    <Link>인문학</Link>
+                  </li>
                   <li>
                     <Link>자기계발</Link>
                   </li>
@@ -220,11 +223,11 @@ export default function CategoryList_TopNav() {
                   <li>
                     <Link>컴퓨터/모바일</Link>
                   </li>
+                </ul>
+                <ul>
                   <li>
                     <Link>초등학교참고서</Link>
                   </li>
-                </ul>
-                <ul>
                   <li>
                     <Link>중학교참고서</Link>
                   </li>

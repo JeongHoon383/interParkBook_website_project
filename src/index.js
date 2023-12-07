@@ -17,6 +17,8 @@ import Detail_reco from "./components/Detail/Detail_reco";
 import Detail_review from "./components/Detail/Detail_review";
 import Detail_change from "./components/Detail/Detail_change";
 import Cart from "./Pages/Cart";
+import { Provider } from "react-redux";
+import { store, persistor } from "./components/Cart/store";
 const GlobalStyle = createGlobalStyle`
 
 html, body, div, span, applet, object, iframe,
@@ -203,10 +205,12 @@ const client = new QueryClient();
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <QueryClientProvider client={client}>
-      <GlobalStyle />
-      <RouterProvider router={router} />
-    </QueryClientProvider>
+    <Provider store={store}>
+      <QueryClientProvider client={client}>
+        <GlobalStyle />
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </Provider>
   </React.StrictMode>
 );
 

@@ -6,28 +6,28 @@ const Title = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
-  h2 {
+  h3{
     font-size: 22px;
     font-weight: bold;
     color: var(--main);
   }
-  span {
-    a {
+  span{
+    a{
       padding: 0 6px;
-      &:first-child {
-        border-right: 1px solid #ccc;
+      &:first-child{
+        border-right: 1px solid #CCC;
       }
-      &:hover {
+      &:hover{
         text-decoration: underline;
       }
     }
   }
 `;
 
-export default function CategoryList_Title({ title }) {
-  return (
+export default function CategoryList_Title({title}){
+  return(
     <Title>
-      <h2>{title}</h2>
+      <h3>{title}</h3>
       <span>
         <Link>주간베스트</Link>
         <Link>새로 나온 책</Link>
