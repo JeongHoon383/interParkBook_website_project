@@ -1,27 +1,32 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import App from "./App";
-import Main from "./Pages/Main";
-import Detail from "./Pages/Detail";
-import NotFound from "./Pages/NotFound";
-import CategoryMain from "./Pages/CategoryMain";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import App from './App';
+import Main from './Pages/Main';
+import Detail from './Pages/Detail';
+import NotFound from './Pages/NotFound';
+import CategoryMain from './Pages/CategoryMain';
 import Root from './Pages/Root';
-import BestSeller from './components/BestSeller'
+import BestSeller from './components/BestSeller';
 import NewSeller from './Pages/NewSeller';
-import Search from "./components/Search";
-import Mypage from "./Pages/Mypage";
+import Search from './components/Search';
+import Mypage from './Pages/Mypage';
+import Login from './Pages/Login';
+import SignUp from './Pages/SignUp';
+import Agreement from './Pages/Agreement';
+import SignUpDone from './Pages/SignUpDone';
 
-import reportWebVitals from "./reportWebVitals";
-import { createGlobalStyle } from "styled-components";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import CategoryList from "./Pages/CategoryList";
-import Detail_info from "./components/Detail/Detail_info";
-import Detail_event from "./components/Detail/Detail_event";
-import Detail_reco from "./components/Detail/Detail_reco";
-import Detail_review from "./components/Detail/Detail_review";
-import Detail_change from "./components/Detail/Detail_change";
-import Cart from "./Pages/Cart";
+import reportWebVitals from './reportWebVitals';
+import { createGlobalStyle } from 'styled-components';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { CookiesProvider } from 'react-cookie';
+import CategoryList from './Pages/CategoryList';
+import Detail_info from './components/Detail/Detail_info';
+import Detail_event from './components/Detail/Detail_event';
+import Detail_reco from './components/Detail/Detail_reco';
+import Detail_review from './components/Detail/Detail_review';
+import Detail_change from './components/Detail/Detail_change';
+import Cart from './Pages/Cart';
 const GlobalStyle = createGlobalStyle`
 
 html, body, div, span, applet, object, iframe,
@@ -147,58 +152,58 @@ iframe {
 `;
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <App />,
     errorElement: <NotFound />,
     children: [
       {
-        index: "/",
+        index: '/',
         element: <Main />,
       },
       {
-        path: "/book/:id",
+        path: '/book/:id',
         element: <Detail />,
         children: [
           {
-            path: "/book/:id/info",
+            path: '/book/:id/info',
             element: <Detail_info />,
           },
           {
-            path: "/book/:id/event",
+            path: '/book/:id/event',
             element: <Detail_event />,
           },
           {
-            path: "/book/:id/rec",
+            path: '/book/:id/rec',
             element: <Detail_reco />,
           },
           {
-            path: "/book/:id/review",
+            path: '/book/:id/review',
             element: <Detail_review />,
           },
           {
-            path: "/book/:id/change",
+            path: '/book/:id/change',
             element: <Detail_change />,
           },
         ],
       },
       {
-        path: "/bestseller",
-        element:<BestSeller />,
+        path: '/bestseller',
+        element: <BestSeller />,
       },
       {
-        path: "/category/main",
+        path: '/category/main',
         element: <CategoryMain />,
       },
       {
-        path: "/category/:categoryId",
+        path: '/category/:categoryId',
         element: <CategoryList />,
       },
       {
-        path: "/search",
-        element: <Search/>,
+        path: '/search',
+        element: <Search />,
       },
       {
-        path: "/mypage",
+        path: '/mypage',
         element: <Mypage />,
       },
       {
@@ -223,13 +228,15 @@ const router = createBrowserRouter([
   },
 ]);
 const client = new QueryClient();
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <QueryClientProvider client={client}>
-      <GlobalStyle />
-      <RouterProvider router={router} />
-    </QueryClientProvider>
+    <CookiesProvider>
+      <QueryClientProvider client={client}>
+        <GlobalStyle />
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </CookiesProvider>
   </React.StrictMode>
 );
 

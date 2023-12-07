@@ -15,7 +15,6 @@ const Input = styled.input`
 
 export default function SignForm() {
   const [checkItem, setCheckItem] = useState([]);
-  const [form, setForm] = useState({ id: '', password: '', name: '', email: '', phone: '' });
   const navigate = useNavigate();
 
   const {
@@ -43,21 +42,11 @@ export default function SignForm() {
   const isAllChecked = checkItem.length === 3;
   const disabled = !isAllChecked;
 
-  const onSubmit = () => {
-    const values = getValues();
-    setForm({
-      ...form,
-      id: values.id,
-      password: values.password,
-      name: values.name,
-      email: values.email,
-      phone: values.phone,
-    });
-
+  const onSubmit = (data) => {
     axios({
       method: 'post',
       url: 'http://localhost:9090/member/',
-      data: form,
+      data: data,
     })
       .then((result) => {
         if (result.data === 'success') {
@@ -66,11 +55,6 @@ export default function SignForm() {
       })
       .catch((err) => console.error(err));
   };
-
-  {
-    console.log(JSON.stringify(form));
-  }
-
   return (
     <div className="signUpContent">
       <div className="signUpInner">

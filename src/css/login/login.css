@@ -43,6 +43,11 @@ fieldset button {
   background-color: var(--main);
 }
 
+.errorMsg {
+  font-size: 0.8em;
+  color: var(--main);
+}
+
 .loginCheck {
   display: flex;
   align-items: center;
