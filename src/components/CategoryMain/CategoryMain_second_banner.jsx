@@ -1,30 +1,48 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import Second_banner_content from './Second_banner_content';
+import axios from 'axios';
 
 const CategoryMain_second_banner = () => {
+  const [bannerList, setBannerList] = useState([]);
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: '/data/categoryMain/interParkChoice.json',
+    }).then((result) => {
+      console.log(result);
+      setBannerList(result.data);
+    });
+  }, []);
+
+  const initBanners = [
+    { id: 0, text: '행복은 어디에나' },
+    { id: 1, text: '수어 문법을 문학으로 녹인다면' },
+    { id: 2, text: '대한민국 산업의 미래' },
+  ];
+
   return (
     <Second_banner>
-      <div className="banner_left">
-        <div>
-          <img className="banner_img" src="/img/CategoryMain/secondbanner_img/secondbanner1.jpeg" alt="" />
-        </div>
-        <div className="banner_text">
-          <div>인터파크의 선택(링크 - 카테고리 리스트로)</div>
-          <div>단어를 통해 새로이 보게 된 세상</div>
-          <div>민바람 작가가 단어들을 그러모아 하나씩 꺼내어주는 산문집. 그가 건네는 순우리말 낱말들이 낯설지만 품고 있는 에너지들이 우리에게 위안과 용기를 준다. 익숙한 장면들에서 떠오른 낱말들로 마음을 따뜻하게 만져주어 틈틈이 펼쳐 읽고 싶다.</div>
-          <div>낱말의 장면들(링크 - 상세도서로)</div>
-          <div>민바람 저/신혜림 사진/서사원</div>
-          <div>
-            <span>15,120원(10% 할인)</span>
-            <span>이미지, 840원</span>
-          </div>
-        </div>
-      </div>
-      <div className="banner_right">
+      {bannerList.length > 0 && (
+        <Second_banner_content banner={bannerList[active]} />
+      )}
+
+      <div className='banner_right'>
         <ul>
-          <li><img className="banner_right_img" src="/img/CategoryMain/secondbanner_img/secondbanner1-1.jpeg" alt="" /></li>
-          <li><img className="banner_right_img" src="/img/CategoryMain/secondbanner_img/secondbanner2-2.jpeg" alt="" /></li>
-          <li><img className="banner_right_img" src="/img/CategoryMain/secondbanner_img/secondbanner3-3.jpeg" alt="" /></li>
+          {initBanners.map(({ id, text }) => (
+            <li key={id} onMouseOver={() => setActive(id)}>
+              <img
+                className='banner_right_img'
+                src={`/img/CategoryMain/secondbanner_img/secondbanner${
+                  id + 1
+                }-${id + 1}.jpeg`}
+                alt=''
+              />
+              <span className='banner_right_text'>{text}</span>
+            </li>
+          ))}
         </ul>
       </div>
     </Second_banner>
@@ -36,43 +54,42 @@ const Second_banner = styled.div`
   margin-top: 20px;
   width: 770px;
   height: 323px;
-  border : 1px solid red;
-  /* background-color : rgb(38, 38, 38); */
+  background-color: rgb(38, 38, 38);
 
-  .banner_left{
-    display : flex;
-    width : 580px;
-    border-right : 1px solid grey;
+  .banner_right ul {
+    width: 190px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
   }
 
-  .banner_img{
-    margin-top : 30px;
-    width : 190px;
-    height : 261px;
+  .banner_right ul li {
+    display: flex;
+    flex-basis: 33.3%;
+    border-bottom: 1px solid grey;
+    opacity: 0.3;
   }
 
-  .banner_text{
-    margin-left : 20px;
-    margin-top : 30px;
+  .banner_right ul li:hover {
+    opacity: 1;
+    cursor: pointer;
   }
 
-  .banner_right ul{
-    width : 190px;
-    flex-basis : 33.33%;
+  .banner_right ul li:last-child {
+    border-bottom: none;
   }
 
-  .banner_right ul li{
-    height : 105px;
-    border-bottom : 1px solid grey;
+  .banner_right_img {
+    width: 47.8px;
+    height: 80px;
+    margin-top: 12px;
+    margin-left: 20px;
   }
 
-  .banner_right ul li:last-child{
-    border-bottom : none;
-  }
-
-  .banner_right_img{
-    width : 55px;
-    height : 80px;
+  .banner_right_text {
+    margin: 18px 0 0 10px;
+    font-size: 11px;
+    color: #fff;
   }
 `;
 

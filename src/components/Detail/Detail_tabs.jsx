@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Route, Routes, useMatch } from "react-router-dom";
+import { Link, Outlet, Route, Routes, useMatch } from "react-router-dom";
 import styled from "styled-components";
 import Detail_info from "./Detail_info";
 import Detail_event from "./Detail_event";
@@ -49,41 +49,52 @@ const Line = styled(motion.span)`
   background-color: #ff9c46;
 `;
 
-const Detail_tabs = () => {
-  const infoMatch = useMatch("/book/info/");
-  const eventMatch = useMatch("/book/event");
-  const recMatch = useMatch("/book/rec");
-  const reviewMatch = useMatch("/book/review");
-  const changeMatch = useMatch("/book/change");
+const Detail_tabs = ({ id, detailData }) => {
+  const infoMatch = useMatch(`/book/:id/info`);
+  const eventMatch = useMatch("/book/:id/event");
+  const recMatch = useMatch("/book/:id/rec");
+  const reviewMatch = useMatch("/book/:id/review");
+  const changeMatch = useMatch("/book/:id/change");
 
   return (
     <TabsContainer>
       <Tabs>
-        <Tab style={{ background: infoMatch && "rgba(255,255,255,0.5)" }}>
-          <Link to="/book/info/">
-            {infoMatch && <Line layoutId="line"></Line>} <span>책정보</span>
+        <Tab
+          style={{
+            background:
+              !eventMatch &&
+              !recMatch &&
+              !reviewMatch &&
+              !changeMatch &&
+              "rgba(255,255,255,0.5)",
+          }}>
+          <Link to={`/book/${id}/info`}>
+            {!eventMatch && !recMatch && !reviewMatch && !changeMatch && (
+              <Line layoutId="line"></Line>
+            )}{" "}
+            <span>책정보</span>
           </Link>
         </Tab>
         <Tab style={{ background: eventMatch && "rgba(255,255,255,0.5)" }}>
-          <Link to="/book/event">
+          <Link to={`/book/${id}/event`}>
             {eventMatch && <Line layoutId="line"></Line>}
             <span>이벤트/기획전</span>
           </Link>
         </Tab>
         <Tab style={{ background: recMatch && "rgba(255,255,255,0.5)" }}>
-          <Link to="/book/rec">
+          <Link to={`/book/${id}/rec`}>
             {recMatch && <Line layoutId="line"></Line>}
             <span>추천도서</span>
           </Link>
         </Tab>
         <Tab style={{ background: reviewMatch && "rgba(255,255,255,0.5)" }}>
-          <Link to="/book/review">
+          <Link to={`/book/${id}/review`}>
             {reviewMatch && <Line layoutId="line"></Line>}
             <span>100자평/리뷰</span>
           </Link>
         </Tab>
         <Tab style={{ background: changeMatch && "rgba(255,255,255,0.5)" }}>
-          <Link to="/book/change">
+          <Link to={`/book/${id}/change`}>
             {changeMatch && <Line layoutId="line"></Line>}
             <span>교환/환불/배송</span>
           </Link>
@@ -92,22 +103,12 @@ const Detail_tabs = () => {
       {!eventMatch && !recMatch && !reviewMatch && !changeMatch ? (
         <Detail_info />
       ) : null}
-      {infoMatch && <Detail_info />}
+
+      {infoMatch && <Detail_info detailData={detailData} />}
       {eventMatch && <Detail_event />}
-      {recMatch && <Detail_reco />}
+      {recMatch && <Detail_reco detailData={detailData} />}
       {reviewMatch && <Detail_review />}
       {changeMatch && <Detail_change />}
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      Detail_tabs
     </TabsContainer>
   );
 };
