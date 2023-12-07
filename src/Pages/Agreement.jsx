@@ -3,7 +3,6 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import '../css/login/signUp.css';
-import axios from 'axios';
 import SignForm from '../components/SignUp/SignForm';
 
 const schema = yup

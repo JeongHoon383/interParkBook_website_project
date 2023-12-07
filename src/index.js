@@ -6,13 +6,13 @@ import Main from './Pages/Main';
 import Detail from './Pages/Detail';
 import NotFound from './Pages/NotFound';
 import CategoryMain from './Pages/CategoryMain';
-
 import reportWebVitals from './reportWebVitals';
 import { createGlobalStyle } from 'styled-components';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import CategoryList from './Pages/CategoryList';
 import Login from './Pages/Login';
 import SignUp from './Pages/SignUp';
+import SignUpDone from './Pages/SignUpDone';
 import Agreement from './Pages/Agreement';
 const GlobalStyle = createGlobalStyle`
 
@@ -178,8 +178,12 @@ const router = createBrowserRouter([
     element: <SignUp />,
     children: [
       {
-        index: '/agreement',
+        index: '/',
         element: <Agreement />,
+      },
+      {
+        path: '/member/done',
+        element: <SignUpDone />,
       },
     ],
   },

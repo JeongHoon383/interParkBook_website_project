@@ -89,3 +89,58 @@ button:disabled {
   background-color: #ccc;
   pointer-events: none;
 }
+
+/* signUp Done */
+
+.signUpDoneContent {
+  height: 630px;
+}
+
+.signUpDoneInner {
+  width: 40%;
+  margin: 0 auto;
+  padding: 120px;
+  text-align: center;
+}
+
+.DoneIcon {
+  font-size: 3em;
+  color: var(--main);
+}
+
+.DoneIcon svg {
+  margin: 0 auto;
+}
+
+.signUpDoneText {
+  margin: 20px 0 50px 0;
+}
+
+.signUpDoneText h3 {
+  margin-bottom: 20px;
+  font-family: 'YES24GothicB';
+  font-size: 1.7em;
+  color: var(--default);
+}
+
+.signUpDoneText h5 {
+  color: #999;
+}
+
+.linkBtn button {
+  margin: 6px 15px 12px 0;
+  width: 130px;
+  height: 40px;
+  border-radius: 3px;
+  font-family: 'YES24GothicB';
+  text-align: center;
+  color: #fff;
+}
+
+.linkBtn button:first-child {
+  background-color: var(--default);
+}
+
+.linkBtn button:last-child {
+  background-color: var(--main);
+}

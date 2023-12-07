@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const Input = styled.input`
   display: inline-block;
@@ -13,10 +15,13 @@ const Input = styled.input`
 
 export default function SignForm() {
   const [checkItem, setCheckItem] = useState([]);
+  const [form, setForm] = useState({ id: '', password: '', name: '', email: '', phone: '' });
+  const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors, isValid },
   } = useFormContext();
 
@@ -25,22 +30,46 @@ export default function SignForm() {
     if (phoneReg.test(e.key)) e.preventDefault();
   };
 
-  const handleChange = (e) => {
+  const handleSelect = (e) => {
     e.target.checked
       ? setCheckItem([...checkItem, e.target.id])
       : setCheckItem(checkItem.filter((el) => el !== e.target.id));
   };
 
-  const handleChangeAll = (e) => {
+  const handleSelectAll = (e) => {
     e.target.checked ? setCheckItem(['required01', 'required02', 'required03']) : setCheckItem([]);
   };
 
   const isAllChecked = checkItem.length === 3;
   const disabled = !isAllChecked;
 
-  const onSubmit = (data) => {
-    alert('드디어 !!');
+  const onSubmit = () => {
+    const values = getValues();
+    setForm({
+      ...form,
+      id: values.id,
+      password: values.password,
+      name: values.name,
+      email: values.email,
+      phone: values.phone,
+    });
+
+    axios({
+      method: 'post',
+      url: 'http://localhost:9090/member/',
+      data: form,
+    })
+      .then((result) => {
+        if (result.data === 'success') {
+          navigate('/member/done');
+        }
+      })
+      .catch((err) => console.error(err));
   };
+
+  {
+    console.log(JSON.stringify(form));
+  }
 
   return (
     <div className="signUpContent">
@@ -143,7 +172,7 @@ export default function SignForm() {
                 <input
                   type="checkbox"
                   id="requiredAll"
-                  onChange={handleChangeAll}
+                  onChange={handleSelectAll}
                   checked={checkItem.length == 3 ? true : false}
                 />
                 <label htmlFor="requiredAll">
@@ -158,7 +187,7 @@ export default function SignForm() {
                   <input
                     type="checkbox"
                     id="required01"
-                    onChange={handleChange}
+                    onChange={handleSelect}
                     checked={checkItem.includes('required01') ? true : false}
                   />
                   <label htmlFor="required01">
@@ -169,7 +198,7 @@ export default function SignForm() {
                   <input
                     type="checkbox"
                     id="required02"
-                    onChange={handleChange}
+                    onChange={handleSelect}
                     checked={checkItem.includes('required02') ? true : false}
                   />
                   <label htmlFor="required02">
@@ -180,7 +209,7 @@ export default function SignForm() {
                   <input
                     type="checkbox"
                     id="required03"
-                    onChange={handleChange}
+                    onChange={handleSelect}
                     checked={checkItem.includes('required03') ? true : false}
                   />
                   <label htmlFor="required03">
