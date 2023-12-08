@@ -192,7 +192,7 @@ const Detail = () => {
   } = useQuery({
     queryKey: ["DetailData"],
     queryFn: () =>
-      axios.get(`http://localhost:9090/book/${id}`).then((res) => res.data),
+      axios.get(`http://127.0.0.1:9090/book/${id}`).then((res) => res.data),
   });
   console.log(DetailData);
 
@@ -202,7 +202,8 @@ const Detail = () => {
         style={{
           opacity: opacity,
           scale: opacity,
-        }}>
+        }}
+      >
         <div className="center">
           <div>{DetailData?.title.split("-")[0]}</div>
           <div>
@@ -267,7 +268,8 @@ const Detail = () => {
       <Detail_tabs
         id={id}
         DetailData={DetailData}
-        detailData={detailData}></Detail_tabs>
+        detailData={detailData}
+      ></Detail_tabs>
     </>
   );
 };

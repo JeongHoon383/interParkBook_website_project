@@ -1,0 +1,145 @@
+.loginBox {
+  width: 60%;
+  margin: 50px auto;
+}
+
+.loginContent {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.loginTabWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  color: #707070;
+}
+
+.loginTabLi {
+  width: 360px;
+  padding: 12px 0;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-bottom: 1px solid var(--main);
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+
+.clickedTab {
+  background-color: #fff;
+  border: 1px solid var(--main);
+  border-bottom: #fff;
+}
+
+fieldset button {
+  margin: 6px 0 12px 0;
+  width: 100%;
+  height: 40px;
+  border-radius: 3px;
+  font-family: 'YES24GothicB';
+  text-align: center;
+  color: #fff;
+  background-color: var(--main);
+}
+
+.errorMsg {
+  font-size: 0.8em;
+  color: var(--main);
+}
+
+.loginCheck {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.loginCheck .checkBox {
+  margin-right: 8px;
+}
+
+fieldset input[type=checkbox] {
+  display: none;
+}
+
+fieldset input[type=checkbox]+label {
+  cursor: pointer;
+}
+
+fieldset input[type=checkbox]+label>span {
+  vertical-align: middle;
+  padding-left: 5px;
+  font-size: 0.9em;
+}
+
+fieldset input[type=checkbox]+label::before {
+  content: '';
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+fieldset input[type=checkbox]:checked+label::before {
+  content: '';
+  background-color: var(--main);
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-image: url(../../../public/img/check.png);
+}
+
+.naverLogin,
+.kakaoLogin {
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.naverLogin {
+  border: 1px solid #23ba09;
+}
+
+.naverLogin .snsIcon.naver {
+  background-color: #23ba09;
+  background-position: 11px 13px;
+}
+
+.naverLogin .snsIcon,
+.kakaoLogin .snsIcon {
+  float: left;
+  width: 45px;
+  height: 43px;
+  margin-left: auto;
+  background: url(../../../public/img/openid_sns_logo.png) no-repeat 0 0;
+}
+
+.kakaoLogin {
+  border: 1px solid #ffd800;
+}
+
+.kakaoLogin .snsIcon.kakao {
+  background-color: #ffd800;
+  background-position: 11px -56px;
+}
+
+fieldset ul {
+  display: flex;
+  align-items: center;
+  margin-top: 12px;
+}
+
+fieldset ul li {
+  font-size: 0.8em;
+  color: var(--hover);
+}
+
+
+fieldset ul li:not(:last-child)::after {
+  content: '|';
+  margin: 0 6px;
+}

@@ -431,7 +431,8 @@ const Detail_review = () => {
               drag
               layoutId="tog"
               onClick={() => setToggle(true)}
-              type="button">
+              type="button"
+            >
               리뷰쓰기
             </ToggleButton>
           )}
@@ -442,7 +443,8 @@ const Detail_review = () => {
                 variants={formVars}
                 initial="start"
                 animate="end"
-                exit="exit">
+                exit="exit"
+              >
                 <fieldset>
                   <legend>
                     <h1>리뷰 작성</h1>{" "}
@@ -450,7 +452,8 @@ const Detail_review = () => {
                     <CloseButton
                       layoutId="tog"
                       onClick={() => setToggle(false)}
-                      type="button">
+                      type="button"
+                    >
                       리뷰닫기
                     </CloseButton>
                   </legend>
@@ -468,7 +471,8 @@ const Detail_review = () => {
                         {...register("point", { required: true })}
                         onChange={(e) => setStar(Number(e.currentTarget.value))}
                         name="star"
-                        id="star">
+                        id="star"
+                      >
                         <option value="1">1점</option>
                         <option value="2">2점</option>
                         <option value="3">3점</option>
@@ -690,7 +694,8 @@ const Detail_review = () => {
                       <span
                         style={{
                           transform: click ? "rotate(180deg)" : "rotate(0deg)",
-                        }}>
+                        }}
+                      >
                         <IoIosArrowDown />
                       </span>
                     </div>
