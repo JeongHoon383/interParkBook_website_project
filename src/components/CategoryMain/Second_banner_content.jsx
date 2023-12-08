@@ -62,13 +62,13 @@ const SecondBanner = styled.div`
 `;
 //{props.dataList[0] && props.dataList[0].img}
 const Second_banner_content = ({ banner }) => {
-  const { img, semiTitle, content, title, author, price, point } = banner;
+  const { title, author, description, pricesales, mileage, cover } = banner;
 
   return (
     <SecondBanner>
       <div className='banner_left'>
         <div>
-          <img className='banner_img' src={img} alt='' />
+          <img className='banner_img' src={cover} alt='' />
         </div>
         <div className='banner_text'>
           <div className='banner_text_icon'>
@@ -77,13 +77,13 @@ const Second_banner_content = ({ banner }) => {
               <IoIosArrowForward />
             </span>
           </div>
-          <div className='banner_semiTitle'>{semiTitle}</div>
-          <div className='banner_content'>{content}</div>
+          <div className='banner_semiTitle'>{title}</div>
+          <div className='banner_content'>{description}</div>
           <div className='banner_title'>{title}</div>
           <div className='banner_author'>{author}</div>
           <div className='banner_price'>
-            <span>{price}</span>
-            <span>{point}</span>
+            <span>{pricesales}</span>
+            <span>{mileage}P</span>
           </div>
         </div>
       </div>

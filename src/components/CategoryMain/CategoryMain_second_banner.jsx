@@ -7,6 +7,19 @@ const CategoryMain_second_banner = () => {
   const [bannerList, setBannerList] = useState([]);
   const [active, setActive] = useState(0);
 
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios({
+      method : 'get',
+      url : 'http://localhost:9090/category/main'
+    }).then((result) => {
+      const data = result.data
+
+      setData(data.slice(3, 6))
+    })
+  }, [])
+
   useEffect(() => {
     axios({
       method: 'get',
@@ -25,8 +38,8 @@ const CategoryMain_second_banner = () => {
 
   return (
     <Second_banner>
-      {bannerList.length > 0 && (
-        <Second_banner_content banner={bannerList[active]} />
+      {data.length > 0 && (
+        <Second_banner_content banner={data[active]} />
       )}
 
       <div className='banner_right'>

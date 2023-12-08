@@ -5,10 +5,12 @@ import DetailRouter from "./router/DetailRouter.js";
 import MainRouter from "./router/MainRouter.js";
 import SearchRouter from "./router/SearchRouter.js";
 import MemberRouter from "./router/MemberRouter.js";
-import CategoryMain from "./router/CategoryMain.js"
+import CategoryMain from "./router/CategoryMain.js";
+import cors from 'cors'
+
 
 const app = express();
-server.use(cors());
+app.use(cors());
 
 app.use(urlencoded({ extended: true }));
 app.use(express.json());
