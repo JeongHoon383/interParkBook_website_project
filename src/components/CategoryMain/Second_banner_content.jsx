@@ -64,6 +64,10 @@ const SecondBanner = styled.div`
 const Second_banner_content = ({ banner }) => {
   const { title, author, description, pricesales, mileage, cover } = banner;
 
+  const numberReplace = () => {
+    
+  }
+
   return (
     <SecondBanner>
       <div className='banner_left'>
@@ -82,8 +86,8 @@ const Second_banner_content = ({ banner }) => {
           <div className='banner_title'>{title}</div>
           <div className='banner_author'>{author}</div>
           <div className='banner_price'>
-            <span>{pricesales}</span>
-            <span>{mileage}P</span>
+            <span>{pricesales}원</span>
+            <span> {mileage}P</span>
           </div>
         </div>
       </div>

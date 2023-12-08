@@ -41,7 +41,6 @@ const CategoryMain_second_banner = () => {
       {data.length > 0 && (
         <Second_banner_content banner={data[active]} />
       )}
-
       <div className='banner_right'>
         <ul>
           {initBanners.map(({ id, text }) => (
