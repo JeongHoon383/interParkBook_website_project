@@ -21,14 +21,14 @@ const CategoryListMain = styled.main`
 `;
 
 export default function CategoryList() {
-  let { cid } = useParams();
+  // const { mall } = useParams();
   const [categoryData, setCategoryData] = useState([]);
 
-  useEffect(() => {
-    axios.get(`http://localhost:9090/category/list/${cid}`)
-    .then(result => setCategoryData(result.data))
-    .catch(error => console.log(error));
-  }, []);
+  // useEffect(() => {
+  //   axios.get(`http://localhost:9090/category/list/${mall}`)
+  //   .then(result => setCategoryData(result.data))
+  //   .catch(error => console.log(error));
+  // }, []);
 
   return (
     <>

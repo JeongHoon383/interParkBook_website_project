@@ -1,10 +1,9 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { LiaAngleRightSolid } from "react-icons/lia";
 import { CiSquareChevDown, CiSquareChevUp } from "react-icons/ci";
-
 const BackgroundLayout = styled.nav`
   height: 41px;
   font-size: 12px;
@@ -90,8 +89,17 @@ const BackgroundLayout = styled.nav`
   }
 `;
 
-export default function CategoryList_TopNav({ categoryData }) {
+export default function CategoryList_TopNav() {
+  const { mall } = useParams();
   const [isDropMenuOpen, setIsDropMenuOpen] = useState([false, false, false]);
+  const [MallData, setMallData] = useState("");
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:9090/category/list/${mall}`)
+      .then((result) => setMallData(result.data))
+      .catch((error) => console.log(error));
+  }, []);
 
   const handleDropMenu = (idx) => {
     let copy = [...isDropMenuOpen];
@@ -105,11 +113,6 @@ export default function CategoryList_TopNav({ categoryData }) {
     }
   };
 
-  // firstD 데이터 불러오기
-  useEffect(() => {
-    axios.get(`http://localhost:9090/category/list/1depth/${categoryData.mall}`)
-  }, []);
-
   return (
     <BackgroundLayout>
       <div className="centerLayout">
@@ -118,7 +121,7 @@ export default function CategoryList_TopNav({ categoryData }) {
           <span>
             <LiaAngleRightSolid className="angleRight" />
             <button onClick={() => handleDropMenu(0)}>
-              <span>{categoryData.mall}</span>
+              <span>여기에 데이터 넣어라</span>
               {isDropMenuOpen[0] ? <CiSquareChevUp /> : <CiSquareChevDown />}
             </button>
             {isDropMenuOpen[0] ? (
@@ -134,11 +137,11 @@ export default function CategoryList_TopNav({ categoryData }) {
                 </li>
               </ul>
             ) : null}
-          </span> 
+          </span>
           <span>
             <LiaAngleRightSolid className="angleRight" />
             <button onClick={() => handleDropMenu(1)}>
-              <span>{categoryData.firstD}</span>
+              <span>여기에 데이터 넣어라</span>
               {isDropMenuOpen[1] ? <CiSquareChevUp /> : <CiSquareChevDown />}
             </button>
             {isDropMenuOpen[1] ? (
@@ -175,7 +178,7 @@ export default function CategoryList_TopNav({ categoryData }) {
               </div>
             ) : null}
           </span>
-          {
+          {/* {
             categoryData.secondD ? (
               <span>
               <LiaAngleRightSolid className="angleRight" />
@@ -218,7 +221,7 @@ export default function CategoryList_TopNav({ categoryData }) {
               ) : null}
             </span>
             ) : null
-          }
+          } */}
         </nav>
       </div>
     </BackgroundLayout>
