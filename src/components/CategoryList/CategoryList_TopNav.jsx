@@ -94,12 +94,12 @@ export default function CategoryList_TopNav() {
   const [isDropMenuOpen, setIsDropMenuOpen] = useState([false, false, false]);
   const [MallData, setMallData] = useState("");
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:9090/category/list/${mall}`)
-      .then((result) => setMallData(result.data))
-      .catch((error) => console.log(error));
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(`http://localhost:9090/category/list/${mall}`)
+  //     .then((result) => setMallData(result.data))
+  //     .catch((error) => console.log(error));
+  // }, []);
 
   const handleDropMenu = (idx) => {
     let copy = [...isDropMenuOpen];
