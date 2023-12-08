@@ -4,6 +4,9 @@ import { FaRegQuestionCircle } from "react-icons/fa";
 import { GoTriangleRight } from "react-icons/go";
 import { IoSquare } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { removeCart } from "./store";
+
 const Wrapper = styled.div`
   margin-top: 60px;
 `;
@@ -12,7 +15,6 @@ const TaxSection = styled.div`
   display: flex;
   align-items: center;
   font-weight: bold;
-  margin-bottom:10px;
   input {
     margin-right: 8px;
   }
@@ -42,6 +44,7 @@ const ColName = styled.div`
 `;
 
 const AnyItem = styled.div`
+  margin: 10px 0;
   height: 27px;
   background: #f4f4f4;
   font-size: 13px;
@@ -109,52 +112,41 @@ const TextWrapper = styled.div`
 
 const BookInfo = styled.div`
   height: 190px;
+
   ul {
     display: flex;
 
     height: 100%;
     align-items: center;
-    .count_list{
-      text-align:center;
-      display:flex; 
-      flex-direction:column;
-      align-items:center;
-  
-
-span{
-  width:30px;
-  height:15px;
-  font-size:10px;
-  background:#8F8F8F;
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  border-radius:5px;
-  color:#FFFFFF;
-}
-      input{
-        outline:none;
-        border:1px solid rgba(0,0,0,0.4);
-        font-size:12px;
-        background:#F2F2F2;
-        width:30px;
-        height:16px;
-        margin-bottom:10px;
- 
+    li:nth-child(odd) {
+      text-align: center;
+    }
+    li.count {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      input {
+        text-align: center;
+        width: 30px;
+        height: 15px;
+        margin: 10px 0;
+      }
+      div {
+        width: 30px;
+        height: 15px;
+        font-size: 12px;
+        background-color: rgba(0, 0, 0, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
       }
     }
-    li:first-child{
-     display:flex;
-     align-items: center;
-     justify-content: center;
-     .book_check{
-      margin-right:10px;
-     }
-     
-    }
- 
     .tax {
-      padding: 0 30px;
+      padding: 0 10px;
       p {
         color: #15b2e7;
         font-size: 13px;
@@ -212,21 +204,8 @@ const ButtonList = styled.li`
   }
 `;
 
-
-const SumList = styled.li`
-display:flex;
-align-items:center;
-justify-content:flex-end;
-
-em{
-  color:red;
-  font-weight:bold;
-  font-size:16px;
- 
-}
-`
-
-const Cart_Table = () => {
+const Cart_Table = ({ cartData }) => {
+  let dispatch = useDispatch();
   return (
     <Wrapper>
       <TaxSection>
@@ -282,40 +261,53 @@ const Cart_Table = () => {
             배송책임 : <em>교보문고</em> l 배송비 : <em>2,500원</em>
           </span>
         </AnyItem>
-        <BookInfo>
-          <ul>
-            <li style={{ width: "13%" }}>
-              <figure>
-                <input type="checkbox" checked className="book_check" id="" />
-                <img
-                  src="https://image.aladin.co.kr/product/32806/58/cover/k832936705_1.jpg"
-                  alt=""
-                />
-              </figure>
-            </li>
-            <li className="tax" style={{ width: "30%" }}>
-              <p>[소득공제]</p>
-              <Link>세이노의 가르침</Link>
-            </li>
-            <li style={{ width: "15%" }}>
-              <PriceList>
-                <li>&nbsp;정가 7,200원</li>
-                <li>할인가 6,480원</li>
-                <li>&nbsp;적립 360P</li>
-              </PriceList>
-            </li>
-            <li className="count_list" style={{ width: "13%" }}><input type="text" value='1' /><span>변경</span></li>
-            <SumList style={{ width: "15%" }}><em>6,480원</em> </SumList>
-            <ButtonList style={{ width: "14%" }}>
-              <input type="button" value="주문하기" />
-              <input type="button" value="삭제하기" />
-            </ButtonList>
-          </ul>
-        </BookInfo>
+        {cartData &&
+          cartData.map((v) => (
+            <BookInfo>
+              <ul>
+                <li style={{ width: "13%" }}>
+                  <figure>
+                    <input type="checkbox" checked name="" id="" />
+                    <img src={v.img} alt="" />
+                  </figure>
+                </li>
+                <li className="tax" style={{ width: "30%" }}>
+                  <p>[소득공제]</p>
+                  <Link>{v.title}</Link>
+                </li>
+                <li style={{ width: "15%" }}>
+                  <PriceList>
+                    <li>
+                      &nbsp;정가 {Number(v.pricestandard).toLocaleString()}원
+                    </li>
+                    <li>할인가 {Number(v.pricesales).toLocaleString()}원</li>
+                    <li>&nbsp;적립 {Number(v.mileage).toLocaleString()}P</li>
+                  </PriceList>
+                </li>
+                <li className="count" style={{ width: "13%" }}>
+                  <input type="text" value={v.count} />
+                  <div>변경</div>
+                </li>
+                <li style={{ width: "15%", color: "var(--main)" }}>
+                  {(Number(v.pricesales) * v.count).toLocaleString()}원
+                </li>
+                <ButtonList style={{ width: "14%" }}>
+                  <input type="button" value="주문하기" />
+                  <input
+                    type="button"
+                    value="삭제하기"
+                    onClick={() => dispatch(removeCart(v))}
+                  />
+                </ButtonList>
+              </ul>
+            </BookInfo>
+          ))}
       </Row>
-      <AnyItem>
-        <span>북카트에 담긴 상품이 없습니다.</span>
-      </AnyItem>
+      {cartData && cartData.length === 0 && (
+        <AnyItem>
+          <span>북카트에 담긴 상품이 없습니다.</span>
+        </AnyItem>
+      )}
     </Wrapper>
   );
 };

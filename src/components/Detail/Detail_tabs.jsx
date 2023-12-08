@@ -1,5 +1,12 @@
 import React from "react";
-import { Link, Outlet, Route, Routes, useMatch } from "react-router-dom";
+import {
+  Link,
+  Outlet,
+  Route,
+  Routes,
+  useMatch,
+  useNavigate,
+} from "react-router-dom";
 import styled from "styled-components";
 import Detail_info from "./Detail_info";
 import Detail_event from "./Detail_event";
@@ -49,12 +56,14 @@ const Line = styled(motion.span)`
   background-color: #ff9c46;
 `;
 
-const Detail_tabs = ({ id, detailData }) => {
+const Detail_tabs = ({ id, detailData, DetailData }) => {
   const infoMatch = useMatch(`/book/:id/info`);
   const eventMatch = useMatch("/book/:id/event");
   const recMatch = useMatch("/book/:id/rec");
   const reviewMatch = useMatch("/book/:id/review");
   const changeMatch = useMatch("/book/:id/change");
+
+  const navigate = useNavigate();
 
   return (
     <TabsContainer>
@@ -101,12 +110,14 @@ const Detail_tabs = ({ id, detailData }) => {
         </Tab>
       </Tabs>
       {!eventMatch && !recMatch && !reviewMatch && !changeMatch ? (
-        <Detail_info />
+        <Detail_info DetailData={DetailData} />
       ) : null}
-
-      {infoMatch && <Detail_info detailData={detailData} />}
+      {/* 
+      {infoMatch && (
+        <Detail_info DetailData={DetailData} detailData={detailData} />
+      )} */}
       {eventMatch && <Detail_event />}
-      {recMatch && <Detail_reco detailData={detailData} />}
+      {recMatch && <Detail_reco />}
       {reviewMatch && <Detail_review />}
       {changeMatch && <Detail_change />}
     </TabsContainer>

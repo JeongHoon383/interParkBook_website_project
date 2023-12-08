@@ -1,10 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import '../css/login/login.css';
-import * as cookies from '../util/cookies.js';
-import { jwtDecode } from 'jwt-decode';
-import axios from 'axios';
+import React, { useState, useRef, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import "../css/login/login.css";
+import * as cookies from "../util/cookies.js";
+import { jwtDecode } from "jwt-decode";
+import axios from "axios";
 
 const Input = styled.input`
   display: inline-block;
@@ -17,16 +17,20 @@ const Input = styled.input`
 
 export default function Login() {
   const [isTab, setIsTab] = useState(0);
-  const [login, checkLogin] = useState({ id: '', password: '' });
-  const [orderInfo, checkOrderInfo] = useState({ orderName: '', orderPhone: '', orderPW: '' });
-  const [errorMessage, setErrorMessage] = useState('');
-  const [userInfo, setUserInfo] = useState('');
+  const [login, checkLogin] = useState({ id: "", password: "" });
+  const [orderInfo, checkOrderInfo] = useState({
+    orderName: "",
+    orderPhone: "",
+    orderPW: "",
+  });
+  const [errorMessage, setErrorMessage] = useState("");
+  const [userInfo, setUserInfo] = useState("");
   const [isLogin, setIsLogin] = useState(false);
   const navigate = useNavigate();
 
   const loginTab = [
     {
-      name: '회원',
+      name: "회원",
       content: (
         <Member
           login={login}
@@ -41,7 +45,12 @@ export default function Login() {
         />
       ),
     },
-    { name: '비회원', content: <NotMember orderInfo={orderInfo} checkOrderInfo={checkOrderInfo} /> },
+    {
+      name: "비회원",
+      content: (
+        <NotMember orderInfo={orderInfo} checkOrderInfo={checkOrderInfo} />
+      ),
+    },
   ];
 
   const handleClick = (e) => {
@@ -56,7 +65,7 @@ export default function Login() {
             {loginTab.map((v, i) => (
               <li
                 key={i}
-                className={i === isTab ? 'loginTabLi clickedTab' : 'loginTabLi'}
+                className={i === isTab ? "loginTabLi clickedTab" : "loginTabLi"}
                 onClick={() => {
                   handleClick(i);
                 }}
@@ -79,41 +88,49 @@ function Member(props) {
   const memberHandleSubmit = (e) => {
     e.preventDefault();
 
-    if (props.login.id === '') {
-      props.setErrorMessage('아이디를 입력해주세요');
+    if (props.login.id === "") {
+      props.setErrorMessage("아이디를 입력해주세요");
       return inputId.current.focus();
-    } else if (props.login.password === '') {
-      props.setErrorMessage('비밀번호를 입력해주세요');
+    } else if (props.login.password === "") {
+      props.setErrorMessage("비밀번호를 입력해주세요");
       return inputPassword.current.focus();
     } else {
       axios({
-        method: 'post',
-        url: 'http://localhost:9090/login',
+        method: "post",
+        url: "http://127.0.0.1:9090/login",
         data: props.login,
       })
         .then((result) => {
           if (result.data.login_result) {
             const userId = jwtDecode(result.data.rememberUserInfo);
             if (props.isLogin) {
-              cookies.setCookie('rememberUserInfo', result.data.rememberUserInfo, {
-                expires: new Date(Date.now() + 604800000),
-              });
-              localStorage.setItem('userId', JSON.stringify(userId));
+              cookies.setCookie(
+                "rememberUserInfo",
+                result.data.rememberUserInfo,
+                {
+                  expires: new Date(Date.now() + 604800000),
+                }
+              );
+              localStorage.setItem("userId", JSON.stringify(userId));
             } else {
-              cookies.setCookie('rememberUserInfo', result.data.rememberUserInfo, {
-                expires: new Date(Date.now() + 60000),
-              });
-              sessionStorage.setItem('userId', JSON.stringify(userId));
+              cookies.setCookie(
+                "rememberUserInfo",
+                result.data.rememberUserInfo,
+                {
+                  expires: new Date(Date.now() + 60000),
+                }
+              );
+              sessionStorage.setItem("userId", JSON.stringify(userId));
             }
-            props.navigate('/');
+            props.navigate("/");
           } else {
             if (result.data.count === 1) {
-              props.setErrorMessage('비밀번호가 맞지 않습니다.');
-              props.checkLogin({ ...props.login, password: '' });
+              props.setErrorMessage("비밀번호가 맞지 않습니다.");
+              props.checkLogin({ ...props.login, password: "" });
               return inputPassword.current.focus();
             } else {
-              props.setErrorMessage('회원정보가 존재하지 않습니다.');
-              props.checkLogin({ id: '', password: '' });
+              props.setErrorMessage("회원정보가 존재하지 않습니다.");
+              props.checkLogin({ id: "", password: "" });
             }
           }
         })
@@ -153,7 +170,13 @@ function Member(props) {
         <button type="submit">로그인</button>
         <div className="loginCheck">
           <div className="checkBox">
-            <input type="checkbox" name="loginStay" id="loginStay" checked={props.isLogin} onChange={handleLoginSave} />
+            <input
+              type="checkbox"
+              name="loginStay"
+              id="loginStay"
+              checked={props.isLogin}
+              onChange={handleLoginSave}
+            />
             <label htmlFor="loginStay">
               <span>로그인 상태 유지</span>
             </label>
@@ -171,14 +194,15 @@ function Member(props) {
         </div>
         <div
           style={{
-            color: '#999',
-            margin: '18px 0',
-            fontSize: '0.9em',
-            borderBottom: '1px solid #bbbbbb',
-            paddingBottom: '6px',
+            color: "#999",
+            margin: "18px 0",
+            fontSize: "0.9em",
+            borderBottom: "1px solid #bbbbbb",
+            paddingBottom: "6px",
           }}
         >
-          개인정보 보호를 위해 공용 PC에서 사용 후 SNS 계정의 로그아웃 상태를 반드시 확인해주세요.
+          개인정보 보호를 위해 공용 PC에서 사용 후 SNS 계정의 로그아웃 상태를
+          반드시 확인해주세요.
         </div>
         <ul>
           <li>
@@ -203,14 +227,14 @@ function NotMember(props) {
 
   const notMemberHandleSubmit = (e) => {
     e.preventDefault();
-    if (props.orderInfo.orderName === '') {
-      alert('주문자명을 입력해주세요');
+    if (props.orderInfo.orderName === "") {
+      alert("주문자명을 입력해주세요");
       return inputOrderName.current.focus();
-    } else if (props.orderInfo.orderPhone === '') {
-      alert('휴대폰번호를 입력해주세요');
+    } else if (props.orderInfo.orderPhone === "") {
+      alert("휴대폰번호를 입력해주세요");
       return inputOrderPhone.current.focus();
-    } else if (props.orderInfo.orderPW === '') {
-      alert('비밀번호를 입력해주세요');
+    } else if (props.orderInfo.orderPW === "") {
+      alert("비밀번호를 입력해주세요");
       return inputOrderPW.current.focus();
     }
   };
@@ -222,8 +246,10 @@ function NotMember(props) {
 
   return (
     <fieldset>
-      <div style={{ margin: '18px 0', fontSize: '0.9em' }}>
-        비회원으로 <span style={{ color: '#ef3e42' }}>구매 시 입력하신 정보</span>로 로그인해 주세요.
+      <div style={{ margin: "18px 0", fontSize: "0.9em" }}>
+        비회원으로{" "}
+        <span style={{ color: "#ef3e42" }}>구매 시 입력하신 정보</span>로
+        로그인해 주세요.
       </div>
       <form action="" name="NotMemberForm" onSubmit={notMemberHandleChange}>
         <Input

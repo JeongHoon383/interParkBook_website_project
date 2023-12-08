@@ -15,6 +15,8 @@ import Login from './Pages/Login';
 import SignUp from './Pages/SignUp';
 import Agreement from './Pages/Agreement';
 import SignUpDone from './Pages/SignUpDone';
+import { Provider } from "react-redux";
+import { store, persistor } from "./components/Cart/store";
 
 import reportWebVitals from './reportWebVitals';
 import { createGlobalStyle } from 'styled-components';
@@ -210,6 +212,10 @@ const router = createBrowserRouter([
         path: '/login',
         element: <Login />,
       },
+      {
+        path: '/cart',
+        element: <Cart />,
+      },
     ],
   },
   {
@@ -232,10 +238,12 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <CookiesProvider>
+      <Provider store={store}>
       <QueryClientProvider client={client}>
-        <GlobalStyle />
-        <RouterProvider router={router} />
-      </QueryClientProvider>
+          <GlobalStyle />
+          <RouterProvider router={router} />
+        </QueryClientProvider>
+    </Provider>
     </CookiesProvider>
   </React.StrictMode>
 );
