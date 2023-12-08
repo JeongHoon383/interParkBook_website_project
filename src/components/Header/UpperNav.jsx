@@ -46,10 +46,14 @@ export default function UpperNav() {
                 <Link to="/login">로그인</Link>
               </li>
             )}
+            {!getCookie('rememberUserInfo') ? (
+              <li className="rightTab_li">
+                <Link to="/member">회원가입</Link>
+              </li>
+            ) : null}
             <li className="rightTab_li">
-              <Link to="/member">회원가입</Link>
+              <Link to="">북카트</Link>
             </li>
-            <li className="rightTab_li">북카트</li>
             <li className="rightTab_li myPage" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
               마이페이지
               <IoMdArrowDropdown fontSize="small" />
