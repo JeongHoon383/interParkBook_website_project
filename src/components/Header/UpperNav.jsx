@@ -21,6 +21,7 @@ export default function UpperNav() {
   const handleMouseOut = () => {
     setIsHover(false);
   };
+
   return (
     <div className="upperNav">
       <div className="upperNavCon">
@@ -52,7 +53,7 @@ export default function UpperNav() {
               </li>
             ) : null}
             <li className="rightTab_li">
-              <Link to="">북카트</Link>
+              <Link to="/cart">북카트</Link>
             </li>
             <li className="rightTab_li myPage" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
               마이페이지
