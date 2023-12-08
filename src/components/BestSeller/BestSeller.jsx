@@ -1,13 +1,13 @@
 import React from "react";
-import Book from "./Book";
+import Book from "../BestSeller/Book";
 import { useState } from "react";
-import SearchNavBar from "./SearchNavBar";
-
+import SearchNavBar from "../Search/SearchNavBar";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import SearchSideBar from "./SearchSideBar";
-
+import SearchSideBar from "../Search/SearchSideBar";
+import SearchBookDetail from "../Search/SearchBookDetail";
+import '../../css/search/Search.css';
 
 
 export default function BestSeller() {

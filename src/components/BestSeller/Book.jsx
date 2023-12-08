@@ -4,9 +4,7 @@ import { useEffect } from "react";
 import BookAvatar from "./BookAvatar";
 import BookContent from "./BookContent";
 import BookList from "./BookList";
-
-
-
+import '../../css/search/Search.css';
 
 export default function Book({ filename }) {
   const [bookList, setBookList] = useState([]);
@@ -20,15 +18,9 @@ export default function Book({ filename }) {
   }, []);
 
   return (
-   
-    
-    
+     
     
   <div className="mombook">
-
-
-
-
       <BookList>
         {bookList.map((book) =>
 

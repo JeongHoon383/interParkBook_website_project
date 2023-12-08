@@ -7,9 +7,9 @@ import Detail from "./Pages/Detail";
 import NotFound from "./Pages/NotFound";
 import CategoryMain from "./Pages/CategoryMain";
 import Root from './Pages/Root';
-import BestSeller from './components/BestSeller'
+import BestSeller from "./components/BestSeller/BestSeller";
 import NewSeller from './Pages/NewSeller';
-import Search from "./components/Search";
+import Search from "./components/Search/Search";
 
 
 import reportWebVitals from "./reportWebVitals";
@@ -22,6 +22,8 @@ import Detail_reco from "./components/Detail/Detail_reco";
 import Detail_review from "./components/Detail/Detail_review";
 import Detail_change from "./components/Detail/Detail_change";
 import Cart from "./Pages/Cart";
+import AdminPage from "./components/AdminPage";
+import SearchForm from "./components/Search/SearchForm";
 const GlobalStyle = createGlobalStyle`
 
 html, body, div, span, applet, object, iframe,
@@ -193,10 +195,22 @@ const router = createBrowserRouter([
         path: "/category/list",
         element: <CategoryList />,
       },
+      // {
+      //   path: "/search/:keyword",
+      //   element: <Search/>,
+      // },
       {
         path: "/search",
         element: <Search/>,
       },
+
+      { path: "/newseller", 
+      element: <NewSeller /> }
+      ,
+      { path: "/admin", 
+      element: <AdminPage /> }
+
+
     ],
   },
 ]);

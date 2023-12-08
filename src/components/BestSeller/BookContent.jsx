@@ -1,7 +1,8 @@
 import React from "react";
-import '../css/Search.css';
+import '../../css/search/Search.css';
 import styled from 'styled-components';
 import Bookstar from "./BookStar";
+
 
 export default function BookContent(book) {
   return (

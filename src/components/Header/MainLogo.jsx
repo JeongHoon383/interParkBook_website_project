@@ -2,8 +2,12 @@ import React from 'react';
 import { IoSearch } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 import '../../css/header/mainLogo.css';
+import SearchForm from '../Search/SearchForm'
+
+
 
 export default function MainLogo() {
+
   return (
     <div className="mainLogo">
       <div className="logoBox">
@@ -14,12 +18,14 @@ export default function MainLogo() {
             </Link>
           </h1>
           <div className="search">
-            <form className="searchForm">
-              <input className="searchInput" type="text" />
-              <button className="searchBtn">
-                <IoSearch style={{ color: 'var(--main)' }} />
-              </button>
-            </form>
+
+
+
+          <SearchForm/>
+
+
+
+
             <div className="hit_searcher">
               <ul>
                 <li>

@@ -6,6 +6,8 @@ import UpperNav from './components/Header/UpperNav';
 import MainLogo from './components/Header/MainLogo';
 import BottomNav from './components/Header/BottomNav';
 import Footer from './components/Footer';
+
+
 function App() {
   return (
     <>

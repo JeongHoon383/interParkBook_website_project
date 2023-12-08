@@ -1,0 +1,27 @@
+.adminpagetab{
+	margin: 0 auto;
+	padding-left: 700px;
+/* margin-left:500px; */
+
+}
+
+.adminpagememberbox > div{
+	margin-top: 15px; /* 위쪽 여백 조절 */
+	margin-bottom: 15px; /* 아래쪽 여백 조절 */
+
+}
+
+
+.adminpagebookbox > div{
+	margin-top: 5px; /* 위쪽 여백 조절 */
+	margin-bottom: 5px; /* 아래쪽 여백 조절 */
+
+}
+
+.adminpageinsertbtn{
+	
+	color:grey;
+	padding: 5px;
+	border-radius: 10%;
+	background-color: burlywood;
+}
