@@ -106,10 +106,11 @@ const Detail_hover = () => {
                   height: "10px",
                   borderLeft: "1px solid rgba(0,0,0,0.4)",
                   borderBottom: "1px solid rgba(0,0,0,0.4)",
+
                   background: "#FFFFFF",
                   top: "21.5px",
                   transform: "translateY(-50%) rotate(45deg)",
-                  left: "-6px",
+                  left: "-18px",
                   zIndex: "99",
                 }}></span>
               <Figure style={{ borderRight: "1px solid lightgray" }}>
@@ -139,7 +140,7 @@ const Detail_hover = () => {
                   background: "#FFFFFF",
                   top: "64.5px",
                   transform: "translateY(-50%) rotate(45deg)",
-                  left: "-6px",
+                  left: "-18px",
                   zIndex: "99",
                 }}></span>
               <Figure style={{ borderRight: "1px solid lightgray" }}>
@@ -169,7 +170,7 @@ const Detail_hover = () => {
                   background: "#FFFFFF",
                   top: "107.5px",
                   transform: "translateY(-50%) rotate(45deg)",
-                  left: "-6px",
+                  left: "-18px",
                   zIndex: "99",
                 }}></span>
               <Figure style={{ borderRight: "1px solid lightgray" }}>

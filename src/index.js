@@ -6,9 +6,9 @@ import Main from "./Pages/Main";
 import Detail from "./Pages/Detail";
 import NotFound from "./Pages/NotFound";
 import CategoryMain from "./Pages/CategoryMain";
-import Root from './Pages/Root';
-import BestSeller from './components/BestSeller'
-import NewSeller from './Pages/NewSeller';
+import Root from "./Pages/Root";
+import BestSeller from "./components/BestSeller";
+import NewSeller from "./Pages/NewSeller";
 import Search from "./components/Search";
 import Mypage from "./Pages/Mypage";
 
@@ -185,7 +185,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/bestseller",
-        element:<BestSeller />,
+        element: <BestSeller />,
       },
       {
         path: "/category/main",
@@ -197,7 +197,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/search",
-        element: <Search/>,
+        element: <Search />,
       },
       {
         path: "/mypage",
@@ -207,7 +207,6 @@ const router = createBrowserRouter([
         path: "/cart",
         element: <Cart />,
       },
-
     ],
   },
 ]);

@@ -1,11 +1,5 @@
 import styled from "styled-components";
-import Pagination from "react-js-pagination";
-import {
-  AiOutlineDoubleLeft,
-  AiOutlineLeft,
-  AiOutlineRight,
-  AiOutlineDoubleRight,
-} from "react-icons/ai";
+import PaginationComponent from "./PaginationComponent";
 
 const Sortarea = styled.div`
   width: 770px;
@@ -47,36 +41,6 @@ const Sortarea = styled.div`
     justify-content: space-between;
     padding: 10px 12px;
     background: #f8f8f8;
-    .pagination {
-      display: inline-flex;
-      align-items: center;
-      li {
-        &.disabled {
-          color: #ccc;
-        }
-        a {
-          display: inline-block;
-          width: 26px;
-          line-height: 24px;
-          margin: 0 1px;
-          text-align: center;
-          &.active {
-            font-weight: bold;
-            border-radius: 4px;
-            border: 1px solid #d8d8d8;
-            background: #fff;
-          }
-          &:not(.paginationBtn):hover {
-            border-radius: 4px;
-            border: 1px solid #d8d8d8;
-            background: #fff;
-          }
-          &.paginationBtn {
-            font-size: 16px;
-          }
-        }
-      }
-    }
     .selectOption {
       button {
         line-height: 27px;
@@ -151,7 +115,8 @@ export default function CategoryList_Sort({
             name="listQty"
             id="listQty"
             onChange={handleListQty}
-            value={listQty}>
+            value={listQty}
+          >
             <option value="20">20개씩 보기</option>
             <option value="30">30개씩 보기</option>
             <option value="40">40개씩 보기</option>
@@ -161,28 +126,20 @@ export default function CategoryList_Sort({
             name="soldout"
             id="soldout"
             onChange={handleChangeSoldout}
-            value={isSoldout}>
+            value={isSoldout}
+          >
             <option value="0">품절포함</option>
             <option value="1">품절제외</option>
           </select>
         </span>
       </div>
       <div className="bottomArea">
-        <Pagination
-          totalItemsCount={totalResults}
-          activePage={currentPage}
-          pageRangeDisplayed={10}
-          itemsCountPerPage={listQty}
-          onChange={handlePageChange}
-          linkClassFirst={"paginationBtn"}
-          linkClassPrev={"paginationBtn"}
-          linkClassNext={"paginationBtn"}
-          linkClassLast={"paginationBtn"}
-          activeLinkClass={"active"}
-          firstPageText={<AiOutlineDoubleLeft />}
-          prevPageText={<AiOutlineLeft />}
-          nextPageText={<AiOutlineRight />}
-          lastPageText={<AiOutlineDoubleRight />}
+        <PaginationComponent 
+          totalResults = {totalResults}
+          currentPage = {currentPage}
+          pageRangeDisplayed = {10}
+          itemsCountPerPage = {listQty}
+          handlePageChange = {handlePageChange}
         />
         <span className="selectOption">
           {isCheckedAll ? (
