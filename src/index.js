@@ -190,7 +190,7 @@ const router = createBrowserRouter([
         element: <CategoryMain />,
       },
       {
-        path: "/category/list/:cid",
+        path: "/category/list/:mall",
         element: <CategoryList />,
       },
       {

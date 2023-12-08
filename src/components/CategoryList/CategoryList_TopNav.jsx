@@ -92,14 +92,14 @@ const BackgroundLayout = styled.nav`
 export default function CategoryList_TopNav() {
   const { mall } = useParams();
   const [isDropMenuOpen, setIsDropMenuOpen] = useState([false, false, false]);
-  const [MallData, setMallData] = useState("");
+  const [MallData, setMallData] = useState([]);
 
-  // useEffect(() => {
-  //   axios
-  //     .get(`http://localhost:9090/category/list/${mall}`)
-  //     .then((result) => setMallData(result.data))
-  //     .catch((error) => console.log(error));
-  // }, []);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:9090/category/list/${mall}`)
+      .then((result) => setMallData(result.data))
+      .catch((error) => console.log(error));
+  }, []);
 
   const handleDropMenu = (idx) => {
     let copy = [...isDropMenuOpen];
@@ -121,20 +121,18 @@ export default function CategoryList_TopNav() {
           <span>
             <LiaAngleRightSolid className="angleRight" />
             <button onClick={() => handleDropMenu(0)}>
-              <span>여기에 데이터 넣어라</span>
+              <span>{MallData[0] && MallData[0].currentMall}</span>
               {isDropMenuOpen[0] ? <CiSquareChevUp /> : <CiSquareChevDown />}
             </button>
             {isDropMenuOpen[0] ? (
               <ul className="clickMenu firstDList">
-                <li>
-                  <Link>국내도서</Link>
-                </li>
-                <li>
-                  <Link>외국도서</Link>
-                </li>
-                <li>
-                  <Link>전자책</Link>
-                </li>
+                {
+                  MallData.map(data => (
+                    <li>
+                      <Link>{data.allMall}</Link>
+                    </li>
+                  ))
+                }
               </ul>
             ) : null}
           </span>
