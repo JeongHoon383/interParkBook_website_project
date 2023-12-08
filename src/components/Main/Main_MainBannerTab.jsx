@@ -63,7 +63,7 @@ function Slide({ tab }) {
   const settings = {
     className: 'slideItems',
     arrows: true,
-    dots: true,
+    dots: false,
     lazyLoad: 'anticipated',
     infinite: true,
     autoplay: true,

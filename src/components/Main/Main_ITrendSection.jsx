@@ -31,12 +31,14 @@ export default function Main_ITrendSection() {
 
   useEffect(() => {
     axios
-      .get('/data/itemNewAll.json')
-      .then((result) => {
-        setItemNewAll(result.data.item);
-      })
-      .catch();
-    axios.get('/data/bestSeller.json').then((result) => setBestSeller(result.data.item));
+      .get('http://localhost:9090/new/')
+      .then((result) => setItemNewAll(result.data))
+      .catch((err) => console.error(err));
+
+    axios
+      .get('http://localhost:9090/best/')
+      .then((result) => setBestSeller(result.data))
+      .catch((err) => console.error(err));
   }, []);
 
   const rankSpan = [{ name: '1~5위' }, { name: '6~10위' }];
@@ -85,7 +87,7 @@ export default function Main_ITrendSection() {
                   <img src={v.cover} alt="" />
                 </div>
                 <div className="textBox">
-                  <p className="newTitle">{v.title.split('-')[0]}</p>
+                  <p className="newTitle">{v.title}</p>
                   <p className="newAuthor">{v.author}</p>
                 </div>
               </div>
@@ -131,7 +133,7 @@ function BestSeller({ rank, bestSeller }) {
                   <span className="rankImg">
                     <img src={v.cover} alt="" />
                   </span>
-                  <span className="rankTitle">{v.title.split('-')[0]}</span>
+                  <span className="rankTitle">{v.title}</span>
                 </li>
               ))}
           </ol>,
@@ -144,7 +146,7 @@ function BestSeller({ rank, bestSeller }) {
                   <span className="rankImg">
                     <img src={v.cover} alt="" />
                   </span>
-                  <span className="rankTitle">{v.title.split('-')[0]}</span>
+                  <span className="rankTitle">{v.title}</span>
                 </li>
               ))}
           </ol>,

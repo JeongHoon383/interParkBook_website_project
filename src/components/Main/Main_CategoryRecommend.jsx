@@ -29,71 +29,33 @@ const Img = styled.img`
 
 export default function Main_CategoryRecommend() {
   const [isHover, setIsHover] = useState(0);
-  const [dataList1, setDataList1] = useState([]);
-  const [dataList2, setDataList2] = useState([]);
-  const [dataList3, setDataList3] = useState([]);
-  const [dataList4, setDataList4] = useState([]);
-  const [dataList5, setDataList5] = useState([]);
-  const [dataList6, setDataList6] = useState([]);
+  const [dataList, setDataList] = useState([]);
 
-  useEffect(() => {
+  function content(searchCategoryId) {
     axios({
       method: 'get',
-      url: '/data/editorRecommend.json',
+      url: `http://localhost:9090/field/${searchCategoryId}`,
     }).then((result) => {
-      setDataList1(result.data[0]);
-      setDataList2(result.data[1]);
-      setDataList3(result.data[2]);
-      setDataList4(result.data[3]);
-      setDataList5(result.data[4]);
-      setDataList6(result.data[5]);
+      setDataList(result.data);
     });
-  });
+  }
+
+  useEffect(() => {
+    content(53471);
+  }, []);
 
   const slideArr = [
-    { name: '건강/요리', content: <Slide dataList={dataList1} /> },
-    { name: '맛집여행', content: <Slide dataList={dataList2} /> },
-    { name: '소설', content: <Slide dataList={dataList3} /> },
-    { name: '경제', content: <Slide dataList={dataList4} /> },
-    { name: '유아/아동', content: <Slide dataList={dataList5} /> },
-    { name: '외국도서', content: <Slide dataList={dataList6} /> },
+    { name: '건강/요리', cid: '53471' },
+    { name: '맛집여행', cid: '50875' },
+    { name: '소설', cid: '50993' },
+    { name: '경제', cid: '3057' },
+    { name: '유아/아동', cid: '35091' },
   ];
 
   const handleHover = (index) => {
     setIsHover(index);
   };
 
-  return (
-    <div className="categoryRecommend">
-      <div className="categoryRecommendHeader">
-        <h3>
-          <span>분야별</span>
-          <span>추천</span>
-        </h3>
-      </div>
-      <div className="categoryRecommendBox">
-        <div className="categoryTabs">
-          <ul className="tabWrap">
-            {slideArr.map((v, i) => (
-              <li
-                key={i}
-                className={i === isHover ? 'tabLi focused' : 'tabLi'}
-                onMouseOver={() => {
-                  handleHover(i);
-                }}
-              >
-                {v.name}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="categoryContents">{slideArr[isHover].content}</div>
-      </div>
-    </div>
-  );
-}
-
-function Slide({ dataList }) {
   const settings = {
     dots: false,
     arrows: true,
@@ -115,25 +77,48 @@ function Slide({ dataList }) {
       </Pre>
     ),
   };
+
   return (
-    <>
-      {dataList.map((v, i) => (
-        <div className={`category_ ${v.searchCategoryId}`} key={i}>
+    <div className="categoryRecommend">
+      <div className="categoryRecommendHeader">
+        <h3>
+          <span>분야별</span>
+          <span>추천</span>
+        </h3>
+      </div>
+      <div className="categoryRecommendBox">
+        <div className="categoryTabs">
+          <ul className="tabWrap">
+            {slideArr.map((v, i) => (
+              <li
+                key={i}
+                className={i === isHover ? 'tabLi focused' : 'tabLi'}
+                onMouseOver={() => {
+                  handleHover(i);
+                  content(v.cid);
+                }}
+              >
+                {v.name}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="categoryContents">
           <Slider {...settings}>
-            {v.item.map((ic, i) => (
-              <>
+            {dataList.map((v, i) => (
+              <div className={`category_ ${v.searchCategoryId}`} key={i}>
                 <div className="categoryImgBox" key={i}>
-                  <img src={ic.cover} alt="" />
+                  <img src={v.cover} alt="" />
                 </div>
-                <p className="categoryTitle">{ic.title.split('-')[0]}</p>
+                <p className="categoryTitle">{v.title.split('-')[0]}</p>
                 <p className="categoryPrice" style={{ color: '#e66a57' }}>
-                  {ic.priceSales.toLocaleString()}원
+                  {v.priceSales.toLocaleString()}원
                 </p>
-              </>
+              </div>
             ))}
           </Slider>
         </div>
-      ))}
-    </>
+      </div>
+    </div>
   );
 }

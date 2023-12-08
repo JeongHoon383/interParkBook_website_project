@@ -20,7 +20,6 @@ export default function SignForm() {
   const {
     register,
     handleSubmit,
-    getValues,
     formState: { errors, isValid },
   } = useFormContext();
 

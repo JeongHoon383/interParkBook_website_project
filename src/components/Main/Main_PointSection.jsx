@@ -86,23 +86,23 @@ export default function Main_PointSection() {
   useEffect(() => {
     axios({
       method: 'get',
-      url: '/data/blogBest.json',
+      url: 'http://localhost:9090/blogbest',
     })
-      .then((result) => setBlogBest([result.data]))
+      .then((result) => setBlogBest(result.data))
       .catch((err) => console.error(err));
 
     axios({
       method: 'get',
-      url: '/data/musicBestseller.json',
+      url: 'http://localhost:9090/music',
     })
-      .then((result) => setMusic([result.data]))
+      .then((result) => setMusic(result.data))
       .catch((err) => console.error(err));
 
     axios({
       method: 'get',
-      url: '/data/dvdBestseller.json',
+      url: 'http://localhost:9090/dvd',
     })
-      .then((result) => setDvd([result.data]))
+      .then((result) => setDvd(result.data))
       .catch((err) => console.error(err));
   }, []);
 
@@ -184,33 +184,31 @@ function BlogBestSlide({ blogBest }) {
   };
   return (
     <>
-      {blogBest.map((v, i) => (
-        <StyledSlider {...settings}>
-          {v.item.map((ic, i) => (
-            <div className="slideItem" key={i}>
-              <div className="blogBestImgBox">
-                <img src={ic.cover} alt="" />
-              </div>
-              <div className="blogBestText">
-                <div className="rateWrap">
-                  <div className="starRateWrap">
-                    <div
-                      className="starRate"
-                      style={{ width: ic.customerReviewRank === 10 ? '100%' : ic.customerReviewRank === 7 ? '60%' : 0 }}
-                    ></div>
-                    <span className="customerReviewRank">{ic.customerReviewRank}</span>
-                  </div>
-                </div>
-                <p className="blogBestTitle">{ic.title.split('-')[0]}</p>
-                <span className="priceStandard" style={{ marginRight: '5px' }}>
-                  {ic.priceStandard.toLocaleString()}원
-                </span>
-                <span className="priceSales">{ic.priceSales.toLocaleString()}원</span>
-              </div>
+      <StyledSlider {...settings}>
+        {blogBest.map((v, i) => (
+          <div className="slideItem" key={i}>
+            <div className="blogBestImgBox">
+              <img src={v.cover} alt="" />
             </div>
-          ))}
-        </StyledSlider>
-      ))}
+            <div className="blogBestText">
+              <div className="rateWrap">
+                <div className="starRateWrap">
+                  <div
+                    className="starRate"
+                    style={{ width: v.customerReviewRank === 10 ? '100%' : v.customerReviewRank === 9 ? '90%' : 0 }}
+                  ></div>
+                  <span className="customerReviewRank">{v.customerReviewRank}</span>
+                </div>
+              </div>
+              <p className="blogBestTitle">{v.title.split('-')[0]}</p>
+              <span className="priceStandard" style={{ marginRight: '5px' }}>
+                {v.priceStandard.toLocaleString()}원
+              </span>
+              <span className="priceSales">{v.priceSales.toLocaleString()}원</span>
+            </div>
+          </div>
+        ))}
+      </StyledSlider>
     </>
   );
 }
@@ -238,22 +236,20 @@ function DVDSlide({ dvd }) {
   };
   return (
     <>
-      {dvd.map((v, i) => (
-        <Slider {...settings}>
-          {v.item.map((ic, i) => (
-            <>
-              <div className="dvdImgBox" key={i}>
-                <img src={ic.cover} alt="" />
-              </div>
-              <p className="dvdTitle">{ic.title.split('-')[0]}</p>
-              <p className="dvdPrice" style={{ color: '#e66a57' }}>
-                <span style={{ color: '#e66a57' }}>{ic.priceSales.toLocaleString()}원</span>
-                <span style={{ color: '#666', fontSize: '0.9em', marginLeft: '4px' }}>+{ic.mileage}P</span>
-              </p>
-            </>
-          ))}
-        </Slider>
-      ))}
+      <Slider {...settings}>
+        {dvd.map((v, i) => (
+          <>
+            <div className="dvdImgBox" key={i}>
+              <img src={v.cover} alt="" />
+            </div>
+            <p className="dvdTitle">{v.title.split('-')[0]}</p>
+            <p className="dvdPrice" style={{ color: '#e66a57' }}>
+              <span style={{ color: '#e66a57' }}>{v.priceSales.toLocaleString()}원</span>
+              <span style={{ color: '#666', fontSize: '0.9em', marginLeft: '4px' }}>+{v.mileage}P</span>
+            </p>
+          </>
+        ))}
+      </Slider>
     </>
   );
 }
@@ -280,22 +276,20 @@ function MusicSlide({ music }) {
   };
   return (
     <>
-      {music.map((v, i) => (
-        <Slider {...settings}>
-          {v.item.map((ic, i) => (
-            <>
-              <div className="musicImgBox" key={i}>
-                <img src={ic.cover} alt="" />
-              </div>
-              <p className="musicTitle">{ic.title.split('-')[0]}</p>
-              <p className="dvdPrice" style={{ color: '#e66a57' }}>
-                <span style={{ color: '#e66a57' }}>{ic.priceSales.toLocaleString()}원</span>
-                <span style={{ color: '#666', fontSize: '0.9em', marginLeft: '4px' }}>+{ic.mileage}P</span>
-              </p>
-            </>
-          ))}
-        </Slider>
-      ))}
+      <Slider {...settings}>
+        {music.map((v, i) => (
+          <>
+            <div className="musicImgBox" key={i}>
+              <img src={v.cover} alt="" />
+            </div>
+            <p className="musicTitle">{v.title.split('-')[0]}</p>
+            <p className="dvdPrice" style={{ color: '#e66a57' }}>
+              <span style={{ color: '#e66a57' }}>{v.priceSales.toLocaleString()}원</span>
+              <span style={{ color: '#666', fontSize: '0.9em', marginLeft: '4px' }}>+{v.mileage}P</span>
+            </p>
+          </>
+        ))}
+      </Slider>
     </>
   );
 }
