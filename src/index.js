@@ -10,7 +10,7 @@ import Root from './Pages/Root';
 import BestSeller from './components/BestSeller'
 import NewSeller from './Pages/NewSeller';
 import Search from "./components/Search";
-
+import Mypage from "./Pages/Mypage";
 
 import reportWebVitals from "./reportWebVitals";
 import { createGlobalStyle } from "styled-components";
@@ -190,13 +190,18 @@ const router = createBrowserRouter([
         element: <CategoryMain />,
       },
       {
-        path: "/category/list",
+        path: "/category/:categoryId",
         element: <CategoryList />,
       },
       {
         path: "/search",
         element: <Search/>,
       },
+      {
+        path: "/mypage",
+        element: <Mypage />,
+      },
+
     ],
   },
 ]);

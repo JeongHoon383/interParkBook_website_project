@@ -92,7 +92,7 @@ export default function CategoryList_MainSection() {
         handleSelectAll={handleSelectAll}
         isCheckedAll={isCheckedAll}
         setIsCheckedAll={setIsCheckedAll}
-        checkList={checkList}
+        setCheckList={setCheckList}
       />
     </MainSection>
   );
