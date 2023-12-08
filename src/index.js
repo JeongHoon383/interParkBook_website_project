@@ -6,6 +6,11 @@ import Main from "./Pages/Main";
 import Detail from "./Pages/Detail";
 import NotFound from "./Pages/NotFound";
 import CategoryMain from "./Pages/CategoryMain";
+import Root from './Pages/Root';
+import BestSeller from './components/BestSeller'
+import NewSeller from './Pages/NewSeller';
+import Search from "./components/Search";
+import Mypage from "./Pages/Mypage";
 
 import reportWebVitals from "./reportWebVitals";
 import { createGlobalStyle } from "styled-components";
@@ -180,24 +185,29 @@ const router = createBrowserRouter([
       },
       {
         path: "/bestseller",
-        element: <div>bestseller</div>,
+        element:<BestSeller />,
       },
       {
         path: "/category/main",
         element: <CategoryMain />,
       },
       {
-        path: "/category/list",
+        path: "/category/:categoryId",
         element: <CategoryList />,
       },
       {
         path: "/search",
-        element: <div>search</div>,
+        element: <Search/>,
+      },
+      {
+        path: "/mypage",
+        element: <Mypage />,
       },
       {
         path: "/cart",
         element: <Cart />,
       },
+
     ],
   },
 ]);

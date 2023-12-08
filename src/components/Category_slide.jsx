@@ -1,105 +1,95 @@
 import React from 'react';
 import Slider from 'react-slick';
-import { IoIosArrowBack } from "react-icons/io";
-import styled from "styled-components"
+import styled from 'styled-components';
 
-const BannerLastImg = styled.div`
-  margin : 0 auto;
-
-  .banner_ul{
-    display : flex;
-  }
-
-  .banner_ul li img{
-    height : 322px;
-  }
-
-  .banner_ul li:not(:last-child){
-    
+const Banner = styled.div`
+  .banner_ul {
+    display: flex;
   }
 `;
 
-const BannerImg = styled.div`
-    .banner_img{
-    margin : 0 auto;
-    height : 322px;
-  }
+const Pre = styled.div`
+  width: 40px;
+  height: 20px;
+  position: absolute;
+  left: 1%;
+  z-index: 3;
 `;
 
-function SampleNextArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{ ...style,
-        display : "none",
-        position : "absolute",
-        top : "161.5px",
-        right : "1px",
-        background: "var(--default)", 
-      }}
-      onClick={onClick}
-    />
-  );
-}
+const NextTo = styled.div`
+  width: 40px;
+  height: 20px;
+  position: absolute;
+  right: 1%;
+  z-index: 3;
+`;
 
-function SamplePrevArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{ ...style, 
-        zIndex : 10,
-        display : "none",
-        position : "absolute",
-        top : "161.5px",
-        left : "1px",
-        background: "var(--default)" 
-      }}
-      onClick={onClick}
-    />
-  );
-}
-
-
-export default function Slide() {
+const Img = styled.img`
+  width: 100%;
+`;
+export default function Slide({ slideRef, afterChange }) {
   const settings = {
-    dots: false,
+    className: '',
+    arrows: true,
     infinite: true,
-    speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: false,
-    autoplaySpeed: 3000,
-    cssEase: 'liner',
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />
+    autoplay: true,
+    speed: 1000,
+    autoplaySpeed: 5000,
+    draggable: false,
+    dotsClass: 'dots_custom',
+    nextArrow: (
+      <NextTo>
+        <Img src='/img/Slide/right-arrow.svg' />
+      </NextTo>
+    ),
+    prevArrow: (
+      <Pre>
+        <Img src='/img/Slide/left-arrow.svg' />
+      </Pre>
+    ),
   };
+
+  const banner_img_sources = [
+    'bn_579x323_banner1.jpeg',
+    'bn_579x323_banner2.jpeg',
+    'bn_579x323_banner3.jpeg',
+    'bn_main_579x323_banner4.jpeg',
+    'bn_579x323_banner5.jpeg',
+  ];
+
+  const banner_lastImg_sources = [
+    'Big_6_1_192x323_231121_banner6-1.jpeg',
+    'Big_6_2_192x323_231121_banner6-2.jpeg',
+    'Big_6_3_192x323_231114_banner6-3.jpeg',
+  ];
+
   return (
     <div>
-      <Slider {...settings}>
-        <BannerImg>
-          <img className="banner_img" src="/img/CategoryMain/topbanner_img/bn_579x323_banner1.jpeg" />
-        </BannerImg>
-        <BannerImg>
-          <img className="banner_img" src="/img/CategoryMain/topbanner_img/bn_579x323_banner2.jpeg" />
-        </BannerImg>
-        <BannerImg>
-          <img className="banner_img" src="/img/CategoryMain/topbanner_img/bn_579x323_banner3.jpeg" />
-        </BannerImg>
-        <BannerImg>
-          <img className="banner_img" src="/img/CategoryMain/topbanner_img/bn_main_579x323_banner4.jpeg"/>
-        </BannerImg>
-        <BannerImg>
-          <img className="banner_img" src="/img/CategoryMain/topbanner_img/bn_579x323_banner5.jpeg" />
-        </BannerImg>
-        <BannerLastImg>
-          <ul className='banner_ul'>            
-            <li><img className='banner_lastImg' src="/img/CategoryMain/topbanner_img/Big_6_1_192x323_231121_banner6-1.jpeg" alt="" /></li>
-            <li><img className='banner_lastImg' src="/img/CategoryMain/topbanner_img/Big_6_2_192x323_231121_banner6-2.jpeg" alt="" /></li>
-            <li><img className='banner_lastImg' src="/img/CategoryMain/topbanner_img/Big_6_3_192x323_231114_banner6-3.jpeg" alt="" /></li>
+      <Slider ref={slideRef} afterChange={afterChange} {...settings}>
+        {banner_img_sources.map((source) => (
+          <div key={source}>
+            <img
+              className='banner_img'
+              alt=''
+              src={`/img/CategoryMain/topbanner_img/${source}`}
+            />
+          </div>
+        ))}
+        <Banner>
+          <ul className='banner_ul'>
+            {banner_lastImg_sources.map((source) => (
+              <li key={source}>
+                <img
+                  className='banner_lastImg'
+                  src={`/img/CategoryMain/topbanner_img/${source}`}
+                  alt=''
+                />
+              </li>
+            ))}
           </ul>
-        </BannerLastImg>
+        </Banner>
       </Slider>
     </div>
   );
