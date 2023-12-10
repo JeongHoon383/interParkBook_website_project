@@ -223,5 +223,5 @@ export default function CategoryList_TopNav() {
         </nav>
       </div>
     </BackgroundLayout>
-  );
+  ); 
 }
