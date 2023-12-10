@@ -16,6 +16,7 @@
 .allTab {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .categoryTab {
@@ -35,7 +36,7 @@
 .allCategory {
   position: relative;
   color: #000;
-  z-index: 99;
+  z-index: 102;
 }
 
 .category {
@@ -63,26 +64,22 @@
 }
 
 .categoryNav li {
+  width: 100%;
   font-weight: 500;
-  line-height: 150%;
+  line-height: 120%;
 }
 
-.categoryNav li:hover {
+.categoryNav li a{
+  display: inline-block;
+  width: 95%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.categoryNav li:hover a{
   color: var(--hover);
   text-decoration: underline;
-}
-
-.categoryNav li.reservationSell,
-.categoryNav li.translateBook {
-  font-weight: 800;
-  color: var(--main);
-}
-
-.goodsTitle:after {
-  content: '>';
-  margin-left: 5px;
-  font-size: 0.7em;
-  font-weight: 800;
 }
 
 .mainNav {

@@ -1,15 +1,19 @@
 import React from 'react';
-import Domestic from './Domestic';
-import Foreign from './Foreign';
-import Goods from './Goods';
+import HeaderCategoryList from './HeaderCategoryList';
 
 export default function AllCategory() {
   return (
     <div className="allCategory">
       <div className="mainNav">
-        <Domestic />
-        <Foreign />
-        <Goods />
+        <HeaderCategoryList
+          mall={'국내도서'}
+        />
+        <HeaderCategoryList
+          mall={'외국도서'}
+        />
+        <HeaderCategoryList
+          mall={'전자책'}
+        />
       </div>
     </div>
   );

@@ -15,10 +15,10 @@ export default function BottomNav() {
     <div className="bottomNav">
       <div className="bottomNav_tab">
         <div className={`categoryTab`} onClick={handleClick}>
-          <a href="#" className="allTab">
+          <span className="allTab">
             전체 카테고리
             {isClick == true ? <IoIosArrowUp /> : <IoIosArrowDown />}
-          </a>
+          </span>
           {isClick == true ? <AllCategory /> : null}
         </div>
         <div className="otherTab">
