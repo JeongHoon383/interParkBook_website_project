@@ -9,9 +9,9 @@ import { CiSearch } from "react-icons/ci";
 import Detail_BookInfo from "../components/Detail/Detail_BookInfo";
 import Detail_tabs from "../components/Detail/Detail_tabs";
 import Detail_hover from "../components/Detail/Detail_hover";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-import { detailState } from "../components/Detail/atom";
+import { useSelector } from "react-redux";
 const MotionNav = styled(motion.div)`
   position: fixed;
   top: 0;
@@ -154,8 +154,8 @@ const Detail = () => {
   const opacity = useTransform(scrollY, [0, 186], [0, 1]);
 
   const { id } = useParams();
-  console.log(id);
-
+  let a = useSelector((state) => state);
+  console.log(a);
   /*   useEffect(() => {
     axios
       .get(
@@ -185,7 +185,16 @@ const Detail = () => {
         .then((result) => result.data.documents[0]),
   });
 
-  console.log(detailData, "테스트");
+  const {
+    isPending: DetailLoading,
+    error: DetailError,
+    data: DetailData,
+  } = useQuery({
+    queryKey: ["DetailData"],
+    queryFn: () =>
+      axios.get(`http://127.0.0.1:9090/book/${id}`).then((res) => res.data),
+  });
+  console.log(DetailData);
 
   return (
     <>
@@ -193,9 +202,10 @@ const Detail = () => {
         style={{
           opacity: opacity,
           scale: opacity,
-        }}>
+        }}
+      >
         <div className="center">
-          <div>{detailData?.title}</div>
+          <div>{DetailData?.title.split("-")[0]}</div>
           <div>
             <span>
               {detailData?.sale_price.toLocaleString()}
@@ -218,8 +228,11 @@ const Detail = () => {
           <TitleBox>
             <Title>
               <div>
-                <h1>{detailData?.title}</h1>
-                <span>: {data?.title && data.title.split("-")[1]}</span>
+                <h1>{DetailData?.title.split("-")[0]}</h1>
+                <span>
+                  {DetailData?.title &&
+                    `:` + DetailData.title.split("-").reverse()[0]}
+                </span>
               </div>
               <div className="event">
                 <span>베스트셀러</span>
@@ -244,11 +257,19 @@ const Detail = () => {
               </span>
             </Star>
           </TitleBox>
-          <Detail_BookInfo detailData={detailData} data={data} />
+          <Detail_BookInfo
+            DetailData={DetailData}
+            detailData={detailData}
+            data={data}
+          />
           <Detail_hover />
         </div>
       </Container>
-      <Detail_tabs id={id} detailData={detailData}></Detail_tabs>
+      <Detail_tabs
+        id={id}
+        DetailData={DetailData}
+        detailData={detailData}
+      ></Detail_tabs>
     </>
   );
 };

@@ -4,7 +4,7 @@ import SearchBookDetail from './SearchBookDetail'
 import SearchBookCheckIcons from "./SearchBookCheckIcons";
 
 
-export default function SearchBookResult(){
+export default function SearchBookResult({title}){
 
 	return(
 	<div className="bookresultbox">
@@ -13,7 +13,9 @@ export default function SearchBookResult(){
 		<SearchBookCheckIcons/>
 
 		
-		<SearchBookDetail/>
+		<SearchBookDetail title={title} />
+
+
 		<SearchBookBuy/>
 
 		</div>

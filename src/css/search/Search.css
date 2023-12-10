@@ -372,6 +372,8 @@ margin-top: 10px;
 margin-bottom: 25px;
 display: flex;
 flex-wrap: wrap;
+border-bottom : 1px solid lightgray;
+
 }
 
 .searchresulttop{
@@ -465,11 +467,11 @@ color:black;
 
 .categoryresultline{
   display:flex;
-  cursor:pointer;
+  border:1px dark grey;
   margin:0 auto;
   clear:both;
   padding-top:5px;
-  background: url(//qi-b.qoo10cdn.com/renewPark/reBookpark/search/bg_cate_open.gif) repeat-x left 10px #fff;
+  /* background: url(//qi-b.qoo10cdn.com/renewPark/reBookpark/search/bg_cate_open.gif) repeat-x left 10px #fff; */
 }
 
 
@@ -608,10 +610,12 @@ border-bottom: 0.5px solid #a1a1a1;
   }
   .searchtitle{
     font-weight: 600;
-    font-size: 15px;
+    font-size: 14px;
     color:rgb(181, 6, 6);
-    margin-bottom: 5px;
+    margin-bottom: 0px;
     margin-left: 13px;
+    line-height: 30px;
+    
 
   }
   
@@ -731,6 +735,7 @@ text-align: right;
     /* border:1px solid green; */
     display: flex;
     margin-bottom: 10px;
+    margin-top : 30px;
   }
 
 .searchreview{
@@ -751,6 +756,8 @@ text-align: right;
 .searchtapwrap{
   display:flex;
   flex-wrap: wrap;
+width:10px;  
+
 }
 
 
@@ -1020,9 +1027,10 @@ margin-bottom: 5px;
 
 
 .searchtabtextbox{
-  margin-top: 5px;
+  margin-top: 10px;
   font-size: 13px;
-  margin-bottom: 5px;
+  margin-bottom: 1px;
+  padding-left: 3px;
 }
 
 .searchpagination{
@@ -1040,31 +1048,42 @@ margin-bottom: 5px;
 
 .bookresultbox{
   display:flex;
-  margin-bottom: 50px;
+  /* margin-bottom: 50px; */
   border-bottom: 1px dotted lightgray;
-  padding-bottom: 30px;
+  padding-bottom: 20px;
+  
+
 
 
 }
 
 .bookresult{
   /* border:5px solid yellow; */
-  width: 500px;  
+  width: 100%;
 }
 
+.bookresult .searchcheckicons {
+  width: 5%;
+  /* margin-right: 2%; */
+}
+
+.bookresult .searchbookdetail {
+  width: 65%;
+  margin-right: 10%;
+}
 
 /* SearchPagination */
-.searchbookbuy{
+.bookresult .searchbookbuy{
 margin:0 auto;
+width: 20%;
+justify-content: center;
 /* border:5px solid orange; */
 
 font-size: 10px;
 line-height: 20px;
-margin-left: 180px;
 
 padding:15px;
 border-left: 1px solid rgb(234, 234, 234);
-margin-top: 20px;
 }
 
 .salesindex{
@@ -1072,6 +1091,7 @@ margin-top: 20px;
   display: flex;
   flex-wrap: nowrap;
   gap:3px;
+  color : pink;
 }
 
 .salesindexred{
@@ -1118,16 +1138,15 @@ height: 9px;
 
 .addbookcart{
 display: flex;
-width:50px;
-height: 10px;
+color:orange;
 cursor: pointer;
 margin-bottom: 5px;
+flex-direction: nowrap;
 }
 
 .buynow{
   display: flex;
-  width:50px;
-  height: 10px;
+  color:grey;
   cursor: pointer;
 }
 
@@ -1200,14 +1219,6 @@ margin-top: 3px;
   margin-top: 10px;
 }
 
-.searchbookdetaillisting{
-margin-top:10px;
-margin-left: 15px;
-white-space: nowrap;
-line-height: 22px;
-
-}
-
 
 .searchbookdetail-sub{
 display:flex;
@@ -1220,6 +1231,12 @@ font-size: 9px;
   display: flex;
   flex-wrap: wrap;
 }
+
+
+.searchminiblueicons{
+  display:flex;
+}
+
 
 .series{
 margin-top: 2px;
@@ -1238,11 +1255,28 @@ margin-left: 3px;
   margin-top: 2px;
 }
 
+
+.searchbookdetaillisting{
+  margin-top:10px;
+  margin-left: 15px;
+  width: 90%;
+  white-space: nowrap;
+  line-height: 22px;
+  }
+  
+.searchbookdetaillisting .title_wrap {
+  display: flex;
+}
+
 .searchbookdetail-boldtitle{
 font-weight: 600;
 font-size: 13px;
 color:#373737;
 margin-left: 5px;
+overflow: hidden;
+white-space: nowrap;
+text-overflow: ellipsis;
+width: 35%;
 }
 
 .searchbookdetailpsec{
@@ -1271,3 +1305,5 @@ margin-left: 10px;
 justify-content: space-between;
 
 }
+
+

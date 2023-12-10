@@ -187,7 +187,7 @@ function BlogBestSlide({ blogBest }) {
       {blogBest.map((v, i) => (
         <StyledSlider {...settings}>
           {v.item.map((ic, i) => (
-            <div className="slideItem">
+            <div className="slideItem" key={i}>
               <div className="blogBestImgBox">
                 <img src={ic.cover} alt="" />
               </div>
