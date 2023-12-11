@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { LiaAngleRightSolid } from "react-icons/lia";
@@ -19,6 +19,14 @@ const BackgroundLayout = styled.nav`
       line-height: 41px;
       > span {
         position: relative;
+        &:hover {
+          .mallList {
+            display: block;
+          }
+          .depthCategoryList {
+            display: flex;
+          }
+        }
         svg {
           position: relative;
           display: inline-block;
@@ -39,6 +47,7 @@ const BackgroundLayout = styled.nav`
         }
         .clickMenu {
           position: absolute;
+          display: none;
           top: 0;
           left: 20px;
           transform: translateY(20px);
@@ -64,8 +73,7 @@ const BackgroundLayout = styled.nav`
             }
           }
         }
-        .firstDepthList {
-          display: flex;
+        .depthCategoryList {
           padding: 10px 0;
           ul {
             width: 120px;
@@ -100,13 +108,13 @@ export default function CategoryList_TopNav() {
     false,
     false,
     false,
-    false
+    false,
   ]);
   const parameterArr = useParams().categoryPath.split("_");
   const [allMall, setAllMall] = useState([]);
   const [allFirstD, setAllFirstD] = useState([]);
   const [allSecondD, setAllSecondD] = useState([]);
-
+  
   const handleDropMenu = (idx) => {
     let copy = [...isDropMenuOpen];
     if (copy[idx]) {
@@ -120,19 +128,21 @@ export default function CategoryList_TopNav() {
   };
 
   useEffect(() => {
-    axios("http://127.0.0.1:9090/category/list/mall")
-    .then((result) => setAllMall(result.data)
+    axios("http://127.0.0.1:9090/category/list/mall").then((result) =>
+      setAllMall(result.data)
     );
 
-    axios(`http://127.0.0.1:9090/category/list/${parameterArr[0]}`)
-    .then((result) => setAllFirstD(result.data)
+    axios(`http://127.0.0.1:9090/category/list/${parameterArr[0]}`).then(
+      (result) => setAllFirstD(result.data)
     );
 
-    axios(`http://127.0.0.1:9090/category/list/${parameterArr[0]}/${parameterArr[1]}`)
-    .then((result) => setAllSecondD(result.data)
-    );
-  }, []);
+    if(parameterArr[2]){
+      axios(
+        `http://127.0.0.1:9090/category/list/${parameterArr[0]}/${parameterArr[1]}`
+      ).then((result) => setAllSecondD(result.data));
+    }
 
+  }, [parameterArr[1]]);
 
   const show1DCategory = (categoryData) => {
     const arr = [];
@@ -143,7 +153,12 @@ export default function CategoryList_TopNav() {
       arr.push(
         <ul key={i}>
           {categoryArr.map((item) => (
-            <li key={item.firstD} className={item.firstD === parameterArr[1] ? 'currentCategory' : null}>
+            <li
+              key={item.firstD}
+              className={
+                item.firstD === parameterArr[1] ? "currentCategory" : null
+              }
+            >
               <Link to={`/category/list/${item.mall}_${item.firstD}`}>
                 {item.firstD}
               </Link>
@@ -165,8 +180,15 @@ export default function CategoryList_TopNav() {
       arr.push(
         <ul key={i}>
           {categoryArr.map((item) => (
-            <li key={item.secondD} className={item.secondD === parameterArr[2] ? 'currentCategory' : null}>
-              <Link to={`/category/list/${item.mall}_${item.firstD}_${item.secondD}`}>
+            <li
+              key={item.secondD}
+              className={
+                item.secondD === parameterArr[2] ? "currentCategory" : null
+              }
+            >
+              <Link
+                to={`/category/list/${item.mall}_${item.firstD}_${item.secondD}`}
+              >
                 {item.secondD}
               </Link>
             </li>
@@ -183,52 +205,59 @@ export default function CategoryList_TopNav() {
       <div className="centerLayout">
         <nav className="categoryNavigation">
           <Link to={"/"}>메인페이지</Link>
-          <span>
+
+          <span
+            onMouseEnter={() => handleDropMenu(0)}
+            onMouseLeave={() => handleDropMenu(0)}
+          >
             <LiaAngleRightSolid className="angleRight" />
-            <button onClick={() => handleDropMenu(0)}>
-              <span>{allFirstD[0] && allFirstD[0].mall}</span>
+            <button>
+              <span>{parameterArr[0]}</span>
               {isDropMenuOpen[0] ? <CiSquareChevUp /> : <CiSquareChevDown />}
             </button>
-            {isDropMenuOpen[0] ? (
-              <ul className="clickMenu mallList">
-                {allMall.map((item) => (
-                  <li key={item.mall} className={item.mall === parameterArr[0] ? 'currentCategory' : null}>
-                    <Link to={"/category/main"}>{item.mall}</Link>
-                  </li>
-                ))}
-              </ul>
-            ) : null}
+            <ul className="clickMenu mallList">
+              {allMall.map((item) => (
+                <li
+                  key={item.mall}
+                  className={
+                    item.mall === parameterArr[0] ? "currentCategory" : null
+                  }
+                >
+                  <Link to={"/category/main"}>{item.mall}</Link>
+                </li>
+              ))}
+            </ul>
           </span>
 
-          <span>
+          <span
+            onMouseEnter={() => handleDropMenu(1)}
+            onMouseLeave={() => handleDropMenu(1)}
+          >
             <LiaAngleRightSolid className="angleRight" />
-            <button onClick={() => handleDropMenu(1)}>
+            <button>
               <span>{parameterArr[1]}</span>
               {isDropMenuOpen[1] ? <CiSquareChevUp /> : <CiSquareChevDown />}
             </button>
-            {allFirstD.length > 0 && isDropMenuOpen[1] ? (
-              <div className="clickMenu firstDepthList">
-                {show1DCategory(allFirstD)}
-              </div>
-            ) : null}
+            <div className="clickMenu depthCategoryList">
+              {isDropMenuOpen[1] ? show1DCategory(allFirstD) : null}
+            </div>
           </span>
 
-          {
-            parameterArr[2] ? (
-              <span>
+          {parameterArr[2] ? (
+            <span
+              onMouseEnter={() => handleDropMenu(2)}
+              onMouseLeave={() => handleDropMenu(2)}
+            >
               <LiaAngleRightSolid className="angleRight" />
-              <button onClick={() => handleDropMenu(2)}>
+              <button>
                 <span>{parameterArr[2]}</span>
                 {isDropMenuOpen[2] ? <CiSquareChevUp /> : <CiSquareChevDown />}
               </button>
-              {allSecondD.length > 0 && isDropMenuOpen[2] ? (
-              <div className="clickMenu firstDepthList">
-                {show2DCategory(allSecondD)}
+              <div className="clickMenu depthCategoryList">
+                {isDropMenuOpen[2] ? show2DCategory(allSecondD) : null}
               </div>
-              ) : null}
             </span>
-            ) : null
-          }
+          ) : null}
         </nav>
       </div>
     </BackgroundLayout>

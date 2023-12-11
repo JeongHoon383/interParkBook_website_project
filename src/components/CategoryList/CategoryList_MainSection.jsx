@@ -34,6 +34,7 @@ export default function CategoryList_MainSection() {
 `).then((result) => {
       setData(result.data);
     });
+
   }, [listQty, currentPage, isSoldout]);
 
   //하위 컴포넌트(CategoryList_Sort) 전체선택/선택해제 핸들링이벤트
@@ -61,7 +62,7 @@ export default function CategoryList_MainSection() {
 
   return (
     <MainSection>
-      <CategoryList_Title title={data.searchCategoryName} />
+      <CategoryList_Title />
       <CategoryList_SubCaNav />
       <CategoryList_Sort
         totalResults={data.totalResults}

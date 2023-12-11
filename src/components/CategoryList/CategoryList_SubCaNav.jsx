@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { HiOutlinePlusSmall, HiOutlineMinusSmall } from "react-icons/hi2";
+import axios from "axios";
 
 const SubCategory = styled.div`
   position: relative;
@@ -86,6 +87,12 @@ const SubCategory = styled.div`
 
 export default function CategoryList_SubCaNav() {
   const [isExtended, setIsExtended] = useState(false);
+  const parameterArr = useParams().categoryPath.split('_');
+  // const parameter = parameterArr.filter(parameter => parameter !== undefined).join('/')
+
+  // useEffect(() => {
+  //   axios(`http://127.0.0.1:9090/category/list/${parameterArr[0]}/${parameterArr[1]}/${parameterArr[2]}/${parameterArr[3]}/${parameterArr[4]}/${parameterArr[5]}`)
+  // }, []);
 
   const handleClick = () => {
     setIsExtended(!isExtended);
