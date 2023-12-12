@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { AiFillMediumCircle } from "react-icons/ai";
 import { RiCoupon3Line } from "react-icons/ri";
 import { TfiClose } from "react-icons/tfi";
 import { FiUser } from "react-icons/fi";
