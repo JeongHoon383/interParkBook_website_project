@@ -6,9 +6,7 @@ import Main from "./Pages/Main";
 import Detail from "./Pages/Detail";
 import NotFound from "./Pages/NotFound";
 import CategoryMain from "./Pages/CategoryMain";
-import Root from './Pages/Root';
 import BestSeller from './components/BestSeller'
-import NewSeller from './Pages/NewSeller';
 import Search from "./components/Search";
 import Mypage from "./Pages/Mypage";
 
