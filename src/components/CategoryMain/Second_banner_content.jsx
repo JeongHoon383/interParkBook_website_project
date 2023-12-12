@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { IoIosArrowForward } from 'react-icons/io';
+import { Link } from 'react-router-dom';
 
 const SecondBanner = styled.div`
   width: 580px;
@@ -75,12 +76,13 @@ const Second_banner_content = ({ banner }) => {
           <img className='banner_img' src={cover} alt='' />
         </div>
         <div className='banner_text'>
-          <div className='banner_text_icon'>
+          <Link to='/category/list'><div className='banner_text_icon'>
             인터파크의 선택
             <span>
               <IoIosArrowForward />
             </span>
           </div>
+          </Link>
           <div className='banner_semiTitle'>{title}</div>
           <div className='banner_content'>{description}</div>
           <div className='banner_title'>{title}</div>
