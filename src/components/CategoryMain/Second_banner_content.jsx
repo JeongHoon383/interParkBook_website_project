@@ -50,6 +50,10 @@ const SecondBanner = styled.div`
     cursor: pointer;
   }
 
+  .banner_title:hover{
+    text-decoration : underline;
+  }
+
   .banner_author {
     margin-bottom: 10px;
     font-size: 12px;
@@ -73,7 +77,7 @@ const Second_banner_content = ({ banner }) => {
     <SecondBanner>
       <div className='banner_left'>
         <div>
-          <img className='banner_img' src={cover} alt='' />
+          <Link to='/book/:id'><img className='banner_img' src={cover} alt='' /></Link>
         </div>
         <div className='banner_text'>
           <Link to='/category/list'><div className='banner_text_icon'>
@@ -85,7 +89,7 @@ const Second_banner_content = ({ banner }) => {
           </Link>
           <div className='banner_semiTitle'>{title}</div>
           <div className='banner_content'>{description}</div>
-          <div className='banner_title'>{title}</div>
+          <Link to='/book/:id'><div className='banner_title'>{title}</div></Link>
           <div className='banner_author'>{author}</div>
           <div className='banner_price'>
             <span>{pricesales}원</span>

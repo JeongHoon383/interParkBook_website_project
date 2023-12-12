@@ -27,6 +27,11 @@ const BestSellerContainer = styled.div`
     margin-right: 5px;
   }
 
+  .rank_row:active{
+    font-weight : bold;
+    color : black;
+  }
+
   .rank_high {
     margin-left: 5px;
   }
@@ -49,6 +54,7 @@ const Bestseller = () => {
   const [rankList, setRankList] = useState([]);
   const [active, setActive] = useState('0');
   const [renderList, setLenderList] = useState([]);
+  const [rankActive, setRankActive] = useState(false);
 
   useEffect(() => {
     axios({
@@ -65,6 +71,7 @@ const Bestseller = () => {
   const rankClick = ({ start, end }) => {
     setActive(start);
     setLenderList(rankList.slice(start, end));
+    setRankActive(!rankActive)
   };
 
   const rankHover = (rank) => {
@@ -80,7 +87,7 @@ const Bestseller = () => {
       <div className='rank'>
         <span
           onClick={() => rankClick({ start: 0, end: 5 })}
-          className='rank_row grey'
+          className={`rank_row grey ${rankActive ? "active" : ""}`}
         >
           1~5위
         </span>

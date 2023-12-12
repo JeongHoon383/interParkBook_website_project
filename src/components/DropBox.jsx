@@ -5,7 +5,7 @@ const DropBox_container = styled.div`
 
   .form-select{
     width : 158px;
-    height : 24px;
+    height : 30px;
   }
 `;
 
@@ -53,7 +53,6 @@ const DropBox = () => {
             <option value={option.value}>{option.label}</option>
           ))}
         </select>
-        <p>{value}</p>
       </div>
     </DropBox_container>
   );

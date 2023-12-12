@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 import styled from 'styled-components'
 
 const NewbookContents = styled.div`
@@ -19,7 +20,12 @@ const NewbookContents = styled.div`
   }
 
   .newBook_title{
+    margin-bottom : 10px;
     font-weight : bold;
+  }
+
+  .newBook_title:hover{
+    text-decoration : underline;
   }
 
   .newbook_price{
@@ -38,9 +44,9 @@ const NewbookContent = ({ content }) => {
   return (
     <NewbookContents>
       <ul className='newbook_ul'>
-        <li><img className='newBook_img' src={img} alt="" /></li>
+        <Link to='/book/:id'><li><img className='newBook_img' src={img} alt="" /></li></Link>
         <li className='newBook_category'>{category}</li>
-        <li className='newBook_title'>{title}</li>
+        <Link to='/book/:id'><li className='newBook_title'>{title}</li></Link>
         <li className='newBook_autor grey'>{author}</li>
         <li className='newBook_editor grey'>{editor}</li>
         <li className='newbook_price'>{price}</li>

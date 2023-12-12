@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const BestSellerImg = styled.div`
@@ -53,15 +54,16 @@ const BestSellerBox = ({rank}) => {
     <BestSellerImg>
       <div className="img_box">
         <div>
-          <img
+          <Link to='/book/:id'><img
             className="bestSeller_img"
             src={img}
             alt=""
           />
+          </Link>
         </div>
         <div>
           <ul className="bestSeller_img_text">
-            <li className="best_title">{title}</li>
+            <Link to='/book/:id'><li className="best_title">{title}</li></Link>
             <li className="best_author grey">{author}</li>
             <li className="best_price">{price}</li>
           </ul>

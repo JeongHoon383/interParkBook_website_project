@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 
 const OnlyReview = styled.div`
@@ -56,6 +57,10 @@ const OnlyReview = styled.div`
     font-weight : bold;
   }
 
+  .onlyReview_title:hover{
+    text-decoration : underline;
+  }
+
   .onlyReview_author{
     margin-bottom : 5px;
   }
@@ -75,9 +80,9 @@ const OnlyContent = ({ onlyList }) => {
             <p className="onlyReview_article_author">{author}</p>
           </div>
           <div className="onlyReview_content">
-            <div><img className="onlyReview_img" src={img} alt="" /></div>
+            <div><Link to='/book/:id'><img className="onlyReview_img" src={img} alt="" /></Link></div>
             <div className="onlyReview_img_text">
-              <div className="onlyReview_title">{title}</div>
+              <Link to='/book/:id'><div className="onlyReview_title">{title}</div></Link>
               <div className="onlyReview_author grey">{review_author}</div>
               <div className="grey">{publisher}</div>
             </div>

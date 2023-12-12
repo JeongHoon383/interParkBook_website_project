@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import styled from 'styled-components';
 
 const BestRank = styled.div`
@@ -41,10 +42,10 @@ const BestSellerRank = ({ item, rankHover }) => {
 
   return (
     <BestRank onMouseOver={() => rankHover(Number(rank))}>
-      <div className='rank_box'>
+      <Link to='/book/:id'><div className='rank_box'>
         <div className='rank_box_num'>{rank}</div>
         <div className='rank_box_title'>{title}</div>
-      </div>
+      </div></Link>
     </BestRank>
   );
 };

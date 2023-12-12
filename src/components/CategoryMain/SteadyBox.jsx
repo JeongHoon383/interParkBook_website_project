@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const SteadyContainer = styled.div`
@@ -28,6 +29,7 @@ const SteadyContainer = styled.div`
   .steady_img{
     width : 92px;
     height : 135px;
+    cursor: pointer;
   }
 
   .steady_img_content{
@@ -41,6 +43,11 @@ const SteadyContainer = styled.div`
   .steady_img_title{
     margin-bottom : 10px;
     font-weight : bold;
+    cursor: pointer;
+  }
+
+  .steady_img_title:hover{
+    text-decoration : underline;
   }
 
   .steady_author,
@@ -62,15 +69,15 @@ const SteadyBox = ({content}) => {
         <div className="steady_main">
           <div className="steady_circle">{circle}</div>
           <div>
-            <img
+            <Link to='/book/:id'><img
               className="steady_img"
               src={img}
               alt=""
-            />
+            /></Link>
           </div>
           <div>
             <ul className="steady_img_content">
-              <li className="steady_img_title">{title}</li>
+              <Link to='/book/:id'><li className="steady_img_title">{title}</li></Link>
               <li className="steady_author grey">{author}</li>
               <li className="steady_publisher grey">{publisher}</li>
               <li className="steady_price">{price}</li>

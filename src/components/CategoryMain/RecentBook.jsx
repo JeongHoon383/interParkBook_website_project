@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from "react-router-dom";
 import styled from 'styled-components'
 import RecentContent from './RecentContent';
 import axios from 'axios';
@@ -41,6 +42,11 @@ const Recent_container = styled.div`
     .recent_name{
       margin-bottom : 8px;
       font-weight : bold;
+    }
+
+    .recent_name:hover{
+      cursor: pointer;
+      text-decoration : underline;
     }
 
     .recent_author{
@@ -97,10 +103,10 @@ const RecentBook = () => {
         <h3 className="recent_title">내가 최근 본 상품</h3>
         <div className="recent_img_box">
           <div>
-            <div><img className="recent_img" src="/img/CategoryMain/recent_img/banner.jpeg" alt="" /></div>
+            <div><Link to='/book/:id'><img className="recent_img" src="/img/CategoryMain/recent_img/banner.jpeg" alt="" /></Link></div>
             <div className="recent_text">
               <ul>
-                <li className="recent_name">레몬과 살인귀</li>
+                <Link to='/book/:id'><li className="recent_name">레몬과 살인귀</li></Link>
                 <li className="recent_author grey">구와가키 아유 저</li>
                 <li className="recent_grade">별점</li>
                 <li className="recent_price">15,120원(10% 할인)</li>

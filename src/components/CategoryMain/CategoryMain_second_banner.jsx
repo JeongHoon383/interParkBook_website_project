@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Second_banner_content from './Second_banner_content';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const CategoryMain_second_banner = () => {
@@ -42,16 +43,16 @@ const CategoryMain_second_banner = () => {
         <Second_banner_content banner={data[active]} />
       )}
       <div className='banner_right'>
-        <ul>
-          {initBanners.map(({ id, text }) => (
+      <ul>
+        {initBanners.map(({ id, text }) => (
             <li key={id} onMouseOver={() => setActive(id)}>
-              <img
+              <Link to='/book/:id'><img
                 className='banner_right_img'
                 src={`/img/CategoryMain/secondbanner_img/secondbanner${
                   id + 1
                 }-${id + 1}.jpeg`}
                 alt=''
-              />
+              /></Link>
               <span className='banner_right_text'>{text}</span>
             </li>
           ))}
