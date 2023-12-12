@@ -1,9 +1,9 @@
 import styled from "styled-components";
+import { Link, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import { LiaAngleRightSolid } from "react-icons/lia";
 import { CiSquareChevDown, CiSquareChevUp } from "react-icons/ci";
-import { Link } from "react-router-dom";
-import { useState } from "react";
-
 const BackgroundLayout = styled.nav`
   height: 41px;
   font-size: 12px;
@@ -47,7 +47,7 @@ const BackgroundLayout = styled.nav`
             color: #000;
           }
         }
-        .firstDepthList {
+        .firstDList {
           position: absolute;
           li {
             width: 80px;
@@ -90,15 +90,24 @@ const BackgroundLayout = styled.nav`
 `;
 
 export default function CategoryList_TopNav() {
-  const [isDropMenuOpen, setIsDropMenuOpen] = useState([false, false]);
+  const { mall } = useParams();
+  const [isDropMenuOpen, setIsDropMenuOpen] = useState([false, false, false]);
+  const [MallData, setMallData] = useState([]);
 
-  const handleClick = (idx) => {
+  useEffect(() => {
+    axios
+      .get(`http://localhost:9090/category/list/${mall}`)
+      .then((result) => setMallData(result.data))
+      .catch((error) => console.log(error));
+  }, []);
+
+  const handleDropMenu = (idx) => {
     let copy = [...isDropMenuOpen];
     if (copy[idx]) {
       copy[idx] = false;
       setIsDropMenuOpen(copy);
     } else {
-      copy = [false, false];
+      copy = [false, false, false];
       copy[idx] = true;
       setIsDropMenuOpen(copy);
     }
@@ -111,28 +120,26 @@ export default function CategoryList_TopNav() {
           <Link to={"/"}>메인페이지</Link>
           <span>
             <LiaAngleRightSolid className="angleRight" />
-            <button onClick={() => handleClick(0)}>
-              <span>국내도서</span>
+            <button onClick={() => handleDropMenu(0)}>
+              <span>{MallData[0] && MallData[0].currentMall}</span>
               {isDropMenuOpen[0] ? <CiSquareChevUp /> : <CiSquareChevDown />}
             </button>
             {isDropMenuOpen[0] ? (
-              <ul className="clickMenu firstDepthList">
-                <li className="currentCategory">
-                  <Link>국내도서</Link>
-                </li>
-                <li>
-                  <Link>외국도서</Link>
-                </li>
-                <li>
-                  <Link>eBook</Link>
-                </li>
+              <ul className="clickMenu firstDList">
+                {
+                  MallData.map(data => (
+                    <li>
+                      <Link>{data.allMall}</Link>
+                    </li>
+                  ))
+                }
               </ul>
             ) : null}
           </span>
           <span>
             <LiaAngleRightSolid className="angleRight" />
-            <button onClick={() => handleClick(1)}>
-              <span>여행</span>
+            <button onClick={() => handleDropMenu(1)}>
+              <span>여기에 데이터 넣어라</span>
               {isDropMenuOpen[1] ? <CiSquareChevUp /> : <CiSquareChevDown />}
             </button>
             {isDropMenuOpen[1] ? (
@@ -166,77 +173,55 @@ export default function CategoryList_TopNav() {
                     <Link>소설/시/희곡</Link>
                   </li>
                 </ul>
-                <ul>
-                  <li>
-                    <Link>수험서/자격증</Link>
-                  </li>
-                  <li>
-                    <Link>어린이</Link>
-                  </li>
-                  <li>
-                    <Link>에세이</Link>
-                  </li>
-                  <li className="currentCategory">
-                    <Link>여행</Link>
-                  </li>
-                  <li>
-                    <Link>역사</Link>
-                  </li>
-                  <li>
-                    <Link>예술/대중문화</Link>
-                  </li>
-                  <li>
-                    <Link>외국어</Link>
-                  </li>
-                  <li>
-                    <Link>유아</Link>
-                  </li>
-                  <li>
-                    <Link>인문학</Link>
-                  </li>
-                </ul>
-                <ul>
-                  <li>
-                    <Link>자기계발</Link>
-                  </li>
-                  <li>
-                    <Link>잡지</Link>
-                  </li>
-                  <li>
-                    <Link>장르소설</Link>
-                  </li>
-                  <li>
-                    <Link>전집/중고전집</Link>
-                  </li>
-                  <li>
-                    <Link>종교/역학</Link>
-                  </li>
-                  <li>
-                    <Link>좋은부모</Link>
-                  </li>
-                  <li>
-                    <Link>청소년</Link>
-                  </li>
-                  <li>
-                    <Link>컴퓨터/모바일</Link>
-                  </li>
-                  <li>
-                    <Link>초등학교참고서</Link>
-                  </li>
-                </ul>
-                <ul>
-                  <li>
-                    <Link>중학교참고서</Link>
-                  </li>
-                  <li>
-                    <Link>고등학교참고서</Link>
-                  </li>
-                </ul>
               </div>
             ) : null}
           </span>
+          {/* {
+            categoryData.secondD ? (
+              <span>
+              <LiaAngleRightSolid className="angleRight" />
+              <button onClick={() => handleDropMenu(2)}>
+                <span>{categoryData.secondD}</span>
+                {isDropMenuOpen[2] ? <CiSquareChevUp /> : <CiSquareChevDown />}
+              </button>
+              {isDropMenuOpen[2] ? (
+                <div className="clickMenu secondDepthList">
+                  <ul>
+                    <li>
+                      <Link>가정/요리/뷰티</Link>
+                    </li>
+                    <li>
+                      <Link>건강/취미/레저</Link>
+                    </li>
+                    <li>
+                      <Link>경제경영</Link>
+                    </li>
+                    <li>
+                      <Link>과학</Link>
+                    </li>
+                    <li>
+                      <Link>달력/기타</Link>
+                    </li>
+                    <li>
+                      <Link>대학교재/전문서적</Link>
+                    </li>
+                    <li>
+                      <Link>만화</Link>
+                    </li>
+                    <li>
+                      <Link>사회과학</Link>
+                    </li>
+                    <li>
+                      <Link>소설/시/희곡</Link>
+                    </li>
+                  </ul>
+                </div>
+              ) : null}
+            </span>
+            ) : null
+          } */}
         </nav>
       </div>
     </BackgroundLayout>
-  );
+  ); 
 }

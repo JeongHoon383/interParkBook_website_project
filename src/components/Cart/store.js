@@ -11,6 +11,7 @@ let cartState = createSlice({
     },
     removeCart(state, action) {
       let idx = state.findIndex((v) => v.id === action.id);
+      
       let copy = [...state];
       copy.splice(idx, 1);
       return copy;

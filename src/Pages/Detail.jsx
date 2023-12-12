@@ -198,14 +198,14 @@ const Detail = () => {
 
   return (
     <>
-      <MotionNav
+    {DetailLoading ? <h1>로딩중</h1> :  <>  <MotionNav
         style={{
           opacity: opacity,
           scale: opacity,
         }}
       >
         <div className="center">
-          <div>{DetailData?.title.split("-")[0]}</div>
+          <div>{DetailData.title.split("-")[0] ? DetailData.title.split("-")[0] : DetailData.title}</div>
           <div>
             <span>
               {detailData?.sale_price.toLocaleString()}
@@ -228,9 +228,9 @@ const Detail = () => {
           <TitleBox>
             <Title>
               <div>
-                <h1>{DetailData?.title.split("-")[0]}</h1>
+                <h1>{DetailData?.title.split("-")[0] ? DetailData?.title.split("-")[0] : DetailData?.title}</h1>
                 <span>
-                  {DetailData?.title &&
+                  {DetailData.title.split("-").reverse()[0] &&
                     `:` + DetailData.title.split("-").reverse()[0]}
                 </span>
               </div>
@@ -269,7 +269,8 @@ const Detail = () => {
         id={id}
         DetailData={DetailData}
         detailData={detailData}
-      ></Detail_tabs>
+      ></Detail_tabs></>}
+     
     </>
   );
 };

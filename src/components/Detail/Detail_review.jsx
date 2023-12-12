@@ -15,6 +15,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { getUser } from "../../util/localStorage";
 
 const Wrapper = styled.div`
   position: relative;
@@ -392,7 +393,7 @@ const Detail_review = () => {
     axios
       .post(`http://127.0.0.1:9090/book/:isbn/review`, {
         title,
-        point: star,
+        point: rating+1,
         content,
         isbn: params.id,
         uid: "park",
@@ -419,7 +420,11 @@ const Detail_review = () => {
   });
 
   /*   console.log(reviewData && reviewData[0].avg_point.toFixed(1)); */
-
+let starArr = [1,2,3,4,5]
+const [rating,setRating] = useState(0)
+const handleMouseover = (star)=> setRating(star)
+ console.log(getUser() && getUser());
+ 
   return (
     <>
       {isPending ? (
@@ -467,65 +472,18 @@ const Detail_review = () => {
                     />
 
                     <Evaluation>
-                      <select
-                        {...register("point", { required: true })}
-                        onChange={(e) => setStar(Number(e.currentTarget.value))}
-                        name="star"
-                        id="star"
-                      >
-                        <option value="1">1점</option>
-                        <option value="2">2점</option>
-                        <option value="3">3점</option>
-                        <option value="4">4점</option>
-                        <option value="5">5점</option>
-                      </select>
+             
                       <Star>
-                        {star === 1 && (
-                          <>
-                            <AiFillStar />
-                            <AiOutlineStar />
-                            <AiOutlineStar />
-                            <AiOutlineStar />
-                            <AiOutlineStar />
-                          </>
-                        )}
-                        {star === 2 && (
-                          <>
-                            <AiFillStar />
-                            <AiFillStar />
-                            <AiOutlineStar />
-                            <AiOutlineStar />
-                            <AiOutlineStar />
-                          </>
-                        )}
-                        {star === 3 && (
-                          <>
-                            <AiFillStar />
-                            <AiFillStar />
-                            <AiFillStar />
-                            <AiOutlineStar />
-                            <AiOutlineStar />
-                          </>
-                        )}
-                        {star === 4 && (
-                          <>
-                            <AiFillStar />
-                            <AiFillStar />
-                            <AiFillStar />
-                            <AiFillStar />
-                            <AiOutlineStar />
-                          </>
-                        )}
-                        {star === 5 && (
-                          <>
-                            <AiFillStar />
-                            <AiFillStar />
-                            <AiFillStar />
-                            <AiFillStar />
-                            <AiFillStar />
-                          </>
-                        )}
+                      {starArr.map((v,i)=>
+                                <>
+                                   <AiFillStar  key={i} onMouseOver={()=>handleMouseover(i)}
+                                   style={{cursor:'pointer', scale:'1.2'}}
+                                   fill={i <= rating ? 'var(--main)' : 'none'} stroke="var(--main)" strokeWidth="20"/>
+                                </>
+                                   )}
+      
                       </Star>
+            
                     </Evaluation>
                   </div>
 

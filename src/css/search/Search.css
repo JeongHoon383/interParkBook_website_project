@@ -605,9 +605,6 @@ border-bottom: 0.5px solid #a1a1a1;
     justify-content: center;
   }
   
-  .line{
-    border:1px solid grey;
-  }
   .searchtitle{
     font-weight: 600;
     font-size: 14px;

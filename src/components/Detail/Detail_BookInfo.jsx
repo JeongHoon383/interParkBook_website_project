@@ -261,7 +261,7 @@ const CartArea = styled.div`
     cursor: pointer;
   }
   .cart {
-    background-color: #ff9c46;
+    background-color: var(--main);
   }
   .buy {
     background-color: #707070;
