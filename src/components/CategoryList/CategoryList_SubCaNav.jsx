@@ -120,11 +120,9 @@ export default function CategoryList_SubCaNav() {
         <SubCategory>
           {isExtended ? (
             <>
-              {parameterArr[4] ? null : (
-                <button onClick={handleClick}>
-                  <HiOutlineMinusSmall />
-                </button>
-              )}
+              <button onClick={handleClick}>
+                <HiOutlineMinusSmall />
+              </button>
               <ul className="extended">
                 {categoryData.map((item) => (
                   <li key={item.categoryName} className="subCategoryItem">
@@ -145,7 +143,7 @@ export default function CategoryList_SubCaNav() {
             <>
               {parameterArr[4] ? null : (
                 <button onClick={handleClick}>
-                  <HiOutlineMinusSmall />
+                  <HiOutlinePlusSmall />
                 </button>
               )}
               <ul className="abbreviated">
