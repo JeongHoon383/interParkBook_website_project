@@ -37,10 +37,18 @@ const BackgroundLayout = styled.nav`
             transform: translateY(-50%);
           }
         }
-        button {
+        .categoryNavDepth {
           display: inline-flex;
           align-items: center;
           padding-left: 20px;
+          span {
+            display: inline-block;
+            width: 80px;
+            text-align: left;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
           svg {
             font-size: 20px;
           }
@@ -49,7 +57,7 @@ const BackgroundLayout = styled.nav`
           position: absolute;
           display: none;
           top: 0;
-          left: 20px;
+          left: 0;
           transform: translateY(20px);
           border: 1px solid var(--main);
           background: #fff;
@@ -61,9 +69,9 @@ const BackgroundLayout = styled.nav`
         }
         .mallList {
           li {
-            width: 80px;
-            text-align: center;
+            width: 120px;
             line-height: 30px;
+            padding-left: 14px;
             a {
               display: inline-block;
               width: 100%;
@@ -111,7 +119,14 @@ export default function CategoryList_TopNav() {
     false,
   ]);
   const parameterArr = useParams().categoryPath.split("_");
-  const [allCategoryData ,setAllCategoryData] = useState([[], [], [], [], [], []]);
+  const [allCategoryData, setAllCategoryData] = useState([
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+  ]);
 
   const handleDropMenu = (idx) => {
     let copy = [...isDropMenuOpen];
@@ -129,24 +144,31 @@ export default function CategoryList_TopNav() {
     let copy = [...allCategoryData];
 
     const topNavAxios = (params, idx) => {
-      if(parameterArr[idx]) {
-        axios(`http://127.0.0.1:9090/category/list/${params}`)
-        .then((result) => {
-          copy[idx] = result.data;
-          setAllCategoryData(copy);
-        });
+      if (parameterArr[idx]) {
+        axios(`http://127.0.0.1:9090/category/list/${params}`).then(
+          (result) => {
+            copy[idx] = result.data;
+            setAllCategoryData(copy);
+          }
+        );
       }
     };
 
-    const params = (idx) => parameterArr[idx] ? "/" + parameterArr[idx] : "";
-    topNavAxios('mall', 0);
+    const params = (idx) => (parameterArr[idx] ? "/" + parameterArr[idx] : "");
+    topNavAxios("mall", 0);
     topNavAxios(params(0), 1);
     topNavAxios(`${params(0)}${params(1)}`, 2);
     topNavAxios(`${params(0)}${params(1)}${params(2)}`, 3);
     topNavAxios(`${params(0)}${params(1)}${params(2)}${params(3)}`, 4);
-    topNavAxios(`${params(0)}${params(1)}${params(2)}${params(3)}${params(4)}`, 5);
-
-  }, [parameterArr[0], parameterArr[1], parameterArr[2], parameterArr[3], parameterArr[4], parameterArr[5]]);
+    topNavAxios(`${params(0)}${params(1)}${params(2)}${params(3)}${params(4)}`,5);
+  }, [
+    parameterArr[0],
+    parameterArr[1],
+    parameterArr[2],
+    parameterArr[3],
+    parameterArr[4],
+    parameterArr[5],
+  ]);
 
   const showCategory = (categoryData, index) => {
     const arr = [];
@@ -159,10 +181,18 @@ export default function CategoryList_TopNav() {
             <li
               key={item.categoryName}
               className={
-                item.categoryName === parameterArr[index] ? "currentCategory" : null
+                item.categoryName === parameterArr[index]
+                  ? "currentCategory"
+                  : null
               }
             >
-              <Link to={`/category/list/${item.mall}_${item.firstD}${item.secondD ? "_" + item.secondD : ""}${item.thirdD ? "_" + item.thirdD : ""}${item.fourthD ? "_" + item.fourthD : ""}${item.fifthD ? "_" + item.fifthD : ""}`}>
+              <Link
+                to={`/category/list/${item.mall}_${item.firstD}${
+                  item.secondD ? "_" + item.secondD : ""
+                }${item.thirdD ? "_" + item.thirdD : ""}${
+                  item.fourthD ? "_" + item.fourthD : ""
+                }${item.fifthD ? "_" + item.fifthD : ""}`}
+              >
                 {item.categoryName}
               </Link>
             </li>
@@ -170,28 +200,25 @@ export default function CategoryList_TopNav() {
         </ul>
       );
     }
-
     return arr;
   };
 
   const categoryComponenet = (idx) => {
-    return(
-      parameterArr[idx] ? (
-        <span
-          onMouseEnter={() => handleDropMenu(idx)}
-          onMouseLeave={() => handleDropMenu(idx)}
-        >
-          <LiaAngleRightSolid className="angleRight" />
-          <button>
-            <span>{parameterArr[idx]}</span>
-            {isDropMenuOpen[idx] ? <CiSquareChevUp /> : <CiSquareChevDown />}
-          </button>
-          <div className="clickMenu depthCategoryList">
-            {isDropMenuOpen[idx] ? showCategory(allCategoryData[idx], idx) : null}
-          </div>
+    return parameterArr[idx] ? (
+      <span
+        onMouseEnter={() => handleDropMenu(idx)}
+        onMouseLeave={() => handleDropMenu(idx)}
+      >
+        <LiaAngleRightSolid className="angleRight" />
+        <span className="categoryNavDepth">
+          <span>{parameterArr[idx]}</span>
+          {isDropMenuOpen[idx] ? <CiSquareChevUp /> : <CiSquareChevDown />}
         </span>
-      ) : null
-    );
+        <div className="clickMenu depthCategoryList">
+          {isDropMenuOpen[idx] ? showCategory(allCategoryData[idx], idx) : null}
+        </div>
+      </span>
+    ) : null;
   };
 
   return (
@@ -205,10 +232,10 @@ export default function CategoryList_TopNav() {
             onMouseLeave={() => handleDropMenu(0)}
           >
             <LiaAngleRightSolid className="angleRight" />
-            <button>
+            <span className="categoryNavDepth">
               <span>{parameterArr[0]}</span>
               {isDropMenuOpen[0] ? <CiSquareChevUp /> : <CiSquareChevDown />}
-            </button>
+            </span>
             <ul className="clickMenu mallList">
               {allCategoryData[0].map((item) => (
                 <li
@@ -228,7 +255,6 @@ export default function CategoryList_TopNav() {
           {categoryComponenet(3)}
           {categoryComponenet(4)}
           {categoryComponenet(5)}
-
         </nav>
       </div>
     </BackgroundLayout>

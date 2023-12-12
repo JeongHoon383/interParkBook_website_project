@@ -73,6 +73,9 @@ const SubCategory = styled.div`
     margin: 13px 0;
     li {
       width: 20%;
+      &:not(:nth-child(5n + 1)) {
+        border-left: 1px solid #d8d8d8;
+      }
       a {
         display: inline-block;
         width: 100%;
@@ -97,6 +100,8 @@ export default function CategoryList_SubCaNav() {
   const [categoryData, setCategoryData] = useState([]);
 
   useEffect(() => {
+    setIsExtended(false);
+
     if (parameterArr.length < 6) {
       axios(
         `http://127.0.0.1:9090/category/list/${parameterArr[0]}/${parameterArr[1]}/${parameterArr[2]}/${parameterArr[3]}/${parameterArr[4]}`
@@ -107,16 +112,45 @@ export default function CategoryList_SubCaNav() {
     parameterArr[2],
     parameterArr[3],
     parameterArr[4],
-    parameterArr[5],
+    parameterArr[5]
   ]);
 
   const handleClick = () => {
     setIsExtended(!isExtended);
   };
 
+  const showFurtherSubCategory = (subCategoryData) => {
+    const arr = [];
+
+    axios(
+      `http://127.0.0.1:9090/category/list/${subCategoryData.mall}/${
+        subCategoryData.firstD
+      }/${subCategoryData.secondD}${
+        subCategoryData.thirdD ? "/" + subCategoryData.thirdD : ""
+      }${subCategoryData.fourthD ? "/" + subCategoryData.fourthD : ""}`
+    ).then((result) => {
+      return result.data.map((item) => {
+        arr.push(
+          <li key={item.categoryName}>
+            <Link
+              to={`/category/list/${item.mall}_${item.firstD}_${item.secondD}_${
+                item.thirdD
+              }${item.fourthD ? "_" + item.fourthD : ""}${
+                item.fifthD ? "_" + item.fifthD : ""
+              }`}
+            >
+              {item.categoryName}
+            </Link>
+          </li>
+        );
+      });
+    });
+    return arr;
+  };
+
   return (
     <>
-      {parameterArr.length < 6 && categoryData.length > 0 ? (
+      {!parameterArr[5] && categoryData.length > 0 ? (
         <SubCategory>
           {isExtended ? (
             <>
@@ -135,6 +169,9 @@ export default function CategoryList_SubCaNav() {
                     >
                       {item.categoryName}
                     </Link>
+                    <ul className="furtherSubCategory">
+                      {showFurtherSubCategory(item)}
+                    </ul>
                   </li>
                 ))}
               </ul>
