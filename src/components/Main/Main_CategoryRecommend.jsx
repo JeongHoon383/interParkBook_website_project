@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Slider from 'react-slick';
-import '../../css/main/categoryRecommend.css';
 import axios from 'axios';
 
 const Pre = styled.div`
@@ -27,6 +26,80 @@ const Img = styled.img`
   vertical-align: bottom;
 `;
 
+const CategoryP = styled.p`
+  font-size: 0.7em;
+  font-weight: bold;
+  text-align: center;
+  color: var(--default);
+`;
+
+const CategoryRecommend = styled.div`
+  h3 {
+    display: flex;
+    flex-basis: 100%;
+    align-items: center;
+    color: var(--default);
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 33px 0;
+    &::before {
+      content: '';
+      flex-grow: 1;
+      margin: 0 16px;
+      background: var(--default);
+      height: 1px;
+      font-size: 0;
+      line-height: 0;
+    }
+    &::after {
+      content: '';
+      flex-grow: 1;
+      margin: 0 16px;
+      background: var(--default);
+      height: 1px;
+      font-size: 0;
+      line-height: 0;
+    }
+  }
+
+  .tabs {
+    padding-bottom: 22px;
+    border-bottom: 1px solid #c9c9c9;
+  }
+  .tabsWrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    font-weight: bold;
+    color: var(--hover);
+    font-size: 0.9em;
+    letter-spacing: -1px;
+  }
+  .tabLi {
+    margin: 0 auto;
+    cursor: pointer;
+  }
+
+  .focused {
+    color: #e66a57;
+  }
+
+  .categoryImgBox {
+    box-sizing: border-box;
+    width: 85px;
+    height: 126px;
+    margin: 20px auto;
+  }
+`;
+
+const StyledSlider = styled(Slider)`
+  .slick-prev,
+  .slick-next {
+    &::before {
+      content: none;
+    }
+  }
+`;
 export default function Main_CategoryRecommend() {
   const [isHover, setIsHover] = useState(0);
   const [dataList, setDataList] = useState([]);
@@ -79,16 +152,16 @@ export default function Main_CategoryRecommend() {
   };
 
   return (
-    <div className="categoryRecommend">
+    <CategoryRecommend>
       <div className="categoryRecommendHeader">
         <h3>
-          <span>분야별</span>
-          <span>추천</span>
+          <span style={{ color: 'var(--default)' }}>분야별</span>
+          <span style={{ color: '#e66a57' }}>추천</span>
         </h3>
       </div>
       <div className="categoryRecommendBox">
-        <div className="categoryTabs">
-          <ul className="tabWrap">
+        <div className="tabs">
+          <ul className="tabsWrap">
             {slideArr.map((v, i) => (
               <li
                 key={i}
@@ -104,21 +177,21 @@ export default function Main_CategoryRecommend() {
           </ul>
         </div>
         <div className="categoryContents">
-          <Slider {...settings}>
+          <StyledSlider {...settings}>
             {dataList.map((v, i) => (
               <div className={`category_ ${v.searchCategoryId}`} key={i}>
                 <div className="categoryImgBox" key={i}>
-                  <img src={v.cover} alt="" />
+                  <img src={v.cover} alt="" style={{ width: '100%', height: '100%' }} />
                 </div>
-                <p className="categoryTitle">{v.title.split('-')[0]}</p>
-                <p className="categoryPrice" style={{ color: '#e66a57' }}>
-                  {v.priceSales.toLocaleString()}원
-                </p>
+                <CategoryP style={{ width: '100px', height: '40px', margin: '0 auto' }}>
+                  {v.title.split('-')[0]}
+                </CategoryP>
+                <CategoryP style={{ color: '#e66a57' }}>{v.priceSales.toLocaleString()}원</CategoryP>
               </div>
             ))}
-          </Slider>
+          </StyledSlider>
         </div>
       </div>
-    </div>
+    </CategoryRecommend>
   );
 }

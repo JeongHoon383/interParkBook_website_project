@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../css/main/banner/mainBanner.css';
 import Slider from '../Slide';
 
 export default function MainBanner() {
