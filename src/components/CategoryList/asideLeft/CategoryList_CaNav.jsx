@@ -7,11 +7,10 @@ const CategoryNav = styled.nav`
   width: 180px;
   margin-right: 30px;
   .categoryTitle {
-    font-size: 16px;
-    color: #fff;
-    font-weight: bold;
     line-height: 36px;
-    padding-left: 13px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
     background: var(--main);
   }
   .categoryList {
