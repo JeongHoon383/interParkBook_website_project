@@ -42,6 +42,7 @@ export default function CategoryList_MainSection() {
     axios(
       `http://127.0.0.1:9090/category/list/${parameterArr[0]}/${parameterArr[1]}/${parameterArr[2]}/${parameterArr[3]}/${parameterArr[4]}/${startIndex}/${endIndex}/${sorting}`
     ).then((result) => {
+      setBookData(result.data);
     });
   }, [
     listQty,

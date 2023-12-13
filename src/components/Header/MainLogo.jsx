@@ -1,11 +1,66 @@
 import React from 'react';
 import { IoSearch } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
-import '../../css/header/mainLogo.css';
+import styled from 'styled-components';
+
+const MainDiv = styled.div`
+  .logoBox {
+    width: 60%;
+    margin: 20px auto;
+  }
+
+  .logoContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logoContainer {
+    width: 200px;
+    margin-left: 12px;
+    .logoImg {
+      width: 100%;
+    }
+  }
+  .search {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    margin-top: 25px;
+  }
+
+  .searchForm {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--main);
+    padding-bottom: 3px;
+  }
+
+  .searchInput {
+    width: 300px;
+    border: none;
+  }
+  .hit_searcher {
+    margin: 5px 25px;
+    width: 400px;
+    color: var(--default);
+    ul {
+      display: flex;
+      font-size: 0.7em;
+    }
+    li {
+      &:not(:last-child)::after {
+        content: '|';
+        margin: 0 5px;
+      }
+    }
+  }
+`;
 
 export default function MainLogo() {
   return (
-    <div className="mainLogo">
+    <MainDiv>
       <div className="logoBox">
         <div className="logoContent">
           <div className="logoContainer">
@@ -50,6 +105,6 @@ export default function MainLogo() {
           </div>
         </div>
       </div>
-    </div>
+    </MainDiv>
   );
 }

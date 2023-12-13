@@ -1,13 +1,17 @@
-import React from "react";
-import "../../css/main/banner/mainBanner.css";
-import Main_MainBannerTab from "./Main_MainBannerTab";
+import React from 'react';
+import styled from 'styled-components';
+import Main_MainBannerTab from './Main_MainBannerTab';
+
+const Content = styled.div`
+  margin: 0 auto;
+`;
 
 export default function MainBanner() {
   return (
     <div className="mainBanner">
-      <div className="mainBanner_content">
+      <Content>
         <Main_MainBannerTab />
-      </div>
+      </Content>
     </div>
   );
 }
