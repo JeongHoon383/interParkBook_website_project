@@ -20,9 +20,6 @@ const BackgroundLayout = styled.nav`
       > span {
         position: relative;
         &:hover {
-          .mallList {
-            display: block;
-          }
           .depthCategoryList {
             display: flex;
           }
@@ -53,12 +50,13 @@ const BackgroundLayout = styled.nav`
             font-size: 20px;
           }
         }
-        .clickMenu {
+        .depthCategoryList {
           position: absolute;
           display: none;
           top: 0;
           left: 0;
           transform: translateY(20px);
+          padding: 10px 0;
           border: 1px solid var(--main);
           background: #fff;
           z-index: 99;
@@ -66,23 +64,6 @@ const BackgroundLayout = styled.nav`
             font-weight: bold;
             color: #000;
           }
-        }
-        .mallList {
-          li {
-            width: 120px;
-            line-height: 30px;
-            padding-left: 14px;
-            a {
-              display: inline-block;
-              width: 100%;
-              &:hover {
-                text-decoration: underline;
-              }
-            }
-          }
-        }
-        .depthCategoryList {
-          padding: 10px 0;
           ul {
             width: 120px;
             padding-left: 14px;
@@ -160,7 +141,10 @@ export default function CategoryList_TopNav() {
     topNavAxios(`${params(0)}${params(1)}`, 2);
     topNavAxios(`${params(0)}${params(1)}${params(2)}`, 3);
     topNavAxios(`${params(0)}${params(1)}${params(2)}${params(3)}`, 4);
-    topNavAxios(`${params(0)}${params(1)}${params(2)}${params(3)}${params(4)}`,5);
+    topNavAxios(
+      `${params(0)}${params(1)}${params(2)}${params(3)}${params(4)}`,
+      5
+    );
   }, [
     parameterArr[0],
     parameterArr[1],
@@ -236,18 +220,20 @@ export default function CategoryList_TopNav() {
               <span>{parameterArr[0]}</span>
               {isDropMenuOpen[0] ? <CiSquareChevUp /> : <CiSquareChevDown />}
             </span>
-            <ul className="clickMenu mallList">
-              {allCategoryData[0].map((item) => (
-                <li
-                  key={item.mall}
-                  className={
-                    item.mall === parameterArr[0] ? "currentCategory" : null
-                  }
-                >
-                  <Link to={"/category/main"}>{item.mall}</Link>
-                </li>
-              ))}
-            </ul>
+            <div className="clickMenu depthCategoryList">
+              <ul>
+                {allCategoryData[0].map((item) => (
+                  <li
+                    key={item.mall}
+                    className={
+                      item.mall === parameterArr[0] ? "currentCategory" : null
+                    }
+                  >
+                    <Link to={"/category/main"}>{item.mall}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </span>
 
           {categoryComponenet(1)}

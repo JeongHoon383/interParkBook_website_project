@@ -21,11 +21,11 @@ const ProdAvatar = styled.div`
   }
 `;
 
-export default function CategoryList_ProdAvatar({ data }) {
+export default function CategoryList_ProdAvatar({ bookData }) {
   return (
     <ProdAvatar>
-      <Link to={`/book/${data.isbn}`}>
-        <img src={data.cover} alt="bookCover" />
+      <Link to={`/book/${bookData.isbn}`}>
+        <img src={bookData.cover} alt="bookCover" />
       </Link>
       <Link className="preview" target="_blank">
         미리보기{/* 클릭시 미리보기 창 기능 추가 필요 */}

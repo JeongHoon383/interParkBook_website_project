@@ -5,6 +5,7 @@ import CategoryList_Title from "./categoryList_Title";
 import CategoryList_SubCaNav from "./CategoryList_SubCaNav";
 import CategoryList_Sort from "./CategoryList_Sort";
 import CategoryList_Products from "./product/CategoryList_Products";
+import { useParams } from "react-router-dom";
 
 const MainSection = styled.section`
   width: 770px;
@@ -12,7 +13,8 @@ const MainSection = styled.section`
 `;
 
 export default function CategoryList_MainSection() {
-  const [data, setData] = useState([]);
+  const parameterArr = useParams().categoryPath.split("_");
+  const [bookData, setBookData] = useState([]);
   const [listQty, setListQty] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
   const [isSoldout, setIsSoldout] = useState("0");
@@ -32,16 +34,26 @@ export default function CategoryList_MainSection() {
 &Cover=MidBig
 &CategoryId=1196
 `).then((result) => {
-      setData(result.data);
+      setBookData(result.data);
     });
+
+    let startIndex = 0;
+    let endIndex = 0;
+    let sort = 'priceSales'
+
+    startIndex = (currentPage - 1) * listQty + 1;
+    endIndex = currentPage * listQty;
+
+    axios(`http://127.0.0.1:9090/category/list/${parameterArr[0]}/${parameterArr[1]}/${parameterArr[2]}/${parameterArr[3]}/${parameterArr[4]}/${startIndex}/${endIndex}/${sort}`)
+    .then(result => console.log(result.data));
 
   }, [listQty, currentPage, isSoldout]);
 
   //하위 컴포넌트(CategoryList_Sort) 전체선택/선택해제 핸들링이벤트
   const handleSelectAll = (flag) => {
     if (flag) {
-      Array.isArray(data.item) &&
-        data.item.map((item) =>
+      Array.isArray(bookData.item) &&
+        bookData.item.map((item) =>
           !checkList.includes(item.isbn)
             ? setCheckList((checkList) => [...checkList, item.isbn])
             : null
@@ -65,7 +77,7 @@ export default function CategoryList_MainSection() {
       <CategoryList_Title />
       <CategoryList_SubCaNav />
       <CategoryList_Sort
-        totalResults={data.totalResults}
+        totalResults={bookData.totalResults}
         listQty={listQty}
         setListQty={setListQty}
         currentPage={currentPage}
@@ -78,12 +90,12 @@ export default function CategoryList_MainSection() {
         setCheckList={setCheckList}
       />
       <CategoryList_Products
-        data={data}
+        bookData={bookData}
         checkList={checkList}
         setCheckList={setCheckList}
       />
       <CategoryList_Sort
-        totalResults={data.totalResults}
+        totalResults={bookData.totalResults}
         listQty={listQty}
         setListQty={setListQty}
         currentPage={currentPage}

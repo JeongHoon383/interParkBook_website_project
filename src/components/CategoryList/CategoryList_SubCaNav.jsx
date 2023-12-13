@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 import { HiOutlinePlusSmall, HiOutlineMinusSmall } from "react-icons/hi2";
 import axios from "axios";
+import CategoryList_SUbCaNavLi from "./product/CategoryList_SubCaNavLi";
 
 const SubCategory = styled.div`
   position: relative;
@@ -31,11 +32,9 @@ const SubCategory = styled.div`
         border-bottom: 1px solid #ccc;
       }
       display: flex;
-      > * {
-        padding: 14px 0;
-      }
       > a {
         width: 150px;
+        padding: 14px 0;
         padding-left: 19px;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -46,23 +45,6 @@ const SubCategory = styled.div`
         border-right: 1px solid #ccc;
         &:hover {
           text-decoration: underline;
-        }
-      }
-      .furtherSubCategory {
-        display: flex;
-        flex-wrap: wrap;
-        flex: 1;
-        li {
-          width: 25%;
-          padding-left: 27px;
-          a {
-            display: inline-block;
-            width: 100%;
-            line-height: 22px;
-            &:hover {
-              text-decoration: underline;
-            }
-          }
         }
       }
     }
@@ -119,34 +101,6 @@ export default function CategoryList_SubCaNav() {
     setIsExtended(!isExtended);
   };
 
-  const showFurtherSubCategory = (subCategoryData) => {
-    const arr = [];
-
-    axios(
-      `http://127.0.0.1:9090/category/list/${subCategoryData.mall}/${
-        subCategoryData.firstD
-      }/${subCategoryData.secondD}${
-        subCategoryData.thirdD ? "/" + subCategoryData.thirdD : ""
-      }${subCategoryData.fourthD ? "/" + subCategoryData.fourthD : ""}`
-    ).then((result) => {
-      return result.data.map((item) => {
-        arr.push(
-          <li key={item.categoryName}>
-            <Link
-              to={`/category/list/${item.mall}_${item.firstD}_${item.secondD}_${
-                item.thirdD
-              }${item.fourthD ? "_" + item.fourthD : ""}${
-                item.fifthD ? "_" + item.fifthD : ""
-              }`}
-            >
-              {item.categoryName}
-            </Link>
-          </li>
-        );
-      });
-    });
-    return arr;
-  };
 
   return (
     <>
@@ -169,9 +123,9 @@ export default function CategoryList_SubCaNav() {
                     >
                       {item.categoryName}
                     </Link>
-                    <ul className="furtherSubCategory">
-                      {showFurtherSubCategory(item)}
-                    </ul>
+                    <CategoryList_SUbCaNavLi 
+                      subCategoryData={item}
+                    />
                   </li>
                 ))}
               </ul>

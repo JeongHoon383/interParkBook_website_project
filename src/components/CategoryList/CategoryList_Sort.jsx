@@ -101,9 +101,8 @@ export default function CategoryList_Sort({
     <Sortarea>
       <div className="topArea">
         <span className="sortOption">
-          <button className="currentSort">기본순</button>
+          <button className="currentSort">신상품순</button>
           <button>판매량순</button>
-          <button>신상품순</button>
           <button>등록일순</button>
           <button>최저가순</button>
           <button>최고가순</button>
