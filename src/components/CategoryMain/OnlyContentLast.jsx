@@ -43,7 +43,7 @@ const OnlyReview = styled.div`
 
   .onlyReview_img{
     margin-top : 15px;
-    width : 70px;
+    width : 278px;
     height : 100px;
   }
 
@@ -67,9 +67,9 @@ const OnlyReview = styled.div`
 
 `
 
-const OnlyContent = ({ onlyList }) => {
+const OnlyContentLast = ({ onlyList }) => {
   if(!onlyList) return <></>
-  const {img, top_title, article, author, title, review_author, publisher} = onlyList;
+  const {img, top_title, article, author} = onlyList;
   return (
         <OnlyReview>
           <h3 className="onlyReview_icon">
@@ -81,14 +81,9 @@ const OnlyContent = ({ onlyList }) => {
           </div>
           <div className="onlyReview_content">
             <div><Link to='/book/:id'><img className="onlyReview_img" src={img} alt="" /></Link></div>
-            <div className="onlyReview_img_text"> 
-              <Link to='/book/:id'><div className="onlyReview_title">{title}</div></Link>
-              <div className="onlyReview_author grey">{review_author}</div>
-              <div className="grey">{publisher}</div>
-            </div>
           </div>
         </OnlyReview>
   )
 }
 
-export default OnlyContent
+export default OnlyContentLast

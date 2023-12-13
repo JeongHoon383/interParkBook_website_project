@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from "styled-components"
 import OnlyContent from './OnlyContent'
+import OnlyContentLast from './OnlyContentLast'
 import axios from 'axios'
 
 const Only = styled.div`
@@ -40,7 +41,7 @@ const InterParkOnly = () => {
       <div className="onlyContainer">
         <OnlyContent onlyList={onlyList[0]}/>
         <OnlyContent onlyList={mediaList[0]}/>
-        <OnlyContent onlyList={goodsList[0]}/>
+        <OnlyContentLast onlyList={goodsList[0]}/>
       </div>
     </Only>
   )

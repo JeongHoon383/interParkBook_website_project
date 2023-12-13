@@ -23,17 +23,30 @@ const BestSellerContainer = styled.div`
     margin-left: 10px;
   }
 
-  .rank_row {
+  .rank_row{
     margin-right: 5px;
-  }
-
-  .rank_row:active{
     font-weight : bold;
-    color : black;
+    cursor: pointer;
   }
 
-  .rank_high {
+  .rank_row_active{
+    margin-right : 5px;
+  }
+
+  .rank_high{
     margin-left: 5px;
+    font-weight : bold;
+    cursor: pointer;
+  }
+
+  .rank_high_active{
+    margin-left : 5px;
+    
+  }
+  .rank_row_active:hover,
+  .rank_high_active:hover{
+    text-decoration : underline;
+    cursor: pointer;
   }
 
   .more {
@@ -54,7 +67,7 @@ const Bestseller = () => {
   const [rankList, setRankList] = useState([]);
   const [active, setActive] = useState('0');
   const [renderList, setLenderList] = useState([]);
-  const [rankActive, setRankActive] = useState(false);
+  const [rankActive, setRankActive] = useState('0');
 
   useEffect(() => {
     axios({
@@ -71,7 +84,6 @@ const Bestseller = () => {
   const rankClick = ({ start, end }) => {
     setActive(start);
     setLenderList(rankList.slice(start, end));
-    setRankActive(!rankActive)
   };
 
   const rankHover = (rank) => {
@@ -86,15 +98,21 @@ const Bestseller = () => {
       </div>
       <div className='rank'>
         <span
-          onClick={() => rankClick({ start: 0, end: 5 })}
-          className={`rank_row grey ${rankActive ? "active" : ""}`}
+          onClick={() => {
+            rankClick({ start: 0, end: 5 })
+            return setRankActive('0')
+          }}
+          className={rankActive === '0' ? 'rank_row' : 'rank_row_active grey'}
         >
           1~5위
         </span>
         <span>|</span>
         <span
-          onClick={() => rankClick({ start: 5, end: 10 })}
-          className='rank_high grey'
+          onClick={() => {
+            rankClick({ start: 5, end: 10 })
+            return setRankActive('1')
+        }}
+          className={rankActive === '1' ? 'rank_high' : 'rank_high_active grey'}
         >
           6~10위
         </span>

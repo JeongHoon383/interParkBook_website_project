@@ -1,14 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Slider from 'react-slick';
 import styled from 'styled-components';
 
 const SlideContainer = styled.div`
+position : relative;
   .banner_img{
   margin : 20px 10px 0 0;
   width: 199px;
   height: 130px;
-}
+  }
 
+  .carouselPage{
+    position : absolute;
+    top : 30px;
+    right : 20px;
+  }
+
+  .carouselPage span{
+    font-size : 12px;
+  }
+
+  .carousel_first_num{
+    font-weight : bold;
+  }
 `;
 
 const Banner = styled.div`
@@ -37,6 +51,16 @@ const Img = styled.img`
   width: 100%;
 `;
 export default function Slide({ slideRef, afterChange }) {
+  const crauselImg = [
+    '/img/Slide/right-arrow.svg',
+    '/img/Slide/left-arrow.svg'
+  ]
+
+  const [changeNum, setChangeNum] = useState({
+    activeSlide : 0,
+    activeSlide2 : 0,
+  })
+
   const settings = {
     className: '',
     arrows: true,
@@ -47,6 +71,8 @@ export default function Slide({ slideRef, afterChange }) {
     speed: 1000,
     draggable: false,
     dotsClass: 'dots_custom',
+    beforeChange : (current, next) =>
+      setChangeNum({ activeSlide : next, activeSlide2 : current}),
     nextArrow: (
       <NextTo>
         <Img src='/img/Slide/right-arrow.svg' />
@@ -82,6 +108,11 @@ export default function Slide({ slideRef, afterChange }) {
           </ul>
         </Banner>
       </Slider>
+      <div className="carouselPage">
+        <span className="carousel_first_num">{changeNum.activeSlide + 1}</span>
+        <span className="grey">/</span>
+        <span className="grey">{crauselImg.length}</span>
+      </div>
     </SlideContainer>
   );
 }
