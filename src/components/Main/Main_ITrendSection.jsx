@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -264,7 +265,9 @@ export default function Main_ITrendSection() {
             {itemNewAll.map((v, i) => (
               <div className="slideDiv" key={i}>
                 <div className="imgBox">
-                  <img src={v.cover} alt="" />
+                  <Link to={`/book/${v.isbn13}`}>
+                    <img src={v.cover} alt="" />
+                  </Link>
                 </div>
                 <div className="textBox">
                   <p className="newTitle">{v.title}</p>
@@ -311,7 +314,9 @@ function BestSeller({ rank, bestSeller }) {
                 <li key={i}>
                   <span className="rankNum">{v.bestRank}</span>
                   <span className="rankImg">
-                    <img src={v.cover} alt="" />
+                    <Link to={`/book/${v.isbn13}`}>
+                      <img src={v.cover} alt="" />
+                    </Link>
                   </span>
                   <span className="rankTitle">{v.title}</span>
                 </li>
@@ -324,7 +329,9 @@ function BestSeller({ rank, bestSeller }) {
                 <li key={i}>
                   <span className="rankNum">{v.bestRank}</span>
                   <span className="rankImg">
-                    <img src={v.cover} alt="" />
+                    <Link to={`/book/${v.isbn13}`}>
+                      <img src={v.cover} alt="" />
+                    </Link>
                   </span>
                   <span className="rankTitle">{v.title}</span>
                 </li>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Slider from 'react-slick';
 import axios from 'axios';
@@ -354,7 +355,9 @@ function BlogBestSlide({ blogBest }) {
         {blogBest.map((v, i) => (
           <div className="slideItem" key={i}>
             <div className="blogBestImgBox">
-              <img src={v.cover} alt="" />
+              <Link to={`/book/${v.isbn13}`}>
+                <img src={v.cover} alt="" />
+              </Link>
             </div>
             <div className="blogBestText">
               <div className="rateWrap">
@@ -406,7 +409,9 @@ function DVDSlide({ dvd }) {
         {dvd.map((v, i) => (
           <>
             <MediaBox key={i}>
-              <img src={v.cover} alt="" />
+              <Link to={`/book/${v.isbn13}`}>
+                <img src={v.cover} alt="" />
+              </Link>
             </MediaBox>
             <MediaTitle>{v.title.split('-')[0]}</MediaTitle>
             <MediaPrice>
@@ -446,7 +451,9 @@ function MusicSlide({ music }) {
         {music.map((v, i) => (
           <>
             <MediaBox key={i}>
-              <img src={v.cover} alt="" />
+              <Link to={`/book/${v.isbn13}`}>
+                <img src={v.cover} alt="" />
+              </Link>
             </MediaBox>
             <MediaTitle>{v.title.split('-')[0]}</MediaTitle>
             <MediaPrice>

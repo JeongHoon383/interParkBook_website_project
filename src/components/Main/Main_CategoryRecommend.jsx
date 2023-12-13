@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Slider from 'react-slick';
 import axios from 'axios';
@@ -181,7 +182,9 @@ export default function Main_CategoryRecommend() {
             {dataList.map((v, i) => (
               <div className={`category_ ${v.searchCategoryId}`} key={i}>
                 <div className="categoryImgBox" key={i}>
-                  <img src={v.cover} alt="" style={{ width: '100%', height: '100%' }} />
+                  <Link to={`/book/${v.isbn13}`}>
+                    <img src={v.cover} alt="" style={{ width: '100%', height: '100%' }} />
+                  </Link>
                 </div>
                 <CategoryP style={{ width: '100px', height: '40px', margin: '0 auto' }}>
                   {v.title.split('-')[0]}
