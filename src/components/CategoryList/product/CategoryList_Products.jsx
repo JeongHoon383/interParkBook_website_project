@@ -21,9 +21,9 @@ export default function CategoryList_Products({
 }) {
   return (
     <ProductsList>
-      {bookData.item &&
-        bookData.item.map((bookData) => (
-          <li key={bookData.isbn}>
+      {bookData &&
+        bookData.map((bookData) => (
+          <li key={bookData.isbn13}>
             <CategoryList_ProdAvatar bookData={bookData} />
             <CategoryList_ProdContent bookData={bookData} />
             <CategoryList_ProdBuy

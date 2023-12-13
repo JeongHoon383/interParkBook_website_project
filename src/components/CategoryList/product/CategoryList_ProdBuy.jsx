@@ -104,10 +104,10 @@ export default function CategoryList_ProdBuy({
   //checkList에 해당 상품이 있는지 없는지에 따라 해당 상품의 checkbox 체크 변환
   useEffect(() => {
     const check = () => {
-      checkList.includes(bookData.isbn) ? setisChecked(true) : setisChecked(false);
+      checkList.includes(bookData.isbn13) ? setisChecked(true) : setisChecked(false);
     };
     check();
-  }, [checkList, bookData.isbn]);
+  }, [checkList, bookData.isbn13]);
 
   return (
     <ProdBuy>
@@ -118,7 +118,7 @@ export default function CategoryList_ProdBuy({
           id="ProdQuantity"
           type="checkbox"
           checked={isChecked}
-          value={bookData.isbn}
+          value={bookData.isbn13}
           onChange={handleSelect}
         />
         <span className="quantitywrapper">

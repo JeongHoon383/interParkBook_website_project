@@ -6,7 +6,8 @@ const ProdAvatar = styled.div`
   text-align: center;
   a {
     img {
-      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
     }
     &.preview {
       display: inline-block;
@@ -24,7 +25,7 @@ const ProdAvatar = styled.div`
 export default function CategoryList_ProdAvatar({ bookData }) {
   return (
     <ProdAvatar>
-      <Link to={`/book/${bookData.isbn}`}>
+      <Link to={`/book/${bookData.isbn13}`}>
         <img src={bookData.cover} alt="bookCover" />
       </Link>
       <Link className="preview" target="_blank">

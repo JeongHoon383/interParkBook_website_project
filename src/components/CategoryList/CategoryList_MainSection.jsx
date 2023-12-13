@@ -9,7 +9,17 @@ import { useParams } from "react-router-dom";
 
 const MainSection = styled.section`
   width: 770px;
-  padding-bottom: 30px;
+  margin-bottom: 30px;
+  .noDataNotice{
+    width: 770px;
+    text-align: center;
+    font-size: 2em;
+    border-radius: 4px;
+    border: 2px solid #d8d8d8;
+    span{
+      line-height: 350px;
+    }
+  }
 `;
 
 export default function CategoryList_MainSection() {
@@ -22,39 +32,36 @@ export default function CategoryList_MainSection() {
   const [isCheckedAll, setIsCheckedAll] = useState(false);
 
   useEffect(() => {
-    axios(`/ttb/api/ItemList.aspx
-?ttbkey=ttbgur65142158001
-&QueryType=itemNewAll
-&MaxResults=${listQty}
-&start=${currentPage}
-&outofStockfilter=${isSoldout}
-&SearchTarget=Book
-&output=JS
-&Version=20131101
-&Cover=MidBig
-&CategoryId=1196
-`).then((result) => {
-      setBookData(result.data);
-    });
-
     let startIndex = 0;
     let endIndex = 0;
-    let sort = 'priceSales'
+    let sorting = "priceSales desc";
 
     startIndex = (currentPage - 1) * listQty + 1;
     endIndex = currentPage * listQty;
 
-    axios(`http://127.0.0.1:9090/category/list/${parameterArr[0]}/${parameterArr[1]}/${parameterArr[2]}/${parameterArr[3]}/${parameterArr[4]}/${startIndex}/${endIndex}/${sort}`)
-    .then(result => console.log(result.data));
-
-  }, [listQty, currentPage, isSoldout]);
+    axios(
+      `http://127.0.0.1:9090/category/list/${parameterArr[0]}/${parameterArr[1]}/${parameterArr[2]}/${parameterArr[3]}/${parameterArr[4]}/${startIndex}/${endIndex}/${sorting}`
+    ).then((result) => {
+      console.log(result.data);
+      setBookData(result.data);
+    });
+  }, [
+    listQty,
+    currentPage,
+    isSoldout,
+    parameterArr[0],
+    parameterArr[1],
+    parameterArr[2],
+    parameterArr[3],
+    parameterArr[4],
+  ]);
 
   //하위 컴포넌트(CategoryList_Sort) 전체선택/선택해제 핸들링이벤트
   const handleSelectAll = (flag) => {
     if (flag) {
-      Array.isArray(bookData.item) &&
-        bookData.item.map((item) =>
-          !checkList.includes(item.isbn)
+      Array.isArray(bookData) &&
+        bookData.map((item) =>
+          !checkList.includes(item.isbn13)
             ? setCheckList((checkList) => [...checkList, item.isbn])
             : null
         );
@@ -74,39 +81,47 @@ export default function CategoryList_MainSection() {
 
   return (
     <MainSection>
-      <CategoryList_Title />
-      <CategoryList_SubCaNav />
-      <CategoryList_Sort
-        totalResults={bookData.totalResults}
-        listQty={listQty}
-        setListQty={setListQty}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        isSoldout={isSoldout}
-        setIsSoldout={setIsSoldout}
-        handleSelectAll={handleSelectAll}
-        isCheckedAll={isCheckedAll}
-        setIsCheckedAll={setIsCheckedAll}
-        setCheckList={setCheckList}
-      />
-      <CategoryList_Products
-        bookData={bookData}
-        checkList={checkList}
-        setCheckList={setCheckList}
-      />
-      <CategoryList_Sort
-        totalResults={bookData.totalResults}
-        listQty={listQty}
-        setListQty={setListQty}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        isSoldout={isSoldout}
-        setIsSoldout={setIsSoldout}
-        handleSelectAll={handleSelectAll}
-        isCheckedAll={isCheckedAll}
-        setIsCheckedAll={setIsCheckedAll}
-        setCheckList={setCheckList}
-      />
+      <CategoryList_Title bookData={bookData} />
+      {bookData.length >= 1 ? (
+        <>
+          <CategoryList_SubCaNav />
+          <CategoryList_Sort
+            totalResults={bookData[0] && bookData[0].totalResults}
+            listQty={listQty}
+            setListQty={setListQty}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            isSoldout={isSoldout}
+            setIsSoldout={setIsSoldout}
+            handleSelectAll={handleSelectAll}
+            isCheckedAll={isCheckedAll}
+            setIsCheckedAll={setIsCheckedAll}
+            setCheckList={setCheckList}
+          />
+          <CategoryList_Products
+            bookData={bookData}
+            checkList={checkList}
+            setCheckList={setCheckList}
+          />
+          <CategoryList_Sort
+            totalResults={bookData[0] && bookData[0].totalResults}
+            listQty={listQty}
+            setListQty={setListQty}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            isSoldout={isSoldout}
+            setIsSoldout={setIsSoldout}
+            handleSelectAll={handleSelectAll}
+            isCheckedAll={isCheckedAll}
+            setIsCheckedAll={setIsCheckedAll}
+            setCheckList={setCheckList}
+          />
+        </>
+      ) : (
+        <div className="noDataNotice">
+          <span>현재 카테고리에 해당하는 상품이 없습니다.</span>
+        </div>
+      )}
     </MainSection>
   );
 }

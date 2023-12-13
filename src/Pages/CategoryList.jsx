@@ -15,6 +15,9 @@ const CategoryListMain = styled.main`
   padding: 0 15px;
   font-size: 12px;
   color: #666;
+  .asideContainer{
+    margin-bottom: 30px;
+  }
 `;
 
 export default function CategoryList() {
@@ -24,7 +27,7 @@ export default function CategoryList() {
       <CategoryList_TopNav/>
 
       <CategoryListMain>
-        <div>
+        <div className="asideContainer">
           <CategoryList_CaNav />
           <CategoryLIst_WeekBestSeller />
         </div>
