@@ -1,8 +1,9 @@
 import React from 'react';
+import * as Styled from './StyledCategory';
 
 export default function Domestic() {
   return (
-    <div className="domestic category">
+    <Styled.Category>
       <h3>국내도서</h3>
       <div className="categoryNav">
         <ul>
@@ -95,11 +96,11 @@ export default function Domestic() {
           <li>
             <a href="">유아동전집</a>
           </li>
-          <li className="reservationSell">
+          <Styled.PointLi>
             <a href="">예약판매</a>
-          </li>
+          </Styled.PointLi>
         </ul>
       </div>
-    </div>
+    </Styled.Category>
   );
 }

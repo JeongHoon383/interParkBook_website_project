@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import * as Styled from './StyledCategory';
 
 export default function Goods() {
   return (
-    <div className="goods category">
-      <h3 className="goodsTitle">
+    <Styled.Category>
+      <Styled.Title>
         <Link to="#">굿즈</Link>
-      </h3>
+      </Styled.Title>
       <div className="categoryNav">
         <ul>
           <li>
@@ -23,6 +24,6 @@ export default function Goods() {
           </li>
         </ul>
       </div>
-    </div>
+    </Styled.Category>
   );
 }

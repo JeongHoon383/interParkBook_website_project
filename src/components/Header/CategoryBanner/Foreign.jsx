@@ -1,8 +1,9 @@
 import React from 'react';
+import * as Styled from './StyledCategory';
 
 export default function Foreign() {
   return (
-    <div className="foreign category">
+    <Styled.Category>
       <h3>외국도서</h3>
       <div className="categoryNav">
         <ul>
@@ -36,14 +37,14 @@ export default function Foreign() {
           <li>
             <a href="">프랑스도서</a>
           </li>
-          <li className="reservationSell">
+          <Styled.PointLi>
             <a href="">예약판매</a>
-          </li>
-          <li className="translateBook">
+          </Styled.PointLi>
+          <Styled.PointLi>
             <a href="">원서vs번역서</a>
-          </li>
+          </Styled.PointLi>
         </ul>
       </div>
-    </div>
+    </Styled.Category>
   );
 }
