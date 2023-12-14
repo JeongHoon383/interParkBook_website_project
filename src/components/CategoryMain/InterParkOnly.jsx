@@ -32,14 +32,16 @@ const InterParkOnly = () => {
       setMediaList(data.slice(1, 4))
       setGoodsList(data.slice(4, 7))
     })
-  })
+  },[])
 
+  
 
   return (
     <Only>
       <h3>INTERPARK ONLY</h3>
       <div className="onlyContainer">
         <OnlyContent onlyList={onlyList[0]}/>
+        {/* {mediaList.map((item) =>(<OnlyContent item={item}/>))} */}
         <OnlyContent onlyList={mediaList[0]}/>
         <OnlyContentLast onlyList={goodsList[0]}/>
       </div>

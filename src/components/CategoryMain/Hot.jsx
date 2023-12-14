@@ -258,7 +258,6 @@ const Hot = () => {
                 )
               )}
             </Slider>
-            
           </div>
         </div>
       </div>

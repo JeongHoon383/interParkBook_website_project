@@ -68,8 +68,11 @@ const OnlyReview = styled.div`
 `
 
 const OnlyContent = ({ onlyList }) => {
-  if(!onlyList) return <></>
+  if( !onlyList ) return <></>
+console.log(onlyList);
+
   const {img, top_title, article, author, title, review_author, publisher} = onlyList;
+  
   return (
         <OnlyReview>
           <h3 className="onlyReview_icon">
@@ -86,7 +89,7 @@ const OnlyContent = ({ onlyList }) => {
               <div className="onlyReview_author grey">{review_author}</div>
               <div className="grey">{publisher}</div>
             </div>
-          </div>
+          </div> {/* 이부분을 마지막만 출력 안되게  */}
         </OnlyReview>
   )
 }
