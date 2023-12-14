@@ -5,8 +5,6 @@ export default function SearchPagination(){
 
 	return(
 
-
-
 <>
 	<div className="paginationbox">
 		<img className="paginationleftarrow" 
@@ -20,8 +18,6 @@ export default function SearchPagination(){
 	</div>
 	
 </>
-
-
 	)
 }
 

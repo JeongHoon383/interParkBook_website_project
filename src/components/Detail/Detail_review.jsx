@@ -12,6 +12,9 @@ import {
   MdKeyboardDoubleArrowRight,
 } from "react-icons/md";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 const Wrapper = styled.div`
   position: relative;
@@ -271,6 +274,7 @@ const PageContainer = styled.div`
 `;
 const ReviewContent = styled.div`
   padding: 0 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
   .title {
     margin: 20px 0;
 
@@ -359,6 +363,17 @@ const Detail_review = () => {
   const [star, setStar] = useState(1);
   const [toggle, setToggle] = useState(false);
   const [click, setClick] = useState(false);
+  const [totalPoint, setTotalPoint] = useState(0);
+  let a = "";
+  const params = useParams();
+  function idStar(a) {
+    let arr = a.split("");
+
+    let v = arr.reverse().splice(0, 2);
+    arr = arr.reverse().join("");
+    return arr;
+  }
+
   const handleClick = () => {
     setClick((click) => !click);
   };
@@ -372,212 +387,349 @@ const Detail_review = () => {
   const onValid = (data) => {
     setValue("title", "");
     setValue("content", "");
-    setValue("point", "1");
 
-    console.log(data);
+    let { title, point, content } = data;
+    axios
+      .post(`http://127.0.0.1:9090/book/:isbn/review`, {
+        title,
+        point: star,
+        content,
+        isbn: params.id,
+        uid: "park",
+      })
+      .then((res) => {
+        alert("리뷰등록성공");
+        window.location.reload();
+      })
+      .catch((err) => console.log(err));
+    setValue("point", "1");
   };
 
+  console.log(star);
+  const {
+    isPending,
+    error,
+    data: reviewData,
+  } = useQuery({
+    queryKey: ["repoData"],
+    queryFn: () =>
+      axios
+        .get(`http://127.0.0.1:9090/book/${params.id}/review`)
+        .then((res) => res?.data),
+  });
+
+  /*   console.log(reviewData && reviewData[0].avg_point.toFixed(1)); */
+
   return (
-    <Wrapper>
-      {toggle === false && (
-        <ToggleButton
-          drag
-          layoutId="tog"
-          onClick={() => setToggle(true)}
-          type="button">
-          리뷰쓰기
-        </ToggleButton>
-      )}
-      <AnimatePresence>
-        {toggle === true ? (
-          <Form
-            onSubmit={handleSubmit(onValid)}
-            variants={formVars}
-            initial="start"
-            animate="end"
-            exit="exit">
-            <fieldset>
-              <legend>
-                <h1>리뷰 작성</h1>{" "}
-                <RiKakaoTalkFill style={{ fontSize: "20px" }} />
-                <CloseButton
-                  layoutId="tog"
-                  onClick={() => setToggle(false)}
-                  type="button">
-                  리뷰닫기
-                </CloseButton>
-              </legend>
+    <>
+      {isPending ? (
+        <h1>로딩중</h1>
+      ) : (
+        <Wrapper>
+          {toggle === false && (
+            <ToggleButton
+              drag
+              layoutId="tog"
+              onClick={() => setToggle(true)}
+              type="button"
+            >
+              리뷰쓰기
+            </ToggleButton>
+          )}
+          <AnimatePresence>
+            {toggle === true ? (
+              <Form
+                onSubmit={handleSubmit(onValid)}
+                variants={formVars}
+                initial="start"
+                animate="end"
+                exit="exit"
+              >
+                <fieldset>
+                  <legend>
+                    <h1>리뷰 작성</h1>{" "}
+                    <RiKakaoTalkFill style={{ fontSize: "20px" }} />
+                    <CloseButton
+                      layoutId="tog"
+                      onClick={() => setToggle(false)}
+                      type="button"
+                    >
+                      리뷰닫기
+                    </CloseButton>
+                  </legend>
 
-              <div className="title">
-                <label htmlFor=""></label>
-                <input
-                  {...register("title", { required: true })}
-                  placeholder="제목을 입력해주세요.."
-                  type="text"
-                />
+                  <div className="title">
+                    <label htmlFor=""></label>
+                    <input
+                      {...register("title", { required: true })}
+                      placeholder="제목을 입력해주세요.."
+                      type="text"
+                    />
 
-                <Evaluation>
-                  <select
-                    {...register("point", { required: true })}
-                    onChange={(e) => setStar(Number(e.currentTarget.value))}
-                    name="star"
-                    id="star">
-                    <option value="1">1점</option>
-                    <option value="2">2점</option>
-                    <option value="3">3점</option>
-                    <option value="4">4점</option>
-                    <option value="5">5점</option>
-                  </select>
-                  <Star>
-                    {star === 1 && (
-                      <>
-                        <AiFillStar />
-                        <AiOutlineStar />
-                        <AiOutlineStar />
-                        <AiOutlineStar />
-                        <AiOutlineStar />
-                      </>
-                    )}
-                    {star === 2 && (
-                      <>
-                        <AiFillStar />
-                        <AiFillStar />
-                        <AiOutlineStar />
-                        <AiOutlineStar />
-                        <AiOutlineStar />
-                      </>
-                    )}
-                    {star === 3 && (
-                      <>
-                        <AiFillStar />
-                        <AiFillStar />
-                        <AiFillStar />
-                        <AiOutlineStar />
-                        <AiOutlineStar />
-                      </>
-                    )}
-                    {star === 4 && (
-                      <>
-                        <AiFillStar />
-                        <AiFillStar />
-                        <AiFillStar />
-                        <AiFillStar />
-                        <AiOutlineStar />
-                      </>
-                    )}
-                    {star === 5 && (
-                      <>
-                        <AiFillStar />
-                        <AiFillStar />
-                        <AiFillStar />
-                        <AiFillStar />
-                        <AiFillStar />
-                      </>
-                    )}
-                  </Star>
-                </Evaluation>
+                    <Evaluation>
+                      <select
+                        {...register("point", { required: true })}
+                        onChange={(e) => setStar(Number(e.currentTarget.value))}
+                        name="star"
+                        id="star"
+                      >
+                        <option value="1">1점</option>
+                        <option value="2">2점</option>
+                        <option value="3">3점</option>
+                        <option value="4">4점</option>
+                        <option value="5">5점</option>
+                      </select>
+                      <Star>
+                        {star === 1 && (
+                          <>
+                            <AiFillStar />
+                            <AiOutlineStar />
+                            <AiOutlineStar />
+                            <AiOutlineStar />
+                            <AiOutlineStar />
+                          </>
+                        )}
+                        {star === 2 && (
+                          <>
+                            <AiFillStar />
+                            <AiFillStar />
+                            <AiOutlineStar />
+                            <AiOutlineStar />
+                            <AiOutlineStar />
+                          </>
+                        )}
+                        {star === 3 && (
+                          <>
+                            <AiFillStar />
+                            <AiFillStar />
+                            <AiFillStar />
+                            <AiOutlineStar />
+                            <AiOutlineStar />
+                          </>
+                        )}
+                        {star === 4 && (
+                          <>
+                            <AiFillStar />
+                            <AiFillStar />
+                            <AiFillStar />
+                            <AiFillStar />
+                            <AiOutlineStar />
+                          </>
+                        )}
+                        {star === 5 && (
+                          <>
+                            <AiFillStar />
+                            <AiFillStar />
+                            <AiFillStar />
+                            <AiFillStar />
+                            <AiFillStar />
+                          </>
+                        )}
+                      </Star>
+                    </Evaluation>
+                  </div>
+
+                  <div className="content">
+                    <label htmlFor=""></label>
+                    <TextArea
+                      {...register("content", { required: true })}
+                      type="text"
+                      placeholder="내용을 입력해주세요"
+                    />
+                  </div>
+                  <SubmitButton type="submit">글작성</SubmitButton>
+                </fieldset>
+              </Form>
+            ) : null}
+          </AnimatePresence>
+          <Review>
+            <Re_title>
+              리뷰
+              <div className="star">
+                {reviewData && !Number(reviewData[0]?.avg_point) && (
+                  <>
+                    <AiOutlineStar />
+                    <AiOutlineStar />
+                    <AiOutlineStar />
+                    <AiOutlineStar />
+                    <AiOutlineStar />
+                  </>
+                )}
+                {reviewData &&
+                  Math.floor(Number(reviewData[0]?.avg_point)) === 1 && (
+                    <>
+                      <AiFillStar />
+                      <AiOutlineStar />
+                      <AiOutlineStar />
+                      <AiOutlineStar />
+                      <AiOutlineStar />
+                    </>
+                  )}
+                {reviewData &&
+                  Math.floor(Number(reviewData[0]?.avg_point)) === 2 && (
+                    <>
+                      <AiFillStar />
+                      <AiFillStar />
+                      <AiOutlineStar />
+                      <AiOutlineStar />
+                      <AiOutlineStar />
+                    </>
+                  )}
+                {reviewData &&
+                  Math.floor(Number(reviewData[0]?.avg_point)) === 3 && (
+                    <>
+                      <AiFillStar />
+                      <AiFillStar />
+                      <AiFillStar />
+                      <AiOutlineStar />
+                      <AiOutlineStar />
+                    </>
+                  )}
+                {reviewData &&
+                  Math.floor(Number(reviewData[0]?.avg_point)) === 4 && (
+                    <>
+                      <AiFillStar />
+                      <AiFillStar />
+                      <AiFillStar />
+                      <AiFillStar />
+                      <AiOutlineStar />
+                    </>
+                  )}
+                {reviewData &&
+                  Math.floor(Number(reviewData[0]?.avg_point)) === 5 && (
+                    <>
+                      <AiFillStar />
+                      <AiFillStar />
+                      <AiFillStar />
+                      <AiFillStar />
+                      <AiFillStar />
+                    </>
+                  )}
               </div>
-
-              <div className="content">
-                <label htmlFor=""></label>
-                <TextArea
-                  {...register("content", { required: true })}
-                  type="text"
-                  placeholder="내용을 입력해주세요"
-                />
-              </div>
-              <SubmitButton type="submit">글작성</SubmitButton>
-            </fieldset>
-          </Form>
-        ) : null}
-      </AnimatePresence>
-      <Review>
-        <Re_title>
-          리뷰
-          <div className="star">
-            <AiFillStar />
-            <AiFillStar />
-            <AiFillStar />
-            <AiFillStar />
-            <AiFillStar />
-          </div>
-          <span>(총 2건)</span>
-        </Re_title>
-        <SortBox>
-          <ul>
-            <li>최근순</li>
-            <li>제목순</li>
-          </ul>
-        </SortBox>
-        <ReviewContent>
-          <div className="title">
-            <div>
-              <em>
-                <AiFillStar />
-                <AiFillStar />
-                <AiFillStar />
-                <AiFillStar />
-                <AiFillStar />
-              </em>
-              마흔에 읽은 쇼펜하우어
-            </div>
-            <div>
-              <ul>
-                <li>qwer12**</li>
-                <li>2023/11/23</li>
-              </ul>
-            </div>
-          </div>
-          <div className="content">
-            최근 관심 있는 독서 분야인 철학 관련 도서를 읽을 기회가 생겼다.
-            쇼펜하우어 정말 유명한 철학가지만, 제대로 읽어보고 알아본 적은
-            없었다. 쇼펜하우어 철학에 대해 자세히 알아볼 수
-          </div>
-          <div className="comment">
-            <ul>
-              <li>댓글(0)</li>
-              <li>추천(0)</li>
-              <li>
-                <AiTwotoneLike />
-                <span>추천하기</span>
-              </li>
-            </ul>
-            <div onClick={handleClick} className="extend">
-              <span>펼쳐보기</span>
-              <span
-                style={{
-                  transform: click ? "rotate(180deg)" : "rotate(0deg)",
-                }}>
-                <IoIosArrowDown />
+              <span>
+                (총 {reviewData && reviewData.length ? reviewData.length : 0}건)
               </span>
-            </div>
-          </div>
-        </ReviewContent>
-        <PageContainer>
-          <div>
-            <ul>
-              <li>
-                <MdKeyboardDoubleArrowLeft />
-                맨앞
-              </li>
-              <li>
-                <MdArrowBackIos />
-                이전
-              </li>
-              <li className="number">1</li>
-              <li>
-                다음
-                <MdArrowForwardIos />
-              </li>
-              <li>
-                맨뒤
-                <MdKeyboardDoubleArrowRight />
-              </li>
-            </ul>
-          </div>
-        </PageContainer>
-      </Review>
-    </Wrapper>
+            </Re_title>
+            <SortBox>
+              <ul>
+                <li>최근순</li>
+                <li>제목순</li>
+              </ul>
+            </SortBox>
+            {!isPending &&
+              reviewData &&
+              Array.isArray(reviewData) &&
+              reviewData.map((v, i) => (
+                <ReviewContent key={i}>
+                  <div className="title">
+                    <div>
+                      <em>
+                        {Number(v?.point) === 1 && (
+                          <>
+                            <AiFillStar />
+                            <AiOutlineStar />
+                            <AiOutlineStar />
+                            <AiOutlineStar />
+                            <AiOutlineStar />
+                          </>
+                        )}
+                        {Number(v?.point) === 2 && (
+                          <>
+                            <AiFillStar />
+                            <AiFillStar />
+                            <AiOutlineStar />
+                            <AiOutlineStar />
+                            <AiOutlineStar />
+                          </>
+                        )}
+                        {Number(v?.point) === 3 && (
+                          <>
+                            <AiFillStar />
+                            <AiFillStar />
+                            <AiFillStar />
+                            <AiOutlineStar />
+                            <AiOutlineStar />
+                          </>
+                        )}
+                        {Number(v?.point) === 4 && (
+                          <>
+                            <AiFillStar />
+                            <AiFillStar />
+                            <AiFillStar />
+                            <AiFillStar />
+                            <AiOutlineStar />
+                          </>
+                        )}
+                        {Number(v?.point) === 5 && (
+                          <>
+                            <AiFillStar />
+                            <AiFillStar />
+                            <AiFillStar />
+                            <AiFillStar />
+                            <AiFillStar />
+                          </>
+                        )}
+                      </em>
+                      {v?.title}
+                    </div>
+                    <div>
+                      <ul>
+                        <li>{idStar(v.id)}**</li>
+                        <li>{v?.rdate.split("T")[0].replaceAll("-", "/")}</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div className="content">{v?.content}</div>
+                  <div className="comment">
+                    <ul>
+                      <li>댓글(0)</li>
+                      <li>추천(0)</li>
+                      <li>
+                        <AiTwotoneLike />
+                        <span>추천하기</span>
+                      </li>
+                    </ul>
+                    <div onClick={handleClick} className="extend">
+                      <span>펼쳐보기</span>
+                      <span
+                        style={{
+                          transform: click ? "rotate(180deg)" : "rotate(0deg)",
+                        }}
+                      >
+                        <IoIosArrowDown />
+                      </span>
+                    </div>
+                  </div>
+                </ReviewContent>
+              ))}
+
+            <PageContainer>
+              <div>
+                <ul>
+                  <li>
+                    <MdKeyboardDoubleArrowLeft />
+                    맨앞
+                  </li>
+                  <li>
+                    <MdArrowBackIos />
+                    이전
+                  </li>
+                  <li className="number">1</li>
+                  <li>
+                    다음
+                    <MdArrowForwardIos />
+                  </li>
+                  <li>
+                    맨뒤
+                    <MdKeyboardDoubleArrowRight />
+                  </li>
+                </ul>
+              </div>
+            </PageContainer>
+          </Review>
+        </Wrapper>
+      )}
+    </>
   );
 };
 

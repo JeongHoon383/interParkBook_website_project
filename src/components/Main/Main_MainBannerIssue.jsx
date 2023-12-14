@@ -1,36 +1,63 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+
+const IssueBook = styled.div`
+  padding-bottom: 58px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: rgb(248, 248, 248);
+
+  .issueBookItem {
+    margin-top: 50px;
+    p {
+      margin-top: 35px;
+      font-size: 0.8em;
+      font-weight: 800;
+      color: var(--hover);
+      text-align: center;
+    }
+    .imgBox {
+      width: 200px;
+      height: 270px;
+      margin-bottom: 12px;
+    }
+  }
+`;
+
+const imgStyle = {
+  width: '100%',
+  height: '100%',
+  boxShadow: '0 10px 4px -4px #d9d9d9',
+};
 
 export default function Main_MainBannerIssue() {
+  const [issueBook, setIssueBook] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:9090/book')
+      .then((result) => {
+        setIssueBook(result.data.slice(0, 4));
+      })
+      .catch((err) => console.error(err));
+  }, [issueBook]);
+
   return (
-    <div className="issueBook">
-      <div className="issueBookItem">
-        <div className="imgBox">
-          <img src="/img/IssueBook/issueBook1.jpg" alt="" />
+    <IssueBook>
+      {issueBook.map((v, i) => (
+        <div className="issueBookItem" key={i}>
+          <div className="imgBox">
+            <Link to={`/book/${v.isbn13}`}>
+              <img src={v.cover} style={imgStyle} alt="" />
+            </Link>
+          </div>
+          <p>{v.title.split('-')[0]}</p>
         </div>
-        <p>당도 100퍼센트의 행복</p>
-        <p>마님 & 올리버쌤 첫 번째 에세이</p>
-      </div>
-      <div className="issueBookItem">
-        <div className="imgBox">
-          <img src="/img/IssueBook/issueBook2.jpg" alt="" />
-        </div>
-        <p>마흔에 읽는 쇼펜하우어</p>
-        <p>나.혼.산. 하석진이 읽은 책</p>
-      </div>
-      <div className="issueBookItem">
-        <div className="imgBox">
-          <img src="/img/IssueBook/issueBook3.jpg" alt="" />
-        </div>
-        <p>작별하지 않는다</p>
-        <p>한경 장편 소설 메디치상 수상!</p>
-      </div>
-      <div className="issueBookItem">
-        <div className="imgBox">
-          <img src="/img/IssueBook/issueBook4.jpg" alt="" />
-        </div>
-        <p>이상한 과자 가게 전천당 19</p>
-        <p>어린이 No.1 베스트셀러</p>
-      </div>
-    </div>
+      ))}
+    </IssueBook>
   );
 }

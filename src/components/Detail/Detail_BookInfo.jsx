@@ -8,11 +8,13 @@ import Detail_count from "./Detail_count";
 import { CiHeart } from "react-icons/ci";
 import { IoBookOutline } from "react-icons/io5";
 import { FaHeart } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaTwitterSquare } from "react-icons/fa";
 import { FaFacebookSquare } from "react-icons/fa";
 import { GoTriangleDown } from "react-icons/go";
 import { GoTriangleRight } from "react-icons/go";
+import { useDispatch } from "react-redux";
+import { changeCart } from "../Cart/store";
 
 const InfoContainer = styled.div`
   display: flex;
@@ -255,6 +257,8 @@ const CartArea = styled.div`
     justify-content: center;
     font-weight: 600;
     color: white;
+
+    cursor: pointer;
   }
   .cart {
     background-color: #ff9c46;
@@ -275,19 +279,37 @@ const CartArea = styled.div`
   }
 `;
 
-const Detail_BookInfo = ({ data, detailData }) => {
+const Detail_BookInfo = ({ data, detailData, DetailData }) => {
   let days = ["일", "월", "화", "수", "목", "금", "토"];
   const [click, setClick] = useState(false);
+  const [qty, setQty] = useState(1);
+  let dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleAddCart = () => {
+    navigate("/cart");
+    alert("추가완료");
+    return dispatch(
+      changeCart({
+        cartId: Date.now(),
+        img: DetailData.cover && DetailData.cover,
+        title: DetailData.title && DetailData.title,
+        pricestandard: DetailData.pricestandard && DetailData.pricestandard,
+        pricesales: DetailData.pricesales && DetailData.pricesales,
+        mileage: DetailData.mileage && DetailData.mileage,
+        count: qty,
+      })
+    );
+  };
   return (
     <>
       <InfoContainer>
         <div className="cover_section">
           <figure>
-            <img src={detailData?.thumbnail} alt="" />
+            <img src={DetailData?.cover} alt="" />
           </figure>
           <InfoCaption className="preview">
             <div className="first">
-              <Link to={detailData?.url}>
+              <Link to={DetailData?.cover}>
                 <span>
                   <GoSearch /> 크게보기
                 </span>
@@ -295,7 +317,7 @@ const Detail_BookInfo = ({ data, detailData }) => {
             </div>
 
             <div>
-              <Link to={detailData?.url}>
+              <Link to={DetailData?.cover}>
                 <span>
                   <IoBookOutline /> 미리보기
                 </span>
@@ -314,7 +336,16 @@ const Detail_BookInfo = ({ data, detailData }) => {
             </span>
           </InfoCaption>
           <InfoCaption>
-            <span style={{ color: "rgba(0,0,0,0.4)" }}>판매지수&nbsp;<em style={{ color: "red" }}>9,418</em></span>
+            <span style={{ color: "rgba(0,0,0,0.4)" }}>
+              판매지수
+              <em style={{ margin: "0 5px", color: "red" }}>
+                {
+                  DetailData?.salesPoint /*  === "0"
+                  ? "220,000"
+                  : DetailData.salesPoint */
+                }
+              </em>
+            </span>
           </InfoCaption>
           <InfoCaption>
             <span className="share">
@@ -330,22 +361,23 @@ const Detail_BookInfo = ({ data, detailData }) => {
         </div>
         <div className="info_section">
           <div className="info_publisher">
-            <span>저 : {detailData?.authors[0]}&nbsp;</span>
+            <span>저 : {DetailData?.author}&nbsp;</span>
             <span>사진 : 류정훈&nbsp;</span>
-            <span>출판사 : {detailData?.publisher}&nbsp;</span>
+            <span>출판사 : {DetailData?.publisher}&nbsp;</span>
             <span>
-              발행 : {detailData?.datetime.split("-")[0]}년{" "}
-              {detailData?.datetime.split("-")[1]}월{" "}
-              {detailData?.datetime.split("-")[2].slice(0, 2)}일&nbsp;
+              발행 : {DetailData?.p_Date.split("-")[0]}년{" "}
+              {DetailData?.p_Date.split("-")[1]}월{" "}
+              {DetailData?.p_Date.split("-")[2].slice(0, 2)}일&nbsp;
             </span>
-            <span className="last_span">
-              ISBN : {detailData?.isbn.split(" ")[1]}&nbsp;
-            </span>
+            <span className="last_span">ISBN : {DetailData?.isbn}&nbsp;</span>
           </div>
           <PriceSection>
             <em>
               <strong>정가</strong>
-              <span> {detailData?.price.toLocaleString()}원</span>
+              <span>
+                {" "}
+                {Number(DetailData?.pricestandard).toLocaleString()}원
+              </span>
             </em>
             <em>
               <div className="red_box">
@@ -360,12 +392,12 @@ const Detail_BookInfo = ({ data, detailData }) => {
                 />
                 <strong>새책</strong>
                 <em className="red_sale">
-                  <h1>{detailData?.sale_price.toLocaleString()}원</h1>
+                  <h1>{Number(DetailData?.pricesales).toLocaleString()}원</h1>
                   <span>(10%할인)</span>
                 </em>
                 <em>
                   <span>
-                    {(detailData?.sale_price * 0.05).toLocaleString()}P (5%적립)
+                    {Number(DetailData?.mileage).toLocaleString()}P (5%적립)
                   </span>
                 </em>
               </div>
@@ -384,8 +416,7 @@ const Detail_BookInfo = ({ data, detailData }) => {
             <em className="point">
               <strong>적립혜택</strong>
               <span>
-                {(detailData?.sale_price * 0.05).toLocaleString()}P
-                &nbsp;(5%적립)
+                {Number(DetailData?.mileage).toLocaleString()}P &nbsp;(5%적립)
               </span>
               <span className="last">
                 5만원이상 주문시 2천P+등급별 최대 1.5%적립{" "}
@@ -423,10 +454,12 @@ const Detail_BookInfo = ({ data, detailData }) => {
             </em>
             <em className="count_area">
               <strong>주문수량</strong>
-              <Detail_count />
+              <Detail_count setQty={setQty} />
             </em>
             <CartArea>
-              <div className="cart">북카트담기</div>
+              <div onClick={handleAddCart} className="cart">
+                북카트담기
+              </div>
               <div className="buy">바로구매</div>
               <div className="like" onClick={() => setClick((prev) => !prev)}>
                 <FaHeart

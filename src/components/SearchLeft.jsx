@@ -3,50 +3,18 @@ import SearchBookResult from "./SearchBookResult"
 import SearchReview from "./SearchReview"
 import SearchPagination from "./SearchPagination"
 import { GoTriangleDown } from "react-icons/go";
+import SearchTabWrap from "./SearchTabWrap";
 
-export default function SearchLeft(){
+
+export default function SearchLeft({books}){
 	
 	return(
 
 <>
 <div className="leftdiv">
 
+<SearchTabWrap />
 
-	<div className="searchtabwrap">
-
-		<div className="searchtabwraptitle"><h2 className="searchtitle">우리 민담집</h2>
-		<div className="searchtabtextbox">에 대한 검색결과는  <span className="searchwraptitlenumb">3</span>건입니다</div>
-		</div>
-	
-	
-	<div className="selectwrapbox">
-		
-			<div className="selecttitle">결과내 재검색</div>
-			 <label><input type="text" id="dtl_input" className="searchlabel"/></label>
-	
-			 <button className="searchbtn">검색</button>
-			 <button className="detailsearch">상세검색<GoTriangleDown className="pricearrowdown"/></button>
-	
-		<div className="searchresulttop">
-			<div className="searchresultdomestic">국내도서 (2)
-				<div className="adiv">
-				<a className="searchresultup"><li>아동(1)</li></a>
-				<a className="searchresultmiddle"><li>시/에세이(1)</li></a>
-				</div>
-			</div>
-			<ol className="searchresultforeign">외국도서 (0)
-			</ol>
-		
-			<ol className="searchresultgoods">굿즈샵 (0)
-			</ol>
-		</div>
-	</div>
-		
-
-	
-		<p className="categoryresultline"><img src="https://qi-b.qoo10cdn.com/renewPark/search/btn_cate_open.gif" className="categoryresultline" alt="" /></p>
-	
-	</div>
 	
 	
 		<div className="category-line"></div>
@@ -58,8 +26,7 @@ export default function SearchLeft(){
 		<div className="searchresulttitle">
 			<img src="https://bimage.interpark.com/renewPark/search/tit_internal.gif" alt="" className="searchresulttitletitle"/> 
 		
-			<div className="searchnum">(<b className="searchnumb">2</b>건)</div>
-		</div>
+					</div>
 	
 		<div className="searchminitab">
 		<ul className="searchminitabtitle">
@@ -79,7 +46,7 @@ export default function SearchLeft(){
 	
 
 		<SearchBookResult/>
-		<SearchBookResult/>
+		{/* <SearchBookResult/> */}
 
 
 		<SearchPagination/>
