@@ -37,7 +37,7 @@ export default function HeaderCategoryList({mall}) {
 
   return (
     <div className="category">
-      <h3><Link to={'/category/main'}>{category[0] && category[0].mall}</Link></h3> 
+      <h3><Link to={`/category/main/${mall}`}>{category[0] && category[0].mall}</Link></h3> 
       <div className="categoryNav">
         {showCategoryList(category)}
       </div>

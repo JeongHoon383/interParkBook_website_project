@@ -229,7 +229,7 @@ export default function CategoryList_TopNav() {
                       item.mall === parameterArr[0] ? "currentCategory" : null
                     }
                   >
-                    <Link to={"/category/main"}>{item.mall}</Link>
+                    <Link to={`/category/main/${item.mall}`}>{item.mall}</Link>
                   </li>
                 ))}
               </ul>

@@ -10,13 +10,13 @@ import { useParams } from "react-router-dom";
 const MainSection = styled.section`
   width: 770px;
   margin-bottom: 30px;
-  .noDataNotice{
+  .noDataNotice {
     width: 770px;
     text-align: center;
     font-size: 2em;
     border-radius: 4px;
     border: 2px solid #d8d8d8;
-    span{
+    span {
       line-height: 350px;
     }
   }
@@ -27,20 +27,20 @@ export default function CategoryList_MainSection() {
   const [bookData, setBookData] = useState([]);
   const [listQty, setListQty] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
-  const [isSoldout, setIsSoldout] = useState("0");
+  const [isSoldout, setIsSoldout] = useState("상품있음");
   const [checkList, setCheckList] = useState([]);
   const [isCheckedAll, setIsCheckedAll] = useState(false);
-
+  const [sort, setSort] = useState("pubDate asc");
+  
   useEffect(() => {
     let startIndex = 0;
     let endIndex = 0;
-    let sorting = "priceSales desc";
 
     startIndex = (currentPage - 1) * listQty + 1;
     endIndex = currentPage * listQty;
 
     axios(
-      `http://127.0.0.1:9090/category/list/${parameterArr[0]}/${parameterArr[1]}/${parameterArr[2]}/${parameterArr[3]}/${parameterArr[4]}/${startIndex}/${endIndex}/${sorting}`
+      `http://127.0.0.1:9090/category/list/${parameterArr[0]}/${parameterArr[1]}/${parameterArr[2]}/${parameterArr[3]}/${parameterArr[4]}/${startIndex}/${endIndex}/${sort}/${isSoldout}`
     ).then((result) => {
       setBookData(result.data);
     });
@@ -48,6 +48,7 @@ export default function CategoryList_MainSection() {
     listQty,
     currentPage,
     isSoldout,
+    sort,
     parameterArr[0],
     parameterArr[1],
     parameterArr[2],
@@ -86,6 +87,8 @@ export default function CategoryList_MainSection() {
           <CategoryList_SubCaNav />
           <CategoryList_Sort
             totalResults={bookData[0] && bookData[0].totalResults}
+            sort={sort}
+            setSort={setSort}
             listQty={listQty}
             setListQty={setListQty}
             currentPage={currentPage}

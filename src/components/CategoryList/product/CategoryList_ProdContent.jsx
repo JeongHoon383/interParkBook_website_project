@@ -84,7 +84,7 @@ export default function CategoryList_ProdContent({ bookData }) {
         <span>{bookData.author}</span>
         {/* 클릭 시 지은이 이름으로 검색하는 기능 추가 필요 */}
         <span>{bookData.publisher}</span>
-        <span>{bookData.pubDate}</span>
+        <span>{bookData.pubDate.substr(0, 10)}</span>
       </p>
       <p className="price">
         <span>{bookData.priceStandard.toLocaleString()}원</span>

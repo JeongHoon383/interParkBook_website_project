@@ -58,6 +58,8 @@ const Sortarea = styled.div`
 
 export default function CategoryList_Sort({
   totalResults,
+  sort,
+  setSort,
   listQty,
   setListQty,
   currentPage,
@@ -70,6 +72,15 @@ export default function CategoryList_Sort({
   setCheckList,
 }) {
   //졍렬 버튼 클릭시 resetCheckLIst 실행/ 수정 필요
+  const handleSort = (e) => {
+    console.log('집에 가서 꼭 해결하자');
+    // resetCheckList();
+    // if(sort && sort.includes(e.target.value)) {
+    //   sort.includes('asc') ? setSort(e.target.value + 'desc') : setSort(e.target.value + 'asc')
+    // }else{
+    //   setSort(e.target.value + 'asc');
+    // }
+  };
 
   //상품 체크 목록 리셋
   const resetCheckList = () => {
@@ -101,12 +112,10 @@ export default function CategoryList_Sort({
     <Sortarea>
       <div className="topArea">
         <span className="sortOption">
-          <button className="currentSort">신상품순</button>
-          <button>판매량순</button>
-          <button>등록일순</button>
-          <button>최저가순</button>
-          <button>최고가순</button>
-          <button>상품명순</button>
+          <button className={sort && sort.includes("pubDate") ? "currentSort" : null} value="pubDate" onClick={handleSort}>등록일순</button>
+          <button className={sort && sort.includes("salesPoint") ? "currentSort" : null} value="salesPoint" onClick={handleSort}>판매량순</button>
+          <button className={sort && sort.includes("priceSales") ? "currentSort" : null} value="priceSales" onClick={handleSort}>가격순</button>
+          <button className={sort && sort.includes("title") ? "currentSort" : null} value="title" onClick={handleSort}>상품명순</button>
         </span>
         <span className="listOption">
           <label htmlFor="listQty"></label>
@@ -116,6 +125,7 @@ export default function CategoryList_Sort({
             onChange={handleListQty}
             value={listQty}
           >
+            <option value="10">10개씩 보기</option>
             <option value="20">20개씩 보기</option>
             <option value="30">30개씩 보기</option>
             <option value="40">40개씩 보기</option>
@@ -127,8 +137,8 @@ export default function CategoryList_Sort({
             onChange={handleChangeSoldout}
             value={isSoldout}
           >
-            <option value="0">품절포함</option>
-            <option value="1">품절제외</option>
+            <option value="품절포함">품절포함</option>
+            <option value="품절">품절제외</option>
           </select>
         </span>
       </div>

@@ -9,6 +9,7 @@ const CategoryNav = styled.nav`
   margin-right: 30px;
   .categoryTitle {
     line-height: 36px;
+    text-align: center;
     font-size: 16px;
     font-weight: bold;
     color: #fff;
@@ -40,7 +41,8 @@ const CategoryNav = styled.nav`
 `;
 
 export default function CategoryList_CaNav() {
-  const mall = useParams().categoryPath.split('_')[0];
+  const params = useParams().categoryPath;
+  const mall = params.includes('_') ? params.split('_')[0] : params;
   const [category, setCategory] = useState([]);
 
   useEffect(() => {
