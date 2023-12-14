@@ -30,8 +30,9 @@ export default function CategoryList_MainSection() {
   const [isSoldout, setIsSoldout] = useState("상품있음");
   const [checkList, setCheckList] = useState([]);
   const [isCheckedAll, setIsCheckedAll] = useState(false);
-  const [sort, setSort] = useState("pubDate asc");
-  
+  const [sortField, setSortField] = useState("pubDate");
+  const [sortOption, setSortOption] = useState("desc");
+
   useEffect(() => {
     let startIndex = 0;
     let endIndex = 0;
@@ -39,16 +40,20 @@ export default function CategoryList_MainSection() {
     startIndex = (currentPage - 1) * listQty + 1;
     endIndex = currentPage * listQty;
 
-    axios(
-      `http://127.0.0.1:9090/category/list/${parameterArr[0]}/${parameterArr[1]}/${parameterArr[2]}/${parameterArr[3]}/${parameterArr[4]}/${startIndex}/${endIndex}/${sort}/${isSoldout}`
-    ).then((result) => {
-      setBookData(result.data);
-    });
+    if(sortField) {
+      axios(
+        `http://127.0.0.1:9090/category/list/${parameterArr[0]}/${parameterArr[1]}/${parameterArr[2]}/${parameterArr[3]}/${parameterArr[4]}/${startIndex}/${endIndex}/${sortField}/${sortOption}/${isSoldout}`
+      ).then((result) => {
+        setBookData(result.data);
+      });
+    }
+
   }, [
     listQty,
     currentPage,
     isSoldout,
-    sort,
+    sortField,
+    sortOption,
     parameterArr[0],
     parameterArr[1],
     parameterArr[2],
@@ -87,8 +92,10 @@ export default function CategoryList_MainSection() {
           <CategoryList_SubCaNav />
           <CategoryList_Sort
             totalResults={bookData[0] && bookData[0].totalResults}
-            sort={sort}
-            setSort={setSort}
+            sortField={sortField}
+            setSortField={setSortField}
+            sortOption={sortOption}
+            setSortOption={setSortOption}
             listQty={listQty}
             setListQty={setListQty}
             currentPage={currentPage}
