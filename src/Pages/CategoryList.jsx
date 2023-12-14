@@ -4,9 +4,6 @@ import CategoryList_MainSection from "../components/CategoryList/CategoryList_Ma
 import CategoryList_CaNav from "../components/CategoryList/asideLeft/CategoryList_CaNav";
 import CategoryLIst_WeekBestSeller from "../components/CategoryList/asideLeft/CategoryLIst_WeekBestSeller";
 import styled from "styled-components";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 
 const CategoryListMain = styled.main`
   position: relative;
@@ -18,26 +15,19 @@ const CategoryListMain = styled.main`
   padding: 0 15px;
   font-size: 12px;
   color: #666;
+  .asideContainer{
+    margin-bottom: 30px;
+  }
 `;
 
 export default function CategoryList() {
-  // const { mall } = useParams();
-  const [categoryData, setCategoryData] = useState([]);
-
-  // useEffect(() => {
-  //   axios.get(`http://localhost:9090/category/list/${mall}`)
-  //   .then(result => setCategoryData(result.data))
-  //   .catch(error => console.log(error));
-  // }, []);
 
   return (
     <>
-      <CategoryList_TopNav
-        categoryData={categoryData}
-      />
+      <CategoryList_TopNav/>
 
       <CategoryListMain>
-        <div>
+        <div className="asideContainer">
           <CategoryList_CaNav />
           <CategoryLIst_WeekBestSeller />
         </div>

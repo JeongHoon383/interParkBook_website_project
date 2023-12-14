@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const BestSellerNav = styled.nav`
   width: 180px;
@@ -60,9 +60,10 @@ const BestSellerNav = styled.nav`
 `;
 
 export default function CategortList_WeekBestSeller() {
+  const parameterArr = useParams().categoryPath.split('_');
   return (
     <BestSellerNav>
-      <h4 className="weekBestSellerTitle">여행 주간 베스트셀러 &gt;</h4>
+      <h4 className="weekBestSellerTitle">{parameterArr.slice(-1)} 주간 베스트셀러 &gt;</h4>
       <ul className="weekBestSellerList">
         <li className="weekBestSellerItem">
           <figure>

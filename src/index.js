@@ -6,17 +6,15 @@ import Main from './Pages/Main';
 import Detail from './Pages/Detail';
 import NotFound from './Pages/NotFound';
 import CategoryMain from './Pages/CategoryMain';
-import Root from './Pages/Root';
 import BestSeller from './components/BestSeller';
-import NewSeller from './Pages/NewSeller';
 import Search from './components/Search';
 import Mypage from './Pages/Mypage';
 import Login from './Pages/Login';
 import SignUp from './Pages/SignUp';
 import Agreement from './Pages/Agreement';
 import SignUpDone from './Pages/SignUpDone';
-import { Provider } from "react-redux";
-import { store, persistor } from "./components/Cart/store";
+import { Provider } from 'react-redux';
+import { store, persistor } from './components/Cart/store';
 
 import reportWebVitals from './reportWebVitals';
 import { createGlobalStyle } from 'styled-components';
@@ -197,7 +195,7 @@ const router = createBrowserRouter([
         element: <CategoryMain />,
       },
       {
-        path: '/category/:categoryId',
+        path: '/category/list/:categoryPath',
         element: <CategoryList />,
       },
       {
@@ -239,11 +237,11 @@ root.render(
   <React.StrictMode>
     <CookiesProvider>
       <Provider store={store}>
-      <QueryClientProvider client={client}>
+        <QueryClientProvider client={client}>
           <GlobalStyle />
           <RouterProvider router={router} />
         </QueryClientProvider>
-    </Provider>
+      </Provider>
     </CookiesProvider>
   </React.StrictMode>
 );

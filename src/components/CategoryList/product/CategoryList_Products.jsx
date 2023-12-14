@@ -15,19 +15,19 @@ const ProductsList = styled.ul`
 `;
 
 export default function CategoryList_Products({
-  data,
+  bookData,
   checkList,
   setCheckList,
 }) {
   return (
     <ProductsList>
-      {data.item &&
-        data.item.map((data) => (
-          <li key={data.isbn}>
-            <CategoryList_ProdAvatar data={data} />
-            <CategoryList_ProdContent data={data} />
+      {bookData &&
+        bookData.map((bookData) => (
+          <li key={bookData.isbn13}>
+            <CategoryList_ProdAvatar bookData={bookData} />
+            <CategoryList_ProdContent bookData={bookData} />
             <CategoryList_ProdBuy
-              data={data}
+              bookData={bookData}
               checkList={checkList}
               setCheckList={setCheckList}
             />

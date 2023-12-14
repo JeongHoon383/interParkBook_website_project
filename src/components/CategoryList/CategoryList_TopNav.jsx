@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import { Link, useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { Link, useLocation, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { LiaAngleRightSolid } from "react-icons/lia";
 import { CiSquareChevDown, CiSquareChevUp } from "react-icons/ci";
+
 const BackgroundLayout = styled.nav`
   height: 41px;
   font-size: 12px;
@@ -18,6 +19,11 @@ const BackgroundLayout = styled.nav`
       line-height: 41px;
       > span {
         position: relative;
+        &:hover {
+          .depthCategoryList {
+            display: flex;
+          }
+        }
         svg {
           position: relative;
           display: inline-block;
@@ -28,17 +34,29 @@ const BackgroundLayout = styled.nav`
             transform: translateY(-50%);
           }
         }
-        button {
+        .categoryNavDepth {
           display: inline-flex;
           align-items: center;
           padding-left: 20px;
+          span {
+            display: inline-block;
+            width: 80px;
+            text-align: left;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
           svg {
             font-size: 20px;
           }
         }
-        .clickMenu {
-          top: calc(100% + 5px);
-          left: 10%;
+        .depthCategoryList {
+          position: absolute;
+          display: none;
+          top: 0;
+          left: 0;
+          transform: translateY(20px);
+          padding: 10px 0;
           border: 1px solid var(--main);
           background: #fff;
           z-index: 99;
@@ -46,37 +64,21 @@ const BackgroundLayout = styled.nav`
             font-weight: bold;
             color: #000;
           }
-        }
-        .firstDList {
-          position: absolute;
-          li {
-            width: 80px;
-            text-align: center;
-            line-height: 30px;
-            a {
-              display: inline-block;
-              width: 100%;
-              &:hover {
-                text-decoration: underline;
-              }
-            }
-          }
-        }
-        .secondDepthList {
-          position: absolute;
-          display: flex;
-          padding: 10px 0;
           ul {
+            width: 120px;
             padding-left: 14px;
             &:not(:last-child) {
               border-right: 1px solid #ddd;
             }
             li {
-              width: 120px;
+              width: 95%;
               line-height: 20px;
               a {
-                display: inline-block;
-                width: inherit;
+                display: block;
+                width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
                 &:hover {
                   text-decoration: underline;
                 }
@@ -90,16 +92,22 @@ const BackgroundLayout = styled.nav`
 `;
 
 export default function CategoryList_TopNav() {
-  const { mall } = useParams();
-  const [isDropMenuOpen, setIsDropMenuOpen] = useState([false, false, false]);
-  const [MallData, setMallData] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:9090/category/list/${mall}`)
-      .then((result) => setMallData(result.data))
-      .catch((error) => console.log(error));
-  }, []);
+  const [isDropMenuOpen, setIsDropMenuOpen] = useState([
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
+  const parameterArr = useParams().categoryPath.split("_");
+  const [allCategoryData, setAllCategoryData] = useState([
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+  ]);
 
   const handleDropMenu = (idx) => {
     let copy = [...isDropMenuOpen];
@@ -107,10 +115,94 @@ export default function CategoryList_TopNav() {
       copy[idx] = false;
       setIsDropMenuOpen(copy);
     } else {
-      copy = [false, false, false];
+      copy = [false, false, false, false, false];
       copy[idx] = true;
       setIsDropMenuOpen(copy);
     }
+  };
+
+  useEffect(() => {
+    let copy = [...allCategoryData];
+
+    const topNavAxios = (params, idx) => {
+      if (parameterArr[idx]) {
+        axios(`http://127.0.0.1:9090/category/list/${params}`).then(
+          (result) => {
+            copy[idx] = result.data;
+            setAllCategoryData(copy);
+          }
+        );
+      }
+    };
+
+    const params = (idx) => (parameterArr[idx] ? "/" + parameterArr[idx] : "");
+    topNavAxios("mall", 0);
+    topNavAxios(params(0), 1);
+    topNavAxios(`${params(0)}${params(1)}`, 2);
+    topNavAxios(`${params(0)}${params(1)}${params(2)}`, 3);
+    topNavAxios(`${params(0)}${params(1)}${params(2)}${params(3)}`, 4);
+    topNavAxios(
+      `${params(0)}${params(1)}${params(2)}${params(3)}${params(4)}`,
+      5
+    );
+  }, [
+    parameterArr[0],
+    parameterArr[1],
+    parameterArr[2],
+    parameterArr[3],
+    parameterArr[4],
+    parameterArr[5],
+  ]);
+
+  const showCategory = (categoryData, index) => {
+    const arr = [];
+    const repeat = Math.ceil(categoryData.length / 10);
+    for (let i = 0; i < repeat; i++) {
+      const categoryArr = categoryData.slice(10 * i, 10 * i + 10);
+      arr.push(
+        <ul key={i}>
+          {categoryArr.map((item) => (
+            <li
+              key={item.categoryName}
+              className={
+                item.categoryName === parameterArr[index]
+                  ? "currentCategory"
+                  : null
+              }
+            >
+              <Link
+                to={`/category/list/${item.mall}_${item.firstD}${
+                  item.secondD ? "_" + item.secondD : ""
+                }${item.thirdD ? "_" + item.thirdD : ""}${
+                  item.fourthD ? "_" + item.fourthD : ""
+                }${item.fifthD ? "_" + item.fifthD : ""}`}
+              >
+                {item.categoryName}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      );
+    }
+    return arr;
+  };
+
+  const categoryComponenet = (idx) => {
+    return parameterArr[idx] ? (
+      <span
+        onMouseEnter={() => handleDropMenu(idx)}
+        onMouseLeave={() => handleDropMenu(idx)}
+      >
+        <LiaAngleRightSolid className="angleRight" />
+        <span className="categoryNavDepth">
+          <span>{parameterArr[idx]}</span>
+          {isDropMenuOpen[idx] ? <CiSquareChevUp /> : <CiSquareChevDown />}
+        </span>
+        <div className="clickMenu depthCategoryList">
+          {isDropMenuOpen[idx] ? showCategory(allCategoryData[idx], idx) : null}
+        </div>
+      </span>
+    ) : null;
   };
 
   return (
@@ -118,110 +210,39 @@ export default function CategoryList_TopNav() {
       <div className="centerLayout">
         <nav className="categoryNavigation">
           <Link to={"/"}>메인페이지</Link>
-          <span>
+
+          <span
+            onMouseEnter={() => handleDropMenu(0)}
+            onMouseLeave={() => handleDropMenu(0)}
+          >
             <LiaAngleRightSolid className="angleRight" />
-            <button onClick={() => handleDropMenu(0)}>
-              <span>{MallData[0] && MallData[0].currentMall}</span>
+            <span className="categoryNavDepth">
+              <span>{parameterArr[0]}</span>
               {isDropMenuOpen[0] ? <CiSquareChevUp /> : <CiSquareChevDown />}
-            </button>
-            {isDropMenuOpen[0] ? (
-              <ul className="clickMenu firstDList">
-                {
-                  MallData.map(data => (
-                    <li>
-                      <Link>{data.allMall}</Link>
-                    </li>
-                  ))
-                }
-              </ul>
-            ) : null}
-          </span>
-          <span>
-            <LiaAngleRightSolid className="angleRight" />
-            <button onClick={() => handleDropMenu(1)}>
-              <span>여기에 데이터 넣어라</span>
-              {isDropMenuOpen[1] ? <CiSquareChevUp /> : <CiSquareChevDown />}
-            </button>
-            {isDropMenuOpen[1] ? (
-              <div className="clickMenu secondDepthList">
-                <ul>
-                  <li>
-                    <Link>가정/요리/뷰티</Link>
-                  </li>
-                  <li>
-                    <Link>건강/취미/레저</Link>
-                  </li>
-                  <li>
-                    <Link>경제경영</Link>
-                  </li>
-                  <li>
-                    <Link>과학</Link>
-                  </li>
-                  <li>
-                    <Link>달력/기타</Link>
-                  </li>
-                  <li>
-                    <Link>대학교재/전문서적</Link>
-                  </li>
-                  <li>
-                    <Link>만화</Link>
-                  </li>
-                  <li>
-                    <Link>사회과학</Link>
-                  </li>
-                  <li>
-                    <Link>소설/시/희곡</Link>
-                  </li>
-                </ul>
-              </div>
-            ) : null}
-          </span>
-          {/* {
-            categoryData.secondD ? (
-              <span>
-              <LiaAngleRightSolid className="angleRight" />
-              <button onClick={() => handleDropMenu(2)}>
-                <span>{categoryData.secondD}</span>
-                {isDropMenuOpen[2] ? <CiSquareChevUp /> : <CiSquareChevDown />}
-              </button>
-              {isDropMenuOpen[2] ? (
-                <div className="clickMenu secondDepthList">
-                  <ul>
-                    <li>
-                      <Link>가정/요리/뷰티</Link>
-                    </li>
-                    <li>
-                      <Link>건강/취미/레저</Link>
-                    </li>
-                    <li>
-                      <Link>경제경영</Link>
-                    </li>
-                    <li>
-                      <Link>과학</Link>
-                    </li>
-                    <li>
-                      <Link>달력/기타</Link>
-                    </li>
-                    <li>
-                      <Link>대학교재/전문서적</Link>
-                    </li>
-                    <li>
-                      <Link>만화</Link>
-                    </li>
-                    <li>
-                      <Link>사회과학</Link>
-                    </li>
-                    <li>
-                      <Link>소설/시/희곡</Link>
-                    </li>
-                  </ul>
-                </div>
-              ) : null}
             </span>
-            ) : null
-          } */}
+            <div className="clickMenu depthCategoryList">
+              <ul>
+                {allCategoryData[0].map((item) => (
+                  <li
+                    key={item.mall}
+                    className={
+                      item.mall === parameterArr[0] ? "currentCategory" : null
+                    }
+                  >
+                    <Link to={"/category/main"}>{item.mall}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </span>
+
+          {categoryComponenet(1)}
+          {categoryComponenet(2)}
+          {categoryComponenet(3)}
+          {categoryComponenet(4)}
+          {categoryComponenet(5)}
         </nav>
       </div>
     </BackgroundLayout>
-  ); 
+  );
 }
