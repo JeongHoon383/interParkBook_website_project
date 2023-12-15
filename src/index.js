@@ -191,7 +191,7 @@ const router = createBrowserRouter([
         element: <BestSeller />,
       },
       {
-        path: '/category/main',
+        path: '/category/main/:categoryPath',
         element: <CategoryMain />,
       },
       {

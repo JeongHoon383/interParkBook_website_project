@@ -72,7 +72,6 @@ const CategoryMain_banner = () => {
 const TopBanner = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 20px;
   height: 326px;
 
   .banner {

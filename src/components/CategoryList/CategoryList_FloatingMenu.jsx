@@ -10,7 +10,7 @@ const FloatingMenu = styled.aside`
   position: sticky;
   top: 20px;
   width: 90px;
-  margin-left: 50px;
+  margin-left: 30px;
   font-size: 11px;
   .myInterpark,
   .recentView {
