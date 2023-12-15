@@ -199,7 +199,7 @@ const router = createBrowserRouter([
         element: <CategoryMain />,
       },
       {
-        path: '/category/:categoryId',
+        path: '/category/list/:categoryPath',
         element: <CategoryList />,
       },
       {
