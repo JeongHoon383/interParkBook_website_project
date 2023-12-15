@@ -23,7 +23,7 @@ const MainSection = styled.section`
 `;
 
 export default function CategoryList_MainSection() {
-  const userId = JSON.parse(sessionStorage.getItem('userId')).id;
+  const userId = JSON.parse(sessionStorage.getItem('userId')) ? JSON.parse(sessionStorage.getItem('userId')).id : undefined;
   const parameterArr = useParams().categoryPath.split("_");
   const [bookData, setBookData] = useState([]);
   const [listQty, setListQty] = useState(20);
@@ -89,9 +89,9 @@ export default function CategoryList_MainSection() {
   //하위 컴포넌트(CategoryList_Sort) 전체선택/선택해제 핸들링이벤트
   const handleSelectAll = (flag) => {
     if (flag) {
-        bookData.map((item) =>
-          !checkList.includes(item.isbn13) && !item.stockStatus.includes('품절')
-            ? setCheckList((checkList) => [...checkList, item.isbn13])
+        bookData.map(({isbn13, title, cover, priceSales, stockStatus}) =>
+          !checkList.some(checkItem => checkItem.isbn13 === isbn13) && !stockStatus.includes('품절')
+            ? setCheckList((checkList) => [...checkList, {isbn13, userId, title, cover, priceSales}])
             : null
         );
       setIsCheckedAll(true);

@@ -24,7 +24,7 @@ const ProdBuy = styled.div`
         height: 30px;
       }
       button {
-        pointer-events: ${(props) => props.stockStatus.includes('품절') ? "none" : "all"};
+        pointer-events: ${(props) => props.$stockStatus.includes('품절') ? "none" : "all"};
         width: 30px;
         font-size: 16px;
         background: #f8f8f8;
@@ -122,7 +122,7 @@ export default function CategoryList_ProdBuy({
   }, [checkList, bookData.isbn13]);
 
   return (
-    <ProdBuy stockStatus={bookData.stockStatus}>
+    <ProdBuy $stockStatus={bookData.stockStatus}>
       <div className="quantity">
         <label htmlFor="ProdQuantity"></label>
         <input
