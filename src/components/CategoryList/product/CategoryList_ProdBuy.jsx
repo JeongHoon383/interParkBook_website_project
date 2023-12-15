@@ -89,18 +89,18 @@ export default function CategoryList_ProdBuy({
   const [isChecked, setisChecked] = useState(false);
 
   //개별 상품 체크박스 클릭시 checkList에 상품 넣고 빼기
-  const handleSelect = (e) => {
+  const handleSelect = (bookData) => {
     if (isChecked) {
       let copy = [...checkList];
       for (let i = 0; i < copy.length; i++) {
-        if (copy[i] === e.target.value) {
+        if (copy[i] === bookData.isbn13) {
           copy.splice(i, 1);
         }
       }
       handleCheckList(copy);
       setisChecked(false);
     } else {
-      handleCheckList([...checkList, e.target.value]);
+      handleCheckList([...checkList, bookData.isbn13]);
       setisChecked(true);
     }
   };
@@ -132,7 +132,7 @@ export default function CategoryList_ProdBuy({
           disabled={bookData.stockStatus.includes('품절') ? true : false}
           checked={isChecked}
           value={bookData.isbn13}
-          onChange={handleSelect}
+          onChange={() => handleSelect(bookData)}
         />
         <span className="quantitywrapper">
           <button

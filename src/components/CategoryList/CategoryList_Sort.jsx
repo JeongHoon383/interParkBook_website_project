@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import PaginationComponent from "./PaginationComponent";
-import { IoIosArrowRoundUp, IoIosArrowRoundDown } from "react-icons/io";
+import { TbSortAscending, TbSortDescending } from "react-icons/tb";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
@@ -16,10 +16,9 @@ const Sortarea = styled.div`
     border-bottom: 1px solid #d8d8d8;
     .sortOption {
       button {
-        display: inline-flex;
-        align-items: center;
+        position: relative;
         line-height: 25px;
-        margin-right: 15px;
+        margin-right: 25px;
         &:hover {
           font-weight: bold;
         }
@@ -28,6 +27,10 @@ const Sortarea = styled.div`
           color: var(--main);
         }
         svg{
+          position: absolute;
+          top: 50%;
+          right: 0;
+          transform: translateX(100%) translateY(-50%);
           font-size: 17px;
         }
       }
@@ -138,10 +141,10 @@ export default function CategoryList_Sort({
     <Sortarea>
       <div className="topArea">
         <span className="sortOption">
-          <button className={sortField && sortField === "pubDate" ? "currentSort" : null} value="pubDate" onClick={handleSort}>등록일순{sortField === "pubDate" && sortOption === "asc" ? <IoIosArrowRoundUp /> : <IoIosArrowRoundDown /> }</button>
-          <button className={sortField && sortField === "salesPoint" ? "currentSort" : null} value="salesPoint" onClick={handleSort}>판매량순{sortField === "salesPoint" && sortOption === "asc" ? <IoIosArrowRoundUp /> : <IoIosArrowRoundDown /> }</button>
-          <button className={sortField && sortField === "priceSales" ? "currentSort" : null} value="priceSales" onClick={handleSort}>가격순{sortField === "priceSales" && sortOption === "asc" ? <IoIosArrowRoundUp /> : <IoIosArrowRoundDown /> }</button>
-          <button className={sortField && sortField === "title" ? "currentSort" : null} value="title" onClick={handleSort}>상품명순{sortField === "title" && sortOption === "asc" ? <IoIosArrowRoundUp /> : <IoIosArrowRoundDown /> }</button>
+          <button className={sortField && sortField === "pubDate" ? "currentSort" : null} value="pubDate" onClick={handleSort}>등록일순{sortField === "pubDate" ? sortOption === "asc" ? <TbSortAscending /> : <TbSortDescending /> : null }</button>
+          <button className={sortField && sortField === "salesPoint" ? "currentSort" : null} value="salesPoint" onClick={handleSort}>판매량순{sortField === "salesPoint" ? sortOption === "asc" ? <TbSortAscending /> : <TbSortDescending /> : null }</button>
+          <button className={sortField && sortField === "priceSales" ? "currentSort" : null} value="priceSales" onClick={handleSort}>가격순{sortField === "priceSales" ? sortOption === "asc" ? <TbSortAscending /> : <TbSortDescending /> : null }</button>
+          <button className={sortField && sortField === "title" ? "currentSort" : null} value="title" onClick={handleSort}>상품명순{sortField === "title" ? sortOption === "asc" ? <TbSortAscending /> : <TbSortDescending /> : null }</button>
         </span>
         <span className="listOption">
           <label htmlFor="listQty"></label>

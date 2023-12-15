@@ -23,6 +23,7 @@ const MainSection = styled.section`
 `;
 
 export default function CategoryList_MainSection() {
+  const userId = JSON.parse(sessionStorage.getItem('userId')).id;
   const parameterArr = useParams().categoryPath.split("_");
   const [bookData, setBookData] = useState([]);
   const [listQty, setListQty] = useState(20);
