@@ -33,6 +33,30 @@ export default function CategoryList_MainSection() {
   const [sortField, setSortField] = useState("pubDate");
   const [sortOption, setSortOption] = useState("desc");
 
+  const handleSortField = (data) => {
+    setSortField(data);
+  };
+  const handleSortOption = (data) => {
+    setSortOption(data);
+  };
+  const handleListQty = (data) => {
+    setListQty(data);
+  };
+  const handleCurrentPage = (data) => {
+    setCurrentPage(data);
+  };
+  const handleIsSoldout = (data) => {
+    setIsSoldout(data);
+  };
+  const handleIsCheckedAll = (data) => {
+    setIsCheckedAll(data);
+  };
+  const handleCheckList = (data) => {
+    setCheckList(data);
+  };
+
+
+  //카테고리별, 정렬별, 페이지별 품절여부별 상품목록 불러오기
   useEffect(() => {
     let startIndex = 0;
     let endIndex = 0;
@@ -64,10 +88,9 @@ export default function CategoryList_MainSection() {
   //하위 컴포넌트(CategoryList_Sort) 전체선택/선택해제 핸들링이벤트
   const handleSelectAll = (flag) => {
     if (flag) {
-      Array.isArray(bookData) &&
         bookData.map((item) =>
-          !checkList.includes(item.isbn13)
-            ? setCheckList((checkList) => [...checkList, item.isbn])
+          !checkList.includes(item.isbn13) && !item.stockStatus.includes('품절')
+            ? setCheckList((checkList) => [...checkList, item.isbn13])
             : null
         );
       setIsCheckedAll(true);
@@ -79,10 +102,11 @@ export default function CategoryList_MainSection() {
 
   //체크박스가 전부 체크됐을 때 IsCheckedAll true/false 변환
   useEffect(() => {
-    Array.isArray(checkList) && checkList.length === listQty
+    const currentPageBookQty = bookData.filter(data => !data.stockStatus.includes('품절')).length;
+    checkList.length === currentPageBookQty
       ? setIsCheckedAll(true)
       : setIsCheckedAll(false);
-  }, [checkList]);
+  }, [checkList, listQty]);
 
   return (
     <MainSection>
@@ -93,37 +117,43 @@ export default function CategoryList_MainSection() {
           <CategoryList_Sort
             totalResults={bookData[0] && bookData[0].totalResults}
             sortField={sortField}
-            setSortField={setSortField}
+            handleSortField={handleSortField}
             sortOption={sortOption}
-            setSortOption={setSortOption}
+            handleSortOption={handleSortOption}
             listQty={listQty}
-            setListQty={setListQty}
+            handleListQty={handleListQty}
             currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
+            handleCurrentPage={handleCurrentPage}
             isSoldout={isSoldout}
-            setIsSoldout={setIsSoldout}
+            handleIsSoldout={handleIsSoldout}
             handleSelectAll={handleSelectAll}
             isCheckedAll={isCheckedAll}
-            setIsCheckedAll={setIsCheckedAll}
-            setCheckList={setCheckList}
+            handleIsCheckedAll={handleIsCheckedAll}
+            handleCheckList={handleCheckList}
+            parameterArr={parameterArr}
           />
           <CategoryList_Products
             bookData={bookData}
             checkList={checkList}
-            setCheckList={setCheckList}
+            handleCheckList={handleCheckList}
           />
           <CategoryList_Sort
             totalResults={bookData[0] && bookData[0].totalResults}
+            sortField={sortField}
+            handleSortField={handleSortField}
+            sortOption={sortOption}
+            handleSortOption={handleSortOption}
             listQty={listQty}
-            setListQty={setListQty}
+            handleListQty={handleListQty}
             currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
+            handleCurrentPage={handleCurrentPage}
             isSoldout={isSoldout}
-            setIsSoldout={setIsSoldout}
+            handleIsSoldout={handleIsSoldout}
             handleSelectAll={handleSelectAll}
             isCheckedAll={isCheckedAll}
-            setIsCheckedAll={setIsCheckedAll}
-            setCheckList={setCheckList}
+            handleIsCheckedAll={handleIsCheckedAll}
+            handleCheckList={handleCheckList}
+            parameterArr={parameterArr}
           />
         </>
       ) : (

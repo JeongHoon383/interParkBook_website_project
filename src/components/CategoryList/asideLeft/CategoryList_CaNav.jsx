@@ -6,12 +6,12 @@ import CategoryList_2D from "./CategoryList_2D";
 
 const CategoryNav = styled.nav`
   width: 180px;
-  margin-right: 30px;
+  margin-right: 20px;
   .categoryTitle {
     line-height: 36px;
-    text-align: center;
     font-size: 16px;
     font-weight: bold;
+    text-align: center;
     color: #fff;
     background: var(--main);
   }

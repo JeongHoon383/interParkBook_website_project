@@ -21,7 +21,6 @@ const CategoryListMain = styled.main`
 `;
 
 export default function CategoryList() {
-
   return (
     <>
       <CategoryList_TopNav/>

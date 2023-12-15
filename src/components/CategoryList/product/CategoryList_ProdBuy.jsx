@@ -24,6 +24,7 @@ const ProdBuy = styled.div`
         height: 30px;
       }
       button {
+        pointer-events: ${(props) => props.stockStatus.includes('품절') ? "none" : "all"};
         width: 30px;
         font-size: 16px;
         background: #f8f8f8;
@@ -51,6 +52,17 @@ const ProdBuy = styled.div`
     border-radius: 3px;
     background: var(--main);
   }
+  .soldout{
+    display: inline-block;
+    width: 100%;
+    line-height: 30px;
+    pointer-events: none;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 3px;
+    border: 1px solid #d8d8d8;
+    background: #f8f8f8;
+  }
   .dibs {
     position: relative;
     width: 30px;
@@ -71,7 +83,7 @@ const ProdBuy = styled.div`
 export default function CategoryList_ProdBuy({
   bookData,
   checkList,
-  setCheckList,
+  handleCheckList,
 }) {
   const [quantity, setQuantity] = useState(1);
   const [isChecked, setisChecked] = useState(false);
@@ -85,10 +97,10 @@ export default function CategoryList_ProdBuy({
           copy.splice(i, 1);
         }
       }
-      setCheckList(copy);
+      handleCheckList(copy);
       setisChecked(false);
     } else {
-      setCheckList([...checkList, e.target.value]);
+      handleCheckList([...checkList, e.target.value]);
       setisChecked(true);
     }
   };
@@ -110,13 +122,14 @@ export default function CategoryList_ProdBuy({
   }, [checkList, bookData.isbn13]);
 
   return (
-    <ProdBuy>
+    <ProdBuy stockStatus={bookData.stockStatus}>
       <div className="quantity">
         <label htmlFor="ProdQuantity"></label>
         <input
           name="ProdQuantity"
           id="ProdQuantity"
           type="checkbox"
+          disabled={bookData.stockStatus.includes('품절') ? true : false}
           checked={isChecked}
           value={bookData.isbn13}
           onChange={handleSelect}
@@ -139,8 +152,19 @@ export default function CategoryList_ProdBuy({
           </button>
         </span>
       </div>
-      <button className="insertCart">카트에 넣기</button>
-      <Link className="buy">바로 구매</Link>
+      {
+        bookData.stockStatus.includes('품절') ? (
+          <>
+            <button className="soldout">{bookData.stockStatus}</button>
+            <Link className="soldout">{bookData.stockStatus}</Link>
+          </>
+        ) : (
+          <>
+            <button className="insertCart">카트에 넣기</button>
+            <Link className="buy">바로 구매</Link>
+          </>
+        )
+      }
       <button className="dibs">
         {/* 찜 기능 추가 */}
         <GoHeart />

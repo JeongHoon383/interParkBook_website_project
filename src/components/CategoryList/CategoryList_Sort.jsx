@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import PaginationComponent from "./PaginationComponent";
 import { IoIosArrowRoundUp, IoIosArrowRoundDown } from "react-icons/io";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 const Sortarea = styled.div`
   width: 770px;
@@ -65,59 +67,72 @@ const Sortarea = styled.div`
 export default function CategoryList_Sort({
   totalResults,
   sortField,
-  setSortField,
+  handleSortField,
   sortOption,
-  setSortOption,
+  handleSortOption,
   listQty,
-  setListQty,
+  handleListQty,
   currentPage,
-  setCurrentPage,
+  handleCurrentPage,
   isSoldout,
-  setIsSoldout,
+  handleIsSoldout,
   handleSelectAll,
   isCheckedAll,
-  setIsCheckedAll,
-  setCheckList,
+  handleIsCheckedAll,
+  handleCheckList,
 }) {
+
+  const parameterArr = useParams().categoryPath.split("_");
+
   //졍렬 기능
   const handleSort = (e) => {
     resetCheckList();
-    setCurrentPage(1);
+    handleCurrentPage(1);
     if(sortField === e.target.value) {
-      sortOption === 'asc' ? setSortOption('desc') : setSortOption('asc')
+      sortOption === 'asc' ? handleSortOption('desc') : handleSortOption('asc')
     }else{
-      setSortField(e.target.value);
-      setSortOption('desc');
+      handleSortField(e.target.value);
+      handleSortOption('desc');
     }
   };
 
   //상품 체크 목록 리셋
   const resetCheckList = () => {
-    setIsCheckedAll(false);
-    setCheckList([]);
+    handleIsCheckedAll(false);
+    handleCheckList([]);
   };
 
   //페이지네이션 현재 페이지 변경
   const handlePageChange = (page) => {
     resetCheckList();
-    setCurrentPage(page);
+    handleCurrentPage(page);
   };
 
   //한 페이지에 볼 상품 수량 변경
-  const handleListQty = (e) => {
+  const handleListQtyChange = (e) => {
     resetCheckList();
-    setCurrentPage(1);
-    setListQty(Number(e.target.value));
+    handleCurrentPage(1);
+    handleListQty(Number(e.target.value));
     handleSelectAll(false);
   };
 
   //품절 상품 포함/제외 변경
   const handleChangeSoldout = (e) => {
     resetCheckList();
-    setCurrentPage(1);
-    setIsSoldout(e.target.value);
+    handleCurrentPage(1);
+    handleIsSoldout(e.target.value);
     handleSelectAll(false);
   };
+
+  //카테고리 변경시 정렬, 페이지네이션, 전체선택, 한번에 볼 상품수, 품절여부 초기화
+  useEffect(() => {
+    resetCheckList();
+    handleCurrentPage(1);
+    handleIsSoldout("상품있음");
+    handleListQty(20);
+    handleSortField("pubDate");
+    handleSortOption("desc");
+  }, [parameterArr[0],parameterArr[1],parameterArr[2],parameterArr[3],parameterArr[4],parameterArr[5]]);
 
   return (
     <Sortarea>
@@ -133,7 +148,7 @@ export default function CategoryList_Sort({
           <select
             name="listQty"
             id="listQty"
-            onChange={handleListQty}
+            onChange={handleListQtyChange}
             value={listQty}
           >
             <option value="10">10개씩 보기</option>

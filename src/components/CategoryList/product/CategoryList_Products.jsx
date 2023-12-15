@@ -17,7 +17,7 @@ const ProductsList = styled.ul`
 export default function CategoryList_Products({
   bookData,
   checkList,
-  setCheckList,
+  handleCheckList,
 }) {
   return (
     <ProductsList>
@@ -29,7 +29,7 @@ export default function CategoryList_Products({
             <CategoryList_ProdBuy
               bookData={bookData}
               checkList={checkList}
-              setCheckList={setCheckList}
+              handleCheckList={handleCheckList}
             />
           </li>
         ))}

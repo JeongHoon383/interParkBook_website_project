@@ -75,6 +75,7 @@ const ProdContent = styled.div`
   }
 `;
 
+  //customerReviewRank에 따라 별점 표시
   const showReviewRankStar = (customerReviewRank) => {
     let arr = [];
     let filledStar = Math.floor(customerReviewRank / 2);
@@ -82,13 +83,13 @@ const ProdContent = styled.div`
     let emptyStar = 5 - filledStar - halfStar;
 
     for (let i=0; i < filledStar; i++) {
-      arr.push(<BiSolidStar />)
+      arr.push(<BiSolidStar key={"SolidStar" + i}/>)
     }
     for (let i=0; i < halfStar; i++) {
-      arr.push(<BiSolidStarHalf />)
+      arr.push(<BiSolidStarHalf key={"halfStar" + i}/>)
     }
     for (let i=0; i < emptyStar; i++) {
-      arr.push(<BiStar />)
+      arr.push(<BiStar key={"emptyStar" + i}/>)
     }
 
     return arr;
