@@ -5,6 +5,7 @@ import Slider from 'react-slick';
 import axios from 'axios';
 import { MdQueueMusic } from 'react-icons/md';
 import { RiDvdFill } from 'react-icons/ri';
+import { Desktop, Mobile } from '../MediaQuery';
 
 const BPre = styled.div`
   width: 30px;
@@ -209,25 +210,22 @@ const StyledSlider = styled(Slider)`
     left: 79%;
     font-size: 0.9em;
     color: var(--default);
-  }
 
-  .slick-dots li {
-    display: none;
+    li {
+      display: none;
+    }
+    .slick-active {
+      display: block;
+    }
+    .customPaging {
+      display: flex;
+      width: 100px;
+    }
+    .currentPage {
+      color: #e66a57;
+    }
   }
-
-  .slick-dots .slick-active {
-    display: block;
-  }
-
-  .slick-dots .customPaging {
-    display: flex;
-    width: 100px;
-  }
-
-  .slick-dots .currentPage {
-    color: #e66a57;
-  }
-  .slick-slide img {
+  img {
     width: 100%;
   }
 
@@ -235,6 +233,49 @@ const StyledSlider = styled(Slider)`
   .slick-next {
     &::before {
       content: none;
+    }
+  }
+`;
+
+const MobileSlider = styled(Slider)``;
+
+const RecommendImgBox = styled.div`
+  box-sizing: border-box;
+  margin: 0 auto;
+  width: 143px;
+  height: 198px;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+const RecommendSection = styled.div`
+  background-color: #f3eddb;
+  .sectionHeader {
+    margin-top: 10px;
+    text-align: center;
+    h3 {
+      font-size: 1.1em;
+      font-family: 'YES24GothicB';
+      padding: 8px 0 12px 0;
+    }
+    span {
+      font-size: 1em;
+      color: var(--default);
+    }
+  }
+  .itemBox {
+    text-align: center;
+    margin: 15px auto;
+    span {
+      display: inline-block;
+      width: 143px;
+      height: 48px;
+      line-height: 48px;
+      font-size: 0.8em;
+      color: var(--default);
+      background-color: #fff;
     }
   }
 `;
@@ -255,7 +296,7 @@ export default function Main_PointSection() {
       method: 'get',
       url: 'http://localhost:9090/blogbest',
     })
-      .then((result) => setBlogBest(result.data))
+      .then((result) => setBlogBest(result.data.slice(0, 8)))
       .catch((err) => console.error(err));
 
     axios({
@@ -278,42 +319,84 @@ export default function Main_PointSection() {
   };
 
   return (
-    <PointSection>
-      <div className="blogBestItem" style={{ width: '40%' }}>
-        <div className="blogBestHeader">
-          <h3>
-            <span>주목!</span> <span>이달의 책</span>
-            <a href="" className="moreBtn">
-              더보기
-            </a>
-          </h3>
-        </div>
-        <div className="blogBestBox">
-          <BlogBestSlide blogBest={blogBest} />
-        </div>
+    <>
+      <Desktop>
+        <PointSection>
+          <div className="blogBestItem" style={{ width: '40%' }}>
+            <div className="blogBestHeader">
+              <h3>
+                <span>주목!</span> <span>이달의 책</span>
+                <a href="" className="moreBtn">
+                  더보기
+                </a>
+              </h3>
+            </div>
+            <div className="blogBestBox">
+              <BlogBestSlide blogBest={blogBest} />
+            </div>
+          </div>
+          <div className="musicItem" style={{ border: '1px solid #c9c9c9', width: '55%' }}>
+            <div className="musicItemHeader">
+              <MusicTabs>
+                <ul className="musicTabWrap">
+                  {slideArr.map((v, i) => (
+                    <li
+                      key={i}
+                      className={i === isTab ? 'catTabLi clicked' : 'catTabLi'}
+                      onClick={() => {
+                        handleClick(i);
+                      }}
+                    >
+                      <span className="tabIcon">{v.icon}</span>
+                      {v.name}
+                    </li>
+                  ))}
+                </ul>
+              </MusicTabs>
+            </div>
+            <div className="musicContents">{slideArr[isTab].content}</div>
+          </div>
+        </PointSection>
+      </Desktop>
+      <Mobile>
+        <MBlogBestSlide blogBest={blogBest} />
+      </Mobile>
+    </>
+  );
+}
+
+function MBlogBestSlide({ blogBest }) {
+  const settings = {
+    className: 'center',
+    dots: false,
+    arrows: false,
+    centerMode: true,
+    centerPadding: '126px',
+    infinite: true,
+    slidesToShow: 1,
+    autoplay: false,
+    speed: 1000,
+    draggable: true,
+  };
+  return (
+    <RecommendSection>
+      <div className="sectionHeader">
+        <h3>인터파크 추천</h3>
+        <span>인터파크에서 추천하는 책을 확인해보세요</span>
       </div>
-      <div className="musicItem" style={{ border: '1px solid #c9c9c9', width: '55%' }}>
-        <div className="musicItemHeader">
-          <MusicTabs>
-            <ul className="musicTabWrap">
-              {slideArr.map((v, i) => (
-                <li
-                  key={i}
-                  className={i === isTab ? 'catTabLi clicked' : 'catTabLi'}
-                  onClick={() => {
-                    handleClick(i);
-                  }}
-                >
-                  <span className="tabIcon">{v.icon}</span>
-                  {v.name}
-                </li>
-              ))}
-            </ul>
-          </MusicTabs>
-        </div>
-        <div className="musicContents">{slideArr[isTab].content}</div>
-      </div>
-    </PointSection>
+      <MobileSlider {...settings}>
+        {blogBest.map((v, i) => (
+          <div className="itemBox" key={i}>
+            <RecommendImgBox>
+              <Link to={`/book/${v.isbn13}`}>
+                <img src={v.cover} alt="" />
+              </Link>
+            </RecommendImgBox>
+            <span>{v.title.split('-')[0]}</span>
+          </div>
+        ))}
+      </MobileSlider>
+    </RecommendSection>
   );
 }
 

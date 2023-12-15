@@ -29,6 +29,12 @@ import Detail_change from './components/Detail/Detail_change';
 import Cart from './Pages/Cart';
 const GlobalStyle = createGlobalStyle`
 
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -58,9 +64,6 @@ footer, header, hgroup, main, menu, nav, section {
 *[hidden] {
     display: none;
 }
-body {
-  line-height: 1;
-}
 menu, ol, ul {
   list-style: none;
 }
@@ -84,6 +87,7 @@ body{
   background-color: white;
   color:black;
   position: relative;
+  line-height: 1;
 }
 a{
   text-decoration: none;

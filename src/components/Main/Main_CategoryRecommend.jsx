@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Slider from 'react-slick';
 import axios from 'axios';
+import { Desktop, Mobile } from '../MediaQuery';
 
 const Pre = styled.div`
   width: 30px;
@@ -35,31 +36,35 @@ const CategoryP = styled.p`
 `;
 
 const CategoryRecommend = styled.div`
-  h3 {
-    display: flex;
-    flex-basis: 100%;
-    align-items: center;
-    color: var(--default);
-    font-size: 1.2em;
-    font-weight: bold;
-    margin: 33px 0;
-    &::before {
-      content: '';
-      flex-grow: 1;
-      margin: 0 16px;
-      background: var(--default);
-      height: 1px;
-      font-size: 0;
-      line-height: 0;
-    }
-    &::after {
-      content: '';
-      flex-grow: 1;
-      margin: 0 16px;
-      background: var(--default);
-      height: 1px;
-      font-size: 0;
-      line-height: 0;
+  background-color: #fff;
+  .categoryRecommendHeader {
+    margin: 10px 0 22px 0;
+    h3 {
+      display: flex;
+      flex-basis: 100%;
+      align-items: center;
+      padding-top: 10px;
+      color: var(--default);
+      font-size: 1.2em;
+      font-weight: bold;
+      &::before {
+        content: '';
+        flex-grow: 1;
+        margin: 0 16px;
+        background: var(--default);
+        height: 1px;
+        font-size: 0;
+        line-height: 0;
+      }
+      &::after {
+        content: '';
+        flex-grow: 1;
+        margin: 0 16px;
+        background: var(--default);
+        height: 1px;
+        font-size: 0;
+        line-height: 0;
+      }
     }
   }
 
@@ -140,6 +145,18 @@ export default function Main_CategoryRecommend() {
     speed: 1000,
     autoplaySpeed: 4000,
     draggable: false,
+    responsive: [
+      {
+        breakpoint: 1200,
+        settings: {
+          rows: 2,
+          slidesPerRow: 2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+        },
+      },
+    ],
     nextArrow: (
       <NextTo>
         <Img src="/img/Slide/right-arrow.svg" />
@@ -189,7 +206,9 @@ export default function Main_CategoryRecommend() {
                 <CategoryP style={{ width: '100px', height: '40px', margin: '0 auto' }}>
                   {v.title.split('-')[0]}
                 </CategoryP>
-                <CategoryP style={{ color: '#e66a57' }}>{v.priceSales.toLocaleString()}원</CategoryP>
+                <Desktop>
+                  <CategoryP style={{ color: '#e66a57' }}>{v.priceSales.toLocaleString()}원</CategoryP>
+                </Desktop>
               </div>
             ))}
           </StyledSlider>

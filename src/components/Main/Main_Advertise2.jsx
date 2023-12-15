@@ -1,21 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
-
-const Div = styled.div`
-  margin: 24px 0;
-`;
+import { Desktop, Mobile } from '../MediaQuery';
 
 const Img = styled.img`
-  width: 90%;
   margin: 0 auto;
 `;
 
 export default function Main_Advertise2() {
   return (
-    <Div className="AdBanner2">
-      <a href="#">
-        <Img src="/img/ad2.jpeg" alt="" />
-      </a>
-    </Div>
+    <>
+      <Desktop>
+        <div className="AdBanner2" style={{ margin: '24px 0' }}>
+          <a href="#">
+            <Img src="/img/ad2.jpeg" style={{ width: '90%' }} alt="" />
+          </a>
+        </div>
+      </Desktop>
+      <Mobile>
+        <div className="AdBanner2" style={{ margin: '10px 0' }}>
+          <a href="#">
+            <Img src="/img/Mobile/m_mo_wel_1208_1.png" style={{ width: '100%' }} alt="" />
+          </a>
+        </div>
+      </Mobile>
+    </>
   );
 }
