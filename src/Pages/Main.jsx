@@ -29,6 +29,9 @@ export default function Main() {
           <Main_CouponAd />
         </div>
       </Desktop>
+      <Mobile>
+        <Main_Mo />
+      </Mobile>
     </>
   );
 }

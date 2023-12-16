@@ -1,8 +1,9 @@
 import React from 'react';
 import { IoSearch } from 'react-icons/io5';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Desktop, Mobile } from '../MediaQuery';
+import { getCookie } from '../../util/cookies.js';
 
 const MainDiv = styled.div`
   .logoBox {
@@ -96,6 +97,7 @@ const MDiv = styled.div`
 `;
 
 export default function MainLogo() {
+  const navigate = useNavigate();
   return (
     <>
       <Desktop>
@@ -160,12 +162,14 @@ export default function MainLogo() {
             </button>
           </form>
           <MDiv>
-            <Link to="/cart">
+            <Link to={getCookie('rememberUserInfo') ? '/cart' : '/login'}>
               <img src="/img/Mobile/m_icon_cart.png" alt="" />
             </Link>
           </MDiv>
           <MDiv>
-            <img src="/img/Mobile/m_icon_mypage.png" alt="" />
+            <Link to={getCookie('rememberUserInfo') ? '/mypage' : '/login'}>
+              <img src="/img/Mobile/m_icon_mypage.png" alt="" />
+            </Link>
           </MDiv>
         </MobileDiv>
       </Mobile>
