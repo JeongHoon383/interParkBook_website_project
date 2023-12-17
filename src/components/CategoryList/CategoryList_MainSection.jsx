@@ -82,18 +82,19 @@ export default function CategoryList_MainSection() {
 
     if(sortField) {
       axios(
-        `http://127.0.0.1:9090/category/list/${parameterArr[0]}/${parameterArr[1]}/${parameterArr[2]}/${parameterArr[3]}/${parameterArr[4]}/${startIndex}/${endIndex}/${sortField}/${sortOption}/${isSoldout}`
+        `http://127.0.0.1:9090/category/list/${parameterArr[0]}/${parameterArr[1]}/${parameterArr[2]}/${parameterArr[3]}/${parameterArr[4]}/${parameterArr[5]}/${startIndex}/${endIndex}/${sortField}/${sortOption}/${isSoldout}`
       ).then((result) => {
         setBookData(result.data);
         setQuantity(result.data.map(data => ({"isbn13":data.isbn13, "qty" : 1})));
       });
     }
-
+    
   }, [
     listQty,
     currentPage,
     isSoldout,
     sortField,
+    sortOption,
     parameterArr[0],
     parameterArr[1],
     parameterArr[2],
@@ -124,6 +125,21 @@ export default function CategoryList_MainSection() {
       : setIsCheckedAll(false);
   }, [checkList, listQty]);
 
+  //선택한 상품들 전부 카트에 담기
+  const addToCartAll = () => {
+    let axiosBookData = [];
+    for(const checkItem of checkList) {
+      for(const quantityItem of quantity) {
+        if(checkItem[0] === quantityItem.isbn13) {
+          axiosBookData.push([...checkItem, quantityItem.qty])
+        }
+      }
+    }
+    
+    // axios.post('http://127.0.0.1:9090/category/list', axiosBookData)
+    console.log(axiosBookData);
+  };
+
   return (
     <MainSection>
       <CategoryList_Title bookData={bookData} />
@@ -147,6 +163,7 @@ export default function CategoryList_MainSection() {
             handleIsCheckedAll={handleIsCheckedAll}
             handleCheckList={handleCheckList}
             parameterArr={parameterArr}
+            addToCartAll={addToCartAll}
           />
           <CategoryList_Products
             bookData={bookData}
@@ -173,6 +190,7 @@ export default function CategoryList_MainSection() {
             handleIsCheckedAll={handleIsCheckedAll}
             handleCheckList={handleCheckList}
             parameterArr={parameterArr}
+            addToCartAll={addToCartAll}
           />
         </>
       ) : (

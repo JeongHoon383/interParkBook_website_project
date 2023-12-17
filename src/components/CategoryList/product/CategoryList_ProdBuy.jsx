@@ -105,7 +105,7 @@ export default function CategoryList_ProdBuy({
       handleCheckList(copy);
       setisChecked(false);
     } else {
-      handleCheckList([...checkList, [isbn13, userId, title, cover, priceSales]]);
+      handleCheckList([...checkList,[isbn13, userId, title, cover, priceSales]]);
       setisChecked(true);
     }
   };
