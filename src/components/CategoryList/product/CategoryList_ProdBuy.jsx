@@ -24,7 +24,8 @@ const ProdBuy = styled.div`
         height: 30px;
       }
       button {
-        pointer-events: ${(props) => props.$stockStatus.includes('품절') ? "none" : "all"};
+        pointer-events: ${(props) =>
+          props.$stockStatus.includes("품절") ? "none" : "all"};
         width: 30px;
         font-size: 16px;
         background: #f8f8f8;
@@ -52,7 +53,7 @@ const ProdBuy = styled.div`
     border-radius: 3px;
     background: var(--main);
   }
-  .soldout{
+  .soldout {
     display: inline-block;
     width: 100%;
     line-height: 30px;
@@ -84,41 +85,36 @@ export default function CategoryList_ProdBuy({
   bookData,
   checkList,
   handleCheckList,
+  userId,
+  idx,
+  quantity,
+  handleQuantity
 }) {
-  const [quantity, setQuantity] = useState(1);
   const [isChecked, setisChecked] = useState(false);
 
   //개별 상품 체크박스 클릭시 checkList에 상품 넣고 빼기
   const handleSelect = (bookData) => {
+    const {isbn13, title, cover, priceSales} = bookData;
     if (isChecked) {
       let copy = [...checkList];
       for (let i = 0; i < copy.length; i++) {
-        if (copy[i] === bookData.isbn13) {
+        if (copy[i][0] === bookData.isbn13) {
           copy.splice(i, 1);
         }
       }
       handleCheckList(copy);
       setisChecked(false);
     } else {
-      handleCheckList([...checkList, bookData.isbn13]);
+      handleCheckList([...checkList, [isbn13, userId, title, cover, priceSales]]);
       setisChecked(true);
-    }
-  };
-
-  const handleQuantity = (flag) => {
-    if (flag === "plus") {
-      setQuantity(quantity + 1);
-    } else if (flag === "minus" && quantity > 1) {
-      setQuantity(quantity - 1);
     }
   };
 
   //checkList에 해당 상품이 있는지 없는지에 따라 해당 상품의 checkbox 체크 변환
   useEffect(() => {
-    const check = () => {
-      checkList.includes(bookData.isbn13) ? setisChecked(true) : setisChecked(false);
-    };
-    check();
+    checkList.some(checkItem => checkItem[0] === bookData.isbn13)
+      ? setisChecked(true)
+      : setisChecked(false);
   }, [checkList, bookData.isbn13]);
 
   return (
@@ -129,7 +125,7 @@ export default function CategoryList_ProdBuy({
           name="ProdQuantity"
           id="ProdQuantity"
           type="checkbox"
-          disabled={bookData.stockStatus.includes('품절') ? true : false}
+          disabled={bookData.stockStatus.includes("품절") ? true : false}
           checked={isChecked}
           value={bookData.isbn13}
           onChange={() => handleSelect(bookData)}
@@ -137,34 +133,32 @@ export default function CategoryList_ProdBuy({
         <span className="quantitywrapper">
           <button
             onClick={() => {
-              handleQuantity("minus");
+              handleQuantity("minus", bookData.isbn13, idx);
             }}
           >
             -
           </button>
-          <input type="number" value={quantity} readOnly />
+          <input type="number" value={quantity[idx] ? quantity[idx].qty : 1} readOnly />
           <button
             onClick={() => {
-              handleQuantity("plus");
+              handleQuantity("plus", bookData.isbn13, idx);
             }}
           >
             +
           </button>
         </span>
       </div>
-      {
-        bookData.stockStatus.includes('품절') ? (
-          <>
-            <button className="soldout">{bookData.stockStatus}</button>
-            <Link className="soldout">{bookData.stockStatus}</Link>
-          </>
-        ) : (
-          <>
-            <button className="insertCart">카트에 넣기</button>
-            <Link className="buy">바로 구매</Link>
-          </>
-        )
-      }
+      {bookData.stockStatus.includes("품절") ? (
+        <>
+          <button className="soldout">{bookData.stockStatus}</button>
+          <Link className="soldout">{bookData.stockStatus}</Link>
+        </>
+      ) : (
+        <>
+          <button className="insertCart">카트에 담기</button>
+          <Link className="buy">바로 구매</Link>
+        </>
+      )}
       <button className="dibs">
         {/* 찜 기능 추가 */}
         <GoHeart />

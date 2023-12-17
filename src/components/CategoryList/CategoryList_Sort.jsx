@@ -26,7 +26,7 @@ const Sortarea = styled.div`
           font-weight: bold;
           color: var(--main);
         }
-        svg{
+        svg {
           position: absolute;
           top: 50%;
           right: 0;
@@ -84,18 +84,17 @@ export default function CategoryList_Sort({
   handleIsCheckedAll,
   handleCheckList,
 }) {
-
   const parameterArr = useParams().categoryPath.split("_");
 
   //졍렬 기능
   const handleSort = (e) => {
     resetCheckList();
     handleCurrentPage(1);
-    if(sortField === e.target.value) {
-      sortOption === 'asc' ? handleSortOption('desc') : handleSortOption('asc')
-    }else{
+    if (sortField === e.target.value) {
+      sortOption === "asc" ? handleSortOption("desc") : handleSortOption("asc");
+    } else {
       handleSortField(e.target.value);
-      handleSortOption('desc');
+      handleSortOption("desc");
     }
   };
 
@@ -135,16 +134,83 @@ export default function CategoryList_Sort({
     handleListQty(20);
     handleSortField("pubDate");
     handleSortOption("desc");
-  }, [parameterArr[0],parameterArr[1],parameterArr[2],parameterArr[3],parameterArr[4],parameterArr[5]]);
+  }, [
+    parameterArr[0],
+    parameterArr[1],
+    parameterArr[2],
+    parameterArr[3],
+    parameterArr[4],
+    parameterArr[5],
+  ]);
 
   return (
     <Sortarea>
       <div className="topArea">
         <span className="sortOption">
-          <button className={sortField && sortField === "pubDate" ? "currentSort" : null} value="pubDate" onClick={handleSort}>등록일순{sortField === "pubDate" ? sortOption === "asc" ? <TbSortAscending /> : <TbSortDescending /> : null }</button>
-          <button className={sortField && sortField === "salesPoint" ? "currentSort" : null} value="salesPoint" onClick={handleSort}>판매량순{sortField === "salesPoint" ? sortOption === "asc" ? <TbSortAscending /> : <TbSortDescending /> : null }</button>
-          <button className={sortField && sortField === "priceSales" ? "currentSort" : null} value="priceSales" onClick={handleSort}>가격순{sortField === "priceSales" ? sortOption === "asc" ? <TbSortAscending /> : <TbSortDescending /> : null }</button>
-          <button className={sortField && sortField === "title" ? "currentSort" : null} value="title" onClick={handleSort}>상품명순{sortField === "title" ? sortOption === "asc" ? <TbSortAscending /> : <TbSortDescending /> : null }</button>
+          <button
+            className={
+              sortField && sortField === "pubDate" ? "currentSort" : null
+            }
+            value="pubDate"
+            onClick={handleSort}
+          >
+            등록일순
+            {sortField === "pubDate" ? (
+              sortOption === "asc" ? (
+                <TbSortAscending />
+              ) : (
+                <TbSortDescending />
+              )
+            ) : null}
+          </button>
+          <button
+            className={
+              sortField && sortField === "salesPoint" ? "currentSort" : null
+            }
+            value="salesPoint"
+            onClick={handleSort}
+          >
+            판매량순
+            {sortField === "salesPoint" ? (
+              sortOption === "asc" ? (
+                <TbSortAscending />
+              ) : (
+                <TbSortDescending />
+              )
+            ) : null}
+          </button>
+          <button
+            className={
+              sortField && sortField === "priceSales" ? "currentSort" : null
+            }
+            value="priceSales"
+            onClick={handleSort}
+          >
+            가격순
+            {sortField === "priceSales" ? (
+              sortOption === "asc" ? (
+                <TbSortAscending />
+              ) : (
+                <TbSortDescending />
+              )
+            ) : null}
+          </button>
+          <button
+            className={
+              sortField && sortField === "title" ? "currentSort" : null
+            }
+            value="title"
+            onClick={handleSort}
+          >
+            상품명순
+            {sortField === "title" ? (
+              sortOption === "asc" ? (
+                <TbSortAscending />
+              ) : (
+                <TbSortDescending />
+              )
+            ) : null}
+          </button>
         </span>
         <span className="listOption">
           <label htmlFor="listQty"></label>
@@ -172,12 +238,12 @@ export default function CategoryList_Sort({
         </span>
       </div>
       <div className="bottomArea">
-        <PaginationComponent 
-          totalResults = {totalResults}
-          currentPage = {currentPage}
-          pageRangeDisplayed = {10}
-          itemsCountPerPage = {listQty}
-          handlePageChange = {handlePageChange}
+        <PaginationComponent
+          totalResults={totalResults}
+          currentPage={currentPage}
+          pageRangeDisplayed={10}
+          itemsCountPerPage={listQty}
+          handlePageChange={handlePageChange}
         />
         <span className="selectOption">
           {isCheckedAll ? (
@@ -185,7 +251,7 @@ export default function CategoryList_Sort({
           ) : (
             <button onClick={() => handleSelectAll(true)}>전체선택</button>
           )}
-          <button>카트에 넣기</button>
+          <button>카트에 담기</button>
           <button>찜하기</button>
         </span>
       </div>

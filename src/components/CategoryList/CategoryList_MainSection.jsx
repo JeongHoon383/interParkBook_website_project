@@ -33,6 +33,7 @@ export default function CategoryList_MainSection() {
   const [isCheckedAll, setIsCheckedAll] = useState(false);
   const [sortField, setSortField] = useState("pubDate");
   const [sortOption, setSortOption] = useState("desc");
+  const [quantity, setQuantity] = useState([]);
 
   const handleSortField = (data) => {
     setSortField(data);
@@ -55,6 +56,20 @@ export default function CategoryList_MainSection() {
   const handleCheckList = (data) => {
     setCheckList(data);
   };
+  const handleQuantity = (flag, isbn13, idx) => {
+    let copy = [...quantity];
+    let currentQty = quantity[idx] && quantity[idx].qty;
+    if (flag === "plus") {
+      currentQty += 1;
+    } else if (flag === "minus" && currentQty > 1) {
+      currentQty -= 1;
+    }
+    copy[idx] = {
+      "isbn13" : isbn13,
+      "qty" : currentQty
+    };
+    setQuantity(copy);
+  };
 
 
   //카테고리별, 정렬별, 페이지별 품절여부별 상품목록 불러오기
@@ -70,6 +85,7 @@ export default function CategoryList_MainSection() {
         `http://127.0.0.1:9090/category/list/${parameterArr[0]}/${parameterArr[1]}/${parameterArr[2]}/${parameterArr[3]}/${parameterArr[4]}/${startIndex}/${endIndex}/${sortField}/${sortOption}/${isSoldout}`
       ).then((result) => {
         setBookData(result.data);
+        setQuantity(result.data.map(data => ({"isbn13":data.isbn13, "qty" : 1})));
       });
     }
 
@@ -78,7 +94,6 @@ export default function CategoryList_MainSection() {
     currentPage,
     isSoldout,
     sortField,
-    sortOption,
     parameterArr[0],
     parameterArr[1],
     parameterArr[2],
@@ -90,8 +105,8 @@ export default function CategoryList_MainSection() {
   const handleSelectAll = (flag) => {
     if (flag) {
         bookData.map(({isbn13, title, cover, priceSales, stockStatus}) =>
-          !checkList.some(checkItem => checkItem.isbn13 === isbn13) && !stockStatus.includes('품절')
-            ? setCheckList((checkList) => [...checkList, {isbn13, userId, title, cover, priceSales}])
+          !checkList.some(checkItem => checkItem[0] === isbn13) && !stockStatus.includes('품절')
+            ? setCheckList((checkList) => [...checkList, [isbn13, userId, title, cover, priceSales]])
             : null
         );
       setIsCheckedAll(true);
@@ -137,6 +152,9 @@ export default function CategoryList_MainSection() {
             bookData={bookData}
             checkList={checkList}
             handleCheckList={handleCheckList}
+            userId={userId}
+            quantity={quantity}
+            handleQuantity={handleQuantity}
           />
           <CategoryList_Sort
             totalResults={bookData[0] && bookData[0].totalResults}
