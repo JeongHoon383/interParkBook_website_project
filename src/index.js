@@ -13,7 +13,8 @@ import Login from './Pages/Login';
 import SignUp from './Pages/SignUp';
 import Agreement from './Pages/Agreement';
 import SignUpDone from './Pages/SignUpDone';
- 
+import { Provider } from "react-redux";
+import { store, persistor } from "./components/Cart/store";
 
 import reportWebVitals from './reportWebVitals';
 import { createGlobalStyle } from 'styled-components';
@@ -28,6 +29,12 @@ import Detail_change from './components/Detail/Detail_change';
 import Cart from './Pages/Cart';
 import { RecoilRoot } from 'recoil';
 const GlobalStyle = createGlobalStyle`
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -58,9 +65,6 @@ footer, header, hgroup, main, menu, nav, section {
 *[hidden] {
     display: none;
 }
-body {
-  line-height: 1;
-}
 menu, ol, ul {
   list-style: none;
 }
@@ -84,6 +88,7 @@ body{
   background-color: white;
   color:black;
   position: relative;
+  line-height: 1;
 }
 a{
   text-decoration: none;
@@ -210,7 +215,7 @@ const router = createBrowserRouter([
         element: <CategoryMain />,
       },
       {
-        path: '/category/:categoryId',
+        path: '/category/list/:categoryPath',
         element: <CategoryList />,
       },
       {
