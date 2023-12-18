@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { MdRefresh } from "react-icons/md";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { AiOutlineDownload } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled.div`
   margin-top: 48px;
@@ -21,6 +22,7 @@ const Upper = styled.div`
       background: transparent;
       display: flex;
       font-weight: bold;
+      cursor: pointer;
       em {
         font-size: 13px;
         display: flex;
@@ -30,6 +32,9 @@ const Upper = styled.div`
         border: 1px solid black;
         margin-right: 5px;
         padding: 3px 5px;
+        svg:hover {
+          transform: rotate(90deg);
+        }
       }
     }
   }
@@ -125,8 +130,16 @@ const ButtonArea = styled.div`
     height: 50px;
   }
 `;
+const Shop = styled.input`
+  cursor: pointer;
+`;
+const Order = styled.input`
+  cursor: pointer;
+`;
 
-const Cart_Cal = () => {
+const Cart_Cal = ({ setCart, cart, total }) => {
+  const navigate = useNavigate();
+
   return (
     <Wrapper>
       <Upper>
@@ -137,7 +150,10 @@ const Cart_Cal = () => {
               다시계산하기
               <MdRefresh />
             </em>
-            <em>
+            <em
+              onClick={() => {
+                setCart([]);
+              }}>
               삭제하기 <FaRegTrashAlt />
             </em>
           </span>
@@ -152,7 +168,7 @@ const Cart_Cal = () => {
         <div className="up">
           <ul>
             <li style={{ width: "25%" }}>
-              총 0종 (0개)<span></span>
+              총금액<span></span>
             </li>
             <li style={{ width: "25%" }}>
               배송비<span></span>
@@ -163,20 +179,21 @@ const Cart_Cal = () => {
         <div className="down">
           <ul>
             <li style={{ width: "25%" }}>
-              0 <b>원</b> <span style={{ color: "lightgray" }}>+</span>
+              {Number(total).toLocaleString()} <b>원</b>
+              <span style={{ color: "lightgray" }}>+</span>
             </li>
             <li style={{ width: "25%" }}>
               0 <b>원</b> <span>=</span>
             </li>
             <li style={{ width: "50%" }}>
-              0 <b>원</b>{" "}
+              {Number(total).toLocaleString()} <b>원</b>
             </li>
           </ul>
         </div>
       </PriceBox>
       <ButtonArea>
-        <input type="text" value="쇼핑 계속하기" />
-        <input type="text" value="주문하기" />
+        <Shop onClick={() => navigate("/")} type="text" value="쇼핑 계속하기" />
+        <Order type="text" value="주문하기" onClick={() => setCart([])} />
       </ButtonArea>
     </Wrapper>
   );

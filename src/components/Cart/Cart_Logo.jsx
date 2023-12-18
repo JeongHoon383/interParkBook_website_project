@@ -16,6 +16,12 @@ const StartShop = styled.figure`
   right: 0;
   top: 50%;
   transform: translateY(-80%);
+  img{
+    
+ @media (max-width:768px){
+  display: none;
+ }
+  }
 `;
 
 const ImageSpan = styled.span`
@@ -24,6 +30,11 @@ const ImageSpan = styled.span`
   font-size: 12px;
   padding-left: 70px;
   bottom: 10px;
+  
+ @media (max-width:768px){
+  padding-left: 50px;
+  font-size: 9px;
+ }
   em {
     color: var(--main);
     font-weight: bold;
@@ -33,8 +44,16 @@ const ImageSpan = styled.span`
 const Ul = styled.ul`
   font-size: 12px;
   color: #777;
+  
+ @media (max-width:768px){
+  font-size: 9px;
+ }
   li {
     margin-top: 5px;
+    
+ @media (max-width:768px){
+  margin-top: 4px;
+ }
   }
 `;
 
@@ -42,11 +61,13 @@ const Cart_Logo = () => {
   return (
     <>
       <Figure>
+   
         <img
           src="https://qi-b.qoo10cdn.com/renewPark/bookCart/bg_title01.gif"
           alt=""
         />
         <StartShop>
+ 
           <img
             src="https://qi-b.qoo10cdn.com/renewPark/bookCart/tab_shopCart.gif"
             alt=""
