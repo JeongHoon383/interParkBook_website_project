@@ -9,20 +9,29 @@ import Main_ServiceBenefit from '../components/Main/Main_ServiceBenefit';
 import Main_CategoryRecommend from '../components/Main/Main_CategoryRecommend';
 import Main_Advertise2 from '../components/Main/Main_Advertise2';
 import Main_PointSection from '../components/Main/Main_PointSection';
+import { Desktop, Mobile } from '../components/MediaQuery';
+import Main_Mo from '../components/Main/Mobile/Main_Mo';
 
 export default function Main() {
   return (
-    <div className="mainContent" style={{ width: '60%', margin: '30px auto' }}>
-      <MainBanner />
-      <Main_Advertise />
-      <Main_ITrendSection />
-      <Main_ChoiceSection />
-      <Main_LoginBanner />
-      <Main_CategoryRecommend />
-      <Main_Advertise2 />
-      <Main_PointSection />
-      <Main_ServiceBenefit />
-      <Main_CouponAd />
-    </div>
+    <>
+      <Desktop>
+        <div className="dMainContent" style={{ width: '60%', margin: '30px auto' }}>
+          <MainBanner />
+          <Main_Advertise />
+          <Main_ITrendSection />
+          <Main_ChoiceSection />
+          <Main_LoginBanner />
+          <Main_CategoryRecommend />
+          <Main_Advertise2 />
+          <Main_PointSection />
+          <Main_ServiceBenefit />
+          <Main_CouponAd />
+        </div>
+      </Desktop>
+      <Mobile>
+        <Main_Mo />
+      </Mobile>
+    </>
   );
 }

@@ -3,7 +3,8 @@ import styled from "styled-components";
 import Cart_Logo from "../components/Cart/Cart_Logo";
 import Cart_Table from "../components/Cart/Cart_Table";
 import Cart_Cal from "../components/Cart/Cart_Cal";
-import { useSelector } from "react-redux";
+import { cartState } from "../components/Cart/atom";
+import { useRecoilState } from "recoil";
 
 const Wrapper = styled.div`
   width: 60%;
@@ -11,12 +12,12 @@ const Wrapper = styled.div`
 `;
 
 const Cart = () => {
-  let cartData = useSelector((state) => state.cartState);
+  const [cart, setCart] = useRecoilState(cartState);
 
   return (
     <Wrapper>
       <Cart_Logo></Cart_Logo>
-      <Cart_Table cartData={cartData}></Cart_Table>
+      <Cart_Table cart={cart} setCart={setCart}></Cart_Table>
       <Cart_Cal></Cart_Cal>
     </Wrapper>
   );

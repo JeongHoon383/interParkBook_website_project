@@ -4,8 +4,9 @@ import { FaRegQuestionCircle } from "react-icons/fa";
 import { GoTriangleRight } from "react-icons/go";
 import { IoSquare } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { removeCart } from "./store";
+import { cartState } from "./atom";
+import { useRecoilState } from "recoil";
 
 const Wrapper = styled.div`
   margin-top: 60px;
@@ -204,8 +205,9 @@ const ButtonList = styled.li`
   }
 `;
 
-const Cart_Table = ({ cartData }) => {
-  let dispatch = useDispatch();
+const Cart_Table = ({ setCart, cart }) => {
+ 
+
   return (
     <Wrapper>
       <TaxSection>
@@ -261,8 +263,8 @@ const Cart_Table = ({ cartData }) => {
             배송책임 : <em>교보문고</em> l 배송비 : <em>2,500원</em>
           </span>
         </AnyItem>
-        {cartData &&
-          cartData.map((v) => (
+        {cart &&
+          cart.map((v) => (
             <BookInfo>
               <ul>
                 <li style={{ width: "13%" }}>
@@ -278,9 +280,9 @@ const Cart_Table = ({ cartData }) => {
                 <li style={{ width: "15%" }}>
                   <PriceList>
                     <li>
-                      &nbsp;정가 {Number(v.pricestandard).toLocaleString()}원
+                      &nbsp;정가 {Number(v.priceStandard).toLocaleString()}원
                     </li>
-                    <li>할인가 {Number(v.pricesales).toLocaleString()}원</li>
+                    <li>할인가 {Number(v.priceSales).toLocaleString()}원</li>
                     <li>&nbsp;적립 {Number(v.mileage).toLocaleString()}P</li>
                   </PriceList>
                 </li>
@@ -289,21 +291,32 @@ const Cart_Table = ({ cartData }) => {
                   <div>변경</div>
                 </li>
                 <li style={{ width: "15%", color: "var(--main)" }}>
-                  {(Number(v.pricesales) * v.count).toLocaleString()}원
+                  {(Number(v.priceSales) * v.count).toLocaleString()}원
                 </li>
                 <ButtonList style={{ width: "14%" }}>
-                  <input type="button" value="주문하기" />
+                  <input type="button" value="주문하기"  onClick={()=>{
+
+                  }}/>
                   <input
                     type="button"
                     value="삭제하기"
-                    onClick={() => dispatch(removeCart(v))}
+                    onClick={(e) =>
+                      setCart((prev) => {
+                        let copy = [...prev];
+                        copy = copy.filter((data) => {
+                          return data.cartId !== v.cartId;
+                        });
+                        alert('삭제완료')
+                        return copy;
+                      })
+                    }
                   />
                 </ButtonList>
               </ul>
             </BookInfo>
           ))}
       </Row>
-      {cartData && cartData.length === 0 && (
+      {cart && cart.length === 0 && (
         <AnyItem>
           <span>북카트에 담긴 상품이 없습니다.</span>
         </AnyItem>

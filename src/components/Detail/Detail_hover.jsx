@@ -8,6 +8,9 @@ const Wrapper = styled.div`
   height: 130px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  @media (max-width: 768px) {
+    display: none;  
+  }
   div:nth-child(2) {
     grid-column: span 4;
   }
@@ -111,7 +114,7 @@ const Detail_hover = () => {
                   top: "21.5px",
                   transform: "translateY(-50%) rotate(45deg)",
                   left: "-18px",
-                  zIndex: "99",
+                  zIndex: "1",
                 }}></span>
               <Figure style={{ borderRight: "1px solid lightgray" }}>
                 <img src="https://qi-b.qoo10cdn.com/renewPark/reBookpark/test_img/last_inc/book_benefit.jpg" />
@@ -171,7 +174,7 @@ const Detail_hover = () => {
                   top: "107.5px",
                   transform: "translateY(-50%) rotate(45deg)",
                   left: "-18px",
-                  zIndex: "99",
+                  zIndex: "1",
                 }}></span>
               <Figure style={{ borderRight: "1px solid lightgray" }}>
                 <img src="https://qi-b.qoo10cdn.com/renewPark/reBookpark/test_img/last_inc/book_benefit.jpg" />

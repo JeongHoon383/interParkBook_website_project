@@ -4,6 +4,9 @@ import CategoryList_MainSection from "../components/CategoryList/CategoryList_Ma
 import CategoryList_CaNav from "../components/CategoryList/asideLeft/CategoryList_CaNav";
 import CategoryLIst_WeekBestSeller from "../components/CategoryList/asideLeft/CategoryLIst_WeekBestSeller";
 import styled from "styled-components";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 const CategoryListMain = styled.main`
   position: relative;

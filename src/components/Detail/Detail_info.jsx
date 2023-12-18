@@ -6,24 +6,45 @@ import { IoIosArrowDown } from "react-icons/io";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
+const Wrapper = styled.div`
+  min-width: 60vw;
+`;
+
 const SortSection = styled(motion.section)`
   margin-top: 40px;
   margin-bottom: 10px;
+  @media (max-width: 768px) {
+    margin-top: 28px;
+    margin-bottom: 7px;
+  }
   h1 {
     font-size: 20px;
     margin: 10px 0;
     font-weight: 900;
+    @media (max-width: 768px) {
+      font-size: 14px;
+      margin: 7px 0;
+    }
   }
   hr {
     margin-bottom: 20px;
+    @media (max-width: 768px) {
+      margin-bottom: 14px;
+    }
   }
   em {
     font-size: 12px;
+    @media (max-width: 768px) {
+      font-size: 8px;
+    }
   }
   span {
     font-size: 14px;
     letter-spacing: normal;
     line-height: 150%;
+    @media (max-width: 768px) {
+      font-size: 10px;
+    }
   }
 `;
 const AuthorBox = styled.div`
@@ -32,15 +53,24 @@ const AuthorBox = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
-
   border-top: 1px solid lightgray;
+
+  @media (max-width: 768px) {
+    padding: 7px 14px;
+  }
   div:first-child {
     font-size: 16px;
     font-weight: 600;
+    @media (max-width: 768px) {
+      font-size: 11px;
+    }
   }
   div:last-child {
     font-size: 11px;
     color: #a1778c;
+    @media (max-width: 768px) {
+      font-size: 8px;
+    }
   }
 `;
 const AuthorGrid = styled.div`
@@ -48,19 +78,30 @@ const AuthorGrid = styled.div`
   grid-template-columns: repeat(4, 1fr);
   position: relative;
   padding-bottom: 10px;
-
+  .author_info {
+    @media (max-width: 768px) {
+      font-size: 11px;
+    }
+  }
+  @media (max-width: 768px) {
+    padding-bottom: 7px;
+  }
   div {
     padding: 10px;
-
     color: #777;
+    @media (max-width: 768px) {
+      padding: 7px;
+    }
   }
   div:first-child {
     display: flex;
     justify-content: space-between;
-
     font-size: 12px;
     color: #777;
     border-right: 1px solid lightgray;
+    @media (max-width: 768px) {
+      font-size: 8px;
+    }
   }
   div:nth-child(2) {
     grid-column: span 3;
@@ -70,6 +111,9 @@ const AuthorGrid = styled.div`
 const Extend = styled.div`
   span {
     margin-left: 7px;
+    @media (max-width: 768px) {
+      margin-left: 5px;
+    }
   }
   span:last-child {
     color: var(--main);
@@ -82,18 +126,17 @@ const Extend = styled.div`
 const Detail_info = ({ DetailData }) => {
   const sectionRef = useRef(null);
   const [clickWriter, setClickWriter] = useState(false);
-
   return (
-    <>
+    <Wrapper>
       <SortSection>
         <h1>이상품분류</h1>
         <hr />
-        <em>홈 &gt; 국내도서 &gt; 인문 &gt; 인문교양 &gt; 교양일반</em>
+        <em>{DetailData.categoryName && DetailData.categoryName}</em>
       </SortSection>
       <SortSection ref={sectionRef}>
         <h1>책소개</h1>
         <hr />
-        <span>
+        <motion.span>
           {DetailData?.description
             ? DetailData.description
             : "책 정보가 없습니다"}
@@ -144,7 +187,7 @@ const Detail_info = ({ DetailData }) => {
           글로 소설 전체를 뒤엎는 또 다른 세계가 입체적으로 변환하면서 전혀 다른
           가정을 펼쳐갈 수 있다는 게 대단합니다. (…) 기적의 명작이 아닌가
           싶습니다.”라고 극찬하기도 했다.
-        </span>
+        </motion.span>
       </SortSection>
       <SortSection>
         <h1>출판사 서평</h1>
@@ -223,7 +266,7 @@ const Detail_info = ({ DetailData }) => {
               <span>생년월일</span>
               <span>1997</span>
             </div>
-            <div>
+            <div className="author_info">
               {clickWriter
                 ? `1979년생이다. 와세다대학교 인간과학부 통신교육과정
               인간환경과학과를 졸업했다. 「장애인 표상과 현실사회의 상호 영향에
@@ -276,7 +319,7 @@ const Detail_info = ({ DetailData }) => {
           </AuthorGrid>
         </div>
       </SortSection>
-    </>
+    </Wrapper>
   );
 };
 

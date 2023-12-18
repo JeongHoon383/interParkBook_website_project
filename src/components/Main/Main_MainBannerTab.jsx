@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Slider from 'react-slick';
 import Main_MainBannerIssue from './Main_MainBannerIssue';
 import styled from 'styled-components';
+import { Desktop, Mobile } from '../MediaQuery';
 
 const Pre = styled.div`
   width: 60px;
@@ -74,18 +75,20 @@ export default function Main_MainBannerTab() {
 
   return (
     <>
-      <Slide tab={tab} />
-      <Tab>
-        <div onMouseOver={() => handleMouseOver(0)} className={active === 0 ? `activeHover` : null}>
-          핫클릭 이벤트
-        </div>
-        <div onMouseOver={() => handleMouseOver(1)} className={active === 1 ? `activeHover` : null}>
-          추천 이벤트
-        </div>
-        <div onMouseOver={() => handleMouseOver(2)} className={active === 2 ? `activeHover` : null}>
-          화제의 책
-        </div>
-      </Tab>
+      <Desktop>
+        <Slide tab={tab} />
+        <Tab>
+          <div onMouseOver={() => handleMouseOver(0)} className={active === 0 ? `activeHover` : null}>
+            핫클릭 이벤트
+          </div>
+          <div onMouseOver={() => handleMouseOver(1)} className={active === 1 ? `activeHover` : null}>
+            추천 이벤트
+          </div>
+          <div onMouseOver={() => handleMouseOver(2)} className={active === 2 ? `activeHover` : null}>
+            화제의 책
+          </div>
+        </Tab>
+      </Desktop>
     </>
   );
 }

@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { removeUser } from '../../util/localStorage.js';
 import { getCookie } from '../../util/cookies.js';
 import styled from 'styled-components';
+import { Desktop } from '../MediaQuery';
 
 const Nav = styled.div`
   height: 34px;
@@ -54,47 +55,51 @@ export default function UpperNav() {
   };
 
   return (
-    <Nav>
-      <div className="upperNavCon">
-        <div className="leftTab">
-          <Ul>
-            <Li>홈</Li>
-            <Li>투어</Li>
-            <Li>티켓</Li>
-            <Li>쇼핑</Li>
-            <Li style={{ backgroundColor: '#fff', color: '#000' }}>도서</Li>
-          </Ul>
-        </div>
-        <div className="rightTab">
-          <Ul style={{ fontSize: '0.8em' }}>
-            {getCookie('rememberUserInfo') ? (
-              <Li>
-                <button type="button" onClick={handleLogout}>
-                  로그아웃
-                </button>
-              </Li>
-            ) : (
-              <Li>
-                <Link to="/login">로그인</Link>
-              </Li>
-            )}
-            {!getCookie('rememberUserInfo') ? (
-              <Li>
-                <Link to="/member">회원가입</Link>
-              </Li>
-            ) : null}
-            <Li>
-              <Link to="/cart">북카트</Link>
-            </Li>
-            <Li style={styledMP} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
-              마이페이지
-              <IoMdArrowDropdown fontSize="small" />
-              {isHover == true ? <MyPageHover /> : null}
-            </Li>
-            <Li>고객센터</Li>
-          </Ul>
-        </div>
-      </div>
-    </Nav>
+    <>
+      <Desktop>
+        <Nav>
+          <div className="upperNavCon">
+            <div className="leftTab">
+              <Ul>
+                <Li>홈</Li>
+                <Li>투어</Li>
+                <Li>티켓</Li>
+                <Li>쇼핑</Li>
+                <Li style={{ backgroundColor: '#fff', color: '#000' }}>도서</Li>
+              </Ul>
+            </div>
+            <div className="rightTab">
+              <Ul style={{ fontSize: '0.8em' }}>
+                {getCookie('rememberUserInfo') ? (
+                  <Li>
+                    <button type="button" onClick={handleLogout}>
+                      로그아웃
+                    </button>
+                  </Li>
+                ) : (
+                  <Li>
+                    <Link to="/login">로그인</Link>
+                  </Li>
+                )}
+                {!getCookie('rememberUserInfo') ? (
+                  <Li>
+                    <Link to="/member">회원가입</Link>
+                  </Li>
+                ) : null}
+                <Li>
+                  <Link to="/cart">북카트</Link>
+                </Li>
+                <Li style={styledMP} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+                  마이페이지
+                  <IoMdArrowDropdown fontSize="small" />
+                  {isHover == true ? <MyPageHover /> : null}
+                </Li>
+                <Li>고객센터</Li>
+              </Ul>
+            </div>
+          </div>
+        </Nav>
+      </Desktop>
+    </>
   );
 }

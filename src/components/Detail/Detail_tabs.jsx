@@ -17,14 +17,15 @@ import Detail_slider from "./Detail_slider";
 import Detail_reco from "./Detail_reco";
 
 const TabsContainer = styled.div`
-  width: 60%;
-  margin: 0 auto;
+ 
 `;
 const Tabs = styled.div`
   display: flex;
   position: sticky;
+  margin: 0 auto;
   top: 55px;
   z-index: 10;
+  width: 100%;
 `;
 const Tab = styled.div`
   flex: 1;
@@ -36,6 +37,15 @@ const Tab = styled.div`
   align-items: center;
   position: relative;
   background-color: #f8f8f8;
+  @media (max-width: 768px) {
+    height: 30px;
+  }
+  @media (max-width: 768px) {
+    span {
+      font-size: 11px;
+    }
+  }
+
   a {
     display: flex;
     flex-direction: column;
@@ -54,9 +64,12 @@ const Line = styled(motion.span)`
   position: absolute;
   height: 5px;
   background-color: #ff9c46;
+  @media (max-width: 768px) {
+    height: 4px;
+  }
 `;
 
-const Detail_tabs = ({ id, detailData, DetailData }) => {
+const Detail_tabs = ({ id, DetailData, reviewData, setReviewData }) => {
   const infoMatch = useMatch(`/book/:id/info`);
   const eventMatch = useMatch("/book/:id/event");
   const recMatch = useMatch("/book/:id/rec");
@@ -112,13 +125,12 @@ const Detail_tabs = ({ id, detailData, DetailData }) => {
       {!eventMatch && !recMatch && !reviewMatch && !changeMatch ? (
         <Detail_info DetailData={DetailData} />
       ) : null}
-      {/* 
-      {infoMatch && (
-        <Detail_info DetailData={DetailData} detailData={detailData} />
-      )} */}
+
       {eventMatch && <Detail_event />}
       {recMatch && <Detail_reco />}
-      {reviewMatch && <Detail_review />}
+      {reviewMatch && (
+        <Detail_review reviewData={reviewData} setReviewData={setReviewData} />
+      )}
       {changeMatch && <Detail_change />}
     </TabsContainer>
   );

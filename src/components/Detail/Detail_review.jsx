@@ -15,6 +15,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { getUser } from "../../util/localStorage";
 
 const Wrapper = styled.div`
   position: relative;
@@ -22,7 +23,7 @@ const Wrapper = styled.div`
 
 const ToggleButton = styled(motion.button)`
   position: absolute;
-  top: -50px;
+  top: -5px;
   right: 0;
   margin-top: 10px;
   width: 90px;
@@ -33,6 +34,11 @@ const ToggleButton = styled(motion.button)`
   -moz-box-shadow: 10px 10px 30px 0px rgba(0, 0, 0, 0.75);
   color: white;
   right: 0;
+  @media (max-width: 768px) {
+    width: 65px;
+    height: 18px;
+    font-size: 12px;
+  }
 `;
 const CloseButton = styled(motion.button)`
   width: 90px;
@@ -43,6 +49,11 @@ const CloseButton = styled(motion.button)`
   -moz-box-shadow: 10px 10px 30px 0px rgba(0, 0, 0, 0.75);
   color: white;
   right: 0;
+  @media (max-width: 768px) {
+    width: 65px;
+    height: 18px;
+    font-size: 12px;
+  }
 `;
 const SubmitButton = styled.button`
   width: 90px;
@@ -54,6 +65,11 @@ const SubmitButton = styled.button`
   color: white;
   right: 0;
   margin-bottom: 10px;
+  @media (max-width: 768px) {
+    width: 65px;
+    height: 18px;
+    font-size: 12px;
+  }
 `;
 const Form = styled(motion.form)`
   border: 1px solid lightgray;
@@ -70,8 +86,14 @@ const Form = styled(motion.form)`
       align-items: center;
       justify-content: flex-start;
       color: #ff9c46;
+      @media (max-width: 768px) {
+        height: 28px;
+      }
       h1 {
         margin: 0 10px;
+        @media (max-width: 768px) {
+          margin: 0 7px;
+        }
       }
     }
     .title {
@@ -82,13 +104,22 @@ const Form = styled(motion.form)`
       display: flex;
       justify-content: flex-start;
       align-items: center;
-
       padding-left: 10px;
+      @media (max-width: 768px) {
+        height: 30px;
+        padding-left: 7px;
+      }
       input {
         margin-right: 10px;
+        @media (max-width: 768px) {
+          margin-right: 7px;
+        }
       }
       label {
         margin-right: 10px;
+        @media (max-width: 768px) {
+          margin-right: 7px;
+        }
       }
     }
     .content {
@@ -98,8 +129,15 @@ const Form = styled(motion.form)`
       align-items: flex-start;
       padding-left: 10px;
       margin: 20px;
+      @media (max-width: 768px) {
+        padding-left: 7px;
+        margin: 14px;
+      }
       label {
         margin-right: 10px;
+        @media (max-width: 768px) {
+          margin-right: 7px;
+        }
       }
     }
   }
@@ -114,6 +152,9 @@ const TextArea = styled.textarea`
   height: 70px;
   margin: 0 auto;
   width: 80%;
+  @media (max-width: 768px) {
+    height: 50px;
+  }
 `;
 const Star = styled.span`
   display: flex;
@@ -168,6 +209,11 @@ const Re_title = styled.div`
   display: flex;
   align-items: center;
   border-bottom: 1px solid black;
+  @media (max-width: 768px) {
+    padding: 7px 0;
+    font-size: 14px;
+    padding-left: 14px;
+  }
   div.star {
     display: flex;
     align-items: center;
@@ -176,11 +222,17 @@ const Re_title = styled.div`
   span {
     font-size: 12px;
     font-weight: lighter;
+    @media (max-width: 768px) {
+      font-size: 8px;
+    }
   }
 `;
 
 const Review = styled.div`
   margin-top: 85px;
+  @media (max-width: 768px) {
+    margin-top: 60px;
+  }
 `;
 const UserOutput = styled.div`
   height: 145px;
@@ -245,6 +297,10 @@ const PageContainer = styled.div`
   border-top: 1px solid black;
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
   margin-bottom: 10px;
+  @media (max-width: 768px) {
+    height: 30px;
+    margin-bottom: 7px;
+  }
   .number {
     background-color: #555555;
     color: #ffffe4;
@@ -260,6 +316,9 @@ const PageContainer = styled.div`
       align-items: center;
       text-align: center;
       font-size: 12px;
+      @media (max-width: 768px) {
+        font-size: 9px;
+      }
       li {
         display: flex;
         justify-content: center;
@@ -268,6 +327,10 @@ const PageContainer = styled.div`
         width: 45px;
         height: 37px;
         cursor: pointer;
+        @media (max-width: 768px) {
+          width: 32px;
+          height: 26px;
+        }
       }
     }
   }
@@ -359,20 +422,30 @@ const ReviewContent = styled.div`
     }
   }
 `;
-const Detail_review = () => {
+const Detail_review = ({ reviewData, setReviewData }) => {
+  const [rating, setRating] = useState(0);
   const [star, setStar] = useState(1);
   const [toggle, setToggle] = useState(false);
   const [click, setClick] = useState(false);
   const [totalPoint, setTotalPoint] = useState(0);
+
+  const [isPending, setIsPending] = useState(false);
   let a = "";
   const params = useParams();
   function idStar(a) {
     let arr = a.split("");
-
     let v = arr.reverse().splice(0, 2);
     arr = arr.reverse().join("");
     return arr;
   }
+
+  useEffect(() => {
+    setIsPending(true);
+    axios
+      .get(`http://127.0.0.1:9090/book/${params.id}/review`)
+      .then((res) => setReviewData(res?.data));
+    setIsPending(false);
+  }, [reviewData]);
 
   const handleClick = () => {
     setClick((click) => !click);
@@ -392,33 +465,22 @@ const Detail_review = () => {
     axios
       .post(`http://127.0.0.1:9090/book/:isbn/review`, {
         title,
-        point: star,
+        point: rating + 1,
         content,
         isbn: params.id,
         uid: "park",
       })
       .then((res) => {
         alert("리뷰등록성공");
-        window.location.reload();
+        setToggle(false);
       })
       .catch((err) => console.log(err));
     setValue("point", "1");
   };
 
-  console.log(star);
-  const {
-    isPending,
-    error,
-    data: reviewData,
-  } = useQuery({
-    queryKey: ["repoData"],
-    queryFn: () =>
-      axios
-        .get(`http://127.0.0.1:9090/book/${params.id}/review`)
-        .then((res) => res?.data),
-  });
+  let starArr = [1, 2, 3, 4, 5];
 
-  /*   console.log(reviewData && reviewData[0].avg_point.toFixed(1)); */
+  const handleMouseover = (star) => setRating(star);
 
   return (
     <>
@@ -431,8 +493,7 @@ const Detail_review = () => {
               drag
               layoutId="tog"
               onClick={() => setToggle(true)}
-              type="button"
-            >
+              type="button">
               리뷰쓰기
             </ToggleButton>
           )}
@@ -443,8 +504,7 @@ const Detail_review = () => {
                 variants={formVars}
                 initial="start"
                 animate="end"
-                exit="exit"
-              >
+                exit="exit">
                 <fieldset>
                   <legend>
                     <h1>리뷰 작성</h1>{" "}
@@ -452,8 +512,7 @@ const Detail_review = () => {
                     <CloseButton
                       layoutId="tog"
                       onClick={() => setToggle(false)}
-                      type="button"
-                    >
+                      type="button">
                       리뷰닫기
                     </CloseButton>
                   </legend>
@@ -467,64 +526,19 @@ const Detail_review = () => {
                     />
 
                     <Evaluation>
-                      <select
-                        {...register("point", { required: true })}
-                        onChange={(e) => setStar(Number(e.currentTarget.value))}
-                        name="star"
-                        id="star"
-                      >
-                        <option value="1">1점</option>
-                        <option value="2">2점</option>
-                        <option value="3">3점</option>
-                        <option value="4">4점</option>
-                        <option value="5">5점</option>
-                      </select>
                       <Star>
-                        {star === 1 && (
+                        {starArr.map((v, i) => (
                           <>
-                            <AiFillStar />
-                            <AiOutlineStar />
-                            <AiOutlineStar />
-                            <AiOutlineStar />
-                            <AiOutlineStar />
+                            <AiFillStar
+                              key={i}
+                              onMouseOver={() => handleMouseover(i)}
+                              style={{ cursor: "pointer", scale: "1.2" }}
+                              fill={i <= rating ? "var(--main)" : "none"}
+                              stroke="var(--main)"
+                              strokeWidth="20"
+                            />
                           </>
-                        )}
-                        {star === 2 && (
-                          <>
-                            <AiFillStar />
-                            <AiFillStar />
-                            <AiOutlineStar />
-                            <AiOutlineStar />
-                            <AiOutlineStar />
-                          </>
-                        )}
-                        {star === 3 && (
-                          <>
-                            <AiFillStar />
-                            <AiFillStar />
-                            <AiFillStar />
-                            <AiOutlineStar />
-                            <AiOutlineStar />
-                          </>
-                        )}
-                        {star === 4 && (
-                          <>
-                            <AiFillStar />
-                            <AiFillStar />
-                            <AiFillStar />
-                            <AiFillStar />
-                            <AiOutlineStar />
-                          </>
-                        )}
-                        {star === 5 && (
-                          <>
-                            <AiFillStar />
-                            <AiFillStar />
-                            <AiFillStar />
-                            <AiFillStar />
-                            <AiFillStar />
-                          </>
-                        )}
+                        ))}
                       </Star>
                     </Evaluation>
                   </div>
@@ -694,8 +708,7 @@ const Detail_review = () => {
                       <span
                         style={{
                           transform: click ? "rotate(180deg)" : "rotate(0deg)",
-                        }}
-                      >
+                        }}>
                         <IoIosArrowDown />
                       </span>
                     </div>
