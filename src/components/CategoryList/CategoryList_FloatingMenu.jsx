@@ -4,7 +4,7 @@ import { RiCoupon3Line } from "react-icons/ri";
 import { TfiClose } from "react-icons/tfi";
 import { FiUser } from "react-icons/fi";
 import { CiHeart } from "react-icons/ci";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const FloatingMenu = styled.aside`
   position: sticky;
@@ -145,9 +145,13 @@ const FloatingMenu = styled.aside`
   }
 `;
 
-export default function CategoryList_FloatingMenu() {
+export default function CategoryList_FloatingMenu({userId}) {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
+
+  // useEffect(() => {
+  //   axios.post(`http:127.0.0.1:9090/member/${userId}`)
+  // }, []);
 
   const handleDelete = (e) => {
     /* 최근 본 상품 삭제 기능 추가 */
@@ -157,24 +161,30 @@ export default function CategoryList_FloatingMenu() {
   return (
     <FloatingMenu>
       <h4 className="myInterpark">마이 인터파크</h4>
-      <div className="myMenu">
-        <Link>
-          <span className="pointIcon">P</span>
-          <span>0P</span>
-        </Link>
-        <Link>
-          <RiCoupon3Line />
-          <span>0장</span>
-        </Link>
-        <Link>
-          <FiUser />
-          <span>마이페이지</span>
-        </Link>
-        <Link>
-          <CiHeart />
-          <span>찜한상품</span>
-        </Link>
-      </div>
+      {
+        userId ? (
+          <div className="myMenu">
+          <Link>
+            <span className="pointIcon">P</span>
+            <span>0P</span>
+          </Link>
+          <Link>
+            <RiCoupon3Line />
+            <span>0장</span>
+          </Link>
+          <Link to={'/mypage'}>
+            <FiUser />
+            <span>마이페이지</span>
+          </Link>
+          <Link>
+            <CiHeart />
+            <span>찜한상품</span>
+          </Link>
+        </div>
+        ) : (
+          null
+        )
+      }
       <h4 className="recentView">
         최근 본 상품
         <span className="recentViewCount">3</span>

@@ -21,6 +21,8 @@ const CategoryListMain = styled.main`
 `;
 
 export default function CategoryList() {
+  const userId = JSON.parse(sessionStorage.getItem('userId')) ? JSON.parse(sessionStorage.getItem('userId')).id : undefined;
+
   return (
     <>
       <CategoryList_TopNav/>
@@ -30,8 +32,12 @@ export default function CategoryList() {
           <CategoryList_CaNav />
           <CategoryLIst_WeekBestSeller />
         </div>
-        <CategoryList_MainSection />
-        <CategoryList_FloatingMenu />
+        <CategoryList_MainSection 
+          userId={userId}
+        />
+        <CategoryList_FloatingMenu 
+          userId={userId}
+        />
       </CategoryListMain>
     </>
   );
