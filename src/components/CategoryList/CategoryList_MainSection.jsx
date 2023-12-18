@@ -151,7 +151,7 @@ export default function CategoryList_MainSection({userId}) {
   }, [checkList, listQty]);
 
   //선택한 상품들 전부 카트에 담기
-  const addToCartAll = () => {
+  const handleAddCartAll = () => {
     let axiosBookData = [];
     for(const checkItem of checkList) {
       for(const quantityItem of quantity) {
@@ -197,7 +197,7 @@ export default function CategoryList_MainSection({userId}) {
             handleIsCheckedAll={handleIsCheckedAll}
             handleCheckList={handleCheckList}
             parameterArr={parameterArr}
-            addToCartAll={addToCartAll}
+            handleAddCartAll={handleAddCartAll}
           />
           <CategoryList_Products
             bookData={bookData}
@@ -224,7 +224,7 @@ export default function CategoryList_MainSection({userId}) {
             handleIsCheckedAll={handleIsCheckedAll}
             handleCheckList={handleCheckList}
             parameterArr={parameterArr}
-            addToCartAll={addToCartAll}
+            handleAddCartAll={handleAddCartAll}
           />
         </>
       ) : (
