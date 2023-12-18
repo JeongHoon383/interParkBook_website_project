@@ -6,6 +6,7 @@ import CategoryList_SubCaNav from "./CategoryList_SubCaNav";
 import CategoryList_Sort from "./CategoryList_Sort";
 import CategoryList_Products from "./product/CategoryList_Products";
 import { useParams } from "react-router-dom";
+import { useQuery } from '@tanstack/react-query';
 
 const MainSection = styled.section`
   width: 770px;
@@ -71,7 +72,7 @@ export default function CategoryList_MainSection({userId}) {
   };
 
 
-  //카테고리별, 정렬별, 페이지별 품절여부별 상품목록 불러오기
+  // 카테고리별, 정렬별, 페이지별 품절여부별 상품목록 불러오기
   useEffect(() => {
     let startIndex = 0;
     let endIndex = 0;
@@ -99,7 +100,32 @@ export default function CategoryList_MainSection({userId}) {
     parameterArr[2],
     parameterArr[3],
     parameterArr[4],
+    parameterArr[5]
   ]);
+
+  // const axiosData = async (parameterArr, listQty, currentPage, sortField, sortOption, isSoldout) => {
+  //   const startIndex = (currentPage - 1) * listQty + 1;
+  //   const endIndex = currentPage * listQty;
+
+  //   const response = await axios.get(
+  //     `http://127.0.0.1:9090/category/list/${parameterArr[0]}/${parameterArr[1]}/${parameterArr[2]}/${parameterArr[3]}/${parameterArr[4]}/${parameterArr[5]}/${startIndex}/${endIndex}/${sortField}/${sortOption}/${isSoldout}`
+  //   );
+
+  //   return { data: response.data };
+  // } 
+
+  // const { 
+  //   isPending,
+  //   error,
+  //   data : bookData
+  // } = useQuery({
+  //   queryKey: [...parameterArr, listQty, currentPage, sortField, sortOption, isSoldout],
+  //   queryFn: () => axiosData(parameterArr, listQty, currentPage, sortField, sortOption, isSoldout),
+  //   onSuccess: ({ data }) => {
+  //     console.log(data);
+  //     setQuantity(data.map(data => ({ "isbn13": data.isbn13, "qty": 1 })));
+  //   }
+  // });
 
   //하위 컴포넌트(CategoryList_Sort) 전체선택/선택해제 핸들링이벤트
   const handleSelectAll = (flag) => {
@@ -138,6 +164,14 @@ export default function CategoryList_MainSection({userId}) {
     // axios.post('http://127.0.0.1:9090/category/list', axiosBookData)
     console.log(axiosBookData);
   };
+
+  // if (isPending) {
+  //   return <p>Loading...</p>;
+  // }
+
+  // if (error) {
+  //   return <p>Error: {error.message}</p>;
+  // }
 
   return (
     <MainSection>

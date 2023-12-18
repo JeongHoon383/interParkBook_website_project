@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from 'axios';
 import { RiCoupon3Line } from "react-icons/ri";
 import { TfiClose } from "react-icons/tfi";
 import { FiUser } from "react-icons/fi";
 import { CiHeart } from "react-icons/ci";
-import { useEffect, useState } from "react";
 
 const FloatingMenu = styled.aside`
   position: sticky;
@@ -148,10 +149,13 @@ const FloatingMenu = styled.aside`
 export default function CategoryList_FloatingMenu({userId}) {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
+  const [userInfo, setUserInfo] = useState({});
 
-  // useEffect(() => {
-  //   axios.post(`http:127.0.0.1:9090/member/${userId}`)
-  // }, []);
+  useEffect(() => {
+    axios.get(`http://127.0.0.1:9090/member/${userId}`)
+    .then(result => setUserInfo(result.data))
+    // .then(err => console.log(err));
+  }, []);
 
   const handleDelete = (e) => {
     /* 최근 본 상품 삭제 기능 추가 */
@@ -166,7 +170,7 @@ export default function CategoryList_FloatingMenu({userId}) {
           <div className="myMenu">
           <Link>
             <span className="pointIcon">P</span>
-            <span>0P</span>
+            <span>{userInfo.userMileage}P</span>
           </Link>
           <Link>
             <RiCoupon3Line />
