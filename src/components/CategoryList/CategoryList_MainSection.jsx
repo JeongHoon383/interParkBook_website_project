@@ -173,6 +173,7 @@ export default function CategoryList_MainSection({userId}) {
   //   return <p>Error: {error.message}</p>;
   // }
 
+
   return (
     <MainSection>
       <CategoryList_Title bookData={bookData} />
