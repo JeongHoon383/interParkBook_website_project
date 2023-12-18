@@ -88,31 +88,44 @@ export default function CategoryList_ProdBuy({
   userId,
   idx,
   quantity,
-  handleQuantity
+  handleQuantity,
 }) {
   const [isChecked, setisChecked] = useState(false);
 
   //개별 상품 체크박스 클릭시 checkList에 상품 넣고 빼기
   const handleSelect = (bookData) => {
-    const {isbn13, title, cover, priceSales} = bookData;
+    const { isbn13, cover, title, priceStandard, priceSales, mileage } =
+      bookData;
+    let cart_id = Math.ceil(Math.random() * 10000);
     if (isChecked) {
       let copy = [...checkList];
       for (let i = 0; i < copy.length; i++) {
-        if (copy[i][0] === bookData.isbn13) {
+        if (copy[i].isbn13 === bookData.isbn13) {
           copy.splice(i, 1);
         }
       }
       handleCheckList(copy);
       setisChecked(false);
     } else {
-      handleCheckList([...checkList,[isbn13, userId, title, cover, priceSales]]);
+      handleCheckList([
+        ...checkList,
+        {
+          isbn13: isbn13,
+          cart_id: cart_id,
+          cover: cover,
+          title: title,
+          priceStandard: priceStandard,
+          priceSales: priceSales,
+          mileage: mileage,
+        },
+      ]);
       setisChecked(true);
     }
   };
 
   //checkList에 해당 상품이 있는지 없는지에 따라 해당 상품의 checkbox 체크 변환
   useEffect(() => {
-    checkList.some(checkItem => checkItem[0] === bookData.isbn13)
+    checkList.some((checkItem) => checkItem.isbn13 === bookData.isbn13)
       ? setisChecked(true)
       : setisChecked(false);
   }, [checkList, bookData.isbn13]);
@@ -138,7 +151,11 @@ export default function CategoryList_ProdBuy({
           >
             -
           </button>
-          <input type="number" value={quantity[idx] ? quantity[idx].qty : 1} readOnly />
+          <input
+            type="number"
+            value={quantity[idx] ? quantity[idx].qty : 1}
+            readOnly
+          />
           <button
             onClick={() => {
               handleQuantity("plus", bookData.isbn13, idx);
