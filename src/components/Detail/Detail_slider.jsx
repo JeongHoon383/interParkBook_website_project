@@ -7,13 +7,15 @@ import { MdArrowForwardIos } from "react-icons/md";
 const Wrapper = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-
   gap: 5px;
   position: absolute;
   right: 0;
   margin: 0 auto;
   width: 90%;
   left: 0;
+  @media (max-width: 768px) {
+    overflow: hidden;
+  }
 `;
 
 const Slide = styled(motion.div)`
@@ -24,6 +26,10 @@ const Slide = styled(motion.div)`
   figure {
     height: 170px;
     width: 120px;
+    @media (max-width: 768px) {
+      height: 120px;
+      width: 100px;
+    }
   }
 `;
 
@@ -77,7 +83,6 @@ const Detail_slider = ({ data }) => {
   const [leave, setLeave] = useState(false);
   const [Right, setRight] = useState();
   const toggleLeave = () => setLeave((prev) => !prev);
-
   const offset = 6;
 
   const handleNext = () => {
@@ -86,7 +91,7 @@ const Detail_slider = ({ data }) => {
     setLeave(true);
     let totalCnt = 12;
     const maxIndex = Math.floor(totalCnt / 6) - 1;
-    setIndex((prev) => (prev == maxIndex ? 0 : prev + 1));
+    setIndex((prev) => (prev === maxIndex ? 0 : prev + 1));
   };
   const handlePrev = () => {
     setRight(false);

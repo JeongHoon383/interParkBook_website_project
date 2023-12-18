@@ -6,17 +6,14 @@ import Main from './Pages/Main';
 import Detail from './Pages/Detail';
 import NotFound from './Pages/NotFound';
 import CategoryMain from './Pages/CategoryMain';
-import Root from './Pages/Root';
 import BestSeller from './components/BestSeller';
-import NewSeller from './Pages/NewSeller';
 import Search from './components/Search';
 import Mypage from './Pages/Mypage';
 import Login from './Pages/Login';
 import SignUp from './Pages/SignUp';
 import Agreement from './Pages/Agreement';
 import SignUpDone from './Pages/SignUpDone';
-import { Provider } from "react-redux";
-import { store, persistor } from "./components/Cart/store";
+ 
 
 import reportWebVitals from './reportWebVitals';
 import { createGlobalStyle } from 'styled-components';
@@ -29,6 +26,7 @@ import Detail_reco from './components/Detail/Detail_reco';
 import Detail_review from './components/Detail/Detail_review';
 import Detail_change from './components/Detail/Detail_change';
 import Cart from './Pages/Cart';
+import { RecoilRoot } from 'recoil';
 const GlobalStyle = createGlobalStyle`
 
 html, body, div, span, applet, object, iframe,
@@ -151,6 +149,21 @@ iframe {
   position: fixed;
   left: -10000px;
 }
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color:var(--main) #DFE9EB;
+}
+
+/* Chrome, Edge and Safari */
+*::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color:var(--main);
+}
 `;
 const router = createBrowserRouter([
   {
@@ -238,12 +251,12 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <CookiesProvider>
-      <Provider store={store}>
-      <QueryClientProvider client={client}>
+      <RecoilRoot>
+        <QueryClientProvider client={client}>
           <GlobalStyle />
           <RouterProvider router={router} />
         </QueryClientProvider>
-    </Provider>
+      </RecoilRoot>
     </CookiesProvider>
   </React.StrictMode>
 );

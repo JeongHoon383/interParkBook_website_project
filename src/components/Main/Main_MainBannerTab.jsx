@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Slider from 'react-slick';
-import '../../css/main/banner/mainSlide.css';
 import Main_MainBannerIssue from './Main_MainBannerIssue';
 import styled from 'styled-components';
 
@@ -24,12 +23,44 @@ const Img = styled.img`
   width: 100%;
 `;
 
+const Tab = styled.div`
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  cursor: pointer;
+  font-size: 0.8em;
+  font-weight: 800;
+  color: var(--hover);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background-color: rgb(248, 248, 248);
+
+  .activeHover {
+    background-color: var(--main);
+    padding: 12px 18px;
+    border-radius: 18px;
+    color: #fff;
+  }
+`;
+
+const SlideWrapper = styled.div`
+  margin: 0 auto;
+`;
+
 const StyledSlider = styled(Slider)`
   width: 100%;
   margin: 0 auto;
   background-color: rgb(248, 248, 248);
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  .slick-prev,
+  .slick-next {
+    &::before {
+      content: none;
+    }
+  }
 `;
 
 export default function Main_MainBannerTab() {
@@ -44,7 +75,7 @@ export default function Main_MainBannerTab() {
   return (
     <>
       <Slide tab={tab} />
-      <div className="mainBanner_tab">
+      <Tab>
         <div onMouseOver={() => handleMouseOver(0)} className={active === 0 ? `activeHover` : null}>
           핫클릭 이벤트
         </div>
@@ -54,7 +85,7 @@ export default function Main_MainBannerTab() {
         <div onMouseOver={() => handleMouseOver(2)} className={active === 2 ? `activeHover` : null}>
           화제의 책
         </div>
-      </div>
+      </Tab>
     </>
   );
 }
@@ -63,7 +94,7 @@ function Slide({ tab }) {
   const settings = {
     className: 'slideItems',
     arrows: true,
-    dots: true,
+    dots: false,
     lazyLoad: 'anticipated',
     infinite: true,
     autoplay: true,
@@ -85,7 +116,7 @@ function Slide({ tab }) {
     ),
   };
   return (
-    <div className="slideWrapper">
+    <SlideWrapper>
       {
         [
           <StyledSlider {...settings}>
@@ -125,6 +156,6 @@ function Slide({ tab }) {
           <Main_MainBannerIssue />,
         ][tab]
       }
-    </div>
+    </SlideWrapper>
   );
 }

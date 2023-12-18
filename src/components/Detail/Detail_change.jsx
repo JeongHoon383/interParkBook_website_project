@@ -4,24 +4,43 @@ import styled from "styled-components";
 const SortSection = styled(motion.section)`
   margin-top: 40px;
   margin-bottom: 10px;
+  @media (max-width: 768px) {
+    margin-top: 30px;
+    margin-bottom: 7px;
+  }
   h1 {
     font-size: 20px;
     margin: 10px 0;
     font-weight: 900;
     padding-left: 20px;
+    @media (max-width: 768px) {
+      font-size: 14px;
+      margin: 7px 0;
+      padding-left: 14px;
+    }
   }
   hr {
     margin-bottom: 15px;
+    @media (max-width: 768px) {
+      margin-bottom: 11px;
+    }
   }
   em {
     font-size: 12px;
     padding-left: 20px;
     color: lightgray;
+    @media (max-width: 768px) {
+      font-size: 9px;
+      padding-left: 14px;
+    }
   }
   span {
     font-size: 14px;
     letter-spacing: normal;
     line-height: 150%;
+    @media (max-width: 768px) {
+      font-size: 10px;
+    }
   }
 `;
 
@@ -37,6 +56,12 @@ const GridBox = styled.div`
     font-size: 12px;
     line-height: 150%;
     word-spacing: 5px;
+    @media (max-width: 768px) {
+      min-height: 28px;
+      padding-left: 14px;
+      font-size: 10px;
+      word-spacing: 4px;
+    }
   }
   div:nth-child(odd) {
     background-color: #f9f9f9;
@@ -157,12 +182,16 @@ const Detail_change = () => {
             <em>군부대, 교도소 등 특정기관은 우체국 택배만 배송가능합니다.</em>
           </li>
           <li>
-          <em>배송비는 업체 배송비 정책에 따릅니다.</em>   
+            <em>배송비는 업체 배송비 정책에 따릅니다.</em>
             <ul>
               <li>
-               <em>- 도서 구매 시 15,000원 이상 무료배송, 15,000원 미만 2,500원</em> 
+                <em>
+                  - 도서 구매 시 15,000원 이상 무료배송, 15,000원 미만 2,500원
+                </em>
               </li>
-              <li><em>- 상품별 배송비가 있는 경우, 상품별 배송비 정책 적용</em></li>
+              <li>
+                <em>- 상품별 배송비가 있는 경우, 상품별 배송비 정책 적용</em>
+              </li>
             </ul>
           </li>
         </ul>

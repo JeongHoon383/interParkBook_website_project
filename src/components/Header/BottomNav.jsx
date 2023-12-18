@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { IoIosArrowDown } from "react-icons/io";
-import { IoIosArrowUp } from "react-icons/io";
-import AllCategory from "./CategoryBanner/AllCategory";
-import "../../css/header/bottomNav.css";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { IoIosArrowDown } from 'react-icons/io';
+import { IoIosArrowUp } from 'react-icons/io';
+import AllCategory from './CategoryBanner/AllCategory';
+import '../../css/header/bottomNav.css';
+import { Link } from 'react-router-dom';
 
 export default function BottomNav() {
   const [isClick, setIsClick] = useState(false);
@@ -23,12 +23,10 @@ export default function BottomNav() {
         </div>
         <div className="otherTab">
           <ul>
-            <Link to="/bestseller">
-              <li>베스트셀러</li>
-            </Link>
-            <Link to="/bestseller">
-              <li>신간</li>
-            </Link>
+            <li>
+              <Link to="/bestseller">베스트셀러</Link>
+            </li>
+            <li>신간</li>
             <li>이벤트</li>
           </ul>
         </div>

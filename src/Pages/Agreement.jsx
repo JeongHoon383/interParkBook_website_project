@@ -1,9 +1,8 @@
-import React from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import "../css/login/signUp.css";
-import SignForm from "../components/SignUp/SignForm";
+import React from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import SignForm from '../components/SignUp/SignForm';
 
 const schema = yup
   .object({

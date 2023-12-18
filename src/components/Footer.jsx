@@ -11,8 +11,20 @@ const AdSection = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     cursor: pointer;
+    @media (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
     div:first-child {
       border-right: 1px solid white;
+
+      @media (max-width: 768px) {
+        margin: 0 auto;
+        border-right: none;
+        width: 100%;
+        border-bottom: 1px solid whitesmoke;
+      }
     }
     div {
       display: flex;
@@ -21,10 +33,14 @@ const AdSection = styled.div`
       margin: 0 auto;
       height: 100%;
       width: 100%;
+
       span {
         color: white;
         font-size: 15px;
         margin-right: 10px;
+        @media (max-width: 768px) {
+          font-size: 11px;
+        }
       }
       span:last-child {
         color: #fff5b3;
@@ -38,6 +54,9 @@ const InfoSection = styled.div`
   background: #ffffff;
   display: flex;
   justify-content: center;
+  @media (max-width: 768px) {
+    border-top: 1px solid black;
+  }
   .center {
     width: 60%;
     height: 100%;
@@ -45,6 +64,9 @@ const InfoSection = styled.div`
       height: 35px;
       display: flex;
       align-items: center;
+      @media (max-width: 768px) {
+        display: none;
+      }
       li:first-child {
         font-weight: bold;
         color: #2a2a2a;
@@ -69,8 +91,11 @@ const InfoSection = styled.div`
     }
     .company_info {
       display: flex;
-
       bottom: 0;
+
+      @media (max-width: 768px) {
+        flex-direction: column;
+      }
       div:first-child {
         border-left: none;
       }
@@ -78,6 +103,10 @@ const InfoSection = styled.div`
         border-left: 1px solid #b8b8b8;
         flex: 1;
         padding: 7px 10px;
+        @media (max-width: 768px) {
+          border-left: none;
+          border-bottom: 1px dotted black;
+        }
         span {
           font-size: 12px;
         }
@@ -85,6 +114,7 @@ const InfoSection = styled.div`
           font-size: 11px;
           color: #b8b8b8;
           margin: 3px 0;
+
           li {
             margin: 3px 0;
             padding-left: 10px;
@@ -106,6 +136,7 @@ const InfoSection = styled.div`
     }
   }
 `;
+
 const Footer = () => {
   return (
     <div>
