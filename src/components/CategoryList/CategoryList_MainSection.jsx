@@ -6,7 +6,7 @@ import CategoryList_SubCaNav from "./CategoryList_SubCaNav";
 import CategoryList_Sort from "./CategoryList_Sort";
 import CategoryList_Products from "./product/CategoryList_Products";
 import { useParams } from "react-router-dom";
-import { useQuery } from '@tanstack/react-query';
+// import { useQuery } from '@tanstack/react-query';
 
 const MainSection = styled.section`
   width: 770px;
