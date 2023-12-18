@@ -68,13 +68,13 @@ const SecondBanner = styled.div`
 //{props.dataList[0] && props.dataList[0].img}
 const Second_banner_content = ({ banner }) => {
   if(!banner) return <></>  
-  const { title, author, description, priceSales, mileage, cover } = banner;
+  const { title, author, description, priceSales, mileage, cover, isbn13 } = banner;
 
   return (
     <SecondBanner>
       <div className='banner_left'>
         <div>
-          <Link to='/book/:id'><img className='banner_img' src={cover} alt='' /></Link>
+          <Link to={`/book/${isbn13}`}><img className='banner_img' src={cover} alt='' /></Link>
         </div>
         <div className='banner_text'>
           <Link to='/category/list'><div className='banner_text_icon'>

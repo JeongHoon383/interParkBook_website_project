@@ -10,6 +10,7 @@ const OnlyReview = styled.div`
     border-right : solid 1px #ebebeb;
 
   .onlyReview_icon{
+    padding: 0 0 13px 0;
     display :flex;
     color : var(--main);
   }
@@ -19,8 +20,12 @@ const OnlyReview = styled.div`
   }
 
   .onlyReview_article{
-    padding: 13px 0 0 0;
-    height: 45px;
+    height: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 16px;
+    font-weight: bold;
   }
 
   .onlyReview_article_author{
@@ -37,7 +42,7 @@ const OnlyReview = styled.div`
 
   .onlyReview_content{
     display : flex;
-    margin-top : 20px;
+    margin-top : 10px;
     border-top: solid 1px #ebebeb;
   }
 
@@ -67,26 +72,26 @@ const OnlyReview = styled.div`
 
 `
 
-const OnlyContent = ({ onlyList }) => {
+const OnlyContent = ({ onlyList, topTitle }) => {
   if( !onlyList ) return <></>
 console.log(onlyList);
 
-  const {img, top_title, article, author, title, review_author, publisher} = onlyList;
+  const {cover, description, author, title, publisher} = onlyList;
   
   return (
         <OnlyReview>
           <h3 className="onlyReview_icon">
-            {top_title}<span className="onlyReview_icon_color"><IoIosArrowForward/></span>
+            {topTitle}<span className="onlyReview_icon_color"><IoIosArrowForward/></span>
           </h3>
           <div className="onlyReview_article">
-            {article}
-            <p className="onlyReview_article_author">{author}</p>
+            {description}
           </div>
+          <p className="onlyReview_article_author">{author}</p>
           <div className="onlyReview_content">
-            <div><Link to='/book/:id'><img className="onlyReview_img" src={img} alt="" /></Link></div>
+            <div><Link to='/book/:id'><img className="onlyReview_img" src={cover} alt="" /></Link></div>
             <div className="onlyReview_img_text"> 
               <Link to='/book/:id'><div className="onlyReview_title">{title}</div></Link>
-              <div className="onlyReview_author grey">{review_author}</div>
+              <div className="onlyReview_author grey">{author}</div>
               <div className="grey">{publisher}</div>
             </div>
           </div> {/* 이부분을 마지막만 출력 안되게  */}

@@ -67,20 +67,20 @@ const OnlyReview = styled.div`
 
 `
 
-const OnlyContentLast = ({ onlyList }) => {
+const OnlyContentLast = ({ onlyList, topTitle }) => {
   if(!onlyList) return <></>
-  const {img, top_title, article, author} = onlyList;
+  const {cover, description, author} = onlyList;
   return (
         <OnlyReview>
           <h3 className="onlyReview_icon">
-            {top_title}<span className="onlyReview_icon_color"><IoIosArrowForward/></span>
+            {topTitle}<span className="onlyReview_icon_color"><IoIosArrowForward/></span>
           </h3>
           <div className="onlyReview_article">
-            {article}
+            {description}
             <p className="onlyReview_article_author">{author}</p>
           </div>
           <div className="onlyReview_content">
-            <div><Link to='/book/:id'><img className="onlyReview_img" src={img} alt="" /></Link></div>
+            <div><Link to='/book/:id'><img className="onlyReview_img" src={cover} alt="" /></Link></div>
           </div>
         </OnlyReview>
   )

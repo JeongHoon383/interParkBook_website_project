@@ -45,7 +45,7 @@ const BestSellerRank = ({ item, rankHover }) => {
 
   return (
     <BestRank onMouseOver={() => rankHover(Number(bestRank))}>
-      <Link to='/book/:id'>
+      <Link to={`/book/${item.isbn13}`}>
         <div className='rank_box'>
           <div className='rank_box_num'>{bestRank}</div>
           <div className='rank_box_title'>{title}</div>

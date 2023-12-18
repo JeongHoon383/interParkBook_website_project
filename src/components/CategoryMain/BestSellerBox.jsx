@@ -54,13 +54,13 @@ const BestSellerImg = styled.div`
 const BestSellerBox = ({rank}) => {
     if(!rank) return <></> 
     // axios로 넘어올때 undefined
-    const {cover, title, author, priceSales} = rank
+    const {cover, title, author, priceSales, isbn13} = rank
   
   return (
     <BestSellerImg>
       <div className="img_box">
         <div>
-          <Link to='/book/:id'><img
+          <Link to={`/book/${isbn13}`}><img
             className="bestSeller_img"
             src={cover}
             alt=""
@@ -69,7 +69,7 @@ const BestSellerBox = ({rank}) => {
         </div>
         <div>
           <ul className="bestSeller_img_text">
-            <Link to='/book/:id'><li className="best_title">{title}</li></Link>
+            <Link to={`/book/${isbn13}`}><li className="best_title">{title}</li></Link>
             <li className="best_author grey">{author}</li>
             <li className="best_price">{[priceSales].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</li>
           </ul>

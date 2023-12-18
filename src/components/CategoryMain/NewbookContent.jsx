@@ -51,14 +51,13 @@ const NewbookContents = styled.div`
 
 const NewbookContent = ({ content }) => {
   if(!content) return <></> 
-    const {cover, title, author, publisher, priceSales, mileage, description} = content;
+    const {cover, title, author, publisher, priceSales, mileage, description, isbn13} = content;
 
   return (
     <NewbookContents>
       <ul className='newbook_ul'>
-        <Link to='/book/:id'><li><img className='newBook_img' src={cover} alt="" /></li></Link>
-        {/* <li className='newBook_category'>{category}</li> */}
-        <Link to='/book/:id'><li className='newBook_title'>{title}</li></Link>
+        <Link to={`/book/${isbn13}`}><li><img className='newBook_img' src={cover} alt="" /></li></Link>
+        <Link to={`/book/${isbn13}`}><li className='newBook_title'>{title}</li></Link>
         <li className='newBook_autor grey'>{author}</li>
         <li className='newBook_editor grey'>{publisher}</li>
         <li className='newbook_price'>{[priceSales].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</li>

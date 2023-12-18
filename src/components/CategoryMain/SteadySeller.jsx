@@ -17,7 +17,7 @@ const SteadySeller = () => {
   useEffect(() => {
     axios({
       method : 'get',
-      url : '/data/categoryMain/steadySeller.json'
+      url : 'http://localhost:9090/category/main/categorySteady'
     }).then((result) => {
       setSteadyList(result.data)
     })
@@ -26,11 +26,11 @@ const SteadySeller = () => {
   useEffect(() => {
     axios({
       method : 'get',
-      url : '/data/categoryMain/hotBook.json'
+      url : 'http://localhost:9090/category/main/categoryHot'
     }).then((result) => {
       setHotList(result.data)
     })
-  })
+  }, [])
 
   return (
     <Steady>

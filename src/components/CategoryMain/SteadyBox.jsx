@@ -42,12 +42,26 @@ const SteadyContainer = styled.div`
 
   .steady_img_title{
     margin-bottom : 10px;
+    line-height : 1.2em;
+    height : 3.6em;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display : -webkit-box;
+    -webkit-line-clamp : 3;
     font-weight : bold;
+    
     cursor: pointer;
   }
 
   .steady_img_title:hover{
     text-decoration : underline;
+  }
+
+  .steady_author{
+    width : 100px;
+    overflow : hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   .steady_author,
@@ -62,25 +76,25 @@ const SteadyContainer = styled.div`
 
 const SteadyBox = ({content}) => {
   if(!content) return <></>
-  const {img, title, author, publisher, price, circle} = content;
+  const {cover, title, author, publisher, priceSales, categoryDetail, isbn13} = content;
 
   return (
     <SteadyContainer>
         <div className="steady_main">
-          <div className="steady_circle">{circle}</div>
+          <div className="steady_circle">{categoryDetail}</div>
           <div>
-            <Link to='/book/:id'><img
+            <Link to={`/book/${isbn13}`}><img
               className="steady_img"
-              src={img}
+              src={cover}
               alt=""
             /></Link>
           </div>
           <div>
             <ul className="steady_img_content">
-              <Link to='/book/:id'><li className="steady_img_title">{title}</li></Link>
+              <Link to={`/book/${isbn13}`}><li className="steady_img_title">{title}</li></Link>
               <li className="steady_author grey">{author}</li>
               <li className="steady_publisher grey">{publisher}</li>
-              <li className="steady_price">{price}</li>
+              <li className="steady_price">{[priceSales].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</li>
             </ul>
           </div>
         </div>

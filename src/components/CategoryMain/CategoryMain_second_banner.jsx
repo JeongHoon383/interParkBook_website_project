@@ -28,9 +28,9 @@ const CategoryMain_second_banner = () => {
       <div className='banner_right'>
         {
           data.length > 0 && <ul>
-          {data.map(({ title, cover }, key) => (
+          {data.map(({ title, cover, isbn13 }, key) => (
               <li key={key} onMouseOver={() => setActive(key)}>
-                <Link to='/book/:id'><img
+                <Link to={`/book/${isbn13}`}><img
                   className='banner_right_img'
                   src = {cover}
                   alt=''

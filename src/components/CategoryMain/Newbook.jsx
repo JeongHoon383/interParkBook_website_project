@@ -28,7 +28,7 @@ const Newbook = () => {
   useEffect(() => {
     axios({
       method : 'get',
-      url : 'http://localhost:9090/category/main/categoryMainNewBook'
+      url : 'http://localhost:9090/category/main/categoryNew'
     }).then((result) => {
       setNewList(result.data)
     })

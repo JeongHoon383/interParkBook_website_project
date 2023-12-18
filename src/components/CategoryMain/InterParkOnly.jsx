@@ -25,7 +25,7 @@ const InterParkOnly = () => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: '/data/categoryMain/interParkOnly.json',
+      url: 'http://localhost:9090/category/main/',
     }).then((result) => {
       const data = result.data;
 
@@ -41,17 +41,17 @@ const InterParkOnly = () => {
     <Only>
       <h3>INTERPARK ONLY</h3>
       <div className='onlyContainer'>
-        <OnlyContent onlyList={onlyList[0]} />
+        <OnlyContent topTitle='INTERPARK 편집자 리뷰' onlyList={onlyList[0]} />
         <CommonSlider
           data={mediaList}
           renderItem={(item) => (
-            <OnlyContent key={item.title} onlyList={item} />
+            <OnlyContent key={item.title} onlyList={item} topTitle='미디어 추천' />
           )}
         />
         <CommonSlider
           data={goodsList}
           renderItem={(item) => (
-            <OnlyContentLast key={item.title} onlyList={item} />
+            <OnlyContentLast key={item.title} onlyList={item} topTitle='사은품 증정'/>
           )}
         />
       </div>
