@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FaRegQuestionCircle } from "react-icons/fa";
 import { GoTriangleRight } from "react-icons/go";
@@ -10,14 +10,26 @@ import { useRecoilState } from "recoil";
 
 const Wrapper = styled.div`
   margin-top: 60px;
+ 
+  @media (max-width: 768px) {
+    margin-top: 40px;
+  }
 `;
 const TaxSection = styled.div`
   font-size: 12px;
   display: flex;
   align-items: center;
   font-weight: bold;
+
+  @media (max-width: 768px) {
+    font-size: 9px;
+  }
   input {
     margin-right: 8px;
+
+    @media (max-width: 768px) {
+      margin-right: 6px;
+    }
   }
 `;
 
@@ -25,6 +37,10 @@ const ColName = styled.div`
   border-top: 2px solid black;
   height: 30px;
   background: #ebebeb;
+
+  @media (max-width: 768px) {
+    height: 20px;
+  }
   ul {
     display: flex;
     align-items: center;
@@ -32,6 +48,10 @@ const ColName = styled.div`
     height: 100%;
     font-size: 13px;
     text-align: center;
+
+    @media (max-width: 768px) {
+      font-size: 10px;
+    }
     li {
       display: flex;
       align-items: center;
@@ -55,8 +75,18 @@ const AnyItem = styled.div`
   justify-content: center;
   align-items: center;
   border: 1px solid rgba(0, 0, 0, 0.4);
+
+  @media (max-width: 768px) {
+    margin: 7px 0;
+    height: 19px;
+    font-size: 10px;
+  }
   span {
     padding: 0 10px;
+
+    @media (max-width: 768px) {
+      padding: 0 7px;
+    }
     em {
       font-weight: bold;
     }
@@ -71,13 +101,21 @@ const Row = styled.div`
     display: flex;
     align-items: center;
     font-size: 15px;
-
     padding: 5px 7px;
+    
+ @media (max-width:768px){
+  font-size: 11px;
+  padding: 4px 5px;
+ }
   }
   .triangleBox {
     display: flex;
     align-items: center;
     font-size: 11px;
+    
+ @media (max-width:768px){
+  font-size: 8px;
+ }
   }
 `;
 
@@ -89,12 +127,20 @@ const TextWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   position: relative;
+  
+ @media (max-width:768px){
+  margin-top: 14px;
+ }
   ul {
     position: absolute;
     right: 0;
     display: flex;
     font-size: 12px;
     align-items: center;
+    
+ @media (max-width:768px){
+  font-size: 8px;
+ }
     li {
       a:hover {
         text-decoration: underline;
@@ -114,6 +160,9 @@ const TextWrapper = styled.div`
 const BookInfo = styled.div`
   height: 190px;
 
+  @media (max-width:768px){
+    height: 135px;
+  }
   ul {
     display: flex;
 
@@ -205,9 +254,18 @@ const ButtonList = styled.li`
   }
 `;
 
-const Cart_Table = ({ setCart, cart }) => {
- 
-
+const Cart_Table = ({ setCart, cart, setCheck, setTotal }) => {
+  useEffect(() => {
+    let sum = cart.reduce(
+      (acc, v, i) => acc + Number(v.priceSales) * v.count,
+      0
+    );
+    setTotal(sum);
+  }, [cart]);
+  const [newCount, setNewCount] = useState(0);
+  const handleInputChange = (e) => {
+    setNewCount(e.target.value);
+  };
   return (
     <Wrapper>
       <TaxSection>
@@ -217,10 +275,7 @@ const Cart_Table = ({ setCart, cart }) => {
       </TaxSection>
       <ColName>
         <ul>
-          <li style={{ width: "13%" }}>
-            <input type="checkbox" checked name="" id="" />
-            전체선택
-          </li>
+          <li style={{ width: "13%" }}>표지</li>
           <li style={{ width: "30%" }}>상품명</li>
           <li style={{ width: "15%" }}>판매가</li>
           <li style={{ width: "13%" }}>수량</li>
@@ -264,56 +319,97 @@ const Cart_Table = ({ setCart, cart }) => {
           </span>
         </AnyItem>
         {cart &&
-          cart.map((v) => (
-            <BookInfo>
-              <ul>
-                <li style={{ width: "13%" }}>
-                  <figure>
-                    <input type="checkbox" checked name="" id="" />
-                    <img src={v.img} alt="" />
-                  </figure>
-                </li>
-                <li className="tax" style={{ width: "30%" }}>
-                  <p>[소득공제]</p>
-                  <Link>{v.title}</Link>
-                </li>
-                <li style={{ width: "15%" }}>
-                  <PriceList>
-                    <li>
-                      &nbsp;정가 {Number(v.priceStandard).toLocaleString()}원
-                    </li>
-                    <li>할인가 {Number(v.priceSales).toLocaleString()}원</li>
-                    <li>&nbsp;적립 {Number(v.mileage).toLocaleString()}P</li>
-                  </PriceList>
-                </li>
-                <li className="count" style={{ width: "13%" }}>
-                  <input type="text" value={v.count} />
-                  <div>변경</div>
-                </li>
-                <li style={{ width: "15%", color: "var(--main)" }}>
-                  {(Number(v.priceSales) * v.count).toLocaleString()}원
-                </li>
-                <ButtonList style={{ width: "14%" }}>
-                  <input type="button" value="주문하기"  onClick={()=>{
-
-                  }}/>
-                  <input
-                    type="button"
-                    value="삭제하기"
-                    onClick={(e) =>
-                      setCart((prev) => {
-                        let copy = [...prev];
-                        copy = copy.filter((data) => {
-                          return data.cartId !== v.cartId;
+          cart.map((v, i) => (
+            <div key={i}>
+              <BookInfo>
+                <ul>
+                  <li style={{ width: "13%" }}>
+                    <figure>
+                      <img src={v.img} alt="" />
+                    </figure>
+                  </li>
+                  <li className="tax" style={{ width: "30%" }}>
+                    <p>[소득공제]</p>
+                    <Link>{v.title}</Link>
+                  </li>
+                  <li style={{ width: "15%" }}>
+                    <PriceList>
+                      <li>
+                        &nbsp;정가 {Number(v.priceStandard).toLocaleString()}원
+                      </li>
+                      <li>할인가 {Number(v.priceSales).toLocaleString()}원</li>
+                      <li>&nbsp;적립 {Number(v.mileage).toLocaleString()}P</li>
+                    </PriceList>
+                  </li>
+                  <li className="count" style={{ width: "13%" }}>
+                    <input
+                      min="1"
+                      max="9"
+                      type="text"
+                      defaultValue={v.count}
+                      onChange={(e) => handleInputChange(e)}
+                    />
+                    <div
+                      onClick={(e) => {
+                        setCart((prev) => {
+                          let copy = [...prev];
+                          copy = copy.filter((data) => {
+                            return data.cartId !== v.cartId;
+                          });
+                          let copy2 = [
+                            ...copy,
+                            {
+                              cartId: v.cartId,
+                              count: newCount,
+                              img: v.img,
+                              mileage: v.mileage,
+                              priceSales: v.priceSales,
+                              priceStandard: v.priceStandard,
+                              title: v.title,
+                            },
+                          ];
+                          return copy2;
                         });
-                        alert('삭제완료')
-                        return copy;
-                      })
-                    }
-                  />
-                </ButtonList>
-              </ul>
-            </BookInfo>
+                      }}>
+                      변경
+                    </div>
+                  </li>
+                  <li style={{ width: "15%", color: "var(--main)" }}>
+                    {(Number(v.priceSales) * v.count).toLocaleString()}원
+                  </li>
+                  <ButtonList style={{ width: "14%" }}>
+                    <input
+                      type="button"
+                      value="주문하기"
+                      onClick={() =>
+                        setCart((prev) => {
+                          let copy = [...prev];
+                          copy = copy.filter((data) => {
+                            return data.cartId !== v.cartId;
+                          });
+                          alert("주문완료");
+                          return copy;
+                        })
+                      }
+                    />
+                    <input
+                      type="button"
+                      value="삭제하기"
+                      onClick={(e) =>
+                        setCart((prev) => {
+                          let copy = [...prev];
+                          copy = copy.filter((data) => {
+                            return data.cartId !== v.cartId;
+                          });
+                          alert("삭제완료");
+                          return copy;
+                        })
+                      }
+                    />
+                  </ButtonList>
+                </ul>
+              </BookInfo>
+            </div>
           ))}
       </Row>
       {cart && cart.length === 0 && (
