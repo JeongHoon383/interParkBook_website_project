@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const CategoryMain_second_banner = () => {
-  const [bannerList, setBannerList] = useState([]);
   const [active, setActive] = useState(0);
 
   const [data, setData] = useState([]);
@@ -16,26 +15,10 @@ const CategoryMain_second_banner = () => {
       url : 'http://localhost:9090/category/main'
     }).then((result) => {
       const data = result.data
-
       setData(data.slice(3, 6))
     })
   }, [])
-
-  useEffect(() => {
-    axios({
-      method: 'get',
-      url: '/data/categoryMain/interParkChoice.json',
-    }).then((result) => {
-      console.log(result);
-      setBannerList(result.data);
-    });
-  }, []);
-
-  const initBanners = [
-    { id: 0, text: '행복은 어디에나' },
-    { id: 1, text: '수어 문법을 문학으로 녹인다면' },
-    { id: 2, text: '대한민국 산업의 미래' },
-  ];
+  
 
   return (
     <Second_banner>
@@ -43,20 +26,20 @@ const CategoryMain_second_banner = () => {
         <Second_banner_content banner={data[active]} />
       )}
       <div className='banner_right'>
-      <ul>
-        {initBanners.map(({ id, text }) => (
-            <li key={id} onMouseOver={() => setActive(id)}>
-              <Link to='/book/:id'><img
-                className='banner_right_img'
-                src={`/img/CategoryMain/secondbanner_img/secondbanner${
-                  id + 1
-                }-${id + 1}.jpeg`}
-                alt=''
-              /></Link>
-              <span className='banner_right_text'>{text}</span>
-            </li>
-          ))}
-        </ul>
+        {
+          data.length > 0 && <ul>
+          {data.map(({ title, cover }, key) => (
+              <li key={key} onMouseOver={() => setActive(key)}>
+                <Link to='/book/:id'><img
+                  className='banner_right_img'
+                  src = {cover}
+                  alt=''
+                /></Link>
+                <span className='banner_right_text'>{title}</span>
+              </li>
+            ))}
+          </ul>
+        }
       </div>
     </Second_banner>
   );

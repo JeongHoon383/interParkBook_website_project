@@ -72,12 +72,12 @@ const Bestseller = () => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: '/data/categoryMain/bestSeller.json',
+      url: 'http://localhost:9090/category/main',
     }).then((result) => {
-      const date = result.data;
+      const data = result.data;
 
-      setRankList(date);
-      setLenderList(date.slice(0, 5));
+      setRankList(data);
+      setLenderList(data.slice(0, 5));
     });
   }, []);
 

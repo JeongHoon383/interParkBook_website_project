@@ -28,11 +28,13 @@ const Newbook = () => {
   useEffect(() => {
     axios({
       method : 'get',
-      url : '/data/categoryMain/newBook.json'
+      url : 'http://localhost:9090/category/main/categoryMainNewBook'
     }).then((result) => {
       setNewList(result.data)
     })
   }, [])
+
+  console.log(newList);
 
   return (
     <NewbookContainer>

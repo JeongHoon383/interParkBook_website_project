@@ -31,11 +31,17 @@ const BestSellerImg = styled.div`
   .best_title{
     font-weight : bold;
     font-size : 12px;
+    overflow : hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   .best_author{
     margin-top : 5px;
-    
+    overflow : hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    height : 14px;
   }
 
   .best_price{
@@ -48,7 +54,7 @@ const BestSellerImg = styled.div`
 const BestSellerBox = ({rank}) => {
     if(!rank) return <></> 
     // axios로 넘어올때 undefined
-    const {img, title, author, price} = rank
+    const {cover, title, author, priceSales} = rank
   
   return (
     <BestSellerImg>
@@ -56,7 +62,7 @@ const BestSellerBox = ({rank}) => {
         <div>
           <Link to='/book/:id'><img
             className="bestSeller_img"
-            src={img}
+            src={cover}
             alt=""
           />
           </Link>
@@ -65,7 +71,7 @@ const BestSellerBox = ({rank}) => {
           <ul className="bestSeller_img_text">
             <Link to='/book/:id'><li className="best_title">{title}</li></Link>
             <li className="best_author grey">{author}</li>
-            <li className="best_price">{price}</li>
+            <li className="best_price">{[priceSales].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</li>
           </ul>
         </div>
       </div>

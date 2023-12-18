@@ -67,11 +67,8 @@ const SecondBanner = styled.div`
 `;
 //{props.dataList[0] && props.dataList[0].img}
 const Second_banner_content = ({ banner }) => {
-  const { title, author, description, pricesales, mileage, cover } = banner;
-
-  const numberReplace = () => {
-    
-  }
+  if(!banner) return <></>  
+  const { title, author, description, priceSales, mileage, cover } = banner;
 
   return (
     <SecondBanner>
@@ -92,7 +89,7 @@ const Second_banner_content = ({ banner }) => {
           <Link to='/book/:id'><div className='banner_title'>{title}</div></Link>
           <div className='banner_author'>{author}</div>
           <div className='banner_price'>
-            <span>{pricesales}원</span>
+            <span>{[priceSales].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</span>
             <span> {mileage}P</span>
           </div>
         </div>
