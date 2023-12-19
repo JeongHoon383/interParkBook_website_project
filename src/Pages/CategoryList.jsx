@@ -23,7 +23,13 @@ const CategoryListMain = styled.main`
 
 export default function CategoryList() {
   const userId = JSON.parse(sessionStorage.getItem('userId')) ? JSON.parse(sessionStorage.getItem('userId')).id : undefined;
-  // const userinfo = getUser().id;
+  // const userId = getUser().id;
+
+  //getUser() 했을 때 제대로 정보를 얻으려면 로그인 상태 유지를 해야 함
+  // export const getUser = ()=>{
+  //   let userInfo =  getCookie("rememberUserInfo") && localStorage.getItem("userId") ? JSON.parse(localStorage.getItem('userId')) : null
+  //  return userInfo
+  //  }  
 
   return (
     <>
