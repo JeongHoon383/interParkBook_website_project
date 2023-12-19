@@ -4,9 +4,7 @@ import CategoryList_MainSection from "../components/CategoryList/CategoryList_Ma
 import CategoryList_CaNav from "../components/CategoryList/asideLeft/CategoryList_CaNav";
 import CategoryLIst_WeekBestSeller from "../components/CategoryList/asideLeft/CategoryLIst_WeekBestSeller";
 import styled from "styled-components";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import {getUser} from '../util/localStorage.js';
 
 const CategoryListMain = styled.main`
   position: relative;
@@ -25,6 +23,7 @@ const CategoryListMain = styled.main`
 
 export default function CategoryList() {
   const userId = JSON.parse(sessionStorage.getItem('userId')) ? JSON.parse(sessionStorage.getItem('userId')).id : undefined;
+  // const userinfo = getUser().id;
 
   return (
     <>

@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
+import { Link, useNavigate } from "react-router-dom";
 import { GoHeart } from "react-icons/go";
-import { Link } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { cartState } from "../../Cart/atom";
 
 const ProdBuy = styled.div`
   width: 16%;
-  > *:not(.dibs) {
+  > *:not(.wishlistBtn) {
     margin-bottom: 6px;
   }
   .quantity {
@@ -64,7 +66,7 @@ const ProdBuy = styled.div`
     border: 1px solid #d8d8d8;
     background: #f8f8f8;
   }
-  .dibs {
+  .wishlistBtn {
     position: relative;
     width: 30px;
     height: 30px;
@@ -91,6 +93,26 @@ export default function CategoryList_ProdBuy({
   handleQuantity,
 }) {
   const [isChecked, setisChecked] = useState(false);
+  const [cart, setCart] = useRecoilState(cartState);
+  const navigate = useNavigate();
+
+  //개별 상품 카드에 담기 기능
+  const handleAddCart = (qty) => {
+    navigate("/cart");
+    alert("추가완료");
+    return setCart((prev) => [
+      ...prev,
+      {
+        cartId: Date.now(),
+        img: bookData.cover && bookData.cover,
+        title: bookData.title && bookData.title,
+        priceStandard: bookData.priceStandard && bookData.priceStandard,
+        priceSales: bookData.priceSales && bookData.priceSales,
+        mileage: bookData.mileage && bookData.mileage,
+        count: qty,
+      },
+    ]);
+  };
 
   //개별 상품 체크박스 클릭시 checkList에 상품 넣고 빼기
   const handleSelect = (bookData) => {
@@ -172,11 +194,11 @@ export default function CategoryList_ProdBuy({
         </>
       ) : (
         <>
-          <button className="insertCart">카트에 담기</button>
+          <button className="insertCart" onClick={() => handleAddCart(quantity[idx].qty)}>카트에 담기</button>
           <Link className="buy">바로 구매</Link>
         </>
       )}
-      <button className="dibs">
+      <button className="wishlistBtn">
         {/* 찜 기능 추가 */}
         <GoHeart />
       </button>

@@ -83,7 +83,8 @@ export default function CategoryList_Sort({
   isCheckedAll,
   handleIsCheckedAll,
   handleCheckList,
-  handleAddCartAll
+  handleAddCartAll,
+  handleAddWishlistAll
 }) {
   const parameterArr = useParams().categoryPath.split("_");
 
@@ -253,7 +254,7 @@ export default function CategoryList_Sort({
             <button onClick={() => handleSelectAll(true)}>전체선택</button>
           )}
           <button onClick={handleAddCartAll}>카트에 담기</button>
-          <button>찜하기</button>
+          <button onClick={handleAddWishlistAll}>찜하기</button>
         </span>
       </div>
     </Sortarea>

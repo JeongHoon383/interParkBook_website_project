@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
-import styled from "styled-components";
-import axios from "axios";
-import CategoryList_Title from "./categoryList_Title";
-import CategoryList_SubCaNav from "./CategoryList_SubCaNav";
-import CategoryList_Sort from "./CategoryList_Sort";
-import CategoryList_Products from "./product/CategoryList_Products";
-import { useNavigate, useParams } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { cartState } from "../Cart/atom";
+import { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import axios from 'axios';
+import CategoryList_Title from './categoryList_Title';
+import CategoryList_SubCaNav from './CategoryList_SubCaNav';
+import CategoryList_Sort from './CategoryList_Sort';
+import CategoryList_Products from './product/CategoryList_Products';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { cartState } from '../Cart/atom';
 // import { useQuery } from '@tanstack/react-query';
 
 const MainSection = styled.section`
@@ -26,18 +26,19 @@ const MainSection = styled.section`
 `;
 
 export default function CategoryList_MainSection({ userId }) {
-  const parameterArr = useParams().categoryPath.split("_");
   const [bookData, setBookData] = useState([]);
   const [listQty, setListQty] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
-  const [isSoldout, setIsSoldout] = useState("상품있음");
+  const [isSoldout, setIsSoldout] = useState('상품있음');
   const [checkList, setCheckList] = useState([]);
   const [isCheckedAll, setIsCheckedAll] = useState(false);
-  const [sortField, setSortField] = useState("pubDate");
-  const [sortOption, setSortOption] = useState("desc");
+  const [sortField, setSortField] = useState('pubDate');
+  const [sortOption, setSortOption] = useState('desc');
   const [quantity, setQuantity] = useState([]);
   const [cart, setCart] = useRecoilState(cartState);
-
+  const parameterArr = useParams().categoryPath.split('_');
+  const nanigate = useNavigate();
+  
   const navigate = useNavigate();
 
   const handleSortField = (data) => {
@@ -64,9 +65,9 @@ export default function CategoryList_MainSection({ userId }) {
   const handleQuantity = (flag, isbn13, idx) => {
     let copy = [...quantity];
     let currentQty = quantity[idx] && quantity[idx].qty;
-    if (flag === "plus" && currentQty < 10) {
+    if (flag === 'plus' && currentQty < 10) {
       currentQty += 1;
-    } else if (flag === "minus" && currentQty > 1) {
+    } else if (flag === 'minus' && currentQty > 1) {
       currentQty -= 1;
     }
     copy[idx] = {
@@ -108,30 +109,6 @@ export default function CategoryList_MainSection({ userId }) {
     parameterArr[5],
   ]);
 
-  // const axiosData = async (parameterArr, listQty, currentPage, sortField, sortOption, isSoldout) => {
-  //   const startIndex = (currentPage - 1) * listQty + 1;
-  //   const endIndex = currentPage * listQty;
-
-  //   const response = await axios.get(
-  //     `http://127.0.0.1:9090/category/list/${parameterArr[0]}/${parameterArr[1]}/${parameterArr[2]}/${parameterArr[3]}/${parameterArr[4]}/${parameterArr[5]}/${startIndex}/${endIndex}/${sortField}/${sortOption}/${isSoldout}`
-  //   );
-
-  //   return { data: response.data };
-  // }
-
-  // const {
-  //   isPending,
-  //   error,
-  //   data : bookData
-  // } = useQuery({
-  //   queryKey: [...parameterArr, listQty, currentPage, sortField, sortOption, isSoldout],
-  //   queryFn: () => axiosData(parameterArr, listQty, currentPage, sortField, sortOption, isSoldout),
-  //   onSuccess: ({ data }) => {
-  //     console.log(data);
-  //     setQuantity(data.map(data => ({ "isbn13": data.isbn13, "qty": 1 })));
-  //   }
-  // });
-
   //하위 컴포넌트(CategoryList_Sort) 전체선택/선택해제 핸들링이벤트
   const handleSelectAll = (flag) => {
     if (flag) {
@@ -146,7 +123,7 @@ export default function CategoryList_MainSection({ userId }) {
           stockStatus,
         }) =>
           !checkList.some((checkItem) => checkItem.isbn13 === isbn13) &&
-          !stockStatus.includes("품절")
+          !stockStatus.includes('품절')
             ? setCheckList((checkList) => [
                 ...checkList,
                 {
@@ -170,7 +147,7 @@ export default function CategoryList_MainSection({ userId }) {
   //체크박스가 전부 체크됐을 때 IsCheckedAll true/false 변환
   useEffect(() => {
     const currentPageBookQty = bookData.filter(
-      (data) => !data.stockStatus.includes("품절")
+      (data) => !data.stockStatus.includes('품절')
     ).length;
     checkList.length === currentPageBookQty
       ? setIsCheckedAll(true)
@@ -189,8 +166,8 @@ export default function CategoryList_MainSection({ userId }) {
         }
       }
   
-      navigate("/cart");
-      alert("추가완료");
+      navigate('/cart');
+      alert('추가완료');
       return setCart((prev) => [
         ...prev,
         ...axiosBookData.map((bookData) => ({
@@ -208,13 +185,23 @@ export default function CategoryList_MainSection({ userId }) {
     }
   };
 
-  // if (isPending) {
-  //   return <p>Loading...</p>;
-  // }
-
-  // if (error) {
-  //   return <p>Error: {error.message}</p>;
-  // }
+  const handleAddWishlistAll = () => {
+    if(userId) {
+      if(checkList.length > 0) {
+        const WishlistArr = checkList.map(checkItem => ({'isbn13': checkItem.isbn13, 'id': userId}));
+        axios.post('http://127.0.0.1:9090/wishlist/all', WishlistArr)
+        .then(result => {
+          alert('찜한 상품 목록에 추가하였습니다.');
+        })
+        .catch(err => console.log(err));
+      }
+    }else{
+      let notice = window.confirm('로그인 후 이용 가능합니다.\n로그인 하시겠습니까?');
+      if(notice) {
+        navigate('/login')
+      }
+    }
+  }
 
   return (
     <MainSection>
@@ -240,6 +227,7 @@ export default function CategoryList_MainSection({ userId }) {
             handleCheckList={handleCheckList}
             parameterArr={parameterArr}
             handleAddCartAll={handleAddCartAll}
+            handleAddWishlistAll={handleAddWishlistAll}
           />
           <CategoryList_Products
             bookData={bookData}
@@ -267,10 +255,11 @@ export default function CategoryList_MainSection({ userId }) {
             handleCheckList={handleCheckList}
             parameterArr={parameterArr}
             handleAddCartAll={handleAddCartAll}
+            handleAddWishlistAll={handleAddWishlistAll}
           />
         </>
       ) : (
-        <div className="noDataNotice">
+        <div className='noDataNotice'>
           <span>현재 카테고리에 해당하는 상품이 없습니다.</span>
         </div>
       )}
