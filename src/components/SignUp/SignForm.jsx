@@ -102,7 +102,7 @@ const Star = styled.span`
 `;
 
 const ErrorMessage = styled.div`
-  margin-left: 190px;
+  /* margin-left: 190px; */
   margin-bottom: 12px;
   font-size: 0.7em;
   color: var(--main);

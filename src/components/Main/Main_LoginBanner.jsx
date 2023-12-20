@@ -17,7 +17,7 @@ export default function Main_LoginBanner() {
     <>
       <Desktop>
         <Div className="loginBanner">
-          {!cookies.getCookie('rememberUserInfo') ? (
+          {!cookies.getCookie('accessToken') ? (
             <Link to="/login">
               <Img src="/img/banner_recommend_login.png" alt="" />
             </Link>
@@ -26,7 +26,7 @@ export default function Main_LoginBanner() {
       </Desktop>
       <Mobile>
         <div style={{ margin: '10px 0 10px 0' }}>
-          {!cookies.getCookie('rememberUserInfo') ? (
+          {!cookies.getCookie('accessToken') ? (
             <Link to="/login">
               <Img src="/img/Mobile/m_btn_login_dark.png" alt="" />
             </Link>

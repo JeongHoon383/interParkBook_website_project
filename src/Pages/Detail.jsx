@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { BsClipboardCheck } from "react-icons/bs";
@@ -16,6 +16,7 @@ import * as cookies from '../util/cookies';
 const Wrapper = styled.div`
   width: 60vw;
   margin: 0 auto;
+  position: relative;
 `;
 
 const MotionNav = styled(motion.div)`
@@ -217,9 +218,22 @@ const Star = styled.div`
     color: #ff9c46;
   }
 `;
+const Top = styled(motion.span)`
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  top: 80vh;
+  right: 70px;
+  width: 50px;
+  height: 50px;
+  background: var(--main);
+  border-radius: 100%;
+  text-align: center;
+`;
 
 const Detail = () => {
-  
   const { isPending, error, data } = useQuery({
     queryKey: ["repoData"],
     queryFn: () => axios.get(`/detail.json`).then((res) => res.data.item[0]),
@@ -228,7 +242,12 @@ const Detail = () => {
   const containerRef = useRef(null);
 
   const { scrollY, scrollYProgress } = useViewportScroll();
-  /*   console.log(scrollY > containerRef.current.offsetTop); */
+  /*   useEffect(()=>{
+    scrollY.onChange(()=>console.log(scrollY.get(),scrollYProgress.get())
+    )
+  },[]) */
+  const topOpacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
+
   const opacity = useTransform(scrollY, [0, 186], [0, 1]);
 
   const { id } = useParams();
@@ -446,6 +465,11 @@ const Detail = () => {
             DetailData={DetailData}></Detail_tabs>
         </>
       )}
+      <Top
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        style={{ opacity: topOpacity }}>
+        Top
+      </Top>
     </Wrapper>
   );
 };

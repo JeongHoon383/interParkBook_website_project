@@ -1,13 +1,15 @@
-import { getCookie, removeCookie } from './cookies.js';
+import { getCookie, removeCookie } from "./cookies.js";
 
 export const removeUser = () => {
-  removeCookie('rememberUserInfo');
+  removeCookie('accessToken');
+  removeCookie('rememberMe');
   localStorage.clear();
 };
 
-  export const getUser = ()=>{
- let userInfo =  getCookie("rememberUserInfo") && localStorage.getItem("userId") ? JSON.parse(localStorage.getItem('userId')) : null
-return userInfo
-}  
-
- 
+export const getUser = () => {
+  let userInfo =
+    getCookie('accessToken') && localStorage.getItem('accessToken')
+      ? JSON.parse(localStorage.getItem('accessToken'))
+      : null;
+  return userInfo;
+};
