@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import * as cookies from '../util/cookies.js';
 import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
 
 const Input = styled.input`
   display: inline-block;
@@ -227,7 +228,8 @@ function Member(props) {
         .then((result) => {
           if (result.data.login_result) {
             // 로그인 후 토큰, rememberMe 상태를 저장
-            localStorage.setItem('accessToken', result.data.token);
+            const userId = jwtDecode(result.data.token);
+            localStorage.setItem('accessToken', JSON.stringify(userId));
             cookies.setCookie('accessToken', result.data.token, { expires: new Date(Date.now() + 2628000000) }); // 쿠키 유효 1달
             localStorage.setItem('rememberMe', props.rememberMe.toString());
             cookies.setCookie('rememberMe', props.rememberMe.toString(), {
