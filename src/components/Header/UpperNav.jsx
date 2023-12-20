@@ -70,7 +70,7 @@ export default function UpperNav() {
             </div>
             <div className="rightTab">
               <Ul style={{ fontSize: '0.8em' }}>
-                {getCookie('rememberUserInfo') ? (
+                {getCookie('accessToken') ? (
                   <Li>
                     <button type="button" onClick={handleLogout}>
                       로그아웃
@@ -81,7 +81,7 @@ export default function UpperNav() {
                     <Link to="/login">로그인</Link>
                   </Li>
                 )}
-                {!getCookie('rememberUserInfo') ? (
+                {!getCookie('accessToken') ? (
                   <Li>
                     <Link to="/member">회원가입</Link>
                   </Li>

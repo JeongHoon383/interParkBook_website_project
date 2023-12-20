@@ -162,12 +162,12 @@ export default function MainLogo() {
             </button>
           </form>
           <MDiv>
-            <Link to={getCookie('rememberUserInfo') ? '/cart' : '/login'}>
+            <Link to={getCookie('accessToken') ? '/cart' : '/login'}>
               <img src="/img/Mobile/m_icon_cart.png" alt="" />
             </Link>
           </MDiv>
           <MDiv>
-            <Link to={getCookie('rememberUserInfo') ? '/mypage' : '/login'}>
+            <Link to={getCookie('accessToken') ? '/mypage' : '/login'}>
               <img src="/img/Mobile/m_icon_mypage.png" alt="" />
             </Link>
           </MDiv>
