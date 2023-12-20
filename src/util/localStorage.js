@@ -7,8 +7,8 @@ export const removeUser = () => {
 
 export const getUser = () => {
   let userInfo =
-    getCookie("rememberUserInfo") && sessionStorage.getItem("userId")
-      ? JSON.parse(sessionStorage.getItem("userId"))
+    getCookie("rememberUserInfo") && localStorage.getItem("userId")
+      ? JSON.parse(localStorage.getItem("userId"))
       : null;
   return userInfo;
 };

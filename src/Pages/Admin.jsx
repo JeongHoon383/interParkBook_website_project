@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import styled from "styled-components";
 import axios from "axios";
 import Admin_new from "../components/Admin/Admin_new";
+import Admin_delete from "../components/Admin/Admin_delete";
 
 const Wrapper = styled.div`
   width: 60vw;
@@ -45,6 +46,7 @@ const Admin = () => {
         </Nav>
       )}
       {tab === 2 && <Admin_new />}
+      {tab === 3 && <Admin_delete/>}
     </Wrapper>
   );
 };
