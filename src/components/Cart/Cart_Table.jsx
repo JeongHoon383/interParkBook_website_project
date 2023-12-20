@@ -10,7 +10,7 @@ import { useRecoilState } from "recoil";
 
 const Wrapper = styled.div`
   margin-top: 60px;
- 
+
   @media (max-width: 768px) {
     margin-top: 40px;
   }
@@ -102,20 +102,20 @@ const Row = styled.div`
     align-items: center;
     font-size: 15px;
     padding: 5px 7px;
-    
- @media (max-width:768px){
-  font-size: 11px;
-  padding: 4px 5px;
- }
+
+    @media (max-width: 768px) {
+      font-size: 11px;
+      padding: 4px 5px;
+    }
   }
   .triangleBox {
     display: flex;
     align-items: center;
     font-size: 11px;
-    
- @media (max-width:768px){
-  font-size: 8px;
- }
+
+    @media (max-width: 768px) {
+      font-size: 8px;
+    }
   }
 `;
 
@@ -127,20 +127,20 @@ const TextWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   position: relative;
-  
- @media (max-width:768px){
-  margin-top: 14px;
- }
+
+  @media (max-width: 768px) {
+    margin-top: 14px;
+  }
   ul {
     position: absolute;
     right: 0;
     display: flex;
     font-size: 12px;
     align-items: center;
-    
- @media (max-width:768px){
-  font-size: 8px;
- }
+
+    @media (max-width: 768px) {
+      font-size: 8px;
+    }
     li {
       a:hover {
         text-decoration: underline;
@@ -160,7 +160,7 @@ const TextWrapper = styled.div`
 const BookInfo = styled.div`
   height: 190px;
 
-  @media (max-width:768px){
+  @media (max-width: 768px) {
     height: 135px;
   }
   ul {
@@ -343,32 +343,22 @@ const Cart_Table = ({ setCart, cart, setCheck, setTotal }) => {
                   </li>
                   <li className="count" style={{ width: "13%" }}>
                     <input
-                      min="1"
-                      max="9"
-                      type="text"
+                      min={1}
+                      max={9}
+                      type="number"
                       defaultValue={v.count}
                       onChange={(e) => handleInputChange(e)}
                     />
                     <div
                       onClick={(e) => {
                         setCart((prev) => {
-                          let copy = [...prev];
-                          copy = copy.filter((data) => {
-                            return data.cartId !== v.cartId;
+                          return prev.map((item) => {
+                            if (item.cartId === v.cartId) {
+                              return { ...item, count: newCount };
+                            } else {
+                              return item;
+                            }
                           });
-                          let copy2 = [
-                            ...copy,
-                            {
-                              cartId: v.cartId,
-                              count: newCount,
-                              img: v.img,
-                              mileage: v.mileage,
-                              priceSales: v.priceSales,
-                              priceStandard: v.priceStandard,
-                              title: v.title,
-                            },
-                          ];
-                          return copy2;
                         });
                       }}>
                       변경

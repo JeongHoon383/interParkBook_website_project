@@ -28,6 +28,7 @@ import Detail_review from './components/Detail/Detail_review';
 import Detail_change from './components/Detail/Detail_change';
 import Cart from './Pages/Cart';
 import { RecoilRoot } from 'recoil';
+import Admin from './Pages/Admin';
 const GlobalStyle = createGlobalStyle`
 
 html,
@@ -233,6 +234,10 @@ const router = createBrowserRouter([
       {
         path: '/cart',
         element: <Cart />,
+      },
+      {
+        path: '/admin',
+        element: <Admin />,
       },
     ],
   },

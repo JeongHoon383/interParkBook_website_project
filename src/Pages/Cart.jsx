@@ -13,7 +13,6 @@ const Wrapper = styled.form`
 
 const Cart = () => {
   const [cart, setCart] = useRecoilState(cartState);
-  console.log(cart);
   const [total, setTotal] = useState(0);
   const [check, setCheck] = useState([]);
   return (
