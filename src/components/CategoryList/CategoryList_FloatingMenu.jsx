@@ -58,9 +58,16 @@ const FloatingMenu = styled.aside`
     }
   }
   .recentViewList {
-    min-height: 240px;
+    height: ${(props) => props.$recentViewData ? "300px" : "150px"}; 
     padding: 5px 0;
     li {
+      &.noRecentView{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: ${(props) => props.$recentViewData ? "300px" : "150px"}; 
+        text-align: center;
+      }
       > a {
         display: block;
         width: 70%;
@@ -94,7 +101,7 @@ const FloatingMenu = styled.aside`
               width: 16px;
               height: 16px;
               text-align: center;
-              background: #000;
+              background: var(--main);
               svg {
                 position: absolute;
                 top: 50%;
@@ -148,33 +155,39 @@ const FloatingMenu = styled.aside`
 `;
 
 export default function CategoryList_FloatingMenu({userId}) {
-  const [recentView, setRecentView] = useState([]);
+  const [recentViewData, setRecentViewData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
   const [userInfo, setUserInfo] = useState({});
+
+  const getRecentViewData = () => {
+    const recentViewArr = cookies.getCookie('recentView') ? cookies.getCookie('recentView') : [];
+    axios.post('http://127.0.0.1:9090/floatingMenu/', recentViewArr)
+    .then(result => {
+      setTotalPage(Math.ceil(result.data.length/3) > 1 ? Math.ceil(result.data.length/3) : 1);
+      setRecentViewData(result.data)
+    });
+  };
 
   useEffect(() => {
     axios.get(`http://127.0.0.1:9090/member/${userId}`)
     .then(result => setUserInfo(result.data));
 
-    // const recentViewArr = cookies.getCookie('recentView');
-    // console.log(recentViewArr);
-    // axios.get(`http://127.0.0.1:9090/floatingMenu/${JSON.stringify(recentViewArr)}`)
-    // .then(result => console.log(result.data));
-
+    getRecentViewData();
   }, []);
 
-  
-
-
-
-  const handleDelete = (e) => {
-    /* 최근 본 상품 삭제 기능 추가 */
+  const handleDelete = (isbn13, e) => {
     e.preventDefault();
+    const recentViewCookie = cookies.getCookie('recentView');
+    const existingValues = recentViewCookie ? recentViewCookie : [];
+    const updateValues = existingValues.filter(value => value != isbn13);
+    cookies.setCookie('recentView', JSON.stringify(updateValues), {path : '/'});
+
+    getRecentViewData();
   };
 
   return (
-    <FloatingMenu>
+    <FloatingMenu $recentViewData={recentViewData.length}>
       <h4 className="myInterpark">마이 인터파크</h4>
       {
         userId ? (
@@ -202,74 +215,45 @@ export default function CategoryList_FloatingMenu({userId}) {
       }
       <h4 className="recentView">
         최근 본 상품
-        <span className="recentViewCount">3</span>
+        <span className="recentViewCount">{recentViewData.length ? recentViewData.length : 0}</span>
       </h4>
       <ul className="recentViewList">
-        {/* 추후 sql 이용 시 axios 데이터로 수정/ 데이터 없을 때 화면 추가 /삭제 기능 추가*/}
-        <li>
-          <Link>
-            <figure>
-              <img
-                src="https://image.aladin.co.kr/product/32940/45/cover150/k692936045_1.jpg"
-                alt="recentViewBookCover"
-              />
-              <figcaption>
-                <button className="deleteBtn" onClick={handleDelete}>
-                  <TfiClose />
-                </button>
-                <p className="bookTitle">
-                  함께 웃고, 배우고, 사랑하고 - 네 자매의 스페인 여행
-                </p>
-                <p className="priceSales">17100원</p>
-              </figcaption>
-            </figure>
-          </Link>
-        </li>
-        <li>
-          <Link>
-            <figure>
-              <img
-                src="https://image.aladin.co.kr/product/32940/45/cover150/k692936045_1.jpg"
-                alt="recentViewBookCover"
-              />
-              <figcaption>
-                <button className="deleteBtn" onClick={handleDelete}>
-                  <TfiClose />
-                </button>
-                <p className="bookTitle">
-                  함께 웃고, 배우고, 사랑하고 - 네 자매의 스페인 여행
-                </p>
-                <p className="priceSales">17100원</p>
-              </figcaption>
-            </figure>
-          </Link>
-        </li>
-        <li>
-          <Link>
-            <figure>
-              <img
-                src="https://image.aladin.co.kr/product/32940/45/cover150/k692936045_1.jpg"
-                alt="recentViewBookCover"
-              />
-              <figcaption>
-                <button className="deleteBtn" onClick={handleDelete}>
-                  <TfiClose />
-                </button>
-                <p className="bookTitle">
-                  함께 웃고, 배우고, 사랑하고 - 네 자매의 스페인 여행
-                </p>
-                <p className="priceSales">17100원</p>
-              </figcaption>
-            </figure>
-          </Link>
-        </li>
+      {
+        recentViewData.length ? 
+          recentViewData.slice((currentPage - 1) * 3, currentPage * 3).map(item => (
+            <li key={item.isbn13}>
+            <Link to={`/book/${item.isbn13}`}>
+              <figure>
+                <img
+                  src={item.cover}
+                  alt="recentViewBookCover"
+                />
+                <figcaption>
+                  <button className="deleteBtn" onClick={(e) =>{handleDelete(item.isbn13, e)}}>
+                    <TfiClose />
+                  </button>
+                  <p className="bookTitle">
+                    {item.title}
+                  </p>
+                  <p className="priceSales">{item.priceSales.toLocaleString()}원</p>
+                </figcaption>
+              </figure>
+            </Link>
+          </li>
+          ))
+          : (
+          <li className="noRecentView">
+            <p>최근 본 상품이 없습니다.</p>
+          </li>
+        ) 
+      }
       </ul>
       <div className="fractionPagination">
-        <button>&lt;</button>
+        <button onClick={() => setCurrentPage(currentPage > 1 ? currentPage - 1 : 1)}>&lt;</button>
         <span>
           {currentPage}/{totalPage}
         </span>
-        <button>&gt;</button>
+        <button onClick={() => setCurrentPage(currentPage < totalPage ? currentPage + 1 : totalPage)}>&gt;</button>
       </div>
     </FloatingMenu>
   );

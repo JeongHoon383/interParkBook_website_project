@@ -279,16 +279,15 @@ const Detail = () => {
     ]);
   };
 
-  // 현재 상품 로컬스토리에 최근 본 상품 목록으로 저장
+  // 현재 도서 쿠키에 최근 본 상품 목록으로 저장
   const cookieSetting =  () => {
     if(!DetailLoading) {
     const recentViewCookie = cookies.getCookie('recentView');
     const existingValues = recentViewCookie ? recentViewCookie : [];
 
       if(existingValues.length && !existingValues.includes(DetailData.isbn13)) {
-        if(existingValues.length > 11) {
-          existingValues.pop();
-        }
+        if(existingValues.length > 14) existingValues.pop();
+
         const updateValues = [DetailData.isbn13, ...existingValues];
         cookies.setCookie('recentView', JSON.stringify(updateValues), {path : '/', expires: new Date(Date.now() + 600000)});
 
