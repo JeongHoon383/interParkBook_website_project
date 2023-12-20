@@ -10,7 +10,7 @@ const CategoryHot = styled.div`
   .hot_Container {
     margin: 0 auto;
     margin-top: 20px;
-    padding: 20px;
+    padding : 20px 0 0 20px;
     width: 958px;
     height: 380px;
     border: solid 1px #d8d8d8;
@@ -147,14 +147,25 @@ const hot_category_list = [
 
 const Hot = () => {
   /** useState */
+  const [hotDataList, setHotDataList] = useState([])
   const [dataList, setDataList] = useState([]);
   const [selectedData, setSelectedData] = useState({
-    seletedId: '',
+    selectedId: '',
     thumbnailList: [],
     bookList: [],
   });
 
   /** useEffect */
+  useEffect(() => {
+    axios({
+      method : 'get',
+      url : 'http://localhost:9090/category/main/categoryHot'
+    }).then((result) => {
+      setHotDataList(result.data)
+    })
+  }, [])
+
+
   useEffect(() => {
     const getData = async () => {
       const { data } = await axios({

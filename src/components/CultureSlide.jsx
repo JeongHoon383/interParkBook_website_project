@@ -35,7 +35,7 @@ const Pre = styled.div`
   width: 40px;
   height: 20px;
   position: absolute;
-  left: 1%;
+  left: 0.1%;
   z-index: 3;
 `;
 
@@ -43,13 +43,22 @@ const NextTo = styled.div`
   width: 40px;
   height: 20px;
   position: absolute;
-  right: 1%;
+  right: 5%;
   z-index: 3;
 `;
 
 const Img = styled.img`
   width: 100%;
 `;
+
+const StyledSlider = styled(Slider) `
+  .slick-prev, .slick-next {
+    &::before{
+      content:none
+    }
+  }
+`
+
 export default function Slide({ slideRef, afterChange }) {
   const crauselImg = [
     '/img/Slide/right-arrow.svg',
@@ -88,7 +97,7 @@ export default function Slide({ slideRef, afterChange }) {
 
   return (
     <SlideContainer>
-      <Slider ref={slideRef} afterChange={afterChange} {...settings}>
+      <StyledSlider ref={slideRef} afterChange={afterChange} {...settings}>
           <div className="slider_banner">
             <img
               className='banner_img'
@@ -107,7 +116,7 @@ export default function Slide({ slideRef, afterChange }) {
               </li>
           </ul>
         </Banner>
-      </Slider>
+      </StyledSlider>
       <div className="carouselPage">
         <span className="carousel_first_num">{changeNum.activeSlide + 1}</span>
         <span className="grey">/</span>

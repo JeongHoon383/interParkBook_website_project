@@ -5,6 +5,7 @@ import BestSellerBox from './BestSellerBox';
 import BestSellerRank from './BestSellerRank';
 import { IoIosArrowForward } from 'react-icons/io';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const BestSellerContainer = styled.div`
   width: 178px;
@@ -116,10 +117,12 @@ const Bestseller = () => {
         >
           6~10위
         </span>
-        <span className='more grey'>
-          더보기
-          <IoIosArrowForward />
-        </span>
+        <Link to="/bestSeller/">
+          <span className='more grey'>
+            더보기
+            <IoIosArrowForward />
+          </span>
+        </Link>
       </div>
       {rankList[active] && <BestSellerBox rank={rankList[active]} />}
       {renderList.length > 0 &&

@@ -28,6 +28,11 @@ const OnlyReview = styled.div`
     font-weight: bold;
   }
 
+  .onlyReview_article:hover{
+    text-decoration : underline;
+    cursor: pointer;
+  }
+
   .onlyReview_article_author{
     display: block;
     margin-top: 10px;
@@ -76,21 +81,23 @@ const OnlyContent = ({ onlyList, topTitle }) => {
   if( !onlyList ) return <></>
 console.log(onlyList);
 
-  const {cover, description, author, title, publisher} = onlyList;
+  const {cover, description, author, title, publisher, isbn13} = onlyList;
   
   return (
         <OnlyReview>
           <h3 className="onlyReview_icon">
             {topTitle}<span className="onlyReview_icon_color"><IoIosArrowForward/></span>
           </h3>
-          <div className="onlyReview_article">
-            {description}
-          </div>
+          <Link to={`/book/${isbn13}`}>
+            <div className="onlyReview_article">
+              {description}
+            </div>
+          </Link>
           <p className="onlyReview_article_author">{author}</p>
           <div className="onlyReview_content">
-            <div><Link to='/book/:id'><img className="onlyReview_img" src={cover} alt="" /></Link></div>
+            <div><Link to={`/book/${isbn13}`}><img className="onlyReview_img" src={cover} alt="" /></Link></div>
             <div className="onlyReview_img_text"> 
-              <Link to='/book/:id'><div className="onlyReview_title">{title}</div></Link>
+              <Link to={`/book/${isbn13}`}><div className="onlyReview_title">{title}</div></Link>
               <div className="onlyReview_author grey">{author}</div>
               <div className="grey">{publisher}</div>
             </div>

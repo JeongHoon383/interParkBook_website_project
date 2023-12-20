@@ -8,8 +8,7 @@ const StlyedSlider = styled.div`
 
 const StyledArrow = styled.div`
   position: absolute;
-  background-color: #555;
-  border-radius: 0.3rem;
+  background-color: #d8d8d8;
   padding: 1rem;
   background-size: contain;
   cursor: pointer;

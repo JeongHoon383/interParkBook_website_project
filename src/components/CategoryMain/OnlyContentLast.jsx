@@ -67,20 +67,20 @@ const OnlyReview = styled.div`
 
 `
 
-const OnlyContentLast = ({ onlyList, topTitle }) => {
+const OnlyContentLast = ({ onlyList }) => {
   if(!onlyList) return <></>
-  const {cover, description, author} = onlyList;
+  const {img, article, author} = onlyList;
   return (
         <OnlyReview>
           <h3 className="onlyReview_icon">
-            {topTitle}<span className="onlyReview_icon_color"><IoIosArrowForward/></span>
+            사은품 증정<span className="onlyReview_icon_color"><IoIosArrowForward/></span>
           </h3>
           <div className="onlyReview_article">
-            {description}
+            {article}
             <p className="onlyReview_article_author">{author}</p>
           </div>
           <div className="onlyReview_content">
-            <div><Link to='/book/:id'><img className="onlyReview_img" src={cover} alt="" /></Link></div>
+            <div><Link to='/book/:id'><img className="onlyReview_img" src={img} alt="" /></Link></div>
           </div>
         </OnlyReview>
   )

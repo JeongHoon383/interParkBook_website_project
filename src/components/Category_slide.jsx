@@ -27,6 +27,14 @@ const NextTo = styled.div`
 const Img = styled.img`
   width: 100%;
 `;
+
+const StyledSlider = styled(Slider) `
+  .slick-prev, .slick-next {
+    &::before{
+      content:none
+    }
+  }
+`
 export default function Slide({ slideRef, afterChange }) {
   const settings = {
     className: '',
@@ -67,7 +75,7 @@ export default function Slide({ slideRef, afterChange }) {
 
   return (
     <div>
-      <Slider ref={slideRef} afterChange={afterChange} {...settings}>
+      <StyledSlider ref={slideRef} afterChange={afterChange} {...settings}>
         {banner_img_sources.map((source) => (
           <div key={source}>
             <img
@@ -90,7 +98,7 @@ export default function Slide({ slideRef, afterChange }) {
             ))}
           </ul>
         </Banner>
-      </Slider>
+      </StyledSlider>
     </div>
   );
 }

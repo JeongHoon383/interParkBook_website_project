@@ -31,11 +31,20 @@ const InterParkOnly = () => {
 
       setOnlyList(data);
       setMediaList(data.slice(1, 4));
-      setGoodsList(data.slice(4, 7));
 
       console.log('data:', data);
     });
   }, []);
+
+  useEffect(() => {
+    axios({
+      method : 'get',
+      url : '/data/categoryMain/interParkOnly.json'
+    }).then((result) => {
+      setGoodsList(result.data)
+    })
+  },[])
+
 
   return (
     <Only>
