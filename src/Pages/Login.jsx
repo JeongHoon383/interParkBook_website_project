@@ -1,9 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import * as cookies from '../util/cookies.js';
-import { jwtDecode } from 'jwt-decode';
 import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
 
 const Input = styled.input`
   display: inline-block;
@@ -154,8 +154,7 @@ export default function Login() {
     orderPW: '',
   });
   const [errorMessage, setErrorMessage] = useState('');
-  const [userInfo, setUserInfo] = useState('');
-  const [isLogin, setIsLogin] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
 
   const loginTab = [
@@ -168,10 +167,8 @@ export default function Login() {
           errorMessage={errorMessage}
           setErrorMessage={setErrorMessage}
           navigate={navigate}
-          isLogin={isLogin}
-          setIsLogin={setIsLogin}
-          userInfo={userInfo}
-          setUserInfo={setUserInfo}
+          rememberMe={rememberMe}
+          setRememberMe={setRememberMe}
         />
       ),
     },
@@ -225,23 +222,19 @@ function Member(props) {
     } else {
       axios({
         method: 'post',
-        url: 'http://127.0.0.1:9090/login',
+        url: 'http://localhost:9090/login',
         data: props.login,
       })
         .then((result) => {
           if (result.data.login_result) {
-            const userId = jwtDecode(result.data.rememberUserInfo);
-            if (props.isLogin) {
-              cookies.setCookie('rememberUserInfo', result.data.rememberUserInfo, {
-                expires: new Date(Date.now() + 604800000),
-              });
-              localStorage.setItem('userId', JSON.stringify(userId));
-            } else {
-              cookies.setCookie('rememberUserInfo', result.data.rememberUserInfo, {
-                expires: new Date(Date.now() + 60000),
-              });
-              sessionStorage.setItem('userId', JSON.stringify(userId));
-            }
+            // 로그인 후 토큰, rememberMe 상태를 저장
+            const userId = jwtDecode(result.data.token)
+            localStorage.setItem('accessToken', JSON.stringify(userId));
+            cookies.setCookie('accessToken', result.data.token, { expires: new Date(Date.now() + 2628000000) }); // 쿠키 유효 1달
+            localStorage.setItem('rememberMe', props.rememberMe.toString());
+            cookies.setCookie('rememberMe', props.rememberMe.toString(), {
+              expires: props.rememberMe ? new Date(Date.now() + 2628000000) : null,
+            }); // rememberMe가 체크되어있으면 1달 유효
             props.navigate('/');
           } else {
             if (result.data.count === 1) {
@@ -263,8 +256,8 @@ function Member(props) {
     props.checkLogin({ ...props.login, [name]: value });
   };
 
-  const handleLoginSave = (e) => {
-    props.setIsLogin(e.target.checked);
+  const handleRememberMeChange = () => {
+    props.setRememberMe(!props.rememberMe);
   };
 
   return (
@@ -290,7 +283,13 @@ function Member(props) {
         <button type="submit">로그인</button>
         <div className="loginCheck">
           <div className="checkBox">
-            <input type="checkbox" name="loginStay" id="loginStay" checked={props.isLogin} onChange={handleLoginSave} />
+            <input
+              type="checkbox"
+              name="loginStay"
+              id="loginStay"
+              checked={props.rememberMe}
+              onChange={handleRememberMeChange}
+            />
             <label htmlFor="loginStay">
               <span>로그인 상태 유지</span>
             </label>

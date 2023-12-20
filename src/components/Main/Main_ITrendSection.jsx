@@ -309,10 +309,10 @@ function BestSeller({ rank, bestSeller }) {
         [
           <ol>
             {bestSeller
-              .filter((v) => v.bestRank <= 5)
+              .filter((v, i) => i <= 4)
               .map((v, i) => (
                 <li key={i}>
-                  <span className="rankNum">{v.bestRank}</span>
+                  <span className="rankNum">{i + 1}</span>
                   <span className="rankImg">
                     <Link to={`/book/${v.isbn13}`}>
                       <img src={v.cover} alt="" />
@@ -324,10 +324,10 @@ function BestSeller({ rank, bestSeller }) {
           </ol>,
           <ol>
             {bestSeller
-              .filter((v) => v.bestRank <= 10 && v.bestRank >= 6)
+              .filter((v, i) => i <= 10 && i >= 6)
               .map((v, i) => (
                 <li key={i}>
-                  <span className="rankNum">{v.bestRank}</span>
+                  <span className="rankNum">{i + 6}</span>
                   <span className="rankImg">
                     <Link to={`/book/${v.isbn13}`}>
                       <img src={v.cover} alt="" />

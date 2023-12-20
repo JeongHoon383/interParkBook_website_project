@@ -481,14 +481,14 @@ const Detail_review = ({ reviewData, setReviewData }) => {
   let starArr = [1, 2, 3, 4, 5];
 
   const handleMouseover = (star) => setRating(star);
-
+let userInfo = getUser()
   return (
     <>
       {isPending ? (
         <h1>로딩중</h1>
       ) : (
         <Wrapper>
-          {toggle === false && (
+          {toggle === false && userInfo && (
             <ToggleButton
               drag
               layoutId="tog"

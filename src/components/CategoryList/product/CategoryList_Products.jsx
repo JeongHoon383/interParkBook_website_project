@@ -17,19 +17,26 @@ const ProductsList = styled.ul`
 export default function CategoryList_Products({
   bookData,
   checkList,
-  setCheckList,
+  handleCheckList,
+  userId,
+  quantity,
+  handleQuantity
 }) {
   return (
     <ProductsList>
       {bookData &&
-        bookData.map((bookData) => (
+        bookData.map((bookData, idx) => (
           <li key={bookData.isbn13}>
             <CategoryList_ProdAvatar bookData={bookData} />
             <CategoryList_ProdContent bookData={bookData} />
             <CategoryList_ProdBuy
               bookData={bookData}
               checkList={checkList}
-              setCheckList={setCheckList}
+              handleCheckList={handleCheckList}
+              userId={userId}
+              idx={idx}
+              quantity={quantity}
+              handleQuantity={handleQuantity}
             />
           </li>
         ))}

@@ -7,29 +7,30 @@ const IssueBook = styled.div`
   padding-bottom: 58px;
   margin: 0 auto;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-evenly;
   background-color: rgb(248, 248, 248);
 
   .issueBookItem {
+    width: 22%;
     margin-top: 50px;
     p {
-      margin-top: 35px;
+      margin-top: 44px;
       font-size: 0.8em;
       font-weight: 800;
       color: var(--hover);
       text-align: center;
     }
     .imgBox {
-      width: 200px;
-      height: 270px;
-      margin-bottom: 12px;
+      width: 100%;
+      height: 223px;
     }
   }
 `;
 
 const imgStyle = {
-  width: '100%',
+  margin: '0 auto',
+  width: '80%',
   height: '100%',
   boxShadow: '0 10px 4px -4px #d9d9d9',
 };
@@ -44,7 +45,7 @@ export default function Main_MainBannerIssue() {
         setIssueBook(result.data.slice(0, 4));
       })
       .catch((err) => console.error(err));
-  }, [issueBook]);
+  }, []);
 
   return (
     <IssueBook>

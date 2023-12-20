@@ -1,11 +1,12 @@
 import { motion } from "framer-motion";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { MdClose } from "react-icons/md";
 import Chat_Avatar from "./Chat_Avatar";
 import { useForm } from "react-hook-form";
 import { io } from "socket.io-client";
 import { getUser } from "../../util/localStorage";
+import { IoMdPaperPlane } from "react-icons/io";
 const Wrapper = styled.div`
   position: fixed;
   left: 30px;
@@ -22,10 +23,10 @@ const BotIcon = styled(motion.svg)`
 const ChatBox = styled.div`
   width: 315px;
   height: 450px;
-  border: 1px solid red;
+  border: 1px solid black;
   border-radius: 10px;
 `;
-const TopMenu = styled.div`
+const TopMenu = styled(motion.div)`
   width: 100%;
   height: 60px;
   border-top-right-radius: 10px;
@@ -37,11 +38,14 @@ const TopMenu = styled.div`
   color: white;
   background-color: var(--main);
   font-weight: bold;
+  .close_button {
+    cursor: pointer;
+  }
   svg {
     scale: 1.5;
   }
 `;
-const TimeMenu = styled.div`
+const TimeMenu = styled(motion.div)`
   height: 60px;
   width: 100%;
   padding: 20px;
@@ -62,7 +66,12 @@ const TodayList = styled.li`
   color: rgba(0, 0, 0, 0.4);
   text-align: center;
 `;
-const MessageRow = styled.div`
+const MessageRow = styled(motion.div)`
+  .timeLine {
+    font-size: 10px;
+    margin-bottom: 5px;
+    color: rgba(0, 0, 0, 0.4);
+  }
   &.mine {
     flex-direction: row-reverse;
     .message_payload span:first-child {
@@ -102,7 +111,7 @@ const MessageRow = styled.div`
     }
     span:last-child {
       opacity: 0.8;
-      font-size: 13px;
+ 
     }
   }
 `;
@@ -172,18 +181,27 @@ const Form = styled.form`
   border-bottom-right-radius: 10px;
   input {
     width: 80%;
-    margin-top: 10px;
+
     margin-right: 10px;
+  }
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  svg {
+    color: var(--main);
+    scale: 1.5;
   }
 `;
 const socket = io();
 socket.emit("ask-join", "1");
 const Chat = () => {
-  let userinfo = getUser()
-  console.log(userinfo);
   const [click, setClick] = useState(false);
   const [update, setUpdate] = useState();
   const [down, setDown] = useState([]);
+  const userInfo = getUser();
+  const scrollRef = useRef(null);
   const {
     handleSubmit,
     register,
@@ -192,6 +210,7 @@ const Chat = () => {
   } = useForm();
   useEffect(() => {
     socket.emit("message", {
+      id: userInfo?.id,
       msg: update,
       time: `${new Date().getHours()}:${new Date().getMinutes()}`,
     });
@@ -207,6 +226,14 @@ const Chat = () => {
     console.log(update, "update");
   };
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (scrollRef.current) {
+        scrollRef.current.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100); // 100ms 후에 스크롤 이동 실행
+    return () => clearTimeout(timer); // 클린업 함수로 타이머 제거
+  }, [down]);
   return (
     <Wrapper>
       {!click ? (
@@ -220,12 +247,31 @@ const Chat = () => {
       ) : (
         <ChatBox layoutId="chatroom">
           <TopMenu>
-            <span>4조 고객센터</span>
-            <span onClick={() => setClick((prev) => !prev)}>
+            <motion.span
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0, transition: 0.3 }}>
+              4조 고객센터
+            </motion.span>
+            <span
+              className="close_button"
+              onClick={() => setClick((prev) => !prev)}>
               <MdClose />
             </span>
           </TopMenu>
-          <TimeMenu>운영시간 : 10:00 ~ 18:50</TimeMenu>
+          <TimeMenu
+            initial={{ opacity: 0, y: -10 }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              transition: {
+                duration: 0.3,
+                delay: 0.3,
+                type: "tween",
+                ease: "easeIn",
+              },
+            }}>
+            운영시간 : 10:00 ~ 18:50
+          </TimeMenu>
           <ChatArea>
             <ul>
               <TodayList>
@@ -233,12 +279,23 @@ const Chat = () => {
                 {new Date().getDate()}
               </TodayList>
               <li>
-                <MessageRow>
+                <MessageRow
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                    transition: {
+                      duration: 0.3,
+                      delay: 0.6,
+                      type: "tween",
+                      ease: "easeIn",
+                    },
+                  }}>
                   <Chat_Avatar />
                   <div className="message_content">
                     <span className="message_author"> </span>
                     <div className="message_payload">
-                      <span>
+                      <motion.span>
                         ★고객센터 운영시간★
                         <br /> *평일 ( 10 :00 ~ 18:50 )
                         <br />
@@ -253,15 +310,16 @@ const Chat = () => {
                         문의사항 남겨주시면
                         <br />
                         빠른 확인이 가능합니다
-                      </span>
+                      </motion.span>
                       <span> </span>
                     </div>
                   </div>
                 </MessageRow>
               </li>
-              {down.map((v, i) => (
-                <li key={i}>
-                  <MessageRow2 className="mine">
+              {down.map((v, i) =>
+                v.id == "admin1234" ? (
+                  <MessageRow>
+                    <Chat_Avatar />
                     <div className="message_content">
                       <span className="message_author"> </span>
                       <div className="message_payload">
@@ -269,14 +327,29 @@ const Chat = () => {
                         <span className="timeLine">{v.time}</span>
                       </div>
                     </div>
-                  </MessageRow2>
-                </li>
-              ))}
+                  </MessageRow>
+                ) : (
+                  <li key={i}>
+                    <MessageRow2 className="mine">
+                      <div className="message_content">
+                        <span className="message_author"> </span>
+                        <div className="message_payload">
+                          <span>{v.msg}</span>
+                          <span className="timeLine">{v.time}</span>
+                        </div>
+                      </div>
+                    </MessageRow2>
+                  </li>
+                )
+              )}
+              <li ref={scrollRef}></li>
             </ul>
           </ChatArea>
           <Form onSubmit={handleSubmit(onValid)}>
             <input {...register("msg", { required: true })} type="text" />
-            <button>전송</button>
+            <button>
+              <IoMdPaperPlane />
+            </button>
           </Form>
         </ChatBox>
       )}
