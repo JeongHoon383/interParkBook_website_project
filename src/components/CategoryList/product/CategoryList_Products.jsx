@@ -18,9 +18,10 @@ export default function CategoryList_Products({
   bookData,
   checkList,
   handleCheckList,
-  userId,
   quantity,
-  handleQuantity
+  handleQuantity,
+  handleToggleWishlist,
+  wishlist
 }) {
   return (
     <ProductsList>
@@ -33,10 +34,11 @@ export default function CategoryList_Products({
               bookData={bookData}
               checkList={checkList}
               handleCheckList={handleCheckList}
-              userId={userId}
               idx={idx}
               quantity={quantity}
               handleQuantity={handleQuantity}
+              handleToggleWishlist={handleToggleWishlist}
+              wishlist={wishlist}
             />
           </li>
         ))}

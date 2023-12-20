@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import { GoHeart } from "react-icons/go";
+import { FaHeart } from "react-icons/fa";
 import { useRecoilState } from "recoil";
 import { cartState } from "../../Cart/atom";
 
@@ -87,12 +87,14 @@ export default function CategoryList_ProdBuy({
   bookData,
   checkList,
   handleCheckList,
-  userId,
   idx,
   quantity,
   handleQuantity,
+  handleToggleWishlist,
+  wishlist
 }) {
   const [isChecked, setisChecked] = useState(false);
+  const [isInWishlist, setIsInWishlist] = useState(false);
   const [cart, setCart] = useRecoilState(cartState);
   const navigate = useNavigate();
 
@@ -150,7 +152,13 @@ export default function CategoryList_ProdBuy({
     checkList.some((checkItem) => checkItem.isbn13 === bookData.isbn13)
       ? setisChecked(true)
       : setisChecked(false);
-  }, [checkList, bookData.isbn13]);
+  }, [checkList]);
+
+  useEffect(() => {
+    wishlist.some((item) => item.isbn13 === bookData.isbn13)
+      ? setIsInWishlist(true)
+      : setIsInWishlist(false);
+  }, [wishlist]);
 
   return (
     <ProdBuy $stockStatus={bookData.stockStatus}>
@@ -194,13 +202,25 @@ export default function CategoryList_ProdBuy({
         </>
       ) : (
         <>
-          <button className="insertCart" onClick={() => handleAddCart(quantity[idx].qty)}>카트에 담기</button>
+          <button
+            className="insertCart"
+            onClick={() => handleAddCart(quantity[idx].qty)}
+          >
+            카트에 담기
+          </button>
           <Link className="buy">바로 구매</Link>
         </>
       )}
-      <button className="wishlistBtn">
-        {/* 찜 기능 추가 */}
-        <GoHeart />
+      <button
+        className="wishlistBtn"
+        onClick={() => handleToggleWishlist(bookData, setIsInWishlist)}
+      >
+        <FaHeart
+          strokeWidth={isInWishlist ? "8" : "40"}
+          pathLength="1"
+          stroke="#d8d8d8"
+          fill={isInWishlist ? "var(--main)" : "#f8f8f8"}
+        />
       </button>
     </ProdBuy>
   );

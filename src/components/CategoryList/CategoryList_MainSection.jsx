@@ -35,10 +35,9 @@ export default function CategoryList_MainSection({ userId }) {
   const [sortField, setSortField] = useState('pubDate');
   const [sortOption, setSortOption] = useState('desc');
   const [quantity, setQuantity] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
   const [cart, setCart] = useRecoilState(cartState);
-  const parameterArr = useParams().categoryPath.split('_');
-  const nanigate = useNavigate();
-  
+  const parameterArr = useParams().categoryPath.split('_');  
   const navigate = useNavigate();
 
   const handleSortField = (data) => {
@@ -95,6 +94,12 @@ export default function CategoryList_MainSection({ userId }) {
         );
       });
     }
+
+    if(userId) {
+      axios.get(`http://127.0.0.1:9090/wishlist/${userId}`)
+      .then(result => setWishlist(result.data));
+    }
+
   }, [
     listQty,
     currentPage,
@@ -106,7 +111,7 @@ export default function CategoryList_MainSection({ userId }) {
     parameterArr[2],
     parameterArr[3],
     parameterArr[4],
-    parameterArr[5],
+    parameterArr[5]
   ]);
 
   //하위 컴포넌트(CategoryList_Sort) 전체선택/선택해제 핸들링이벤트
@@ -156,7 +161,7 @@ export default function CategoryList_MainSection({ userId }) {
 
   //선택한 상품들 전부 카트에 담기
   const handleAddCartAll = () => {
-    if(checkList.length > 0) {
+    if(checkList.length) {
       let axiosBookData = [];
       for (const checkItem of checkList) {
         for (const quantityItem of quantity) {
@@ -185,23 +190,55 @@ export default function CategoryList_MainSection({ userId }) {
     }
   };
 
+  //선택한 상품들 찜하기
   const handleAddWishlistAll = () => {
-    if(userId) {
-      if(checkList.length > 0) {
-        const WishlistArr = checkList.map(checkItem => ({'isbn13': checkItem.isbn13, 'id': userId}));
-        axios.post('http://127.0.0.1:9090/wishlist/all', WishlistArr)
+    if(userId && checkList.length) {
+      if(checkList.length) {
+        const wishlistArr = checkList.map(checkItem => ({'isbn13': checkItem.isbn13, 'id': userId}));
+        axios.post('http://127.0.0.1:9090/wishlist/all', wishlistArr)
         .then(result => {
-          alert('찜한 상품 목록에 추가하였습니다.');
+          if(result.data === '이미 찜한 상품') {
+            alert('이미 찜한 상품입니다.');
+          }else{
+            alert('찜한 상품 목록에 추가했습니다.');
+            axios.get(`http://127.0.0.1:9090/wishlist/${userId}`)
+            .then(result2 => setWishlist(result2.data));
+          }
         })
         .catch(err => console.log(err));
       }
+    }else if(!userId){
+      let notice = window.confirm('로그인 후 이용 가능합니다.\n로그인 하시겠습니까?');
+      if(notice) {
+        navigate('/login')
+      }
+    }else if(!checkList.length) {
+      alert('상품을 선택해주세요.')
+    }
+  };
+
+  //클릭한 상품 찜하기
+  const handleToggleWishlist = (currentBookData, setIsInWishlist) => {
+    if(userId) {
+      axios.post('http://127.0.0.1:9090/wishlist/', {"isbn13" : currentBookData.isbn13, "id": userId})
+      .then(result => {
+        if(result.data === '찜하기 완료') {
+          setIsInWishlist(true);
+        }else{
+          setIsInWishlist(false);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        alert('에러가 발생했습니다.\n잠시 후 다시 시도해주세요.')
+      });
     }else{
       let notice = window.confirm('로그인 후 이용 가능합니다.\n로그인 하시겠습니까?');
       if(notice) {
         navigate('/login')
       }
     }
-  }
+  };
 
   return (
     <MainSection>
@@ -233,9 +270,10 @@ export default function CategoryList_MainSection({ userId }) {
             bookData={bookData}
             checkList={checkList}
             handleCheckList={handleCheckList}
-            userId={userId}
             quantity={quantity}
             handleQuantity={handleQuantity}
+            handleToggleWishlist={handleToggleWishlist}
+            wishlist={wishlist}
           />
           <CategoryList_Sort
             totalResults={bookData[0] && bookData[0].totalResults}

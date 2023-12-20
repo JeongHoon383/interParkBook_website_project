@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from 'axios';
+import * as cookies from '../../util/cookies.js';
 import { RiCoupon3Line } from "react-icons/ri";
 import { TfiClose } from "react-icons/tfi";
 import { FiUser } from "react-icons/fi";
@@ -147,15 +148,25 @@ const FloatingMenu = styled.aside`
 `;
 
 export default function CategoryList_FloatingMenu({userId}) {
+  const [recentView, setRecentView] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
   const [userInfo, setUserInfo] = useState({});
 
   useEffect(() => {
     axios.get(`http://127.0.0.1:9090/member/${userId}`)
-    .then(result => setUserInfo(result.data))
-    // .then(err => console.log(err));
+    .then(result => setUserInfo(result.data));
+
+    // const recentViewArr = cookies.getCookie('recentView');
+    // console.log(recentViewArr);
+    // axios.get(`http://127.0.0.1:9090/floatingMenu/${JSON.stringify(recentViewArr)}`)
+    // .then(result => console.log(result.data));
+
   }, []);
+
+  
+
+
 
   const handleDelete = (e) => {
     /* 최근 본 상품 삭제 기능 추가 */

@@ -32,8 +32,8 @@ const GlobalStyle = createGlobalStyle`
 
 html,
 body {
-  width: 100%;
-  overflow-x: hidden;
+  /* width: 100%; */
+  /* overflow-x: hidden; */
 }
 
 html, body, div, span, applet, object, iframe,
