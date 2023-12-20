@@ -1,4 +1,4 @@
-import { getCookie, removeCookie } from './cookies.js';
+import { getCookie, removeCookie } from "./cookies.js";
 
 export const removeUser = () => {
   removeCookie('accessToken');

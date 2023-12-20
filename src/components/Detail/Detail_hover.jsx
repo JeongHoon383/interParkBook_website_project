@@ -147,7 +147,7 @@ const Detail_hover = () => {
                   zIndex: "99",
                 }}></span>
               <Figure style={{ borderRight: "1px solid lightgray" }}>
-                <img src="https://qi-b.qoo10cdn.com/renewPark/reBookpark/test_img/last_inc/book_benefit.jpg" />
+                <img src="/img/kyobo.png" />
               </Figure>
             </div>
             <div>
