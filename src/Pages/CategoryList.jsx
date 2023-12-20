@@ -23,7 +23,8 @@ const CategoryListMain = styled.main`
 
 export default function CategoryList() {
   // const userId = JSON.parse(sessionStorage.getItem('userId')) ? JSON.parse(sessionStorage.getItem('userId')).id : undefined;
-  const userId = getUser().id;
+  const userInfo = getUser();
+  const userId = userInfo ? userInfo.id : undefined;
 
   return (
     <>
