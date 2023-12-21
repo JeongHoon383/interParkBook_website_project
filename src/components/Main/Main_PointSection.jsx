@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import Slider from 'react-slick';
-import axios from 'axios';
-import { MdQueueMusic } from 'react-icons/md';
-import { RiDvdFill } from 'react-icons/ri';
-import { Desktop, Mobile } from '../MediaQuery';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import Slider from "react-slick";
+import axios from "axios";
+import { MdQueueMusic } from "react-icons/md";
+import { RiDvdFill } from "react-icons/ri";
+import { Desktop, Mobile } from "../MediaQuery";
 
 const BPre = styled.div`
   width: 30px;
@@ -51,7 +51,7 @@ const PointSection = styled.div`
   margin: 66px 0;
   .blogBestHeader {
     h3 {
-      font-family: 'YES24GothicB';
+      font-family: "YES24GothicB";
       font-size: 1.2em;
       margin-bottom: 6px;
       padding-bottom: 12px;
@@ -73,7 +73,7 @@ const PointSection = styled.div`
         text-decoration: underline;
       }
       &::after {
-        content: '▶';
+        content: "▶";
         margin-left: 3px;
         font-size: 0.3rem;
       }
@@ -103,26 +103,26 @@ const BlogBestSlider = styled.div`
     height: 15px;
     position: relative;
     display: inline-block;
-    background: url('/img/img_star.png') repeat-x;
+    background: url("/img/img_star.png") repeat-x;
     .starRate {
       position: absolute;
       top: 0;
       left: 0;
       height: 15px;
-      background: url('/img/img_star.png') repeat-x 0 -15px;
+      background: url("/img/img_star.png") repeat-x 0 -15px;
     }
     .customerReviewRank {
       position: absolute;
       margin-left: 5px;
       left: 100%;
-      font-family: 'YES24GothicB';
+      font-family: "YES24GothicB";
       color: #e66a57;
     }
   }
   .blogBestTitle,
   .priceStandard,
   .priceSales {
-    font-family: 'YES24GothicB';
+    font-family: "YES24GothicB";
   }
 
   .blogBestTitle {
@@ -147,7 +147,7 @@ const MusicTabs = styled.div`
   .musicTabWrap {
     display: flex;
     align-items: center;
-    font-family: 'YES24GothicB';
+    font-family: "YES24GothicB";
     color: var(--hover);
     font-size: 0.9em;
     letter-spacing: -1px;
@@ -186,7 +186,7 @@ const MediaBox = styled.div`
 `;
 
 const MediaTitle = styled.p`
-  font-family: 'YES24GothicB';
+  font-family: "YES24GothicB";
   font-size: 0.7em;
   width: 100px;
   height: 80px;
@@ -204,7 +204,7 @@ const MediaPrice = styled.p`
 
 const StyledSlider = styled(Slider)`
   .slick-dots {
-    font-family: 'YES24GothicM';
+    font-family: "YES24GothicM";
     position: absolute;
     top: -11.3%;
     left: 79%;
@@ -257,7 +257,7 @@ const RecommendSection = styled.div`
     text-align: center;
     h3 {
       font-size: 1.1em;
-      font-family: 'YES24GothicB';
+      font-family: "YES24GothicB";
       padding: 8px 0 12px 0;
     }
     span {
@@ -297,28 +297,36 @@ export default function Main_PointSection() {
   const [dvd, setDvd] = useState([]);
 
   const slideArr = [
-    { icon: <MdQueueMusic />, name: '화제의 음반', content: <MusicSlide music={music} /> },
-    { icon: <RiDvdFill />, name: '화제의 DVD', content: <DVDSlide dvd={dvd} /> },
+    {
+      icon: <MdQueueMusic />,
+      name: "화제의 음반",
+      content: <MusicSlide music={music} />,
+    },
+    {
+      icon: <RiDvdFill />,
+      name: "화제의 DVD",
+      content: <DVDSlide dvd={dvd} />,
+    },
   ];
 
   useEffect(() => {
     axios({
-      method: 'get',
-      url: 'http://localhost:9090/blogbest',
+      method: "get",
+      url: "http://192.168.50.25:9090/blogbest",
     })
       .then((result) => setBlogBest(result.data.slice(0, 8)))
       .catch((err) => console.error(err));
 
     axios({
-      method: 'get',
-      url: 'http://localhost:9090/music',
+      method: "get",
+      url: "http://192.168.50.25:9090/music",
     })
       .then((result) => setMusic(result.data))
       .catch((err) => console.error(err));
 
     axios({
-      method: 'get',
-      url: 'http://localhost:9090/dvd',
+      method: "get",
+      url: "http://192.168.50.25:9090/dvd",
     })
       .then((result) => setDvd(result.data))
       .catch((err) => console.error(err));
@@ -332,7 +340,7 @@ export default function Main_PointSection() {
     <>
       <Desktop>
         <PointSection>
-          <div className="blogBestItem" style={{ width: '40%' }}>
+          <div className="blogBestItem" style={{ width: "40%" }}>
             <div className="blogBestHeader">
               <h3>
                 <span>주목!</span> <span>이달의 책</span>
@@ -345,14 +353,17 @@ export default function Main_PointSection() {
               <BlogBestSlide blogBest={blogBest} />
             </div>
           </div>
-          <div className="musicItem" style={{ border: '1px solid #c9c9c9', width: '55%' }}>
+          <div
+            className="musicItem"
+            style={{ border: "1px solid #c9c9c9", width: "55%" }}
+          >
             <div className="musicItemHeader">
               <MusicTabs>
                 <ul className="musicTabWrap">
                   {slideArr.map((v, i) => (
                     <li
                       key={i}
-                      className={i === isTab ? 'catTabLi clicked' : 'catTabLi'}
+                      className={i === isTab ? "catTabLi clicked" : "catTabLi"}
                       onClick={() => {
                         handleClick(i);
                       }}
@@ -377,11 +388,11 @@ export default function Main_PointSection() {
 
 function MBlogBestSlide({ blogBest }) {
   const settings = {
-    className: 'center',
+    className: "center",
     dots: false,
     arrows: false,
     centerMode: true,
-    centerPadding: '126px',
+    centerPadding: "126px",
     infinite: true,
     slidesToShow: 1,
     autoplay: false,
@@ -402,7 +413,7 @@ function MBlogBestSlide({ blogBest }) {
                 <img src={v.cover} alt="" />
               </Link>
             </RecommendImgBox>
-            <span>{v.title.split('-')[0]}</span>
+            <span>{v.title.split("-")[0]}</span>
           </div>
         ))}
       </MobileSlider>
@@ -427,7 +438,8 @@ function BlogBestSlide({ blogBest }) {
     customPaging: (i) => {
       return (
         <span className="customPaging">
-          <span className="currentPage">{(i + 1).toString()}</span>/<span className="totalPage">4</span>
+          <span className="currentPage">{(i + 1).toString()}</span>/
+          <span className="totalPage">4</span>
         </span>
       );
     },
@@ -457,16 +469,27 @@ function BlogBestSlide({ blogBest }) {
                 <div className="starRateWrap">
                   <div
                     className="starRate"
-                    style={{ width: v.customerReviewRank === 10 ? '100%' : v.customerReviewRank === 9 ? '90%' : 0 }}
+                    style={{
+                      width:
+                        v.customerReviewRank === 10
+                          ? "100%"
+                          : v.customerReviewRank === 9
+                          ? "90%"
+                          : 0,
+                    }}
                   ></div>
-                  <span className="customerReviewRank">{v.customerReviewRank}</span>
+                  <span className="customerReviewRank">
+                    {v.customerReviewRank}
+                  </span>
                 </div>
               </div>
-              <p className="blogBestTitle">{v.title.split('-')[0]}</p>
-              <span className="priceStandard" style={{ marginRight: '5px' }}>
+              <p className="blogBestTitle">{v.title.split("-")[0]}</p>
+              <span className="priceStandard" style={{ marginRight: "5px" }}>
                 {v.priceStandard.toLocaleString()}원
               </span>
-              <span className="priceSales">{v.priceSales.toLocaleString()}원</span>
+              <span className="priceSales">
+                {v.priceSales.toLocaleString()}원
+              </span>
             </div>
           </div>
         ))}
@@ -506,10 +529,16 @@ function DVDSlide({ dvd }) {
                 <img src={v.cover} alt="" />
               </Link>
             </MediaBox>
-            <MediaTitle>{v.title.split('-')[0]}</MediaTitle>
+            <MediaTitle>{v.title.split("-")[0]}</MediaTitle>
             <MediaPrice>
-              <span style={{ color: '#e66a57' }}>{v.priceSales.toLocaleString()}원</span>
-              <span style={{ color: '#666', fontSize: '0.9em', marginLeft: '4px' }}>+{v.mileage}P</span>
+              <span style={{ color: "#e66a57" }}>
+                {v.priceSales.toLocaleString()}원
+              </span>
+              <span
+                style={{ color: "#666", fontSize: "0.9em", marginLeft: "4px" }}
+              >
+                +{v.mileage}P
+              </span>
             </MediaPrice>
           </>
         ))}
@@ -548,10 +577,16 @@ function MusicSlide({ music }) {
                 <img src={v.cover} alt="" />
               </Link>
             </MediaBox>
-            <MediaTitle>{v.title.split('-')[0]}</MediaTitle>
+            <MediaTitle>{v.title.split("-")[0]}</MediaTitle>
             <MediaPrice>
-              <span style={{ color: '#e66a57' }}>{v.priceSales.toLocaleString()}원</span>
-              <span style={{ color: '#666', fontSize: '0.9em', marginLeft: '4px' }}>+{v.mileage}P</span>
+              <span style={{ color: "#e66a57" }}>
+                {v.priceSales.toLocaleString()}원
+              </span>
+              <span
+                style={{ color: "#666", fontSize: "0.9em", marginLeft: "4px" }}
+              >
+                +{v.mileage}P
+              </span>
             </MediaPrice>
           </>
         ))}

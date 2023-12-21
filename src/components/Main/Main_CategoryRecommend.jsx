@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import Slider from 'react-slick';
-import axios from 'axios';
-import { Desktop, Mobile } from '../MediaQuery';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import Slider from "react-slick";
+import axios from "axios";
+import { Desktop, Mobile } from "../MediaQuery";
 
 const Pre = styled.div`
   width: 30px;
@@ -48,7 +48,7 @@ const CategoryRecommend = styled.div`
       font-size: 1.2em;
       font-weight: bold;
       &::before {
-        content: '';
+        content: "";
         flex-grow: 1;
         margin: 0 16px;
         background: var(--default);
@@ -57,7 +57,7 @@ const CategoryRecommend = styled.div`
         line-height: 0;
       }
       &::after {
-        content: '';
+        content: "";
         flex-grow: 1;
         margin: 0 16px;
         background: var(--default);
@@ -112,8 +112,8 @@ export default function Main_CategoryRecommend() {
 
   function content(searchCategoryId) {
     axios({
-      method: 'get',
-      url: `http://localhost:9090/field/${searchCategoryId}`,
+      method: "get",
+      url: `http://192.168.50.25:9090/field/${searchCategoryId}`,
     }).then((result) => {
       setDataList(result.data);
     });
@@ -124,11 +124,11 @@ export default function Main_CategoryRecommend() {
   }, []);
 
   const slideArr = [
-    { name: '건강/요리', cid: '53471' },
-    { name: '맛집여행', cid: '50875' },
-    { name: '소설', cid: '50993' },
-    { name: '경제', cid: '3057' },
-    { name: '유아/아동', cid: '35091' },
+    { name: "건강/요리", cid: "53471" },
+    { name: "맛집여행", cid: "50875" },
+    { name: "소설", cid: "50993" },
+    { name: "경제", cid: "3057" },
+    { name: "유아/아동", cid: "35091" },
   ];
 
   const handleHover = (index) => {
@@ -173,8 +173,8 @@ export default function Main_CategoryRecommend() {
     <CategoryRecommend>
       <div className="categoryRecommendHeader">
         <h3>
-          <span style={{ color: 'var(--default)' }}>분야별</span>
-          <span style={{ color: '#e66a57' }}>추천</span>
+          <span style={{ color: "var(--default)" }}>분야별</span>
+          <span style={{ color: "#e66a57" }}>추천</span>
         </h3>
       </div>
       <div className="categoryRecommendBox">
@@ -183,7 +183,7 @@ export default function Main_CategoryRecommend() {
             {slideArr.map((v, i) => (
               <li
                 key={i}
-                className={i === isHover ? 'tabLi focused' : 'tabLi'}
+                className={i === isHover ? "tabLi focused" : "tabLi"}
                 onMouseOver={() => {
                   handleHover(i);
                   content(v.cid);
@@ -200,14 +200,22 @@ export default function Main_CategoryRecommend() {
               <div className={`category_ ${v.searchCategoryId}`} key={i}>
                 <div className="categoryImgBox" key={i}>
                   <Link to={`/book/${v.isbn13}`}>
-                    <img src={v.cover} alt="" style={{ width: '100%', height: '100%' }} />
+                    <img
+                      src={v.cover}
+                      alt=""
+                      style={{ width: "100%", height: "100%" }}
+                    />
                   </Link>
                 </div>
-                <CategoryP style={{ width: '100px', height: '40px', margin: '0 auto' }}>
-                  {v.title.split('-')[0]}
+                <CategoryP
+                  style={{ width: "100px", height: "40px", margin: "0 auto" }}
+                >
+                  {v.title.split("-")[0]}
                 </CategoryP>
                 <Desktop>
-                  <CategoryP style={{ color: '#e66a57' }}>{v.priceSales.toLocaleString()}원</CategoryP>
+                  <CategoryP style={{ color: "#e66a57" }}>
+                    {v.priceSales.toLocaleString()}원
+                  </CategoryP>
                 </Desktop>
               </div>
             ))}

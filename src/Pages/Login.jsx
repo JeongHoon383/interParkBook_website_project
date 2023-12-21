@@ -1,9 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import * as cookies from '../util/cookies.js';
-import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
+import React, { useState, useRef, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import * as cookies from "../util/cookies.js";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 const Input = styled.input`
   display: inline-block;
@@ -50,7 +50,7 @@ const MemberFieldSet = styled.fieldset`
     width: 100%;
     height: 40px;
     border-radius: 3px;
-    font-family: 'YES24GothicB';
+    font-family: "YES24GothicB";
     text-align: center;
     color: #fff;
     background-color: var(--main);
@@ -64,7 +64,7 @@ const MemberFieldSet = styled.fieldset`
       color: var(--hover);
       &:not(:last-child) {
         &::after {
-          content: '|';
+          content: "|";
           margin: 0 6px;
         }
       }
@@ -83,7 +83,7 @@ const MemberFieldSet = styled.fieldset`
       margin-right: 8px;
     }
   }
-  input[type='checkbox'] {
+  input[type="checkbox"] {
     display: none;
     + label {
       cursor: pointer;
@@ -93,7 +93,7 @@ const MemberFieldSet = styled.fieldset`
         font-size: 0.9em;
       }
       &::before {
-        content: '';
+        content: "";
         display: inline-block;
         width: 18px;
         height: 18px;
@@ -105,11 +105,11 @@ const MemberFieldSet = styled.fieldset`
     }
     &:checked + label {
       &::before {
-        content: '';
+        content: "";
         background-color: var(--main);
         background-position: 50%;
         background-repeat: no-repeat;
-        background-image: url('/img/check.png');
+        background-image: url("/img/check.png");
       }
     }
   }
@@ -125,7 +125,7 @@ const MemberFieldSet = styled.fieldset`
       width: 45px;
       height: 43px;
       margin-left: auto;
-      background: url('/img/openid_sns_logo.png') no-repeat 0 0;
+      background: url("/img/openid_sns_logo.png") no-repeat 0 0;
     }
   }
 
@@ -147,19 +147,19 @@ const MemberFieldSet = styled.fieldset`
 
 export default function Login() {
   const [isTab, setIsTab] = useState(0);
-  const [login, checkLogin] = useState({ id: '', password: '' });
+  const [login, checkLogin] = useState({ id: "", password: "" });
   const [orderInfo, checkOrderInfo] = useState({
-    orderName: '',
-    orderPhone: '',
-    orderPW: '',
+    orderName: "",
+    orderPhone: "",
+    orderPW: "",
   });
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
 
   const loginTab = [
     {
-      name: '회원',
+      name: "회원",
       content: (
         <Member
           login={login}
@@ -173,8 +173,10 @@ export default function Login() {
       ),
     },
     {
-      name: '비회원',
-      content: <NotMember orderInfo={orderInfo} checkOrderInfo={checkOrderInfo} />,
+      name: "비회원",
+      content: (
+        <NotMember orderInfo={orderInfo} checkOrderInfo={checkOrderInfo} />
+      ),
     },
   ];
 
@@ -190,7 +192,7 @@ export default function Login() {
             {loginTab.map((v, i) => (
               <li
                 key={i}
-                className={i === isTab ? 'loginTabLi clickedTab' : 'loginTabLi'}
+                className={i === isTab ? "loginTabLi clickedTab" : "loginTabLi"}
                 onClick={() => {
                   handleClick(i);
                 }}
@@ -213,37 +215,41 @@ function Member(props) {
   const memberHandleSubmit = (e) => {
     e.preventDefault();
 
-    if (props.login.id === '') {
-      props.setErrorMessage('아이디를 입력해주세요');
+    if (props.login.id === "") {
+      props.setErrorMessage("아이디를 입력해주세요");
       return inputId.current.focus();
-    } else if (props.login.password === '') {
-      props.setErrorMessage('비밀번호를 입력해주세요');
+    } else if (props.login.password === "") {
+      props.setErrorMessage("비밀번호를 입력해주세요");
       return inputPassword.current.focus();
     } else {
       axios({
-        method: 'post',
-        url: 'http://localhost:9090/login',
+        method: "post",
+        url: "http://192.168.50.25:9090/login",
         data: props.login,
       })
         .then((result) => {
           if (result.data.login_result) {
             // 로그인 후 토큰, rememberMe 상태를 저장
-            const userId = jwtDecode(result.data.token)
-            localStorage.setItem('accessToken', JSON.stringify(userId));
-            cookies.setCookie('accessToken', result.data.token, { expires: new Date(Date.now() + 2628000000) }); // 쿠키 유효 1달
-            localStorage.setItem('rememberMe', props.rememberMe.toString());
-            cookies.setCookie('rememberMe', props.rememberMe.toString(), {
-              expires: props.rememberMe ? new Date(Date.now() + 2628000000) : null,
+            const userId = jwtDecode(result.data.token);
+            localStorage.setItem("accessToken", JSON.stringify(userId));
+            cookies.setCookie("accessToken", result.data.token, {
+              expires: new Date(Date.now() + 2628000000),
+            }); // 쿠키 유효 1달
+            localStorage.setItem("rememberMe", props.rememberMe.toString());
+            cookies.setCookie("rememberMe", props.rememberMe.toString(), {
+              expires: props.rememberMe
+                ? new Date(Date.now() + 2628000000)
+                : null,
             }); // rememberMe가 체크되어있으면 1달 유효
-            props.navigate('/');
+            props.navigate("/");
           } else {
             if (result.data.count === 1) {
-              props.setErrorMessage('비밀번호가 맞지 않습니다.');
-              props.checkLogin({ ...props.login, password: '' });
+              props.setErrorMessage("비밀번호가 맞지 않습니다.");
+              props.checkLogin({ ...props.login, password: "" });
               return inputPassword.current.focus();
             } else {
-              props.setErrorMessage('회원정보가 존재하지 않습니다.');
-              props.checkLogin({ id: '', password: '' });
+              props.setErrorMessage("회원정보가 존재하지 않습니다.");
+              props.checkLogin({ id: "", password: "" });
             }
           }
         })
@@ -307,14 +313,15 @@ function Member(props) {
         </div>
         <div
           style={{
-            color: '#999',
-            margin: '18px 0',
-            fontSize: '0.9em',
-            borderBottom: '1px solid #bbbbbb',
-            paddingBottom: '6px',
+            color: "#999",
+            margin: "18px 0",
+            fontSize: "0.9em",
+            borderBottom: "1px solid #bbbbbb",
+            paddingBottom: "6px",
           }}
         >
-          개인정보 보호를 위해 공용 PC에서 사용 후 SNS 계정의 로그아웃 상태를 반드시 확인해주세요.
+          개인정보 보호를 위해 공용 PC에서 사용 후 SNS 계정의 로그아웃 상태를
+          반드시 확인해주세요.
         </div>
         <ul>
           <li>
@@ -358,8 +365,10 @@ function NotMember(props) {
 
   return (
     <MemberFieldSet>
-      <div style={{ margin: '18px 0', fontSize: '0.9em' }}>
-        비회원으로 <span style={{ color: '#ef3e42' }}>구매 시 입력하신 정보</span>로 로그인해 주세요.
+      <div style={{ margin: "18px 0", fontSize: "0.9em" }}>
+        비회원으로{" "}
+        <span style={{ color: "#ef3e42" }}>구매 시 입력하신 정보</span>로
+        로그인해 주세요.
       </div>
       <form action="" name="NotMemberForm" onSubmit={notMemberHandleChange}>
         <Input

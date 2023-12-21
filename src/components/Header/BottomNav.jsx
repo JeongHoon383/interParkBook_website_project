@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { IoIosArrowDown } from 'react-icons/io';
-import { IoIosArrowUp } from 'react-icons/io';
-import AllCategory from './CategoryBanner/AllCategory';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { Desktop, Mobile } from '../MediaQuery';
+import React, { useState } from "react";
+import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowUp } from "react-icons/io";
+import AllCategory from "./CategoryBanner/AllCategory";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { Desktop, Mobile } from "../MediaQuery";
 
 const Nav = styled.div`
   letter-spacing: -1px;
@@ -58,7 +58,9 @@ export default function BottomNav() {
                 <li>
                   <Link to="/bestseller">베스트셀러</Link>
                 </li>
-                <li>신간</li>
+                <li>
+                  <Link to="/newseller">신간</Link>
+                </li>
                 <li>이벤트</li>
               </ul>
             </div>

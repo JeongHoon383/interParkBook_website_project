@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { useFormContext } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import axios from 'axios';
+import React, { useState } from "react";
+import { useFormContext } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import axios from "axios";
 
 const Input = styled.input`
   display: inline-block;
@@ -14,16 +14,16 @@ const Input = styled.input`
 `;
 
 const Fieldset = styled.fieldset`
-  input[type='text'],
-  input[type='password'],
-  input[type='email'] {
+  input[type="text"],
+  input[type="password"],
+  input[type="email"] {
     &::placeholder {
       padding-left: 6px;
       font-size: 0.8em;
       color: #c9c9c9;
     }
   }
-  input[type='checkbox'] {
+  input[type="checkbox"] {
     display: none;
     + label {
       cursor: pointer;
@@ -33,7 +33,7 @@ const Fieldset = styled.fieldset`
         font-size: 0.9em;
       }
       &::before {
-        content: '';
+        content: "";
         display: inline-block;
         width: 18px;
         height: 18px;
@@ -45,11 +45,11 @@ const Fieldset = styled.fieldset`
     }
     &:checked + label {
       &::before {
-        content: '';
+        content: "";
         background-color: var(--main);
         background-position: 50%;
         background-repeat: no-repeat;
-        background-image: url('img/check.png');
+        background-image: url("img/check.png");
       }
     }
   }
@@ -59,13 +59,13 @@ const Fieldset = styled.fieldset`
   .agreeAll {
     margin-top: 22px;
     font-size: 1.2em;
-    font-family: 'YES24GothicB';
+    font-family: "YES24GothicB";
   }
   .required {
     margin-bottom: 33px;
     .selectText {
       font-size: 0.9em;
-      font-family: 'YES24GothicB';
+      font-family: "YES24GothicB";
     }
     div {
       margin-bottom: 12px;
@@ -79,7 +79,7 @@ const Fieldset = styled.fieldset`
     width: 100%;
     height: 40px;
     border-radius: 3px;
-    font-family: 'YES24GothicB';
+    font-family: "YES24GothicB";
     text-align: center;
     color: #fff;
     background-color: var(--main);
@@ -93,7 +93,7 @@ const Label = styled.label`
   width: 190px;
   display: inline-block;
   text-align: left;
-  font-family: 'YES24GothicB';
+  font-family: "YES24GothicB";
   font-size: 0.8em;
 `;
 
@@ -130,7 +130,9 @@ export default function SignForm() {
   };
 
   const handleSelectAll = (e) => {
-    e.target.checked ? setCheckItem(['required01', 'required02', 'required03']) : setCheckItem([]);
+    e.target.checked
+      ? setCheckItem(["required01", "required02", "required03"])
+      : setCheckItem([]);
   };
 
   const isAllChecked = checkItem.length === 3;
@@ -138,20 +140,23 @@ export default function SignForm() {
 
   const onSubmit = (data) => {
     axios({
-      method: 'post',
-      url: 'http://127.0.0.1:9090/member/',
+      method: "post",
+      url: "http://192.168.50.25:9090/member/",
       data: data,
     })
       .then((result) => {
-        if (result.data === 'success') {
-          navigate('/member/done');
+        if (result.data === "success") {
+          navigate("/member/done");
         }
       })
       .catch((err) => console.error(err));
   };
   return (
     <div className="signUpContent">
-      <div className="signUpInner" style={{ width: '40%', margin: '70px auto' }}>
+      <div
+        className="signUpInner"
+        style={{ width: "40%", margin: "70px auto" }}
+      >
         <form onSubmit={handleSubmit(onSubmit)}>
           <Fieldset>
             <div>
@@ -164,7 +169,7 @@ export default function SignForm() {
                 name="id"
                 id="id"
                 placeholder="6~20자 영문, 숫자"
-                {...register('id', {
+                {...register("id", {
                   required: true,
                 })}
               />
@@ -180,7 +185,7 @@ export default function SignForm() {
                 name="password"
                 id="password"
                 placeholder="8~12자 영문, 숫자, 특수문자"
-                {...register('password', {
+                {...register("password", {
                   required: true,
                 })}
               />
@@ -196,7 +201,7 @@ export default function SignForm() {
                 name="passwordCheck"
                 id="passwordCheck"
                 placeholder="8~12자 영문, 숫자, 특수문자"
-                {...register('passwordCheck', {
+                {...register("passwordCheck", {
                   required: true,
                 })}
               />
@@ -207,10 +212,10 @@ export default function SignForm() {
                 <span>이름</span>
                 <Star> *</Star>
               </Label>
-              <Input type="text" name="name" id="name" {...register('name')} />
+              <Input type="text" name="name" id="name" {...register("name")} />
             </div>
             <ErrorMessage>{errors.name?.message}</ErrorMessage>
-            <div style={{ position: 'relative' }}>
+            <div style={{ position: "relative" }}>
               <Label htmlFor="email" className="textLabel">
                 <span>이메일</span>
                 <Star> *</Star>
@@ -220,13 +225,13 @@ export default function SignForm() {
                 name="email"
                 id="email"
                 placeholder="interpark@interpark.com"
-                {...register('email', {
+                {...register("email", {
                   required: true,
                 })}
               />
             </div>
             <ErrorMessage>{errors.email?.message}</ErrorMessage>
-            <div style={{ position: 'relative' }}>
+            <div style={{ position: "relative" }}>
               <Label htmlFor="phone" className="textLabel">
                 <span>휴대폰</span>
                 <Star> *</Star>
@@ -238,7 +243,7 @@ export default function SignForm() {
                 maxLength="11"
                 placeholder="010 1234 5678"
                 onKeyDown={handleNumber}
-                {...register('phone', {
+                {...register("phone", {
                   required: true,
                 })}
               />
@@ -266,7 +271,7 @@ export default function SignForm() {
                     type="checkbox"
                     id="required01"
                     onChange={handleSelect}
-                    checked={checkItem.includes('required01') ? true : false}
+                    checked={checkItem.includes("required01") ? true : false}
                   />
                   <label htmlFor="required01">
                     <span>[필수] 이용약관</span>
@@ -277,7 +282,7 @@ export default function SignForm() {
                     type="checkbox"
                     id="required02"
                     onChange={handleSelect}
-                    checked={checkItem.includes('required02') ? true : false}
+                    checked={checkItem.includes("required02") ? true : false}
                   />
                   <label htmlFor="required02">
                     <span>[필수] 개인정보 수집동의서</span>
@@ -288,7 +293,7 @@ export default function SignForm() {
                     type="checkbox"
                     id="required03"
                     onChange={handleSelect}
-                    checked={checkItem.includes('required03') ? true : false}
+                    checked={checkItem.includes("required03") ? true : false}
                   />
                   <label htmlFor="required03">
                     <span>[필수]14세 이상입니다.</span>
@@ -297,7 +302,10 @@ export default function SignForm() {
                 <ErrorMessage>{errors.required?.message}</ErrorMessage>
               </div>
             </div>
-            <button type="submit" disabled={!isValid || disabled ? true : false}>
+            <button
+              type="submit"
+              disabled={!isValid || disabled ? true : false}
+            >
               가입 완료
             </button>
           </Fieldset>

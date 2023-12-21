@@ -442,7 +442,7 @@ const Detail_review = ({ reviewData, setReviewData }) => {
   useEffect(() => {
     setIsPending(true);
     axios
-      .get(`http://127.0.0.1:9090/book/${params.id}/review`)
+      .get(`http://192.168.50.25:9090/book/${params.id}/review`)
       .then((res) => setReviewData(res?.data));
     setIsPending(false);
   }, [reviewData]);
@@ -463,7 +463,7 @@ const Detail_review = ({ reviewData, setReviewData }) => {
 
     let { title, point, content } = data;
     axios
-      .post(`http://127.0.0.1:9090/book/:isbn/review`, {
+      .post(`http://192.168.50.25:9090/book/:isbn/review`, {
         title,
         point: rating + 1,
         content,
@@ -481,7 +481,7 @@ const Detail_review = ({ reviewData, setReviewData }) => {
   let starArr = [1, 2, 3, 4, 5];
 
   const handleMouseover = (star) => setRating(star);
-let userInfo = getUser()
+  let userInfo = getUser();
   return (
     <>
       {isPending ? (
@@ -493,7 +493,8 @@ let userInfo = getUser()
               drag
               layoutId="tog"
               onClick={() => setToggle(true)}
-              type="button">
+              type="button"
+            >
               리뷰쓰기
             </ToggleButton>
           )}
@@ -504,7 +505,8 @@ let userInfo = getUser()
                 variants={formVars}
                 initial="start"
                 animate="end"
-                exit="exit">
+                exit="exit"
+              >
                 <fieldset>
                   <legend>
                     <h1>리뷰 작성</h1>{" "}
@@ -512,7 +514,8 @@ let userInfo = getUser()
                     <CloseButton
                       layoutId="tog"
                       onClick={() => setToggle(false)}
-                      type="button">
+                      type="button"
+                    >
                       리뷰닫기
                     </CloseButton>
                   </legend>
@@ -708,7 +711,8 @@ let userInfo = getUser()
                       <span
                         style={{
                           transform: click ? "rotate(180deg)" : "rotate(0deg)",
-                        }}>
+                        }}
+                      >
                         <IoIosArrowDown />
                       </span>
                     </div>

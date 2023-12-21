@@ -1,11 +1,16 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 import styled from 'styled-components'
 
 const NewbookContents = styled.div`
-  margin-left : 35px;
+  margin-left : 26px;
   .newbook_ul li:not(:first-child){
     margin-bottom : 10px;
     font-size : 13px;
+  }
+
+  .newbook_ul{
+    width : 165px;
   }
 
   .newBook_img{
@@ -19,7 +24,17 @@ const NewbookContents = styled.div`
   }
 
   .newBook_title{
+    width : 147px;
+    margin-bottom : 10px;
     font-weight : bold;
+  }
+
+  .newBook_title:hover{
+    text-decoration : underline;
+  }
+
+  .newBook_autor{
+    width : 147px;
   }
 
   .newbook_price{
@@ -28,24 +43,26 @@ const NewbookContents = styled.div`
 
   .newbook_annotation{
     width : 147px;
+    overflow : hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 `;
 
 const NewbookContent = ({ content }) => {
   if(!content) return <></> 
-    const {img, category, title, author, editor, price, point, annotation} = content;
+    const {cover, title, author, publisher, priceSales, mileage, description, isbn13} = content;
 
   return (
     <NewbookContents>
       <ul className='newbook_ul'>
-        <li><img className='newBook_img' src={img} alt="" /></li>
-        <li className='newBook_category'>{category}</li>
-        <li className='newBook_title'>{title}</li>
+        <Link to={`/book/${isbn13}`}><li><img className='newBook_img' src={cover} alt="" /></li></Link>
+        <Link to={`/book/${isbn13}`}><li className='newBook_title'>{title}</li></Link>
         <li className='newBook_autor grey'>{author}</li>
-        <li className='newBook_editor grey'>{editor}</li>
-        <li className='newbook_price'>{price}</li>
-        <li className='newbook_point'>{point}</li>
-        <li className='newbook_annotation'>{annotation}</li>
+        <li className='newBook_editor grey'>{publisher}</li>
+        <li className='newbook_price'>{[priceSales].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</li>
+        <li className='newbook_point'>{mileage}P</li>
+        <li className='newbook_annotation grey'>{description}</li>
       </ul>
     </NewbookContents>
   )

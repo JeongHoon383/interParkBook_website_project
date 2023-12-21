@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { IoIosArrowForward } from 'react-icons/io';
+import { Link } from 'react-router-dom';
 
 const SecondBanner = styled.div`
   width: 580px;
@@ -49,6 +50,10 @@ const SecondBanner = styled.div`
     cursor: pointer;
   }
 
+  .banner_title:hover{
+    text-decoration : underline;
+  }
+
   .banner_author {
     margin-bottom: 10px;
     font-size: 12px;
@@ -62,28 +67,30 @@ const SecondBanner = styled.div`
 `;
 //{props.dataList[0] && props.dataList[0].img}
 const Second_banner_content = ({ banner }) => {
-  const { img, semiTitle, content, title, author, price, point } = banner;
+  if(!banner) return <></>  
+  const { title, author, description, priceSales, mileage, cover, isbn13 } = banner;
 
   return (
     <SecondBanner>
       <div className='banner_left'>
         <div>
-          <img className='banner_img' src={img} alt='' />
+          <Link to={`/book/${isbn13}`}><img className='banner_img' src={cover} alt='' /></Link>
         </div>
         <div className='banner_text'>
-          <div className='banner_text_icon'>
+          <Link to='/category/list'><div className='banner_text_icon'>
             인터파크의 선택
             <span>
               <IoIosArrowForward />
             </span>
           </div>
-          <div className='banner_semiTitle'>{semiTitle}</div>
-          <div className='banner_content'>{content}</div>
-          <div className='banner_title'>{title}</div>
+          </Link>
+          <div className='banner_semiTitle'>{title}</div>
+          <div className='banner_content'>{description}</div>
+          <Link to='/book/:id'><div className='banner_title'>{title}</div></Link>
           <div className='banner_author'>{author}</div>
           <div className='banner_price'>
-            <span>{price}</span>
-            <span>{point}</span>
+            <span>{[priceSales].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</span>
+            <span> {mileage}P</span>
           </div>
         </div>
       </div>

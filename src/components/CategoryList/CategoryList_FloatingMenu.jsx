@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from 'axios';
-import * as cookies from '../../util/cookies.js';
+import axios from "axios";
+import * as cookies from "../../util/cookies.js";
 import { RiCoupon3Line } from "react-icons/ri";
 import { TfiClose } from "react-icons/tfi";
 import { FiUser } from "react-icons/fi";
@@ -58,14 +58,14 @@ const FloatingMenu = styled.aside`
     }
   }
   .recentViewList {
-    height: ${(props) => props.$recentViewData ? "300px" : "150px"}; 
+    height: ${(props) => (props.$recentViewData ? "300px" : "150px")};
     padding: 5px 0;
     li {
-      &.noRecentView{
+      &.noRecentView {
         display: flex;
         align-items: center;
         justify-content: center;
-        height: ${(props) => props.$recentViewData ? "300px" : "150px"}; 
+        height: ${(props) => (props.$recentViewData ? "300px" : "150px")};
         text-align: center;
       }
       > a {
@@ -154,34 +154,44 @@ const FloatingMenu = styled.aside`
   }
 `;
 
-export default function CategoryList_FloatingMenu({userId}) {
+export default function CategoryList_FloatingMenu({ userId }) {
   const [recentViewData, setRecentViewData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
   const [userInfo, setUserInfo] = useState({});
 
   const getRecentViewData = () => {
-    const recentViewArr = cookies.getCookie('recentView') ? cookies.getCookie('recentView') : [];
-    axios.post('http://127.0.0.1:9090/floatingMenu/', recentViewArr)
-    .then(result => {
-      setTotalPage(Math.ceil(result.data.length/3) > 1 ? Math.ceil(result.data.length/3) : 1);
-      setRecentViewData(result.data)
-    });
+    const recentViewArr = cookies.getCookie("recentView")
+      ? cookies.getCookie("recentView")
+      : [];
+    axios
+      .post("http://192.168.50.25:9090/floatingMenu/", recentViewArr)
+      .then((result) => {
+        setTotalPage(
+          Math.ceil(result.data.length / 3) > 1
+            ? Math.ceil(result.data.length / 3)
+            : 1
+        );
+        setRecentViewData(result.data);
+      });
   };
 
   useEffect(() => {
-    axios.get(`http://127.0.0.1:9090/member/${userId}`)
-    .then(result => setUserInfo(result.data));
+    axios
+      .get(`http://192.168.50.25:9090/member/${userId}`)
+      .then((result) => setUserInfo(result.data));
 
     getRecentViewData();
   }, []);
 
   const handleDelete = (isbn13, e) => {
     e.preventDefault();
-    const recentViewCookie = cookies.getCookie('recentView');
+    const recentViewCookie = cookies.getCookie("recentView");
     const existingValues = recentViewCookie ? recentViewCookie : [];
-    const updateValues = existingValues.filter(value => value != isbn13);
-    cookies.setCookie('recentView', JSON.stringify(updateValues), {path : '/'});
+    const updateValues = existingValues.filter((value) => value != isbn13);
+    cookies.setCookie("recentView", JSON.stringify(updateValues), {
+      path: "/",
+    });
 
     getRecentViewData();
   };
@@ -189,9 +199,8 @@ export default function CategoryList_FloatingMenu({userId}) {
   return (
     <FloatingMenu $recentViewData={recentViewData.length}>
       <h4 className="myInterpark">마이 인터파크</h4>
-      {
-        userId ? (
-          <div className="myMenu">
+      {userId ? (
+        <div className="myMenu">
           <Link>
             <span className="pointIcon">P</span>
             <span>{userInfo.userMileage}P</span>
@@ -200,7 +209,7 @@ export default function CategoryList_FloatingMenu({userId}) {
             <RiCoupon3Line />
             <span>0장</span>
           </Link>
-          <Link to={'/mypage'}>
+          <Link to={"/mypage"}>
             <FiUser />
             <span>마이페이지</span>
           </Link>
@@ -209,51 +218,64 @@ export default function CategoryList_FloatingMenu({userId}) {
             <span>찜한상품</span>
           </Link>
         </div>
-        ) : (
-          null
-        )
-      }
+      ) : null}
       <h4 className="recentView">
         최근 본 상품
-        <span className="recentViewCount">{recentViewData.length ? recentViewData.length : 0}</span>
+        <span className="recentViewCount">
+          {recentViewData.length ? recentViewData.length : 0}
+        </span>
       </h4>
       <ul className="recentViewList">
-      {
-        recentViewData.length ? 
-          recentViewData.slice((currentPage - 1) * 3, currentPage * 3).map(item => (
-            <li key={item.isbn13}>
-            <Link to={`/book/${item.isbn13}`}>
-              <figure>
-                <img
-                  src={item.cover}
-                  alt="recentViewBookCover"
-                />
-                <figcaption>
-                  <button className="deleteBtn" onClick={(e) =>{handleDelete(item.isbn13, e)}}>
-                    <TfiClose />
-                  </button>
-                  <p className="bookTitle">
-                    {item.title}
-                  </p>
-                  <p className="priceSales">{item.priceSales.toLocaleString()}원</p>
-                </figcaption>
-              </figure>
-            </Link>
-          </li>
-          ))
-          : (
+        {recentViewData.length ? (
+          recentViewData
+            .slice((currentPage - 1) * 3, currentPage * 3)
+            .map((item) => (
+              <li key={item.isbn13}>
+                <Link to={`/book/${item.isbn13}`}>
+                  <figure>
+                    <img src={item.cover} alt="recentViewBookCover" />
+                    <figcaption>
+                      <button
+                        className="deleteBtn"
+                        onClick={(e) => {
+                          handleDelete(item.isbn13, e);
+                        }}
+                      >
+                        <TfiClose />
+                      </button>
+                      <p className="bookTitle">{item.title}</p>
+                      <p className="priceSales">
+                        {item.priceSales.toLocaleString()}원
+                      </p>
+                    </figcaption>
+                  </figure>
+                </Link>
+              </li>
+            ))
+        ) : (
           <li className="noRecentView">
             <p>최근 본 상품이 없습니다.</p>
           </li>
-        ) 
-      }
+        )}
       </ul>
       <div className="fractionPagination">
-        <button onClick={() => setCurrentPage(currentPage > 1 ? currentPage - 1 : 1)}>&lt;</button>
+        <button
+          onClick={() => setCurrentPage(currentPage > 1 ? currentPage - 1 : 1)}
+        >
+          &lt;
+        </button>
         <span>
           {currentPage}/{totalPage}
         </span>
-        <button onClick={() => setCurrentPage(currentPage < totalPage ? currentPage + 1 : totalPage)}>&gt;</button>
+        <button
+          onClick={() =>
+            setCurrentPage(
+              currentPage < totalPage ? currentPage + 1 : totalPage
+            )
+          }
+        >
+          &gt;
+        </button>
       </div>
     </FloatingMenu>
   );

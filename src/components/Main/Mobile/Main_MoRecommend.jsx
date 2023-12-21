@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import styled from 'styled-components';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import styled from "styled-components";
 
 const Div = styled.div`
   ul {
@@ -38,7 +38,7 @@ const Div = styled.div`
       }
       .rTitle {
         display: block;
-        font-family: 'YES24GothicB';
+        font-family: "YES24GothicB";
         font-size: 0.8em;
         margin-bottom: 6px;
       }
@@ -58,7 +58,7 @@ export default function Main_MoRecommend() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:9090/blogbest')
+      .get("http://192.168.50.25:9090/blogbest")
       .then((result) => setList(result.data))
       .catch((err) => console.error(err));
   }, [list]);
@@ -72,9 +72,9 @@ export default function Main_MoRecommend() {
                 <img src={v.cover} alt="" />
               </div>
               <div className="rTitleBox">
-                <span className="rTitle">{v.title.split('-')[0]}</span>
+                <span className="rTitle">{v.title.split("-")[0]}</span>
                 <span className="rAuthor">
-                  {v.author.split('(')[0]} | {v.publisher}
+                  {v.author.split("(")[0]} | {v.publisher}
                 </span>
               </div>
             </Link>

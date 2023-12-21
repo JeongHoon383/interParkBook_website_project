@@ -1,49 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import Second_banner_content from './Second_banner_content';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import Second_banner_content from "./Second_banner_content";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 const CategoryMain_second_banner = () => {
-  const [bannerList, setBannerList] = useState([]);
   const [active, setActive] = useState(0);
+
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     axios({
-      method: 'get',
-      url: '/data/categoryMain/interParkChoice.json',
+      method: "get",
+      url: "http://192.168.50.25:9090/category/main",
     }).then((result) => {
-      console.log(result);
-      setBannerList(result.data);
+      const data = result.data;
+      setData(data.slice(3, 6));
     });
   }, []);
 
-  const initBanners = [
-    { id: 0, text: '행복은 어디에나' },
-    { id: 1, text: '수어 문법을 문학으로 녹인다면' },
-    { id: 2, text: '대한민국 산업의 미래' },
-  ];
-
   return (
     <Second_banner>
-      {bannerList.length > 0 && (
-        <Second_banner_content banner={bannerList[active]} />
-      )}
-
-      <div className='banner_right'>
-        <ul>
-          {initBanners.map(({ id, text }) => (
-            <li key={id} onMouseOver={() => setActive(id)}>
-              <img
-                className='banner_right_img'
-                src={`/img/CategoryMain/secondbanner_img/secondbanner${
-                  id + 1
-                }-${id + 1}.jpeg`}
-                alt=''
-              />
-              <span className='banner_right_text'>{text}</span>
-            </li>
-          ))}
-        </ul>
+      {data.length > 0 && <Second_banner_content banner={data[active]} />}
+      <div className="banner_right">
+        {data.length > 0 && (
+          <ul>
+            {data.map(({ title, cover, isbn13 }, key) => (
+              <li key={key} onMouseOver={() => setActive(key)}>
+                <Link to={`/book/${isbn13}`}>
+                  <img className="banner_right_img" src={cover} alt="" />
+                </Link>
+                <span className="banner_right_text">{title}</span>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </Second_banner>
   );

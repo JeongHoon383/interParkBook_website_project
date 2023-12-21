@@ -47,6 +47,11 @@ const CultureContainer = styled.div`
     width : 199px;
   }
 
+  .interPark_meet_img li:hover{
+    text-decoration : underline;
+    cursor: pointer;
+  }
+
   .interPark_meet_img li:last-child{
     margin-top : 16px;
   }
@@ -76,6 +81,7 @@ const CultureContainer = styled.div`
     width : 198px;
     height : 130px;
     overflow : hidden;
+    cursor: pointer;
   }
 
   .library_img img{

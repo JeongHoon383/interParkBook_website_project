@@ -86,7 +86,7 @@ export default function CategoryList_SubCaNav() {
 
     if (parameterArr.length < 6) {
       axios(
-        `http://127.0.0.1:9090/category/list/${parameterArr[0]}/${parameterArr[1]}/${parameterArr[2]}/${parameterArr[3]}/${parameterArr[4]}`
+        `http://192.168.50.25:9090/category/list/${parameterArr[0]}/${parameterArr[1]}/${parameterArr[2]}/${parameterArr[3]}/${parameterArr[4]}`
       ).then((result) => setCategoryData(result.data));
     }
   }, [
@@ -94,13 +94,12 @@ export default function CategoryList_SubCaNav() {
     parameterArr[2],
     parameterArr[3],
     parameterArr[4],
-    parameterArr[5]
+    parameterArr[5],
   ]);
 
   const handleClick = () => {
     setIsExtended(!isExtended);
   };
-
 
   return (
     <>
@@ -123,9 +122,7 @@ export default function CategoryList_SubCaNav() {
                     >
                       {item.categoryName}
                     </Link>
-                    <CategoryList_SUbCaNavLi 
-                      subCategoryData={item}
-                    />
+                    <CategoryList_SUbCaNavLi subCategoryData={item} />
                   </li>
                 ))}
               </ul>

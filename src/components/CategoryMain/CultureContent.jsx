@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 import styled from 'styled-components'
 
 const ContentContainer = styled.div`
@@ -18,11 +19,20 @@ const ContentContainer = styled.div`
 
   .day_review_cmt{
     margin-bottom : 10px;
+    cursor: pointer;
+  }
+
+  .day_review_cmt:hover{
+    text-decoration : underline;
   }
 
   .day_review_name{
     margin-bottom : 5px;
     font-weight : bold;
+  }
+
+  .day_review_name:hover{
+    text-decoration : underline;
   }
 
   .day_review_author{
@@ -38,10 +48,10 @@ const CultureContent = ({ item }) => {
   return (
     <ContentContainer>
       <div className="day_review_container">
-          <div><img className="day_review_img" src={img} alt="" /></div>
+          <div><Link to='/book/:id'><img className="day_review_img" src={img} alt="" /></Link></div>
           <ul className="day_review_text">
             <li className="day_review_cmt">{review}</li>
-            <li className="day_review_name">{title}</li>
+            <Link to='/book/:id'><li className="day_review_name">{title}</li></Link>
             <li className="day_review_author grey">{author}</li>
             <li className="day_review_publisher grey">{publisher}</li>
           </ul>

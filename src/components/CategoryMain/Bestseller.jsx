@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import DropBox from '../DropBox';
-import BestSellerBox from './BestSellerBox';
-import BestSellerRank from './BestSellerRank';
-import { IoIosArrowForward } from 'react-icons/io';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import DropBox from "../DropBox";
+import BestSellerBox from "./BestSellerBox";
+import BestSellerRank from "./BestSellerRank";
+import { IoIosArrowForward } from "react-icons/io";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const BestSellerContainer = styled.div`
   width: 178px;
@@ -25,15 +26,32 @@ const BestSellerContainer = styled.div`
 
   .rank_row {
     margin-right: 5px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .rank_row_active {
+    margin-right: 5px;
   }
 
   .rank_high {
     margin-left: 5px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .rank_high_active {
+    margin-left: 5px;
+  }
+  .rank_row_active:hover,
+  .rank_high_active:hover {
+    text-decoration: underline;
+    cursor: pointer;
   }
 
   .more {
     display: flex;
-    margin-left: 45px;
+    margin-left: 25px;
     font-size: 12px;
     cursor: pointer;
   }
@@ -47,18 +65,19 @@ const BestSellerContainer = styled.div`
 
 const Bestseller = () => {
   const [rankList, setRankList] = useState([]);
-  const [active, setActive] = useState('0');
+  const [active, setActive] = useState("0");
   const [renderList, setLenderList] = useState([]);
+  const [rankActive, setRankActive] = useState("0");
 
   useEffect(() => {
     axios({
-      method: 'get',
-      url: '/data/categoryMain/bestSeller.json',
+      method: "get",
+      url: "http://192.168.50.25:9090/category/main",
     }).then((result) => {
-      const date = result.data;
+      const data = result.data;
 
-      setRankList(date);
-      setLenderList(date.slice(0, 5));
+      setRankList(data);
+      setLenderList(data.slice(0, 5));
     });
   }, []);
 
@@ -73,28 +92,36 @@ const Bestseller = () => {
 
   return (
     <BestSellerContainer>
-      <h3 className='bestSeller_text'>베스트셀러</h3>
-      <div className='bestSeller_dropBox'>
+      <h3 className="bestSeller_text">베스트셀러</h3>
+      <div className="bestSeller_dropBox">
         <DropBox />
       </div>
-      <div className='rank'>
+      <div className="rank">
         <span
-          onClick={() => rankClick({ start: 0, end: 5 })}
-          className='rank_row grey'
+          onClick={() => {
+            rankClick({ start: 0, end: 5 });
+            return setRankActive("0");
+          }}
+          className={rankActive === "0" ? "rank_row" : "rank_row_active grey"}
         >
           1~5위
         </span>
         <span>|</span>
         <span
-          onClick={() => rankClick({ start: 5, end: 10 })}
-          className='rank_high grey'
+          onClick={() => {
+            rankClick({ start: 5, end: 10 });
+            return setRankActive("1");
+          }}
+          className={rankActive === "1" ? "rank_high" : "rank_high_active grey"}
         >
           6~10위
         </span>
-        <span className='more grey'>
-          더보기
-          <IoIosArrowForward />
-        </span>
+        <Link to="/bestSeller/">
+          <span className="more grey">
+            더보기
+            <IoIosArrowForward />
+          </span>
+        </Link>
       </div>
       {rankList[active] && <BestSellerBox rank={rankList[active]} />}
       {renderList.length > 0 &&
