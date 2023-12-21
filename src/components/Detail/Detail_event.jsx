@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import React from "react";
 import styled from "styled-components";
 
-const Figure = styled.figure`
+const Figure = styled(motion.figure)`
   width: 100%;
   height: 100px;
   margin-top: 20px;
@@ -39,13 +39,25 @@ const SortSection = styled(motion.section)`
 const Detail_event = () => {
   return (
     <div>
-      <Figure>
+      <Figure
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1, transition: { duration: 0.5 } }}>
         <img
           src="https://qi-b.qoo10cdn.com/milti/renewPark/main/64631_202310301515333991.jpg"
           alt=""
         />
       </Figure>
-      <Figure>
+      <Figure
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: 1,
+          transition: {
+            duration: 0.5,
+            delay: 0.5,
+            type: "tween",
+            ease: "easeIn",
+          },
+        }}>
         <img
           src="https://qi-b.qoo10cdn.com/milti/renewPark/main/64631_202310311030384571.jpg"
           alt=""

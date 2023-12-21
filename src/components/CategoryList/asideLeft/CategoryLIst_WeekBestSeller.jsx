@@ -1,16 +1,18 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import axios from 'axios';
+import { useEffect, useState } from "react";
 
 const BestSellerNav = styled.nav`
   width: 180px;
   border: 1px solid #d8d8d8;
   margin-top: 10px;
   .weekBestSellerTitle {
-    font-size: 15px;
+    font-size: 13px;
     font-weight: bold;
     color: #000;
     text-align: center;
-    padding-top: 10px;
+    padding: 10px 0;
   }
   .weekBestSellerList {
     width: 100%;
@@ -60,80 +62,48 @@ const BestSellerNav = styled.nav`
 `;
 
 export default function CategortList_WeekBestSeller() {
+  const parameterArr = useParams().categoryPath.split('_');
+  const [weekBestSellerTitle, setWeekBestSellerTitle] = useState("");
+  const [bestSellerBookData, setBestSellerBookData] = useState([]);
+
+  useEffect(() => {
+    axios.get(`http://127.0.0.1:9090/category/list/${parameterArr[0]}/${parameterArr[1]}/${parameterArr[2]}/${parameterArr[3]}/${parameterArr[4]}/${parameterArr[5]}`)
+    .then(result => {
+      setWeekBestSellerTitle(result.data.categoryName);
+      axios.get(`/ttb/api/ItemList.aspx?ttbkey=ttbgur65142158001&QueryType=Bestseller&MaxResults=5&start=1&SearchTarget=Book&output=JS&Version=20131101&Cover=Big&CategoryId=${result.data.categoryId}`)
+      .then(result => setBestSellerBookData(result.data.item));
+    });
+  }, [
+    parameterArr[0],
+    parameterArr[1],
+    parameterArr[2],
+    parameterArr[3],
+    parameterArr[4],
+    parameterArr[5]
+  ])
+  
   return (
     <BestSellerNav>
-      <h4 className="weekBestSellerTitle">여행 주간 베스트셀러 &gt;</h4>
+      <h4 className="weekBestSellerTitle">{weekBestSellerTitle} 주간 베스트셀러</h4>
       <ul className="weekBestSellerList">
-        <li className="weekBestSellerItem">
-          <figure>
-            <Link>
-              <div className="weekBestSellerRank">1</div>
-              <img
-                src="https://image.aladin.co.kr/product/32940/45/cover150/k692936045_1.jpg"
-                alt="weekBestseller"
-              />
-            </Link>
-            <figcaption>
-              <Link>함께 웃고, 배우고, 사랑하고 - 네 자매의 스페인 여행</Link>
-            </figcaption>
-          </figure>
-        </li>
-        <li className="weekBestSellerItem">
-          <figure>
-            <Link>
-              <div className="weekBestSellerRank">2</div>
-              <img
-                src="https://image.aladin.co.kr/product/32940/45/cover150/k692936045_1.jpg"
-                alt="weekBestseller"
-              />
-            </Link>
-            <figcaption>
-              <Link>함께 웃고, 배우고, 사랑하고 - 네 자매의 스페인 여행</Link>
-            </figcaption>
-          </figure>
-        </li>
-        <li className="weekBestSellerItem">
-          <figure>
-            <Link>
-              <div className="weekBestSellerRank">3</div>
-              <img
-                src="https://image.aladin.co.kr/product/32940/45/cover150/k692936045_1.jpg"
-                alt="weekBestseller"
-              />
-            </Link>
-            <figcaption>
-              <Link>함께 웃고, 배우고, 사랑하고 - 네 자매의 스페인 여행</Link>
-            </figcaption>
-          </figure>
-        </li>
-        <li className="weekBestSellerItem">
-          <figure>
-            <Link>
-              <div className="weekBestSellerRank">4</div>
-              <img
-                src="https://image.aladin.co.kr/product/32940/45/cover150/k692936045_1.jpg"
-                alt="weekBestseller"
-              />
-            </Link>
-            <figcaption>
-              <Link>함께 웃고, 배우고, 사랑하고 - 네 자매의 스페인 여행</Link>
-            </figcaption>
-          </figure>
-        </li>
-        <li className="weekBestSellerItem">
-          <figure>
-            <Link>
-              <div className="weekBestSellerRank">5</div>
-              <img
-                src="https://image.aladin.co.kr/product/32940/45/cover150/k692936045_1.jpg"
-                alt="weekBestseller"
-              />
-            </Link>
-            <figcaption>
-              <Link>함께 웃고, 배우고, 사랑하고 - 네 자매의 스페인 여행</Link>
-            </figcaption>
-          </figure>
-        </li>
+        {
+          bestSellerBookData.map(bestSellerBookItem => (
+            <li className="weekBestSellerItem" key={bestSellerBookItem.isbn13}>
+            <figure>
+              <Link to={`/book/${bestSellerBookItem.isbn13}`}>
+                <div className="weekBestSellerRank">{bestSellerBookItem.bestRank}</div>
+                <img
+                  src={bestSellerBookItem.cover}
+                  alt="weekBestseller"
+                />
+              </Link>
+              <figcaption>
+                <Link to={`/book/${bestSellerBookItem.isbn13}`}>{bestSellerBookItem.title}</Link>
+              </figcaption>
+            </figure>
+          </li>
+          ))
+        }
       </ul>
     </BestSellerNav>
   );

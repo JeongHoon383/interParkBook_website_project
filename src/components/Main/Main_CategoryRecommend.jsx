@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Slider from 'react-slick';
-import '../../css/main/categoryRecommend.css';
 import axios from 'axios';
+import { Desktop, Mobile } from '../MediaQuery';
 
 const Pre = styled.div`
   width: 30px;
@@ -27,73 +28,113 @@ const Img = styled.img`
   vertical-align: bottom;
 `;
 
+const CategoryP = styled.p`
+  font-size: 0.7em;
+  font-weight: bold;
+  text-align: center;
+  color: var(--default);
+`;
+
+const CategoryRecommend = styled.div`
+  background-color: #fff;
+  .categoryRecommendHeader {
+    margin: 10px 0 22px 0;
+    h3 {
+      display: flex;
+      flex-basis: 100%;
+      align-items: center;
+      padding-top: 10px;
+      color: var(--default);
+      font-size: 1.2em;
+      font-weight: bold;
+      &::before {
+        content: '';
+        flex-grow: 1;
+        margin: 0 16px;
+        background: var(--default);
+        height: 1px;
+        font-size: 0;
+        line-height: 0;
+      }
+      &::after {
+        content: '';
+        flex-grow: 1;
+        margin: 0 16px;
+        background: var(--default);
+        height: 1px;
+        font-size: 0;
+        line-height: 0;
+      }
+    }
+  }
+
+  .tabs {
+    padding-bottom: 22px;
+    border-bottom: 1px solid #c9c9c9;
+  }
+  .tabsWrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    font-weight: bold;
+    color: var(--hover);
+    font-size: 0.9em;
+    letter-spacing: -1px;
+  }
+  .tabLi {
+    margin: 0 auto;
+    cursor: pointer;
+  }
+
+  .focused {
+    color: #e66a57;
+  }
+
+  .categoryImgBox {
+    box-sizing: border-box;
+    width: 85px;
+    height: 126px;
+    margin: 20px auto;
+  }
+`;
+
+const StyledSlider = styled(Slider)`
+  .slick-prev,
+  .slick-next {
+    &::before {
+      content: none;
+    }
+  }
+`;
 export default function Main_CategoryRecommend() {
   const [isHover, setIsHover] = useState(0);
-  const [dataList1, setDataList1] = useState([]);
-  const [dataList2, setDataList2] = useState([]);
-  const [dataList3, setDataList3] = useState([]);
-  const [dataList4, setDataList4] = useState([]);
-  const [dataList5, setDataList5] = useState([]);
-  const [dataList6, setDataList6] = useState([]);
+  const [dataList, setDataList] = useState([]);
 
-  useEffect(() => {
+  function content(searchCategoryId) {
     axios({
       method: 'get',
-      url: '/data/editorRecommend.json',
+      url: `http://localhost:9090/field/${searchCategoryId}`,
     }).then((result) => {
-      setDataList1(result.data[0]);
-      setDataList2(result.data[1]);
-      setDataList3(result.data[2]);
-      setDataList4(result.data[3]);
-      setDataList5(result.data[4]);
-      setDataList6(result.data[5]);
+      setDataList(result.data);
     });
-  });
+  }
+
+  useEffect(() => {
+    content(53471);
+  }, []);
 
   const slideArr = [
-    { name: '건강/요리', content: <Slide dataList={dataList1} /> },
-    { name: '맛집여행', content: <Slide dataList={dataList2} /> },
-    { name: '소설', content: <Slide dataList={dataList3} /> },
-    { name: '경제', content: <Slide dataList={dataList4} /> },
-    { name: '유아/아동', content: <Slide dataList={dataList5} /> },
-    { name: '외국도서', content: <Slide dataList={dataList6} /> },
+    { name: '건강/요리', cid: '53471' },
+    { name: '맛집여행', cid: '50875' },
+    { name: '소설', cid: '50993' },
+    { name: '경제', cid: '3057' },
+    { name: '유아/아동', cid: '35091' },
   ];
 
   const handleHover = (index) => {
     setIsHover(index);
   };
 
-  return (
-    <div className="categoryRecommend">
-      <div className="categoryRecommendHeader">
-        <h3>
-          <span>분야별</span>
-          <span>추천</span>
-        </h3>
-      </div>
-      <div className="categoryRecommendBox">
-        <div className="categoryTabs">
-          <ul className="tabWrap">
-            {slideArr.map((v, i) => (
-              <li
-                key={i}
-                className={i === isHover ? 'tabLi focused' : 'tabLi'}
-                onMouseOver={() => {
-                  handleHover(i);
-                }}
-              >
-                {v.name}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="categoryContents">{slideArr[isHover].content}</div>
-      </div>
-    </div>
-  );
-}
-
-function Slide({ dataList }) {
   const settings = {
     dots: false,
     arrows: true,
@@ -104,6 +145,18 @@ function Slide({ dataList }) {
     speed: 1000,
     autoplaySpeed: 4000,
     draggable: false,
+    responsive: [
+      {
+        breakpoint: 1200,
+        settings: {
+          rows: 2,
+          slidesPerRow: 2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+        },
+      },
+    ],
     nextArrow: (
       <NextTo>
         <Img src="/img/Slide/right-arrow.svg" />
@@ -115,25 +168,52 @@ function Slide({ dataList }) {
       </Pre>
     ),
   };
+
   return (
-    <>
-      {dataList.map((v, i) => (
-        <div className={`category_ ${v.searchCategoryId}`} key={i}>
-          <Slider {...settings}>
-            {v.item.map((ic, i) => (
-              <>
-                <div className="categoryImgBox" key={i}>
-                  <img src={ic.cover} alt="" />
-                </div>
-                <p className="categoryTitle">{ic.title.split('-')[0]}</p>
-                <p className="categoryPrice" style={{ color: '#e66a57' }}>
-                  {ic.priceSales.toLocaleString()}원
-                </p>
-              </>
+    <CategoryRecommend>
+      <div className="categoryRecommendHeader">
+        <h3>
+          <span style={{ color: 'var(--default)' }}>분야별</span>
+          <span style={{ color: '#e66a57' }}>추천</span>
+        </h3>
+      </div>
+      <div className="categoryRecommendBox">
+        <div className="tabs">
+          <ul className="tabsWrap">
+            {slideArr.map((v, i) => (
+              <li
+                key={i}
+                className={i === isHover ? 'tabLi focused' : 'tabLi'}
+                onMouseOver={() => {
+                  handleHover(i);
+                  content(v.cid);
+                }}
+              >
+                {v.name}
+              </li>
             ))}
-          </Slider>
+          </ul>
         </div>
-      ))}
-    </>
+        <div className="categoryContents">
+          <StyledSlider {...settings}>
+            {dataList.map((v, i) => (
+              <div className={`category_ ${v.searchCategoryId}`} key={i}>
+                <div className="categoryImgBox" key={i}>
+                  <Link to={`/book/${v.isbn13}`}>
+                    <img src={v.cover} alt="" style={{ width: '100%', height: '100%' }} />
+                  </Link>
+                </div>
+                <CategoryP style={{ width: '100px', height: '40px', margin: '0 auto' }}>
+                  {v.title.split('-')[0]}
+                </CategoryP>
+                <Desktop>
+                  <CategoryP style={{ color: '#e66a57' }}>{v.priceSales.toLocaleString()}원</CategoryP>
+                </Desktop>
+              </div>
+            ))}
+          </StyledSlider>
+        </div>
+      </div>
+    </CategoryRecommend>
   );
 }

@@ -15,21 +15,30 @@ const ProductsList = styled.ul`
 `;
 
 export default function CategoryList_Products({
-  data,
+  bookData,
   checkList,
-  setCheckList,
+  handleCheckList,
+  quantity,
+  handleQuantity,
+  handleToggleWishlist,
+  wishlist
 }) {
   return (
     <ProductsList>
-      {data.item &&
-        data.item.map((data) => (
-          <li key={data.isbn}>
-            <CategoryList_ProdAvatar data={data} />
-            <CategoryList_ProdContent data={data} />
+      {bookData &&
+        bookData.map((bookData, idx) => (
+          <li key={bookData.isbn13}>
+            <CategoryList_ProdAvatar bookData={bookData} />
+            <CategoryList_ProdContent bookData={bookData} />
             <CategoryList_ProdBuy
-              data={data}
+              bookData={bookData}
               checkList={checkList}
-              setCheckList={setCheckList}
+              handleCheckList={handleCheckList}
+              idx={idx}
+              quantity={quantity}
+              handleQuantity={handleQuantity}
+              handleToggleWishlist={handleToggleWishlist}
+              wishlist={wishlist}
             />
           </li>
         ))}

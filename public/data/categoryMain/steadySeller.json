@@ -1,0 +1,34 @@
+[
+  {
+    "img" : "/img/CategoryMain/steadySeller_img/img_1.jpeg",
+    "title" : "타샤의 정원",
+    "author" : "타샤 튜터 저",
+    "publisher" : "윌북(willbook)",
+    "price" : "16,020원",
+    "circle" : "에세이"
+  },
+  {
+    "img" : "/img/CategoryMain/steadySeller_img/img_2.jpeg",
+    "title" : "어른의 문해력",
+    "author" : "김선영 저",
+    "publisher" : "블랙피쉬",
+    "price" : "12,600원",
+    "circle" : "인문"
+  },
+  {
+    "img" : "/img/CategoryMain/steadySeller_img/img_3.jpeg",
+    "title" : "궁궐의 우리 나무",
+    "author" : "박상진 저",
+    "publisher" : "눌와",
+    "price" : "27,000원",
+    "circle" : "에세이"
+  },
+  {
+    "img" : "/img/CategoryMain/steadySeller_img/img_4.jpeg",
+    "title" : "레버리지",
+    "author" : "롭 무어 저/김유미 역",
+    "publisher" : "다산북스",
+    "price" : "16,200원",
+    "circle" : "경제"
+  }
+]

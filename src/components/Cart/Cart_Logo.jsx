@@ -10,12 +10,18 @@ const Figure = styled.figure`
   }
 `;
 const StartShop = styled.figure`
+border: 1px solid red;
   width: 100px;
   height: 35px;
   position: absolute;
   right: 0;
   top: 50%;
   transform: translateY(-80%);
+  img {
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
 `;
 
 const ImageSpan = styled.span`
@@ -24,6 +30,11 @@ const ImageSpan = styled.span`
   font-size: 12px;
   padding-left: 70px;
   bottom: 10px;
+
+  @media (max-width: 768px) {
+    padding-left: 50px;
+    font-size: 9px;
+  }
   em {
     color: var(--main);
     font-weight: bold;
@@ -33,8 +44,16 @@ const ImageSpan = styled.span`
 const Ul = styled.ul`
   font-size: 12px;
   color: #777;
+
+  @media (max-width: 768px) {
+    font-size: 9px;
+  }
   li {
     margin-top: 5px;
+
+    @media (max-width: 768px) {
+      margin-top: 4px;
+    }
   }
 `;
 
@@ -46,7 +65,7 @@ const Cart_Logo = () => {
           src="https://qi-b.qoo10cdn.com/renewPark/bookCart/bg_title01.gif"
           alt=""
         />
-        <StartShop>
+ {/*        <StartShop>
           <img
             src="https://qi-b.qoo10cdn.com/renewPark/bookCart/tab_shopCart.gif"
             alt=""
@@ -54,7 +73,7 @@ const Cart_Logo = () => {
         </StartShop>
         <ImageSpan>
           회원 로그인 후 상품을 담으시면 <em>1년간 자동저장</em>됩니다.
-        </ImageSpan>
+        </ImageSpan> */}
       </Figure>
       <Ul>
         <li>

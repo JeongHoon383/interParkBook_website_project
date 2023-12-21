@@ -1,11 +1,8 @@
 import styled from "styled-components";
-import Pagination from "react-js-pagination";
-import {
-  AiOutlineDoubleLeft,
-  AiOutlineLeft,
-  AiOutlineRight,
-  AiOutlineDoubleRight,
-} from "react-icons/ai";
+import PaginationComponent from "./PaginationComponent";
+import { TbSortAscending, TbSortDescending } from "react-icons/tb";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 const Sortarea = styled.div`
   width: 770px;
@@ -19,14 +16,22 @@ const Sortarea = styled.div`
     border-bottom: 1px solid #d8d8d8;
     .sortOption {
       button {
+        position: relative;
         line-height: 25px;
-        margin-right: 15px;
+        margin-right: 25px;
         &:hover {
           font-weight: bold;
         }
         &.currentSort {
           font-weight: bold;
           color: var(--main);
+        }
+        svg {
+          position: absolute;
+          top: 50%;
+          right: 0;
+          transform: translateX(100%) translateY(-50%);
+          font-size: 17px;
         }
       }
     }
@@ -47,36 +52,6 @@ const Sortarea = styled.div`
     justify-content: space-between;
     padding: 10px 12px;
     background: #f8f8f8;
-    .pagination {
-      display: inline-flex;
-      align-items: center;
-      li {
-        &.disabled {
-          color: #ccc;
-        }
-        a {
-          display: inline-block;
-          width: 26px;
-          line-height: 24px;
-          margin: 0 1px;
-          text-align: center;
-          &.active {
-            font-weight: bold;
-            border-radius: 4px;
-            border: 1px solid #d8d8d8;
-            background: #fff;
-          }
-          &:not(.paginationBtn):hover {
-            border-radius: 4px;
-            border: 1px solid #d8d8d8;
-            background: #fff;
-          }
-          &.paginationBtn {
-            font-size: 16px;
-          }
-        }
-      }
-    }
     .selectOption {
       button {
         line-height: 27px;
@@ -94,65 +69,160 @@ const Sortarea = styled.div`
 
 export default function CategoryList_Sort({
   totalResults,
+  sortField,
+  handleSortField,
+  sortOption,
+  handleSortOption,
   listQty,
-  setListQty,
+  handleListQty,
   currentPage,
-  setCurrentPage,
+  handleCurrentPage,
   isSoldout,
-  setIsSoldout,
+  handleIsSoldout,
   handleSelectAll,
   isCheckedAll,
-  setIsCheckedAll,
-  setCheckList,
+  handleIsCheckedAll,
+  handleCheckList,
+  handleAddCartAll,
+  handleAddWishlistAll
 }) {
-  //졍렬 버튼 클릭시 resetCheckLIst 실행/ 수정 필요
+  const parameterArr = useParams().categoryPath.split("_");
+
+  //졍렬 기능
+  const handleSort = (e) => {
+    resetCheckList();
+    handleCurrentPage(1);
+    if (sortField === e.target.value) {
+      sortOption === "asc" ? handleSortOption("desc") : handleSortOption("asc");
+    } else {
+      handleSortField(e.target.value);
+      handleSortOption("desc");
+    }
+  };
 
   //상품 체크 목록 리셋
   const resetCheckList = () => {
-    setIsCheckedAll(false);
-    setCheckList([]);
+    handleIsCheckedAll(false);
+    handleCheckList([]);
   };
 
   //페이지네이션 현재 페이지 변경
   const handlePageChange = (page) => {
     resetCheckList();
-    setCurrentPage(page);
+    handleCurrentPage(page);
   };
 
   //한 페이지에 볼 상품 수량 변경
-  const handleListQty = (e) => {
+  const handleListQtyChange = (e) => {
     resetCheckList();
-    setListQty(Number(e.target.value));
+    handleCurrentPage(1);
+    handleListQty(Number(e.target.value));
     handleSelectAll(false);
   };
 
   //품절 상품 포함/제외 변경
   const handleChangeSoldout = (e) => {
     resetCheckList();
-    setIsSoldout(e.target.value);
+    handleCurrentPage(1);
+    handleIsSoldout(e.target.value);
     handleSelectAll(false);
   };
+
+  //카테고리 변경시 정렬, 페이지네이션, 전체선택, 한번에 볼 상품수, 품절여부 초기화
+  useEffect(() => {
+    resetCheckList();
+    handleCurrentPage(1);
+    handleIsSoldout("상품있음");
+    handleListQty(20);
+    handleSortField("pubDate");
+    handleSortOption("desc");
+  }, [
+    parameterArr[0],
+    parameterArr[1],
+    parameterArr[2],
+    parameterArr[3],
+    parameterArr[4],
+    parameterArr[5],
+  ]);
 
   return (
     <Sortarea>
       <div className="topArea">
         <span className="sortOption">
-          <button className="currentSort">기본순</button>
-          <button>판매량순</button>
-          <button>신상품순</button>
-          <button>등록일순</button>
-          <button>최저가순</button>
-          <button>최고가순</button>
-          <button>상품명순</button>
+          <button
+            className={
+              sortField && sortField === "pubDate" ? "currentSort" : null
+            }
+            value="pubDate"
+            onClick={handleSort}
+          >
+            등록일순
+            {sortField === "pubDate" ? (
+              sortOption === "asc" ? (
+                <TbSortAscending />
+              ) : (
+                <TbSortDescending />
+              )
+            ) : null}
+          </button>
+          <button
+            className={
+              sortField && sortField === "salesPoint" ? "currentSort" : null
+            }
+            value="salesPoint"
+            onClick={handleSort}
+          >
+            판매량순
+            {sortField === "salesPoint" ? (
+              sortOption === "asc" ? (
+                <TbSortAscending />
+              ) : (
+                <TbSortDescending />
+              )
+            ) : null}
+          </button>
+          <button
+            className={
+              sortField && sortField === "priceSales" ? "currentSort" : null
+            }
+            value="priceSales"
+            onClick={handleSort}
+          >
+            가격순
+            {sortField === "priceSales" ? (
+              sortOption === "asc" ? (
+                <TbSortAscending />
+              ) : (
+                <TbSortDescending />
+              )
+            ) : null}
+          </button>
+          <button
+            className={
+              sortField && sortField === "title" ? "currentSort" : null
+            }
+            value="title"
+            onClick={handleSort}
+          >
+            상품명순
+            {sortField === "title" ? (
+              sortOption === "asc" ? (
+                <TbSortAscending />
+              ) : (
+                <TbSortDescending />
+              )
+            ) : null}
+          </button>
         </span>
         <span className="listOption">
           <label htmlFor="listQty"></label>
           <select
             name="listQty"
             id="listQty"
-            onChange={handleListQty}
+            onChange={handleListQtyChange}
             value={listQty}
           >
+            <option value="10">10개씩 보기</option>
             <option value="20">20개씩 보기</option>
             <option value="30">30개씩 보기</option>
             <option value="40">40개씩 보기</option>
@@ -164,27 +234,18 @@ export default function CategoryList_Sort({
             onChange={handleChangeSoldout}
             value={isSoldout}
           >
-            <option value="0">품절포함</option>
-            <option value="1">품절제외</option>
+            <option value="품절포함">품절포함</option>
+            <option value="품절">품절제외</option>
           </select>
         </span>
       </div>
       <div className="bottomArea">
-        <Pagination
-          totalItemsCount={totalResults}
-          activePage={currentPage}
+        <PaginationComponent
+          totalResults={totalResults}
+          currentPage={currentPage}
           pageRangeDisplayed={10}
           itemsCountPerPage={listQty}
-          onChange={handlePageChange}
-          linkClassFirst={"paginationBtn"}
-          linkClassPrev={"paginationBtn"}
-          linkClassNext={"paginationBtn"}
-          linkClassLast={"paginationBtn"}
-          activeLinkClass={"active"}
-          firstPageText={<AiOutlineDoubleLeft />}
-          prevPageText={<AiOutlineLeft />}
-          nextPageText={<AiOutlineRight />}
-          lastPageText={<AiOutlineDoubleRight />}
+          handlePageChange={handlePageChange}
         />
         <span className="selectOption">
           {isCheckedAll ? (
@@ -192,8 +253,8 @@ export default function CategoryList_Sort({
           ) : (
             <button onClick={() => handleSelectAll(true)}>전체선택</button>
           )}
-          <button>카트에 넣기</button>
-          <button>찜하기</button>
+          <button onClick={handleAddCartAll}>카트에 담기</button>
+          <button onClick={handleAddWishlistAll}>찜하기</button>
         </span>
       </div>
     </Sortarea>

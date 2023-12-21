@@ -1,17 +1,18 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import CategoryList_2D from "./CategoryList_2D";
 
 const CategoryNav = styled.nav`
   width: 180px;
-  margin-right: 30px;
+  margin-right: 20px;
   .categoryTitle {
-    font-size: 16px;
-    color: #fff;
-    font-weight: bold;
     line-height: 36px;
-    padding-left: 13px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
     background: var(--main);
   }
   .categoryList {
@@ -35,71 +36,32 @@ const CategoryNav = styled.nav`
           display: flex;
         }
       }
-      .categorySubListWrapper {
-        position: absolute;
-        display: none;
-        top: -8px;
-        right: -100px;
-        border: 2px solid var(--main);
-        background: #fff;
-        z-index: 101;
-        .arrowBox {
-          position: absolute;
-          top: 10px;
-          left: -7px;
-          width: 11px;
-          height: 11px;
-          rotate: 45deg;
-          border-left: 2px solid var(--main);
-          border-bottom: 2px solid var(--main);
-          background: #fff;
-        }
-        .categorySubList {
-          width: 130px;
-          .categorySubItem {
-            a {
-              overflow: hidden;
-              text-overflow: ellipsis;
-              white-space: nowrap;
-              &:hover {
-                text-decoration: underline;
-              }
-            }
-          }
-        }
-      }
     }
   }
 `;
 
 export default function CategoryList_CaNav() {
-  /* 추후 카테고리 리스트 수정 필요 */
-  const [categoryList, setCategoryList] = useState([]);
+  const params = useParams().categoryPath;
+  const mall = params.includes('_') ? params.split('_')[0] : params;
+  const [category, setCategory] = useState([]);
 
   useEffect(() => {
-    axios("/data/categoryList.json").then((result) =>
-      setCategoryList(result.data)
-    );
-  }, []);
+    axios(`http://127.0.0.1:9090/category/list/${mall}`)
+    .then(result => setCategory(result.data));
+  }, [mall]);
+
   return (
     <CategoryNav>
-      <h4 className="categoryTitle">국내도서</h4>
+      <h4 className="categoryTitle">{category[0] && category[0].mall}</h4>
       <ul className="categoryList">
-        {categoryList.map((list, index) => (
-          <li className="categoryListItem" key={index}>
-            <Link>{list.categoryName}</Link>
-            {list.subCategoryName.length >= 1 ? (
-              <div className="categorySubListWrapper">
-                <div className="arrowBox"></div>
-                <ul className="categorySubList">
-                  {list.subCategoryName.map((subList, subIndex) => (
-                    <li className="categorySubItem" key={subIndex}>
-                      <Link>{subList}</Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : null}
+        {category.map((item) => (
+          <li className="categoryListItem" key={item.firstD}>
+            <Link to={`/category/list/${item.mall}_${item.firstD}`}>{item.firstD}</Link>
+            <CategoryList_2D
+            className="categorySubListWrapper"
+            mall={mall}
+            firstD={item.firstD}
+            />
           </li>
         ))}
       </ul>

@@ -1,28 +1,50 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { motion, useTransform, useViewportScroll } from "framer-motion";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { IoIosArrowDown } from "react-icons/io";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+
+const Wrapper = styled.div`
+  min-width: 60vw;
+`;
 
 const SortSection = styled(motion.section)`
   margin-top: 40px;
   margin-bottom: 10px;
+  @media (max-width: 768px) {
+    margin-top: 28px;
+    margin-bottom: 7px;
+  }
   h1 {
     font-size: 20px;
     margin: 10px 0;
     font-weight: 900;
+    @media (max-width: 768px) {
+      font-size: 14px;
+      margin: 7px 0;
+    }
   }
   hr {
     margin-bottom: 20px;
+    @media (max-width: 768px) {
+      margin-bottom: 14px;
+    }
   }
   em {
     font-size: 12px;
+    @media (max-width: 768px) {
+      font-size: 8px;
+    }
   }
   span {
     font-size: 14px;
     letter-spacing: normal;
     line-height: 150%;
+    @media (max-width: 768px) {
+      font-size: 10px;
+    }
   }
 `;
 const AuthorBox = styled.div`
@@ -32,76 +54,92 @@ const AuthorBox = styled.div`
   justify-content: space-between;
   padding: 10px 20px;
   border-top: 1px solid lightgray;
+
+  @media (max-width: 768px) {
+    padding: 7px 14px;
+  }
   div:first-child {
     font-size: 16px;
     font-weight: 600;
+    @media (max-width: 768px) {
+      font-size: 11px;
+    }
   }
   div:last-child {
     font-size: 11px;
     color: #a1778c;
+    @media (max-width: 768px) {
+      font-size: 8px;
+    }
   }
 `;
 const AuthorGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  position: relative;
+  padding-bottom: 10px;
+  .author_info {
+    @media (max-width: 768px) {
+      font-size: 11px;
+    }
+  }
+  @media (max-width: 768px) {
+    padding-bottom: 7px;
+  }
   div {
-    height: 140px;
     padding: 10px;
-    overflow: hidden;
     color: #777;
+    @media (max-width: 768px) {
+      padding: 7px;
+    }
   }
   div:first-child {
     display: flex;
     justify-content: space-between;
-
     font-size: 12px;
     color: #777;
     border-right: 1px solid lightgray;
+    @media (max-width: 768px) {
+      font-size: 8px;
+    }
   }
   div:nth-child(2) {
     grid-column: span 3;
   }
 `;
 
-const sortVars = {};
+const Extend = styled.div`
+  span {
+    margin-left: 7px;
+    @media (max-width: 768px) {
+      margin-left: 5px;
+    }
+  }
+  span:last-child {
+    color: var(--main);
+  }
+  span:last-child.active {
+    transform: rotate(180deg);
+  }
+`;
 
-const Detail_info = () => {
+const Detail_info = ({ DetailData }) => {
   const sectionRef = useRef(null);
-  /*   const { scrollY, scrollYProgress } = useViewportScroll();
-  useEffect(() => {
-    scrollY.onChange(() => console.log(scrollY.get(), scrollYProgress.get()));
-    console.log(sectionRef.current.offsetTop);
-  }, []); */
-  const { id } = useParams();
-  const {
-    isPending: detailPending,
-    error: detailError,
-    data: detailData,
-  } = useQuery({
-    queryKey: ["detailData"],
-    queryFn: () =>
-      axios
-        .get(
-          `https://dapi.kakao.com/v3/search/book?target=isbn&query='${id}'`,
-          {
-            headers: "Authorization: KakaoAK 21cabe3d0ca37c4bab8dea7ce9d95589",
-          }
-        )
-        .then((result) => result.data.documents[0]),
-  });
-
+  const [clickWriter, setClickWriter] = useState(false);
   return (
-    <>
+    <Wrapper>
       <SortSection>
         <h1>이상품분류</h1>
         <hr />
-        <em>홈 &gt; 국내도서 &gt; 인문 &gt; 인문교양 &gt; 교양일반</em>
+        <em>{DetailData.categoryName && DetailData.categoryName}</em>
       </SortSection>
       <SortSection ref={sectionRef}>
         <h1>책소개</h1>
         <hr />
-        <span>
-          {detailData?.contents}
+        <motion.span>
+          {DetailData?.description
+            ? DetailData.description
+            : "책 정보가 없습니다"}
           <br /> <br />
           일본 최고 권위 문학상답게 현지 언론들은 앞다퉈 시상식장으로
           몰려들었고, 수상자가 무대에 오르자 평소와 다른 풍경에 기자들은 홀린 듯
@@ -149,7 +187,7 @@ const Detail_info = () => {
           글로 소설 전체를 뒤엎는 또 다른 세계가 입체적으로 변환하면서 전혀 다른
           가정을 펼쳐갈 수 있다는 게 대단합니다. (…) 기적의 명작이 아닌가
           싶습니다.”라고 극찬하기도 했다.
-        </span>
+        </motion.span>
       </SortSection>
       <SortSection>
         <h1>출판사 서평</h1>
@@ -220,7 +258,7 @@ const Detail_info = () => {
         <hr />
         <div>
           <AuthorBox>
-            <div>이치가와 사오 [저]</div>
+            <div>{DetailData?.author} [저]</div>
             <div>신작알림 SNS신청 </div>
           </AuthorBox>
           <AuthorGrid>
@@ -228,8 +266,9 @@ const Detail_info = () => {
               <span>생년월일</span>
               <span>1997</span>
             </div>
-            <div>
-              1979년생이다. 와세다대학교 인간과학부 통신교육과정
+            <div className="author_info">
+              {clickWriter
+                ? `1979년생이다. 와세다대학교 인간과학부 통신교육과정
               인간환경과학과를 졸업했다. 「장애인 표상과 현실사회의 상호 영향에
               관하여」라는 제목의 졸업논문은 오노 아즈사 기념학술상을 수상했다.
               2023년 중편소설 「헌치백」으로 제128회 《문학계》 신인상을
@@ -243,12 +282,44 @@ const Detail_info = () => {
               문학상에 SF, 판타지 등의 장르소설과 라이트노벨을 응모해 왔다.
               절박한 심정으로 집필한 첫 비장르소설이 「헌치백」이었다. 존경하는
               작가로 노벨문학상 수상자 오에 겐자부로, 일본문학 대표 작가 시마다
-              마사히코, 라이트노벨 작가 와카기 미오 등을 꼽았다.
+              마사히코, 라이트노벨 작가 와카기 미오 등을 꼽았다.`.slice(0)
+                : `1979년생이다. 와세다대학교 인간과학부 통신교육과정
+              인간환경과학과를 졸업했다. 「장애인 표상과 현실사회의 상호 영향에
+              관하여」라는 제목의 졸업논문은 오노 아즈사 기념학술상을 수상했다.
+              2023년 중편소설 「헌치백」으로 제128회 《문학계》 신인상을
+              수상하며 데뷔했고, 나아가 이 작품의 제169회 아쿠타가와상 수상으로
+              문학계는 물론 사회적 대반향을 불러일으키며 일약 스타 작가로
+              떠올랐다. 선천성 근세관성 근병증의 중증 장애인으로 인공호흡기와
+              전동 휠체어 등에 의지하고, 집필에는 태블릿을 사용한다.
+              아쿠타가와상 시상식에서 수상 소감으로 전자책과 오 디오북 추가 보급
+              등 ‘독서 배리어 프리’를 호소했다. 자신이 할 수 있는 가장 쉽고 편한
+              일로서 20대 때부터 소설을 쓰기 시작해 지난 20여 년 동안 해마다 각
+              문학상에 SF, 판타지 등의 장르소설과 라이트노벨을 응모해 왔다.
+              절박한 심정으로 집필한 첫 비장르소설이 「헌치백」이었다. 존경하는
+              작가로 노벨문학상 수상자 오에 겐자부로, 일본문학 대표 작가 시마다
+              마사히코, 라이트노벨 작가 와카기 미오 등을 꼽았다.`.slice(
+                    0,
+                    100
+                  ) + `...`}
+              <Extend
+                onClick={() => setClickWriter(!clickWriter)}
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  alignItems: "center",
+                  border: "none",
+                  cursor: "pointer",
+                }}>
+                <span>펼쳐보기</span>
+                <span className={clickWriter && "active"}>
+                  <IoIosArrowDown />
+                </span>
+              </Extend>
             </div>
           </AuthorGrid>
         </div>
       </SortSection>
-    </>
+    </Wrapper>
   );
 };
 

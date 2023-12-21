@@ -8,6 +8,9 @@ const Wrapper = styled.div`
   height: 130px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  @media (max-width: 768px) {
+    display: none;  
+  }
   div:nth-child(2) {
     grid-column: span 4;
   }
@@ -106,11 +109,12 @@ const Detail_hover = () => {
                   height: "10px",
                   borderLeft: "1px solid rgba(0,0,0,0.4)",
                   borderBottom: "1px solid rgba(0,0,0,0.4)",
+
                   background: "#FFFFFF",
                   top: "21.5px",
                   transform: "translateY(-50%) rotate(45deg)",
-                  left: "-6px",
-                  zIndex: "99",
+                  left: "-18px",
+                  zIndex: "1",
                 }}></span>
               <Figure style={{ borderRight: "1px solid lightgray" }}>
                 <img src="https://qi-b.qoo10cdn.com/renewPark/reBookpark/test_img/last_inc/book_benefit.jpg" />
@@ -134,16 +138,16 @@ const Detail_hover = () => {
                   position: "absolute",
                   width: "10px",
                   height: "10px",
-                  borderLeft: "1px solid #5A4B86",
-                  borderBottom: "1px solid #5A4B86",
-                  background: "#5A4B86",
+                  borderLeft: "1px solid rgba(0,0,0,0.4)",
+                  borderBottom: "1px solid rgba(0,0,0,0.4)",
+                  background: "#FFFFFF",
                   top: "64.5px",
                   transform: "translateY(-50%) rotate(45deg)",
-                  left: "-6px",
+                  left: "-18px",
                   zIndex: "99",
                 }}></span>
               <Figure style={{ borderRight: "1px solid lightgray" }}>
-                <img src="https://qi-b.qoo10cdn.com/milti/renewPark/main/95405_202311290936264851.jpg" />
+                <img src="/img/kyobo.png" />
               </Figure>
             </div>
             <div>
@@ -164,16 +168,16 @@ const Detail_hover = () => {
                   position: "absolute",
                   width: "10px",
                   height: "10px",
-                  borderLeft: "1px solid #099B65",
-                  borderBottom: "1px solid #099B65",
-                  background: "#099B65",
+                  borderLeft: "1px solid rgba(0,0,0,0.4)",
+                  borderBottom: "1px solid rgba(0,0,0,0.4)",
+                  background: "#FFFFFF",
                   top: "107.5px",
                   transform: "translateY(-50%) rotate(45deg)",
-                  left: "-6px",
-                  zIndex: "99",
+                  left: "-18px",
+                  zIndex: "1",
                 }}></span>
               <Figure style={{ borderRight: "1px solid lightgray" }}>
-                <img src="https://qi-b.qoo10cdn.com/milti/renewPark/main/95405_202311291635431301.png" />
+                <img src="https://qi-b.qoo10cdn.com/renewPark/reBookpark/test_img/last_inc/book_benefit.jpg" />
               </Figure>
             </div>
             <div>

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { HiArrowLongRight } from "react-icons/hi2";
-import { AiFillStar } from "react-icons/ai";
+import { BiSolidStar, BiSolidStarHalf, BiStar } from "react-icons/bi";
 
 const ProdContent = styled.div`
   width: 66%;
@@ -60,9 +60,10 @@ const ProdContent = styled.div`
     display: flex;
     align-items: center;
     svg {
+      font-size: 15px;
       color: var(--main);
     }
-    .reviewPoint {
+    .reviewRank {
       font-size: 15px;
       font-weight: bold;
       margin-left: 5px;
@@ -74,41 +75,67 @@ const ProdContent = styled.div`
   }
 `;
 
-export default function CategoryList_ProdContent({ data }) {
+  //customerReviewRank에 따라 별점 표시
+  const showReviewRankStar = (customerReviewRank) => {
+    let arr = [];
+    let filledStar = Math.floor(customerReviewRank / 2);
+    let halfStar = customerReviewRank % 2 === 0 ? 0 : 1;
+    let emptyStar = 5 - filledStar - halfStar;
+
+    for (let i=0; i < filledStar; i++) {
+      arr.push(<BiSolidStar key={"SolidStar" + i}/>)
+    }
+    for (let i=0; i < halfStar; i++) {
+      arr.push(<BiSolidStarHalf key={"halfStar" + i}/>)
+    }
+    for (let i=0; i < emptyStar; i++) {
+      arr.push(<BiStar key={"emptyStar" + i}/>)
+    }
+
+    return arr;
+  };
+
+export default function CategoryList_ProdContent({ bookData }) {
   return (
     <ProdContent>
       <p className="title">
-        <Link to={`/book/${data.isbn}`}>{data.title}</Link>
+        <Link to={`/book/${bookData.isbn13}`}>{bookData.title}</Link>
       </p>
       <p className="bookInfo">
-        <span>{data.author}</span>
+        <span>{bookData.author}</span>
         {/* 클릭 시 지은이 이름으로 검색하는 기능 추가 필요 */}
-        <span>{data.publisher}</span>
-        <span>{data.pubDate}</span>
+        <span>{bookData.publisher}</span>
+        <span>{bookData.pubDate.substr(0, 10)}</span>
       </p>
-      <p className="price">
-        <span>{data.priceStandard.toLocaleString()}원</span>
-        <HiArrowLongRight />
-        <span className="priceSales">{data.priceSales.toLocaleString()}원</span>
-        <span className="pointIcon">P</span>
-        <span className="point">{data.mileage.toLocaleString()}P</span>
-      </p>
+      {
+        bookData.priceStandard === bookData.priceSales ? (
+          <p className="price">
+          <span className="priceSales">{bookData.priceSales.toLocaleString()}원</span>
+          <span className="pointIcon">P</span>
+          <span className="point">{bookData.mileage.toLocaleString()}P</span>
+        </p>
+        ) : (
+          <p className="price">
+          <span>{bookData.priceStandard.toLocaleString()}원</span>
+          <HiArrowLongRight />
+          <span className="priceSales">{bookData.priceSales.toLocaleString()}원</span>
+          <span className="pointIcon">P</span>
+          <span className="point">{bookData.mileage.toLocaleString()}P</span>
+        </p>
+        )
+      }
       <p className="salesPoint">
         <span>세일즈포인트 : </span>
         <span className="salesPointNumber">
-          {data.salesPoint.toLocaleString()}
+          {bookData.salesPoint.toLocaleString()}
         </span>
       </p>
       <p className="customerReviewRank">
         <span>회원리뷰 : </span>
-        <AiFillStar />
-        <AiFillStar />
-        <AiFillStar />
-        <AiFillStar />
-        <AiFillStar />
-        <span className="reviewPoint">10</span> {/* 별점 기능 추가 필요 */}
+          {showReviewRankStar(bookData.customerReviewRank)}
+        <span className="reviewRank">{bookData.customerReviewRank}</span> {/* 별점 기능 추가 필요 */}
       </p>
-      <p className="description">{data.description}</p>
+      <p className="description">{bookData.description}</p>
     </ProdContent>
   );
 }

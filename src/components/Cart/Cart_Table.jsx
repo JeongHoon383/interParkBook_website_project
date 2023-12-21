@@ -1,20 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FaRegQuestionCircle } from "react-icons/fa";
 import { GoTriangleRight } from "react-icons/go";
 import { IoSquare } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { removeCart } from "./store";
+import { cartState } from "./atom";
+import { useRecoilState } from "recoil";
+
 const Wrapper = styled.div`
   margin-top: 60px;
+
+  @media (max-width: 768px) {
+    margin-top: 40px;
+  }
 `;
 const TaxSection = styled.div`
   font-size: 12px;
   display: flex;
   align-items: center;
   font-weight: bold;
-  margin-bottom:10px;
+
+  @media (max-width: 768px) {
+    font-size: 9px;
+  }
   input {
     margin-right: 8px;
+
+    @media (max-width: 768px) {
+      margin-right: 6px;
+    }
   }
 `;
 
@@ -22,6 +37,10 @@ const ColName = styled.div`
   border-top: 2px solid black;
   height: 30px;
   background: #ebebeb;
+
+  @media (max-width: 768px) {
+    height: 20px;
+  }
   ul {
     display: flex;
     align-items: center;
@@ -29,6 +48,10 @@ const ColName = styled.div`
     height: 100%;
     font-size: 13px;
     text-align: center;
+
+    @media (max-width: 768px) {
+      font-size: 10px;
+    }
     li {
       display: flex;
       align-items: center;
@@ -42,6 +65,7 @@ const ColName = styled.div`
 `;
 
 const AnyItem = styled.div`
+  margin: 10px 0;
   height: 27px;
   background: #f4f4f4;
   font-size: 13px;
@@ -51,8 +75,18 @@ const AnyItem = styled.div`
   justify-content: center;
   align-items: center;
   border: 1px solid rgba(0, 0, 0, 0.4);
+
+  @media (max-width: 768px) {
+    margin: 7px 0;
+    height: 19px;
+    font-size: 10px;
+  }
   span {
     padding: 0 10px;
+
+    @media (max-width: 768px) {
+      padding: 0 7px;
+    }
     em {
       font-weight: bold;
     }
@@ -67,13 +101,21 @@ const Row = styled.div`
     display: flex;
     align-items: center;
     font-size: 15px;
-
     padding: 5px 7px;
+
+    @media (max-width: 768px) {
+      font-size: 11px;
+      padding: 4px 5px;
+    }
   }
   .triangleBox {
     display: flex;
     align-items: center;
     font-size: 11px;
+
+    @media (max-width: 768px) {
+      font-size: 8px;
+    }
   }
 `;
 
@@ -85,12 +127,20 @@ const TextWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   position: relative;
+
+  @media (max-width: 768px) {
+    margin-top: 14px;
+  }
   ul {
     position: absolute;
     right: 0;
     display: flex;
     font-size: 12px;
     align-items: center;
+
+    @media (max-width: 768px) {
+      font-size: 8px;
+    }
     li {
       a:hover {
         text-decoration: underline;
@@ -109,52 +159,44 @@ const TextWrapper = styled.div`
 
 const BookInfo = styled.div`
   height: 190px;
+
+  @media (max-width: 768px) {
+    height: 135px;
+  }
   ul {
     display: flex;
 
     height: 100%;
     align-items: center;
-    .count_list{
-      text-align:center;
-      display:flex; 
-      flex-direction:column;
-      align-items:center;
-  
-
-span{
-  width:30px;
-  height:15px;
-  font-size:10px;
-  background:#8F8F8F;
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  border-radius:5px;
-  color:#FFFFFF;
-}
-      input{
-        outline:none;
-        border:1px solid rgba(0,0,0,0.4);
-        font-size:12px;
-        background:#F2F2F2;
-        width:30px;
-        height:16px;
-        margin-bottom:10px;
- 
+    li:nth-child(odd) {
+      text-align: center;
+    }
+    li.count {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      input {
+        text-align: center;
+        width: 30px;
+        height: 15px;
+        margin: 10px 0;
+      }
+      div {
+        width: 30px;
+        height: 15px;
+        font-size: 12px;
+        background-color: rgba(0, 0, 0, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
       }
     }
-    li:first-child{
-     display:flex;
-     align-items: center;
-     justify-content: center;
-     .book_check{
-      margin-right:10px;
-     }
-     
-    }
- 
     .tax {
-      padding: 0 30px;
+      padding: 0 10px;
       p {
         color: #15b2e7;
         font-size: 13px;
@@ -212,21 +254,18 @@ const ButtonList = styled.li`
   }
 `;
 
-
-const SumList = styled.li`
-display:flex;
-align-items:center;
-justify-content:flex-end;
-
-em{
-  color:red;
-  font-weight:bold;
-  font-size:16px;
- 
-}
-`
-
-const Cart_Table = () => {
+const Cart_Table = ({ setCart, cart, setCheck, setTotal }) => {
+  useEffect(() => {
+    let sum = cart.reduce(
+      (acc, v, i) => acc + Number(v.priceSales) * v.count,
+      0
+    );
+    setTotal(sum);
+  }, [cart]);
+  const [newCount, setNewCount] = useState(0);
+  const handleInputChange = (e) => {
+    setNewCount(e.target.value);
+  };
   return (
     <Wrapper>
       <TaxSection>
@@ -236,10 +275,7 @@ const Cart_Table = () => {
       </TaxSection>
       <ColName>
         <ul>
-          <li style={{ width: "13%" }}>
-            <input type="checkbox" checked name="" id="" />
-            전체선택
-          </li>
+          <li style={{ width: "13%" }}>표지</li>
           <li style={{ width: "30%" }}>상품명</li>
           <li style={{ width: "15%" }}>판매가</li>
           <li style={{ width: "13%" }}>수량</li>
@@ -282,40 +318,95 @@ const Cart_Table = () => {
             배송책임 : <em>교보문고</em> l 배송비 : <em>2,500원</em>
           </span>
         </AnyItem>
-        <BookInfo>
-          <ul>
-            <li style={{ width: "13%" }}>
-              <figure>
-                <input type="checkbox" checked className="book_check" id="" />
-                <img
-                  src="https://image.aladin.co.kr/product/32806/58/cover/k832936705_1.jpg"
-                  alt=""
-                />
-              </figure>
-            </li>
-            <li className="tax" style={{ width: "30%" }}>
-              <p>[소득공제]</p>
-              <Link>세이노의 가르침</Link>
-            </li>
-            <li style={{ width: "15%" }}>
-              <PriceList>
-                <li>&nbsp;정가 7,200원</li>
-                <li>할인가 6,480원</li>
-                <li>&nbsp;적립 360P</li>
-              </PriceList>
-            </li>
-            <li className="count_list" style={{ width: "13%" }}><input type="text" value='1' /><span>변경</span></li>
-            <SumList style={{ width: "15%" }}><em>6,480원</em> </SumList>
-            <ButtonList style={{ width: "14%" }}>
-              <input type="button" value="주문하기" />
-              <input type="button" value="삭제하기" />
-            </ButtonList>
-          </ul>
-        </BookInfo>
+        {cart &&
+          cart.map((v, i) => (
+            <div key={i}>
+              <BookInfo>
+                <ul>
+                  <li style={{ width: "13%" }}>
+                    <figure>
+                      <img src={v.img} alt="" />
+                    </figure>
+                  </li>
+                  <li className="tax" style={{ width: "30%" }}>
+                    <p>[소득공제]</p>
+                    <Link>{v.title}</Link>
+                  </li>
+                  <li style={{ width: "15%" }}>
+                    <PriceList>
+                      <li>
+                        &nbsp;정가 {Number(v.priceStandard).toLocaleString()}원
+                      </li>
+                      <li>할인가 {Number(v.priceSales).toLocaleString()}원</li>
+                      <li>&nbsp;적립 {Number(v.mileage).toLocaleString()}P</li>
+                    </PriceList>
+                  </li>
+                  <li className="count" style={{ width: "13%" }}>
+                    <input
+                      min={1}
+                      max={9}
+                      type="number"
+                      defaultValue={v.count}
+                      onChange={(e) => handleInputChange(e)}
+                    />
+                    <div
+                      onClick={(e) => {
+                        setCart((prev) => {
+                          return prev.map((item) => {
+                            if (item.cartId === v.cartId) {
+                              return { ...item, count: newCount };
+                            } else {
+                              return item;
+                            }
+                          });
+                        });
+                      }}>
+                      변경
+                    </div>
+                  </li>
+                  <li style={{ width: "15%", color: "var(--main)" }}>
+                    {(Number(v.priceSales) * v.count).toLocaleString()}원
+                  </li>
+                  <ButtonList style={{ width: "14%" }}>
+                    <input
+                      type="button"
+                      value="주문하기"
+                      onClick={() =>
+                        setCart((prev) => {
+                          let copy = [...prev];
+                          copy = copy.filter((data) => {
+                            return data.cartId !== v.cartId;
+                          });
+                          alert("주문완료");
+                          return copy;
+                        })
+                      }
+                    />
+                    <input
+                      type="button"
+                      value="삭제하기"
+                      onClick={(e) =>
+                        setCart((prev) => {
+                          let copy = [...prev];
+                          copy = copy.filter((data) => {
+                            return data.cartId !== v.cartId;
+                          });
+                          alert("삭제완료");
+                          return copy;
+                        })
+                      }
+                    />
+                  </ButtonList>
+                </ul>
+              </BookInfo>
+            </div>
+          ))}
       </Row>
-      <AnyItem>
-        <span>북카트에 담긴 상품이 없습니다.</span>
-      </AnyItem>
+      {cart && cart.length === 0 && (
+        <AnyItem>
+          <span>북카트에 담긴 상품이 없습니다.</span>
+        </AnyItem>
+      )}
     </Wrapper>
   );
 };
