@@ -24,8 +24,8 @@ export default function BottomNav() {
         <div className="otherTab">
           <ul>
             <Link to ='/bestseller'><li>베스트셀러</li></Link>
-            <Link to ='/bestseller'><li>신간</li></Link>
-            <li>이벤트</li>
+            <Link to ='/newseller'><li>신간</li></Link>
+            <Link to ='/event'><li>이벤트</li></Link>
           </ul>
         </div>
       </div>

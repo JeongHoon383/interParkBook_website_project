@@ -5,7 +5,20 @@ import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
+
+const SearchBtn = styled.button`
+background-color:var(--main);
+width: 60px;
+color:white;
+flex-wrap: nowrap;
+margin-left: 5px;
+border-radius: 3px;
+height: 23px;
+font-weight: 900;
+font-size: 13px;
+`
 
 export default function SearchForm() {
 	const navigate = useNavigate();
@@ -49,9 +62,10 @@ export default function SearchForm() {
 			<form onSubmit={handleSubmit} className="searchForm">
 				<input className="searchInput" type="text" onChange={handleChange} />
 		
-					<button className="searchBtn">
-						<IoSearch style={{ color: 'var(--main)' }} />
-					</button>
+			<SearchBtn>
+				<button><IoSearch /></button>
+			</SearchBtn>
+	
 		
 			</form>
 

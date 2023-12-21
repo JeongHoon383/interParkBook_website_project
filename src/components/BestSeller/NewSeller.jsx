@@ -40,9 +40,9 @@ line-height: 20px;
 const Bottomtotalct = styled.li`
 font-size:10px;
 color:#a1a1a1;
-margin-bottom: 5px;line-height: 20px;
+margin-bottom: 5px;
+line-height: 20px;
 `
-
 
 const PaginationWrapper = styled.div`
 
@@ -71,8 +71,6 @@ const PaginationWrapper = styled.div`
   
 
 `
-
-
 export default function BestSeller() {
   const [navbar, setNavbar] = useState('all');
   const [categoryName, setCategoryName] = useState('total');
@@ -98,20 +96,39 @@ export default function BestSeller() {
     setPage(page);
   };
 
+
+
   return (
 
+
     <Toptop>
+
+
       <Topletter src="https://qi-b.qoo10cdn.com/renewPark/reBookpark/rankChart2016/text/h1_bestSeller.png" alt="" />
+
+
+
+
       <SearchSideBar
-        setCategoryName={setCategoryName}>
-      </SearchSideBar>
+        setCategoryName={setCategoryName}
+      ></SearchSideBar>
+
+
+
+
+
       <SearchNavBar setNavbar={setNavbar}></SearchNavBar>
-      <>
-        <Book filename="BestSeller" BestSeller={BestSeller}/>
-      </>
 
 
-        {navbar !== 'all' ?
+      <div className="content">
+
+        <Book filename="BestSeller" BestSeller={BestSeller}
+        />
+      </div>
+
+
+
+      {navbar !== 'all' ?
           <PaginationWrapper>
             <Pagination
               activePage={page}
@@ -141,7 +158,12 @@ export default function BestSeller() {
           당일 베스트셀러는 1시간 단위로 업데이트되며 주간/월간/연간 베스트셀러는 일단위로 업데이트됩니다.
         </Bottomtotalct>
 
+
+
       </Bottomtotal>
+
+
+
     </Toptop>
   )
 }

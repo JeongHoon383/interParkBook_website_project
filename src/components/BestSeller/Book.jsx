@@ -2,11 +2,42 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import BookAvatar from "./BookAvatar";
-import BookContent from "./BookContent";
+import BookContents from "./BookContent";
 import BookList from "./BookList";
-import '../../css/search/Search.css';
+import styled from "styled-components";
 
-export default function Book({ filename }) {
+
+const Mombook = styled.div`
+display: flex;
+flex-wrap: wrap; 
+//border: 10px solid red;
+
+//justify-content: center;
+justify-content:space-between;
+margin: 0 auto;
+padding-top:10px;
+margin-left: 220px;
+margin-top : 17px;
+
+//width:70%;
+
+
+`
+const Books = styled.div`
+position: relative;
+margin-left: 10px;
+flex-wrap: nowrap;
+clear: both;
+flex-direction: row;
+margin-top: 10px;
+margin-bottom: 15px;
+//width: 50%;
+
+width: calc(33.3333% - 10px);
+box-sizing: border-box;
+`
+
+export default function Book({ filename, BestSeller}) {   //BestSeller추가
   const [bookList, setBookList] = useState([]);
   useEffect(() => {
     fetch(`data/${filename}_book.json`)
@@ -17,38 +48,43 @@ export default function Book({ filename }) {
       });
   }, []);
 
+  BestSeller = BestSeller || [];
+  
   return (
-     
-    
-  <div className="mombook">
+         
+
+
+<Mombook>
       <BookList>
-        {bookList.map((book) =>
-
+        {BestSeller.map((book) =>
           
-          <div className="book" key={book.id}>
 
-
-            <BookAvatar image={book.image} 
-            
-            />
-          
-            
+          <Books key={book.id}>
+            <BookAvatar image={book.cover}/>
+                      
             <div>
-              <BookContent
+              <BookContents
                 title={book.title}
                 author={book.author}
-                company={book.company}
-                price={book.price}
-                pdate={book.pdate}
-                sale_index={book.sale_index}
+                publisher={book.publisher}
+                priceStandard={book.priceStandard}
+                pubDate={book.pubDate}
+                salesPoint={book.salesPoint}
                 review={book.review}
 
               />
             </div>
-          </div>
 
+          </Books>
+    
         )}
       </BookList>
-    </div>
+
+</Mombook>
+
+
+
+
+
   )
 }
