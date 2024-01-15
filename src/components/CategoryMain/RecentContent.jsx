@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 import styled from 'styled-components'
 
 const RecentMain = styled.div`
@@ -20,6 +21,11 @@ const RecentMain = styled.div`
 
     .recent_img_name{
       font-weight : bold;
+    }
+
+    .recent_img_name:hover{
+      cursor: pointer;
+      text-decoration : underline;
     }
 
     .recent_img_author{
@@ -50,10 +56,10 @@ const RecentContent = ({ recentList }) => {
     
       <RecentMain>
           <div className="recent_content_img_container">
-            <div className="recent_content_img_box"><img className="recent_content_img" src={img} alt="" /></div>
+            <div className="recent_content_img_box"><Link to='/book/:id'><img className="recent_content_img" src={img} alt="" /></Link></div>
             <div>
               <ul className="recent_img_text">
-                <li className="recent_img_name">{title}</li>
+                <Link to='/book/:id'><li className="recent_img_name">{title}</li></Link>
                 <li className="recent_img_author grey">{author}</li>
                 <li className="recent_img_grade">별점</li>
                 <li className="recent_img_price">{price}</li>

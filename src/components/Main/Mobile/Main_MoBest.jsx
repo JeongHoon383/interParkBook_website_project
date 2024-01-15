@@ -1,8 +1,8 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
-import { Link } from 'react-router-dom';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 const Div = styled.div`
   background-color: #fff;
@@ -20,7 +20,7 @@ const Div = styled.div`
     .rankNum {
       display: inline-block;
       width: 28px;
-      font-family: 'YES24GothicB';
+      font-family: "YES24GothicB";
       color: var(--main);
     }
     .rankTitle {
@@ -69,11 +69,11 @@ export default function Main_MoBest() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:9090/best/')
+      .get("http://127.0.0.1:9090/best/")
       .then((result) => setBestSeller1(result.data.slice(0, 3)))
       .catch((err) => console.error(err));
     axios
-      .get('http://localhost:9090/best/')
+      .get("http://127.0.0.1:9090/best/")
       .then((result) => setBestSeller2(result.data.slice(4, 11)))
       .catch((err) => console.error(err));
   }, []);
@@ -89,19 +89,19 @@ export default function Main_MoBest() {
               <li key={i}>
                 <Link to={`/book/${v.isbn13}`}>
                   <span className="rankNum">{i + 1}</span>
-                  <span className="rankTitle">{v.title.split('-')[0]}</span>
+                  <span className="rankTitle">{v.title.split("-")[0]}</span>
                 </Link>
               </li>
             ))}
           </ul>
         </div>
-        <div className="down" style={{ display: isOpen ? 'block' : 'none' }}>
+        <div className="down" style={{ display: isOpen ? "block" : "none" }}>
           <ul>
             {bestSeller2.map((v, i) => (
               <li key={i}>
                 <Link to={`/book/${v.isbn13}`}>
                   <span className="rankNum">{i + 4}</span>
-                  <span className="rankTitle">{v.title.split('-')[0]}</span>
+                  <span className="rankTitle">{v.title.split("-")[0]}</span>
                 </Link>
               </li>
             ))}

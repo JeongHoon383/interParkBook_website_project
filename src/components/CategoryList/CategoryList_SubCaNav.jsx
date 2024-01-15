@@ -94,13 +94,12 @@ export default function CategoryList_SubCaNav() {
     parameterArr[2],
     parameterArr[3],
     parameterArr[4],
-    parameterArr[5]
+    parameterArr[5],
   ]);
 
   const handleClick = () => {
     setIsExtended(!isExtended);
   };
-
 
   return (
     <>
@@ -123,9 +122,7 @@ export default function CategoryList_SubCaNav() {
                     >
                       {item.categoryName}
                     </Link>
-                    <CategoryList_SUbCaNavLi 
-                      subCategoryData={item}
-                    />
+                    <CategoryList_SUbCaNavLi subCategoryData={item} />
                   </li>
                 ))}
               </ul>

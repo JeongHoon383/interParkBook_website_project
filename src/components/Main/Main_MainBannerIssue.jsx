@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 const IssueBook = styled.div`
   padding-bottom: 58px;
@@ -29,10 +29,10 @@ const IssueBook = styled.div`
 `;
 
 const imgStyle = {
-  margin: '0 auto',
-  width: '80%',
-  height: '100%',
-  boxShadow: '0 10px 4px -4px #d9d9d9',
+  margin: "0 auto",
+  width: "80%",
+  height: "100%",
+  boxShadow: "0 10px 4px -4px #d9d9d9",
 };
 
 export default function Main_MainBannerIssue() {
@@ -40,7 +40,7 @@ export default function Main_MainBannerIssue() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:9090/book')
+      .get("http://127.0.0.1:9090/book")
       .then((result) => {
         setIssueBook(result.data.slice(0, 4));
       })
@@ -56,7 +56,7 @@ export default function Main_MainBannerIssue() {
               <img src={v.cover} style={imgStyle} alt="" />
             </Link>
           </div>
-          <p>{v.title.split('-')[0]}</p>
+          <p>{v.title.split("-")[0]}</p>
         </div>
       ))}
     </IssueBook>

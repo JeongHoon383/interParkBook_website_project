@@ -42,12 +42,13 @@ const CategoryNav = styled.nav`
 
 export default function CategoryList_CaNav() {
   const params = useParams().categoryPath;
-  const mall = params.includes('_') ? params.split('_')[0] : params;
+  const mall = params.includes("_") ? params.split("_")[0] : params;
   const [category, setCategory] = useState([]);
 
   useEffect(() => {
-    axios(`http://127.0.0.1:9090/category/list/${mall}`)
-    .then(result => setCategory(result.data));
+    axios(`http://127.0.0.1:9090/category/list/${mall}`).then((result) =>
+      setCategory(result.data)
+    );
   }, [mall]);
 
   return (
@@ -56,11 +57,13 @@ export default function CategoryList_CaNav() {
       <ul className="categoryList">
         {category.map((item) => (
           <li className="categoryListItem" key={item.firstD}>
-            <Link to={`/category/list/${item.mall}_${item.firstD}`}>{item.firstD}</Link>
+            <Link to={`/category/list/${item.mall}_${item.firstD}`}>
+              {item.firstD}
+            </Link>
             <CategoryList_2D
-            className="categorySubListWrapper"
-            mall={mall}
-            firstD={item.firstD}
+              className="categorySubListWrapper"
+              mall={mall}
+              firstD={item.firstD}
             />
           </li>
         ))}

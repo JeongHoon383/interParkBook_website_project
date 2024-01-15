@@ -33,7 +33,9 @@ const Admin_delete = () => {
 
   const onValid = (data) => {
     setValue("isbn13", "");
-    axios.post(`http://127.0.0.1:9090/admin/delete`, data).then((res) => alert('도서삭제완료'));
+    axios
+      .post(`http://127.0.0.1:9090/admin/delete`, data)
+      .then((res) => alert("도서삭제완료"));
   };
   return (
     <Wrapper>

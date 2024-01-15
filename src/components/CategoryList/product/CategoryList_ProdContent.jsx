@@ -133,7 +133,7 @@ export default function CategoryList_ProdContent({ bookData }) {
       <p className="customerReviewRank">
         <span>회원리뷰 : </span>
           {showReviewRankStar(bookData.customerReviewRank)}
-        <span className="reviewRank">{bookData.customerReviewRank}</span> {/* 별점 기능 추가 필요 */}
+        <span className="reviewRank">{bookData.customerReviewRank / 2}</span> {/* 별점 기능 추가 필요 */}
       </p>
       <p className="description">{bookData.description}</p>
     </ProdContent>

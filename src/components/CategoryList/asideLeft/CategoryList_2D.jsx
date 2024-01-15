@@ -49,23 +49,23 @@ export default function CategoryList_2D({ mall, firstD }) {
     const arr = [];
     const repeat = Math.ceil(secondDCategory.length / 15);
 
-    for(let i = 0; i < repeat; i++) {
+    for (let i = 0; i < repeat; i++) {
       const categoryArr = secondDCategory.slice(15 * i, 15 * i + 15);
       arr.push(
         <ul className="categorySubList" key={i}>
-          {
-            categoryArr.map(item => (
-              <li className="categorySubItem" key={item.secondD}>
-                <Link to={`/category/list/${mall}_${firstD}_${item.secondD}`}>{item.secondD}</Link>
-              </li>
-            ))
-          }
+          {categoryArr.map((item) => (
+            <li className="categorySubItem" key={item.secondD}>
+              <Link to={`/category/list/${mall}_${firstD}_${item.secondD}`}>
+                {item.secondD}
+              </Link>
+            </li>
+          ))}
         </ul>
-      )
+      );
     }
-    
+
     return arr;
-  }
+  };
 
   return (
     <>

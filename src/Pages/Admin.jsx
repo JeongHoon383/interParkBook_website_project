@@ -46,7 +46,7 @@ const Admin = () => {
         </Nav>
       )}
       {tab === 2 && <Admin_new />}
-      {tab === 3 && <Admin_delete/>}
+      {tab === 3 && <Admin_delete />}
     </Wrapper>
   );
 };

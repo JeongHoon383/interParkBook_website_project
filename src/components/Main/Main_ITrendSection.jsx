@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import Slider from 'react-slick';
-import axios from 'axios';
-import styled from 'styled-components';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import Slider from "react-slick";
+import axios from "axios";
+import styled from "styled-components";
 
 const Pre = styled.div`
   width: 40px;
@@ -47,7 +47,7 @@ const TrendSection = styled.div`
       color: var(--default);
       margin: 8px 0;
       &::before {
-        content: '';
+        content: "";
         flex-grow: 1;
         margin: 0 16px;
         background: var(--default);
@@ -56,7 +56,7 @@ const TrendSection = styled.div`
         line-height: 0;
       }
       &::after {
-        content: '';
+        content: "";
         flex-grow: 1;
         margin: 0 16px;
         background: var(--default);
@@ -73,7 +73,7 @@ const TrendSection = styled.div`
       top: 0;
       right: 14px;
       &::after {
-        content: '▶';
+        content: "▶";
         margin-left: 3px;
         font-size: 0.4rem;
       }
@@ -212,24 +212,24 @@ export default function Main_ITrendSection() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:9090/new/')
+      .get("http://127.0.0.1:9090/new/")
       .then((result) => setItemNewAll(result.data))
       .catch((err) => console.error(err));
 
     axios
-      .get('http://localhost:9090/best/')
+      .get("http://127.0.0.1:9090/best/")
       .then((result) => setBestSeller(result.data))
       .catch((err) => console.error(err));
   }, []);
 
-  const rankSpan = [{ name: '1~5위' }, { name: '6~10위' }];
+  const rankSpan = [{ name: "1~5위" }, { name: "6~10위" }];
 
   const handleClick = (e) => {
     setRank(e);
   };
 
   const settings = {
-    className: 'slideDiv',
+    className: "slideDiv",
     dots: false,
     infinite: true,
     slidesToShow: 3,
@@ -237,7 +237,7 @@ export default function Main_ITrendSection() {
     autoplay: true,
     speed: 4000,
     autoplaySpeed: 4000,
-    cssEase: 'linear',
+    cssEase: "linear",
     draggable: false,
     nextArrow: (
       <NextTo>
@@ -253,7 +253,7 @@ export default function Main_ITrendSection() {
 
   return (
     <TrendSection>
-      <div className="interparkNew" style={{ width: '77%' }}>
+      <div className="interparkNew" style={{ width: "77%" }}>
         <div className="newHeader">
           <h3>
             <ColorSpan>신간</ColorSpan> <DefaultSpan>리스트</DefaultSpan>
@@ -281,14 +281,18 @@ export default function Main_ITrendSection() {
       <BestSellerDiv>
         <div className="bestsellerHeader">
           <h3>
-            <DefaultSpan>주간 베스트셀러</DefaultSpan> <ColorSpan>TOP10</ColorSpan>
+            <DefaultSpan>주간 베스트셀러</DefaultSpan>{" "}
+            <ColorSpan>TOP10</ColorSpan>
           </h3>
         </div>
         <div className="bestsellerList">
           <em className="division">|</em>
           {rankSpan.map((el, index) => (
             <>
-              <span className={index === rank ? `rankTab current` : `rankTab`} onClick={() => handleClick(index)}>
+              <span
+                className={index === rank ? `rankTab current` : `rankTab`}
+                onClick={() => handleClick(index)}
+              >
                 {el.name}
               </span>
               <em className="division">|</em>

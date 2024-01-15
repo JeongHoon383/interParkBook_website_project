@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 import { useEffect, useState } from "react";
 
 const BestSellerNav = styled.nav`
@@ -62,48 +62,55 @@ const BestSellerNav = styled.nav`
 `;
 
 export default function CategortList_WeekBestSeller() {
-  const parameterArr = useParams().categoryPath.split('_');
+  const parameterArr = useParams().categoryPath.split("_");
   const [weekBestSellerTitle, setWeekBestSellerTitle] = useState("");
   const [bestSellerBookData, setBestSellerBookData] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://127.0.0.1:9090/category/list/${parameterArr[0]}/${parameterArr[1]}/${parameterArr[2]}/${parameterArr[3]}/${parameterArr[4]}/${parameterArr[5]}`)
-    .then(result => {
-      setWeekBestSellerTitle(result.data.categoryName);
-      axios.get(`/ttb/api/ItemList.aspx?ttbkey=ttbgur65142158001&QueryType=Bestseller&MaxResults=5&start=1&SearchTarget=Book&output=JS&Version=20131101&Cover=Big&CategoryId=${result.data.categoryId}`)
-      .then(result => setBestSellerBookData(result.data.item));
-    });
+    axios
+      .get(
+        `http://127.0.0.1:9090/category/list/${parameterArr[0]}/${parameterArr[1]}/${parameterArr[2]}/${parameterArr[3]}/${parameterArr[4]}/${parameterArr[5]}`
+      )
+      .then((result) => {
+        setWeekBestSellerTitle(result.data.categoryName);
+        axios
+          .get(
+            `/ttb/api/ItemList.aspx?ttbkey=ttbgur65142158001&QueryType=Bestseller&MaxResults=5&start=1&SearchTarget=Book&output=JS&Version=20131101&Cover=Big&CategoryId=${result.data.categoryId}`
+          )
+          .then((result) => setBestSellerBookData(result.data.item));
+      });
   }, [
     parameterArr[0],
     parameterArr[1],
     parameterArr[2],
     parameterArr[3],
     parameterArr[4],
-    parameterArr[5]
-  ])
-  
+    parameterArr[5],
+  ]);
+
   return (
     <BestSellerNav>
-      <h4 className="weekBestSellerTitle">{weekBestSellerTitle} 주간 베스트셀러</h4>
+      <h4 className="weekBestSellerTitle">
+        {weekBestSellerTitle} 주간 베스트셀러
+      </h4>
       <ul className="weekBestSellerList">
-        {
-          bestSellerBookData.map(bestSellerBookItem => (
-            <li className="weekBestSellerItem" key={bestSellerBookItem.isbn13}>
+        {bestSellerBookData.map((bestSellerBookItem) => (
+          <li className="weekBestSellerItem" key={bestSellerBookItem.isbn13}>
             <figure>
               <Link to={`/book/${bestSellerBookItem.isbn13}`}>
-                <div className="weekBestSellerRank">{bestSellerBookItem.bestRank}</div>
-                <img
-                  src={bestSellerBookItem.cover}
-                  alt="weekBestseller"
-                />
+                <div className="weekBestSellerRank">
+                  {bestSellerBookItem.bestRank}
+                </div>
+                <img src={bestSellerBookItem.cover} alt="weekBestseller" />
               </Link>
               <figcaption>
-                <Link to={`/book/${bestSellerBookItem.isbn13}`}>{bestSellerBookItem.title}</Link>
+                <Link to={`/book/${bestSellerBookItem.isbn13}`}>
+                  {bestSellerBookItem.title}
+                </Link>
               </figcaption>
             </figure>
           </li>
-          ))
-        }
+        ))}
       </ul>
     </BestSellerNav>
   );

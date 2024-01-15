@@ -2,6 +2,7 @@ import React from 'react'
 import styled from "styled-components"
 import SteadyBox from "./SteadyBox";
 import { IoIosArrowForward } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 
 const SteadyHot = styled.div`
@@ -27,12 +28,12 @@ const SteadyContainer = (props) => {
 
   return (
     <SteadyHot>
-      <h3 className="steady_title">
+      <Link to='/book/:id'><h3 className="steady_title">
         {props.title}
         <span>
           <IoIosArrowForward />
         </span>
-      </h3>
+      </h3></Link>
       <div className="steady_content_container">
         { props.List.map((item, key) => <SteadyBox key = {key} content = {item} /> )}
       </div>

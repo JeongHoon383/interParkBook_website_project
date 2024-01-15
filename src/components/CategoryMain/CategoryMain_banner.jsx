@@ -1,7 +1,7 @@
-import React, { useRef, useState } from 'react';
-import styled from 'styled-components';
-import Category_slide from '../Category_slide';
-import axios from 'axios';
+import React, { useEffect, useRef, useState } from "react";
+import styled from "styled-components";
+import Category_slide from "../Category_slide";
+import axios from "axios";
 
 const CategoryMain_banner = () => {
   /** useRef */
@@ -23,31 +23,30 @@ const CategoryMain_banner = () => {
   };
 
   const afterChange = (id) => {
-    console.log('id:', id);
     if (isHover === false) {
       setActive(id);
     }
   };
 
   const banner_category_list = [
-    '쇼펜하우어',
-    '목표달성',
-    '머핀북',
-    '파견자들',
-    '김영사',
-    '주목 이 책!',
+    "쇼펜하우어",
+    "목표달성",
+    "머핀북",
+    "파견자들",
+    "김영사",
+    "주목 이 책!",
   ].map((category, id) => ({ id, category }));
 
   return (
     <TopBanner>
-      <div className='banner'>
-        <div className='banner_main'>
+      <div className="banner">
+        <div className="banner_main">
           <Category_slide slideRef={slideRef} afterChange={afterChange} />
         </div>
-        <ul className='banner_category'>
+        <ul className="banner_category">
           {banner_category_list.map(({ id, category }) => (
             <li
-              className={`${active === id && 'active'}`}
+              className={`${active === id && "active"}`}
               key={id}
               onMouseOver={() => mouseHover(id)}
               onMouseLeave={mouseLeave}
@@ -57,11 +56,11 @@ const CategoryMain_banner = () => {
           ))}
         </ul>
       </div>
-      <div className='banner_ad'>
+      <div className="banner_ad">
         <img
-          className='banner_ad_img'
-          src='/img/CategoryMain/topbanner_img/2578206_231016114437_banner-ad.jpeg'
-          alt=''
+          className="banner_ad_img"
+          src="/img/CategoryMain/topbanner_img/2578206_231016114437_banner-ad.jpeg"
+          alt=""
         />
       </div>
     </TopBanner>
@@ -71,7 +70,6 @@ const CategoryMain_banner = () => {
 const TopBanner = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 20px;
   height: 326px;
 
   .banner {

@@ -11,7 +11,7 @@ import Detail_hover from "../components/Detail/Detail_hover";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { cartState } from "../components/Cart/atom";
-import * as cookies from '../util/cookies';
+import * as cookies from "../util/cookies";
 
 const Wrapper = styled.div`
   width: 60vw;
@@ -299,23 +299,31 @@ const Detail = () => {
   };
 
   // 현재 도서 쿠키에 최근 본 상품 목록으로 저장
-  const cookieSetting =  () => {
-    if(!DetailLoading) {
-    const recentViewCookie = cookies.getCookie('recentView');
-    const existingValues = recentViewCookie ? recentViewCookie : [];
+  const recentViewCookieSetting = () => {
+    if (!DetailLoading) {
+      const recentViewCookie = cookies.getCookie("recentView");
+      const existingValues = recentViewCookie ? recentViewCookie : [];
 
-      if(existingValues.length && !existingValues.includes(DetailData.isbn13)) {
-        if(existingValues.length > 14) existingValues.pop();
+      if (
+        existingValues.length &&
+        !existingValues.includes(DetailData.isbn13)
+      ) {
+        if (existingValues.length > 14) existingValues.pop();
 
         const updateValues = [DetailData.isbn13, ...existingValues];
-        cookies.setCookie('recentView', JSON.stringify(updateValues), {path : '/', expires: new Date(Date.now() + 600000)});
-
-      }else if(!existingValues.includes(DetailData.isbn13)){
-        cookies.setCookie('recentView', JSON.stringify([DetailData.isbn13]), {path : '/', expires: new Date(Date.now() + 600000)});
-      };
-    };
+        cookies.setCookie("recentView", JSON.stringify(updateValues), {
+          path: "/",
+          expires: new Date(Date.now() + 600000),
+        });
+      } else if (!existingValues.length) {
+        cookies.setCookie("recentView", JSON.stringify([DetailData.isbn13]), {
+          path: "/",
+          expires: new Date(Date.now() + 600000),
+        });
+      }
+    }
   };
-  cookieSetting();
+  recentViewCookieSetting();
 
   return (
     <Wrapper>
@@ -327,7 +335,8 @@ const Detail = () => {
             style={{
               opacity: opacity,
               scale: opacity,
-            }}>
+            }}
+          >
             <div className="center">
               <div>
                 {DetailData.title.split("-")[0]
@@ -462,12 +471,14 @@ const Detail = () => {
             reviewData={reviewData}
             setReviewData={setReviewData}
             id={id}
-            DetailData={DetailData}></Detail_tabs>
+            DetailData={DetailData}
+          ></Detail_tabs>
         </>
       )}
       <Top
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        style={{ opacity: topOpacity }}>
+        style={{ opacity: topOpacity }}
+      >
         Top
       </Top>
     </Wrapper>

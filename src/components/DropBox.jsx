@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 const DropBox_container = styled.div`
-
-  .form-select{
-    width : 158px;
-    height : 24px;
+  .form-select {
+    width: 158px;
+    height: 30px;
   }
 `;
 
