@@ -113,7 +113,7 @@ export default function Main_CategoryRecommend() {
   function content(searchCategoryId) {
     axios({
       method: "get",
-      url: `http://192.168.50.25:9090/field/${searchCategoryId}`,
+      url: `http://127.0.0.1:9090/field/${searchCategoryId}`,
     }).then((result) => {
       setDataList(result.data);
     });

@@ -7,7 +7,7 @@ export default function HeaderCategoryList({ mall }) {
 
   useEffect(() => {
     axios
-      .get(`http://192.168.50.25:9090/category/list/${mall}`)
+      .get(`http://127.0.0.1:9090/category/list/${mall}`)
       .then((result) => setCategory(result.data));
   }, []);
 

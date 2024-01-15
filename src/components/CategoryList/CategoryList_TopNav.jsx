@@ -126,7 +126,7 @@ export default function CategoryList_TopNav() {
 
     const topNavAxios = (params, idx) => {
       if (parameterArr[idx]) {
-        axios(`http://192.168.50.25:9090/category/list/${params}`).then(
+        axios(`http://127.0.0.1:9090/category/list/${params}`).then(
           (result) => {
             copy[idx] = result.data;
             setAllCategoryData(copy);

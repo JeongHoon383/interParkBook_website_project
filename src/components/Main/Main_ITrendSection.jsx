@@ -212,12 +212,12 @@ export default function Main_ITrendSection() {
 
   useEffect(() => {
     axios
-      .get("http://192.168.50.25:9090/new/")
+      .get("http://127.0.0.1:9090/new/")
       .then((result) => setItemNewAll(result.data))
       .catch((err) => console.error(err));
 
     axios
-      .get("http://192.168.50.25:9090/best/")
+      .get("http://127.0.0.1:9090/best/")
       .then((result) => setBestSeller(result.data))
       .catch((err) => console.error(err));
   }, []);

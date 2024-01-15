@@ -58,7 +58,7 @@ export default function Main_MoRecommend() {
 
   useEffect(() => {
     axios
-      .get("http://192.168.50.25:9090/blogbest")
+      .get("http://127.0.0.1:9090/blogbest")
       .then((result) => setList(result.data))
       .catch((err) => console.error(err));
   }, [list]);

@@ -16,7 +16,7 @@ const SteadySeller = () => {
   useEffect(() => {
     axios({
       method: "get",
-      url: "http://192.168.50.25:9090/category/main/categorySteady",
+      url: "http://127.0.0.1:9090/category/main/categorySteady",
     }).then((result) => {
       setSteadyList(result.data);
     });
@@ -25,7 +25,7 @@ const SteadySeller = () => {
   useEffect(() => {
     axios({
       method: "get",
-      url: "http://192.168.50.25:9090/category/main/categoryHot",
+      url: "http://127.0.0.1:9090/category/main/categoryHot",
     }).then((result) => {
       setHotList(result.data);
     });

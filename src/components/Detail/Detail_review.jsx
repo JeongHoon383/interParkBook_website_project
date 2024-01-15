@@ -442,7 +442,7 @@ const Detail_review = ({ reviewData, setReviewData }) => {
   useEffect(() => {
     setIsPending(true);
     axios
-      .get(`http://192.168.50.25:9090/book/${params.id}/review`)
+      .get(`http://127.0.0.1:9090/book/${params.id}/review`)
       .then((res) => setReviewData(res?.data));
     setIsPending(false);
   }, [reviewData]);
@@ -463,7 +463,7 @@ const Detail_review = ({ reviewData, setReviewData }) => {
 
     let { title, point, content } = data;
     axios
-      .post(`http://192.168.50.25:9090/book/:isbn/review`, {
+      .post(`http://127.0.0.1:9090/book/:isbn/review`, {
         title,
         point: rating + 1,
         content,

@@ -276,7 +276,7 @@ const Detail = () => {
   } = useQuery({
     queryKey: ["DetailData"],
     queryFn: () =>
-      axios.get(`http://192.168.50.25:9090/book/${id}`).then((res) => res.data),
+      axios.get(`http://127.0.0.1:9090/book/${id}`).then((res) => res.data),
   });
   const [qty, setQty] = useState(1);
   const [cart, setCart] = useRecoilState(cartState);
@@ -299,7 +299,7 @@ const Detail = () => {
   };
 
   // 현재 도서 쿠키에 최근 본 상품 목록으로 저장
-  const cookieSetting = () => {
+  const recentViewCookieSetting = () => {
     if (!DetailLoading) {
       const recentViewCookie = cookies.getCookie("recentView");
       const existingValues = recentViewCookie ? recentViewCookie : [];
@@ -315,7 +315,7 @@ const Detail = () => {
           path: "/",
           expires: new Date(Date.now() + 600000),
         });
-      } else if (!existingValues.includes(DetailData.isbn13)) {
+      } else if (!existingValues.length) {
         cookies.setCookie("recentView", JSON.stringify([DetailData.isbn13]), {
           path: "/",
           expires: new Date(Date.now() + 600000),
@@ -323,7 +323,7 @@ const Detail = () => {
       }
     }
   };
-  cookieSetting();
+  recentViewCookieSetting();
 
   return (
     <Wrapper>

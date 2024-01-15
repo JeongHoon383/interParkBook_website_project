@@ -46,7 +46,7 @@ export default function CategoryList_CaNav() {
   const [category, setCategory] = useState([]);
 
   useEffect(() => {
-    axios(`http://192.168.50.25:9090/category/list/${mall}`).then((result) =>
+    axios(`http://127.0.0.1:9090/category/list/${mall}`).then((result) =>
       setCategory(result.data)
     );
   }, [mall]);

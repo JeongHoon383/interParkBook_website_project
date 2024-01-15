@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Desktop, Mobile } from '../MediaQuery';
 import { getCookie } from '../../util/cookies.js';
+import SearchForm from './../Search/SearchForm';
 
 const MainDiv = styled.div`
   .logoBox {
@@ -110,12 +111,13 @@ export default function MainLogo() {
                 </Link>
               </div>
               <div className="search">
-                <form className="searchForm">
+                {/* <form className="searchForm">
                   <input className="searchInput" type="text" />
                   <button className="searchBtn">
                     <IoSearch style={{ color: 'var(--main)' }} />
                   </button>
-                </form>
+                </form> */}
+                <SearchForm className="searchForm"/>
                 <div className="hit_searcher">
                   <ul>
                     <li>

@@ -3,7 +3,12 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 
-const Form = styled.form``;
+const Form = styled.form`
+  label {
+    display: block;
+    font-weight: bold;
+  }
+`;
 
 const Admin_new = () => {
   const {
@@ -16,7 +21,7 @@ const Admin_new = () => {
   } = useForm();
   const onValid = (data) => {
     console.log(data);
-    axios.post(`http://192.168.50.25:9090/admin`, data).then((res) => res);
+    axios.post(`http://127.0.0.1:9090/admin`, data).then((res) => res);
     setValue("title", "");
     setValue("author", "");
     setValue("pubDate", "");

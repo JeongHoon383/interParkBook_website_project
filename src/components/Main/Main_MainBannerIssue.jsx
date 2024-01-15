@@ -40,7 +40,7 @@ export default function Main_MainBannerIssue() {
 
   useEffect(() => {
     axios
-      .get("http://192.168.50.25:9090/book")
+      .get("http://127.0.0.1:9090/book")
       .then((result) => {
         setIssueBook(result.data.slice(0, 4));
       })

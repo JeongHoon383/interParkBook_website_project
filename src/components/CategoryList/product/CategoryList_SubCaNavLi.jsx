@@ -29,7 +29,7 @@ export default function CategoryList_SUbCaNavLi({ subCategoryData }) {
 
   useEffect(() => {
     axios(
-      `http://192.168.50.25:9090/category/list/${subCategoryData.mall}/${
+      `http://127.0.0.1:9090/category/list/${subCategoryData.mall}/${
         subCategoryData.firstD
       }/${subCategoryData.secondD}${
         subCategoryData.thirdD ? "/" + subCategoryData.thirdD : ""

@@ -12,7 +12,7 @@ const CategoryMain_second_banner = () => {
   useEffect(() => {
     axios({
       method: "get",
-      url: "http://192.168.50.25:9090/category/main",
+      url: "http://127.0.0.1:9090/category/main",
     }).then((result) => {
       const data = result.data;
       setData(data.slice(3, 6));

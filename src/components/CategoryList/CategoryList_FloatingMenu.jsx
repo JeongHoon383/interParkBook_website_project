@@ -11,7 +11,8 @@ import { CiHeart } from "react-icons/ci";
 const FloatingMenu = styled.aside`
   position: sticky;
   top: 20px;
-  width: 90px;
+  min-width: 90px;
+  max-width: 90px;
   margin-left: 30px;
   font-size: 11px;
   .myInterpark,
@@ -160,12 +161,20 @@ export default function CategoryList_FloatingMenu({ userId }) {
   const [totalPage, setTotalPage] = useState(1);
   const [userInfo, setUserInfo] = useState({});
 
+  useEffect(() => {
+    axios
+      .get(`http://127.0.0.1:9090/member/${userId}`)
+      .then((result) => setUserInfo(result.data));
+
+    getRecentViewData();
+  }, []);
+
   const getRecentViewData = () => {
     const recentViewArr = cookies.getCookie("recentView")
       ? cookies.getCookie("recentView")
       : [];
     axios
-      .post("http://192.168.50.25:9090/floatingMenu/", recentViewArr)
+      .post("http://127.0.0.1:9090/floatingMenu/", recentViewArr)
       .then((result) => {
         setTotalPage(
           Math.ceil(result.data.length / 3) > 1
@@ -176,19 +185,10 @@ export default function CategoryList_FloatingMenu({ userId }) {
       });
   };
 
-  useEffect(() => {
-    axios
-      .get(`http://192.168.50.25:9090/member/${userId}`)
-      .then((result) => setUserInfo(result.data));
-
-    getRecentViewData();
-  }, []);
-
   const handleDelete = (isbn13, e) => {
     e.preventDefault();
     const recentViewCookie = cookies.getCookie("recentView");
-    const existingValues = recentViewCookie ? recentViewCookie : [];
-    const updateValues = existingValues.filter((value) => value != isbn13);
+    const updateValues = recentViewCookie.filter((value) => value !== isbn13);
     cookies.setCookie("recentView", JSON.stringify(updateValues), {
       path: "/",
     });

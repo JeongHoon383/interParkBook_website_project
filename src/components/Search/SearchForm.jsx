@@ -8,15 +8,19 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const SearchBtn = styled.button`
-  background-color: var(--main);
-  width: 60px;
-  color: white;
+  /* background-color:var(--main); */
+  color: var(--main);
+  text-align: right;
   flex-wrap: nowrap;
   margin-left: 5px;
   border-radius: 3px;
   height: 23px;
   font-weight: 900;
   font-size: 13px;
+  svg {
+    width: 25px;
+    height: 25px;
+  }
 `;
 
 export default function SearchForm() {
@@ -35,7 +39,7 @@ export default function SearchForm() {
     e.preventDefault();
 
     axios
-      .post("http://192.168.50.25:9090/search", { sname: searchBook })
+      .post("http://127.0.0.1:9090/search", { sname: searchBook })
       .then((result) => {
         // alert(JSON.stringify(result.data))
         // console.log(result.data)
@@ -55,9 +59,7 @@ export default function SearchForm() {
         <input className="searchInput" type="text" onChange={handleChange} />
 
         <SearchBtn>
-          {/* <button> */}
-            <IoSearch />
-          {/* </button> */}
+          <IoSearch />
         </SearchBtn>
       </form>
     </>

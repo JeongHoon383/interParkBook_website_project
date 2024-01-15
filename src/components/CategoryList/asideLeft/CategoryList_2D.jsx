@@ -40,7 +40,7 @@ const CategorySubListWrapper = styled.div`
 export default function CategoryList_2D({ mall, firstD }) {
   const [secondDCategory, setSecondDCategory] = useState([]);
   useEffect(() => {
-    axios(`http://192.168.50.25:9090/category/list/${mall}/${firstD}`).then(
+    axios(`http://127.0.0.1:9090/category/list/${mall}/${firstD}`).then(
       (result) => setSecondDCategory(result.data)
     );
   }, []);

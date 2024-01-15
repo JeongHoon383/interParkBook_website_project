@@ -69,7 +69,7 @@ export default function CategortList_WeekBestSeller() {
   useEffect(() => {
     axios
       .get(
-        `http://192.168.50.25:9090/category/list/${parameterArr[0]}/${parameterArr[1]}/${parameterArr[2]}/${parameterArr[3]}/${parameterArr[4]}/${parameterArr[5]}`
+        `http://127.0.0.1:9090/category/list/${parameterArr[0]}/${parameterArr[1]}/${parameterArr[2]}/${parameterArr[3]}/${parameterArr[4]}/${parameterArr[5]}`
       )
       .then((result) => {
         setWeekBestSellerTitle(result.data.categoryName);
