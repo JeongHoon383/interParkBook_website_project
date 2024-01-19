@@ -313,7 +313,8 @@ const Cart_Table = ({ setCart, cart, setCheck, setTotal }) => {
             marginTop: "10px",
             justifyContent: "flex-start",
             fontWeight: "lighter",
-          }}>
+          }}
+        >
           <span>
             배송책임 : <em>교보문고</em> l 배송비 : <em>2,500원</em>
           </span>
@@ -360,7 +361,8 @@ const Cart_Table = ({ setCart, cart, setCheck, setTotal }) => {
                             }
                           });
                         });
-                      }}>
+                      }}
+                    >
                       변경
                     </div>
                   </li>

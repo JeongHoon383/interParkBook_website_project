@@ -86,7 +86,7 @@ export default function CategoryList_MainSection({ userId }) {
 
     if (sortField) {
       axios(
-        `http://127.0.0.1:9090/category/list/${parameterArr[0]}/${parameterArr[1]}/${parameterArr[2]}/${parameterArr[3]}/${parameterArr[4]}/${parameterArr[5]}/${startIndex}/${endIndex}/${sortField}/${sortOption}/${isSoldout}`
+        `http://192.168.50.16:9090/category/list/${parameterArr[0]}/${parameterArr[1]}/${parameterArr[2]}/${parameterArr[3]}/${parameterArr[4]}/${parameterArr[5]}/${startIndex}/${endIndex}/${sortField}/${sortOption}/${isSoldout}`
       ).then((result) => {
         setBookData(result.data);
         setQuantity(
@@ -97,7 +97,7 @@ export default function CategoryList_MainSection({ userId }) {
 
     if (userId) {
       axios
-        .get(`http://127.0.0.1:9090/wishlist/${userId}`)
+        .get(`http://192.168.50.16:9090/wishlist/${userId}`)
         .then((result) => setWishlist(result.data));
     }
   }, [
@@ -199,14 +199,14 @@ export default function CategoryList_MainSection({ userId }) {
           id: userId,
         }));
         axios
-          .post("http://127.0.0.1:9090/wishlist/all", wishlistArr)
+          .post("http://192.168.50.16:9090/wishlist/all", wishlistArr)
           .then((result) => {
             if (result.data === "이미 찜한 상품") {
               alert("이미 찜한 상품입니다.");
             } else {
               alert("찜한 상품 목록에 추가했습니다.");
               axios
-                .get(`http://127.0.0.1:9090/wishlist/${userId}`)
+                .get(`http://192.168.50.16:9090/wishlist/${userId}`)
                 .then((result2) => setWishlist(result2.data));
             }
           })
@@ -228,7 +228,7 @@ export default function CategoryList_MainSection({ userId }) {
   const handleToggleWishlist = (currentBookData, setIsInWishlist) => {
     if (userId) {
       axios
-        .post("http://127.0.0.1:9090/wishlist/", {
+        .post("http://192.168.50.16:9090/wishlist/", {
           isbn13: currentBookData.isbn13,
           id: userId,
         })

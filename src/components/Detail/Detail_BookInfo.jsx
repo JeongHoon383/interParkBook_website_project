@@ -66,7 +66,7 @@ const InfoContainer = styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
- 
+
         padding-bottom: 16px;
       }
       .m_hidden {
@@ -559,8 +559,9 @@ const Detail_BookInfo = ({ data, kakaoData, DetailData, qty, setQty }) => {
   const [cart, setCart] = useRecoilState(cartState);
 
   const handleAddCart = () => {
-    navigate("/cart");
-    alert("추가완료");
+    window.confirm(
+      "북카트에 상품이 추가되었습니다.\n북카트로 이동하시겠습니까?"
+    ) && navigate("/cart");
     return setCart((prev) => [
       ...prev,
       {
@@ -597,7 +598,8 @@ const Detail_BookInfo = ({ data, kakaoData, DetailData, qty, setQty }) => {
         <OverLay
           onClick={() => {
             setModal((prev) => !prev);
-          }}>
+          }}
+        >
           <Modal>
             <h1>소장중인 도서관</h1>
             {libData.length !== 0 ? (

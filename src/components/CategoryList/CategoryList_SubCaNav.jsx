@@ -86,7 +86,7 @@ export default function CategoryList_SubCaNav() {
 
     if (parameterArr.length < 6) {
       axios(
-        `http://127.0.0.1:9090/category/list/${parameterArr[0]}/${parameterArr[1]}/${parameterArr[2]}/${parameterArr[3]}/${parameterArr[4]}`
+        `http://192.168.50.16:9090/category/list/${parameterArr[0]}/${parameterArr[1]}/${parameterArr[2]}/${parameterArr[3]}/${parameterArr[4]}`
       ).then((result) => setCategoryData(result.data));
     }
   }, [

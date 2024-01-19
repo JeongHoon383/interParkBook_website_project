@@ -2,10 +2,10 @@ import React from "react";
 import { Table } from "react-bootstrap";
 
 const Admin_user = ({ data }) => {
-  function star(data,star) {
-   let arr = data.split("")
-   arr.reverse().splice(0,star)
-    return arr.reverse().join("")+'**'
+  function star(data, star) {
+    let arr = data.split("");
+    arr.reverse().splice(0, star);
+    return arr.reverse().join("") + "**";
   }
   return (
     <Table striped>
@@ -23,10 +23,10 @@ const Admin_user = ({ data }) => {
           data.map((v, i) => (
             <tr>
               <td>{i + 1}</td>
-              <td>{star(v.name,2)}</td>
-              <td>{star(v.id,2)}</td>
-              <td>{star(v.phone,4)}**</td>
-              <td>{v.email}</td>
+              <td>{star(v.name, 2)}</td>
+              <td>{star(v.id, 2)}</td>
+              <td>{star(v.phone, 4)}**</td>
+              <td>{v.email.replace(/(.{3}(?=@))/, "***")}</td>
             </tr>
           ))}
       </tbody>

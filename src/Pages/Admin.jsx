@@ -17,7 +17,7 @@ const Admin = () => {
   const { isPending, error, data } = useQuery({
     queryKey: ["repoData"],
     queryFn: () =>
-      axios.get(`http://127.0.0.1:9090/admin`).then((res) => res.data),
+      axios.get(`http://192.168.50.16:9090/admin`).then((res) => res.data),
   });
 
   return (

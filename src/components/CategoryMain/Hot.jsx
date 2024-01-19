@@ -159,7 +159,7 @@ const Hot = () => {
   useEffect(() => {
     axios({
       method: "get",
-      url: "http://127.0.0.1:9090/category/main/categoryHot",
+      url: "http://192.168.50.16:9090/category/main/categoryHot",
     }).then((result) => {
       setHotDataList(result.data);
     });

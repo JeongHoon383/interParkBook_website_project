@@ -276,7 +276,7 @@ const Detail = () => {
   } = useQuery({
     queryKey: ["DetailData"],
     queryFn: () =>
-      axios.get(`http://127.0.0.1:9090/book/${id}`).then((res) => res.data),
+      axios.get(`http://192.168.50.16:9090/book/${id}`).then((res) => res.data),
   });
   const [qty, setQty] = useState(1);
   const [cart, setCart] = useRecoilState(cartState);

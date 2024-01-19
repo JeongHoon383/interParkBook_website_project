@@ -153,7 +153,8 @@ const Cart_Cal = ({ setCart, cart, total }) => {
             <em
               onClick={() => {
                 setCart([]);
-              }}>
+              }}
+            >
               삭제하기 <FaRegTrashAlt />
             </em>
           </span>
@@ -193,7 +194,15 @@ const Cart_Cal = ({ setCart, cart, total }) => {
       </PriceBox>
       <ButtonArea>
         <Shop onClick={() => navigate("/")} type="text" value="쇼핑 계속하기" />
-        <Order type="text" value="주문하기" onClick={() => setCart([])} />
+        <Order
+          type="text"
+          value="주문하기"
+          onClick={() => {
+            setCart([]);
+            alert("주문이 완료되었습니다.");
+            navigate("/book/9791158773120/review");
+          }}
+        />
       </ButtonArea>
     </Wrapper>
   );

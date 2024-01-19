@@ -312,21 +312,21 @@ export default function Main_PointSection() {
   useEffect(() => {
     axios({
       method: "get",
-      url: "http://127.0.0.1:9090/blogbest",
+      url: "http://192.168.50.16:9090/blogbest",
     })
       .then((result) => setBlogBest(result.data.slice(0, 8)))
       .catch((err) => console.error(err));
 
     axios({
       method: "get",
-      url: "http://127.0.0.1:9090/music",
+      url: "http://192.168.50.16:9090/music",
     })
       .then((result) => setMusic(result.data))
       .catch((err) => console.error(err));
 
     axios({
       method: "get",
-      url: "http://127.0.0.1:9090/dvd",
+      url: "http://192.168.50.16:9090/dvd",
     })
       .then((result) => setDvd(result.data))
       .catch((err) => console.error(err));

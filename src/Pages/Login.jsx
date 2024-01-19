@@ -224,7 +224,7 @@ function Member(props) {
     } else {
       axios({
         method: "post",
-        url: "http://127.0.0.1:9090/login",
+        url: "http://192.168.50.16:9090/login",
         data: props.login,
       })
         .then((result) => {

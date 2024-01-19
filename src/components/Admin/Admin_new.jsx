@@ -21,7 +21,7 @@ const Admin_new = () => {
   } = useForm();
   const onValid = (data) => {
     console.log(data);
-    axios.post(`http://127.0.0.1:9090/admin`, data).then((res) => res);
+    axios.post(`http://192.168.50.16:9090/admin`, data).then((res) => res);
     setValue("title", "");
     setValue("author", "");
     setValue("pubDate", "");

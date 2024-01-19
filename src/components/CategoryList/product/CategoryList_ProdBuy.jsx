@@ -91,7 +91,7 @@ export default function CategoryList_ProdBuy({
   quantity,
   handleQuantity,
   handleToggleWishlist,
-  wishlist
+  wishlist,
 }) {
   const [isChecked, setisChecked] = useState(false);
   const [isInWishlist, setIsInWishlist] = useState(false);

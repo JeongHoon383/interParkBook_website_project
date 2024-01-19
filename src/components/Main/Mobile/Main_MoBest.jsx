@@ -69,11 +69,11 @@ export default function Main_MoBest() {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:9090/best/")
+      .get("http://192.168.50.16:9090/best/")
       .then((result) => setBestSeller1(result.data.slice(0, 3)))
       .catch((err) => console.error(err));
     axios
-      .get("http://127.0.0.1:9090/best/")
+      .get("http://192.168.50.16:9090/best/")
       .then((result) => setBestSeller2(result.data.slice(4, 11)))
       .catch((err) => console.error(err));
   }, []);

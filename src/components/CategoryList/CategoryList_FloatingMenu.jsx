@@ -163,7 +163,7 @@ export default function CategoryList_FloatingMenu({ userId }) {
 
   useEffect(() => {
     axios
-      .get(`http://127.0.0.1:9090/member/${userId}`)
+      .get(`http://192.168.50.16:9090/member/${userId}`)
       .then((result) => setUserInfo(result.data));
 
     getRecentViewData();
@@ -174,7 +174,7 @@ export default function CategoryList_FloatingMenu({ userId }) {
       ? cookies.getCookie("recentView")
       : [];
     axios
-      .post("http://127.0.0.1:9090/floatingMenu/", recentViewArr)
+      .post("http://192.168.50.16:9090/floatingMenu/", recentViewArr)
       .then((result) => {
         setTotalPage(
           Math.ceil(result.data.length / 3) > 1

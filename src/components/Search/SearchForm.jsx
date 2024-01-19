@@ -39,7 +39,7 @@ export default function SearchForm() {
     e.preventDefault();
 
     axios
-      .post("http://127.0.0.1:9090/search", { sname: searchBook })
+      .post("http://192.168.50.16:9090/search", { sname: searchBook })
       .then((result) => {
         // alert(JSON.stringify(result.data))
         // console.log(result.data)

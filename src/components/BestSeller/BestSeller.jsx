@@ -79,7 +79,7 @@ export default function BestSeller() {
   useEffect(() => {
     axios
       .get(
-        `http://127.0.0.1:9090/bestseller/${navbar}/${categoryName}/${page}/${itemsCountPerPage}`
+        `http://192.168.50.16:9090/bestseller/${navbar}/${categoryName}/${page}/${itemsCountPerPage}`
       )
       .then((result) => {
         console.log(result.data[0].total_rows);
