@@ -31,6 +31,6 @@ React 인터파크 도서 사이트
 * 협업 툴 : Github
 
 ## ERD
-![Uploading 스크린샷 2024-07-31 오후 3.33.37.png…]()
+<img width="694" alt="스크린샷 2024-07-31 오후 3 33 37" src="https://github.com/user-attachments/assets/11b2c09b-283d-4db5-af07-9d217a1532ba">
 
 
