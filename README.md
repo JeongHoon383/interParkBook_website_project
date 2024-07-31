@@ -35,5 +35,5 @@ React 인터파크 도서 사이트
 
 ## 채택한 개발 기술과 브랜치 전략
 - React
--   asd
+ - asdasd
 
