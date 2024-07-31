@@ -25,7 +25,7 @@ React 인터파크 도서 사이트
 팀원 : 백지수 - 메인 페이지
 
 ## 개발 환경
-* front : HTML, CSS, JavaScript, React, styled-components
+* front : HTML, CSS, JavaScript, React, styled-components, Recoil
 * Back-end : Node.js, Express, socket.io
 * DB : MySQL, 알라딘 API
 * 협업 툴 : Github
@@ -35,5 +35,14 @@ React 인터파크 도서 사이트
 
 ## 채택한 개발 기술과 브랜치 전략
 - React
-  - aasdasd
+  - 컴포넌트화를 통해 추후 유지보수와 재사용성을 고려했습니다.
+  - DOM을 가상화하여 메모리에 보관함으로써 DOM 변경을 최소화하고 스마트하게 최적화할 수 있습니다.
+- styled-components
+  - props를 이용한 조건부 스타일링을 활용하여 상황에 알맞은 스타일을 적용시킬 수 있었습니다.
+  - 빌드될 때 고유한 클래스 이름이 부여되어 네이밍 컨벤션을 정하는 비용을 절약할 수 있었습니다.
+  - CSS-in-JS는 짧은 길이의 유니크한 클래스를 자동으로 생성하기 때문에 코드 경량화의 장점이 있습니다.
+- Recoil
+  - 최상위 컴포넌트를 만들어 props로 유저 정보를 내려주는 방식의 경우 불필요한 props 전달이 발생합니다. 따라서, 필요한 컴포넌트 내부에서만 상태 값을 가져다 사용하기 위해 상태 관리 라이브러리를 사용하기로 했습니다.
+  - Redux가 아닌 Recoil을 채택한 이유
+    - ㅁㄴㅇㄴㅁㅇ
 
