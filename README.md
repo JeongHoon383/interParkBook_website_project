@@ -127,3 +127,6 @@
   - 관리자 페이지는 회원가입한 회원정보, 새로운 도서 등록, 도서 삭제 기능이 있습니다. 
 <img width="500" alt="스크린샷 2024-07-31 오후 8 57 07" src="https://github.com/user-attachments/assets/38e7c9b5-df68-4867-a40f-b75c8959ed73">
 <img width="500" alt="스크린샷 2024-07-31 오후 8 58 15" src="https://github.com/user-attachments/assets/6784ba8e-7e7e-4df3-b4e6-c4c24f7ed1b6">
+
+## 트러블 슈팅
+* [캐러셀 화살표 제거 이슈](https://github.com/JeongHoon383/interParkBook_website_project/wiki/%ED%8A%B8%EB%9F%AC%EB%B8%94-%EC%8A%88%ED%8C%85_%EC%BA%90%EB%9F%AC%EC%85%80-%ED%99%94%EC%82%B4%ED%91%9C-%EC%A0%9C%EA%B1%B0-%EC%9D%B4%EC%8A%88#%EC%BA%90%EB%9F%AC%EC%85%80-%ED%99%94%EC%82%B4%ED%91%9C-%EC%A0%9C%EA%B1%B0-%EC%9D%B4%EC%8A%88)
