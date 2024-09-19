@@ -81,7 +81,9 @@
 <img width="500" alt="스크린샷 2024-07-31 오후 7 07 12" src="https://github.com/user-attachments/assets/8199a2ee-b02f-4225-b4e5-324c7b712d12">
 
 ### [카테고리 메인 페이지]
-  - 메인 페이지와 동일하게 카테고리별로 도서를 볼 수 있으며 도서 이미지 클릭시 해당 도서 상세페이지로 이동됩니다.
+  - 도서 이외에 상품 또는 이벤트 정보 제공
+  - 인터파크에서 선정한 추천 도서 제공
+  - 카테고리 별로 베스트셀러 순위 제공
 <img width="320" alt="스크린샷 2024-01-15 오후 10 47 53" src="https://github.com/user-attachments/assets/de375817-beb6-47e4-a98d-7307d1e00a45">
 <img width="320" alt="스크린샷 2024-01-15 오후 10 48 21" src="https://github.com/user-attachments/assets/42ba48fa-7ecb-4520-b189-5a016376c079">
 <img width="320" alt="스크린샷 2024-01-15 오후 10 48 50" src="https://github.com/user-attachments/assets/4c9d24be-f80d-4393-8224-a78640d927ad">
@@ -130,3 +132,4 @@
 
 ## 트러블 슈팅
 * [캐러셀 화살표 제거 이슈](https://github.com/JeongHoon383/interParkBook_website_project/wiki/%ED%8A%B8%EB%9F%AC%EB%B8%94-%EC%8A%88%ED%8C%85_%EC%BA%90%EB%9F%AC%EC%85%80-%ED%99%94%EC%82%B4%ED%91%9C-%EC%A0%9C%EA%B1%B0-%EC%9D%B4%EC%8A%88#%EC%BA%90%EB%9F%AC%EC%85%80-%ED%99%94%EC%82%B4%ED%91%9C-%EC%A0%9C%EA%B1%B0-%EC%9D%B4%EC%8A%88)
+* [카테고리에 맞는 데이터 전달 이슈](https://github.com/JeongHoon383/interParkBook_website_project/wiki/%ED%8A%B8%EB%9F%AC%EB%B8%94-%EC%8A%88%ED%8C%85_%EC%B9%B4%ED%85%8C%EA%B3%A0%EB%A6%AC%EC%97%90-%EB%A7%9E%EB%8A%94-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%84%EB%8B%AC-%EC%9D%B4%EC%8A%88)
